@@ -1,0 +1,147 @@
+---
+import { SITE } from '../../config/site';
+const pathname = Astro.url.pathname;
+
+const navDescriptions: Record<string, string> = {
+  '/intelligence': 'What & why',
+  '/cycle': 'How it works',
+  '/frameworks': 'Methods & models',
+  '/narratives': 'Strategic positions',
+  '/experiments': 'Prototypes & tools',
+  '/about': '',
+};
+---
+
+<header class="border-b border-[var(--color-rule,#2c2920)] sticky top-0 z-50 nav-header">
+  <div class="container-site">
+    <nav class="flex items-center justify-between h-16" aria-label="Main navigation">
+      <a href="/" class="flex items-center gap-3 no-underline group">
+        <span class="nav-logo">EI<span class="nav-logo-sep"> / </span>OS</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
+        {SITE.nav.map((item) => {
+          const isActive = pathname.startsWith(item.href);
+          const desc = navDescriptions[item.href];
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  'no-underline transition-colors flex flex-col gap-0.5 nav-item',
+                  isActive ? 'nav-item--active' : '',
+                ]}
+              >
+                <span class:list={[
+                  'nav-label',
+                  isActive ? 'text-[var(--color-ink)]' : 'text-[var(--color-ink-secondary)]',
+                ]}>
+                  {item.label}
+                </span>
+                {desc && (
+                  <span class="nav-desc">{desc}</span>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden p-2 -mr-2 text-[var(--color-ink-tertiary)]"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle navigation"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-[var(--color-surface-tertiary)]">
+    <ul class="container-site py-4 flex flex-col gap-4 list-none m-0 p-0">
+      {SITE.nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="t-small text-[var(--color-ink-secondary)] no-underline hover:text-[var(--color-ink)] transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<style>
+  .nav-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  .nav-item:hover .nav-label {
+    color: var(--color-ink);
+  }
+
+  .nav-item--active .nav-label {
+    color: var(--color-ink);
+  }
+
+  .nav-desc {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-tertiary);
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+
+  .nav-item:hover .nav-desc,
+  .nav-item--active .nav-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-header {
+    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--color-ink);
+    transition: color 0.2s;
+  }
+
+  .nav-logo-sep {
+    color: var(--color-accent);
+    margin: 0 0.05em;
+  }
+
+  a:hover .nav-logo {
+    color: var(--color-accent);
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

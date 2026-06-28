@@ -1,0 +1,78 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  excerpt: string;
+  date: Date;
+  type: string;
+  tags: string[];
+  relatedNarratives?: number;
+  relatedArticles?: number;
+}
+
+const { slug, title, subtitle, excerpt, date, type, relatedNarratives = 0, relatedArticles = 0 } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+}).format(date);
+
+const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+
+const connectionParts: string[] = [];
+if (relatedNarratives > 0) connectionParts.push(`${relatedNarratives} narrative${relatedNarratives > 1 ? 's' : ''}`);
+if (relatedArticles > 0) connectionParts.push(`${relatedArticles} article${relatedArticles > 1 ? 's' : ''}`);
+const connectionLabel = connectionParts.join(' · ');
+---
+
+<article class="framework-card">
+  <a href={`/frameworks/${slug}`} class="block no-underline group h-full">
+    <div class="flex flex-col gap-3 h-full">
+      <div class="flex items-start gap-4">
+        <span class="type-badge" style="color: var(--color-blue)">Framework · {typeLabel}</span>
+      </div>
+
+      <h2 class="t-title text-[var(--color-ink)] group-hover:text-[var(--color-blue)] transition-colors m-0 mt-1">
+        {title}
+      </h2>
+
+      {subtitle && (
+        <p class="t-small text-[var(--color-ink-secondary)] m-0 leading-relaxed">{subtitle}</p>
+      )}
+
+      <p class="t-small text-[var(--color-ink-tertiary)] m-0 line-clamp-3 flex-1">{excerpt}</p>
+
+      {connectionLabel && (
+        <div class="pt-3 border-t border-[var(--color-rule,#2c2920)]">
+          <span class="connection-label">Supports {connectionLabel}</span>
+        </div>
+      )}
+    </div>
+  </a>
+</article>
+
+<style>
+  .framework-card {
+    padding: 1.75rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-top: 2px solid var(--color-blue, #6a9fd8);
+    border-radius: 4px;
+    transition: background 0.2s, border-color 0.2s;
+    height: 100%;
+    background: var(--color-surface-secondary);
+  }
+
+  .framework-card:hover {
+    background: var(--color-surface-tertiary);
+    border-top-color: var(--color-accent);
+  }
+
+  .connection-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-blue, #6a9fd8);
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import { SITE } from '../../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-rule,#2c2920)] mt-24">
+  <div class="container-site py-12">
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+      <div class="flex flex-col gap-2">
+        <span class="t-label">{SITE.name}</span>
+        <p class="t-small max-w-sm">{SITE.description}</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 list-none m-0 p-0">
+          {SITE.nav.map((item) => (
+            <li>
+              <a href={item.href} class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)] transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+    <div class="mt-12 pt-6 border-t border-[var(--color-rule,#2c2920)] flex flex-col md:flex-row justify-between gap-2">
+      <p class="t-small">{SITE.author}</p>
+      <p class="t-small">&copy; {year}. This framework evolves as new evidence is added.</p>
+    </div>
+  </div>
+</footer>

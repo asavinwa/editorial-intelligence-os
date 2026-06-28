@@ -1,0 +1,106 @@
+---
+title: "Case Study Agent"
+subtitle: "AI-assisted transformation of customer interviews into reusable strategic evidence"
+excerpt: "Explores how AI can help transform customer interviews into reusable strategic evidence rather than one-off case studies — applying the Case Study Intelligence Framework at the speed of a conversation."
+date: 2024-04-10
+status: active
+tags:
+  - customer-stories
+  - ai
+  - ai-workflows
+  - editorial-intelligence
+  - evidence
+type: agent
+relatedFrameworks:
+  - case-study-intelligence-framework
+  - customer-signal-framework
+relatedNarratives:
+  - customer-stories
+  - trusted-ai
+relatedExperiments:
+  - hidden-hours-diagnostic
+  - editorial-intelligence-os
+---
+
+*Version 0.1 — active experiment. The agent prompt is stable and producing consistent outputs. The current focus is on testing across different interview types and refining the signal extraction logic.*
+
+---
+
+## Purpose
+
+A customer interview produces a transcript. Most transcripts become case studies. Most case studies are published once, filed, and rarely retrieved.
+
+The Case Study Agent experiments with a different model: using AI to extract not just the story, but the strategic intelligence embedded in it — the signals, patterns and insights that make the evidence reusable across teams and over time.
+
+This is not an automation experiment. It is an editorial experiment: **can AI help a skilled practitioner extract more value from a customer conversation than they would working alone?**
+
+---
+
+## The problem
+
+The Case Study Intelligence Framework identifies ten signal types embedded in every customer interview. In practice, a skilled practitioner might extract three or four of them. The rest are present in the transcript — visible to someone who knows what to look for — but not surfaced because time and attention are finite.
+
+The problem is not a lack of insight. It is a lack of a structured process for applying editorial intelligence consistently at the speed that customer programmes operate.
+
+When you interview twenty customers in a quarter, the gap between what you extract from each transcript and what the transcript actually contains becomes a significant loss of intelligence.
+
+---
+
+## Prototype
+
+The agent works in three stages:
+
+**Stage 1 — Interview intake**
+The practitioner provides the interview transcript (or a detailed summary). The agent is briefed on the framework: the ten signal types, the distinction between surface story and structural signal, the difference between a testimonial and strategic evidence.
+
+**Stage 2 — Signal extraction**
+The agent works through the transcript systematically, identifying which of the ten signal types are present, what the evidence is for each, and what the signal suggests about the broader narrative it belongs to.
+
+The output is not a summary. It is a structured intelligence brief: signal by signal, with direct quotes, contextual interpretation, and a flag for which narratives or frameworks the signal connects to.
+
+**Stage 3 — Evidence packaging**
+The agent drafts three outputs from the same interview:
+- A publishable case study (the public-facing story)
+- An internal intelligence note (the signal analysis for strategic use)
+- A connection map (which narratives, frameworks and other customer stories this evidence strengthens)
+
+The practitioner reviews, refines and publishes. The AI extends their capacity; it does not replace their judgement.
+
+---
+
+## Approach
+
+The agent is built on a detailed system prompt that operationalises the Case Study Intelligence Framework as a set of editorial instructions.
+
+The key design decisions:
+
+**Signal specificity over summary**
+Generic AI summarisation produces useful digests. This experiment needs something different: structured extraction against a defined taxonomy. The prompt trains the model to look for specific signal types rather than general themes.
+
+**Editorial framing throughout**
+The agent is instructed to think like an editorial intelligence practitioner, not a content writer. The difference is significant: a content writer asks "what is this story about?" An editorial intelligence practitioner asks "what does this story tell us that we didn't already know, and what does it connect to?"
+
+**Uncertainty as output**
+Where the transcript is ambiguous — where a signal might be present but isn't confirmed — the agent flags this explicitly rather than inferring. The output includes a section on what would need to be true for the signal to be confirmed, and what a follow-up question would look like.
+
+---
+
+## Lessons learned
+
+**The framework makes the AI more useful**
+Without a structured taxonomy, AI summarisation of interviews is generic. The framework gives the agent something specific to look for — which means the output is editorial rather than descriptive. The lesson: AI tools applied to structured frameworks produce structured outputs. AI tools applied to open questions produce open answers.
+
+**The connection map is the most valuable output**
+The publishable case study was expected. The intelligence note was useful. The connection map — which other evidence this interview strengthens, which narratives it moves forward, which frameworks it validates — was the output that changed how practitioners thought about the interview.
+
+**The agent reveals what the interview missed**
+In several cases, the signal extraction process identified questions that should have been asked but weren't. The agent noted that a signal was partially present but would require a follow-up to confirm. This is now built into the workflow: the agent produces a brief follow-up question list as a standard output, even for completed interviews.
+
+---
+
+## Next iteration
+
+- Refine the signal extraction prompt based on ten additional interviews
+- Build a structured output template that integrates directly with the team's knowledge management system
+- Test whether the agent can work from rough notes rather than full transcripts — which would allow signal capture during the interview rather than after
+- Explore whether the connection map can be automated by cross-referencing with the existing content graph

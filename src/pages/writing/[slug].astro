@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import ConnectedThinking from '../../components/content/ConnectedThinking.astro';
+import { getCollection, render } from 'astro:content';
+import { getRelatedContent } from '../../lib/related';
+
+export async function getStaticPaths() {
+  const writing = await getCollection('writing', ({ data }) => data.status === 'published');
+  return writing.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const related = await getRelatedContent(entry);
+
+const formattedDate = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric', month: 'long', day: 'numeric',
+}).format(entry.data.date);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.excerpt}>
+  <div class="container-site py-16">
+    <nav aria-label="Breadcrumb" class="mb-10">
+      <ol class="flex items-center gap-2 list-none m-0 p-0">
+        <li><a href="/writing" class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)] transition-colors">Writing</a></li>
+        <li aria-hidden="true"><span class="t-small text-[var(--color-ink-tertiary)]">→</span></li>
+        <li><span class="t-small text-[var(--color-ink-secondary)]">{entry.data.title}</span></li>
+      </ol>
+    </nav>
+
+    <div class="detail-layout">
+      <article class="detail-main">
+        <header class="mb-12">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="type-badge type-badge--writing">{entry.data.type}</span>
+            <span class="t-small">{entry.data.readTime} min read</span>
+          </div>
+          <h1 class="t-heading mb-4">{entry.data.title}</h1>
+          <p class="t-small">{formattedDate}</p>
+        </header>
+
+        <hr class="divider mb-10" />
+
+        <div class="prose prose-editorial max-w-none">
+          <Content />
+        </div>
+
+        {entry.data.tags.length > 0 && (
+          <footer class="mt-12 pt-8 border-t border-[var(--color-surface-tertiary)]">
+            <p class="t-label mb-3">Topics</p>
+            <div class="flex flex-wrap gap-2">
+              {entry.data.tags.map((tag: string) => (
+                <span class="tag-pill">{tag}</span>
+              ))}
+            </div>
+          </footer>
+        )}
+      </article>
+
+      <aside class="detail-sidebar">
+        <ConnectedThinking
+          narratives={related.narratives}
+          frameworks={related.frameworks}
+          writing={related.writing}
+          experiments={related.experiments}
+        />
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-layout {
+    display: grid; grid-template-columns: 1fr; gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .detail-layout { grid-template-columns: 1fr 280px; align-items: start; }
+  }
+  .detail-sidebar { order: -1; }
+  @media (min-width: 1024px) { .detail-sidebar { order: 1; } }
+</style>

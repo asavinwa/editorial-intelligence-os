@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "eios-dev",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["/opt/homebrew/bin/npm", "run", "dev"],
+      "port": 4321,
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  ]
+}

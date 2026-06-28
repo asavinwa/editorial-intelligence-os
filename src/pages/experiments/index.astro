@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const experiments = await getCollection('experiments');
+const sorted = experiments.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const statusLabels: Record<string, string> = {
+  active: 'Active experiment',
+  complete: 'Complete',
+  archived: 'Archived',
+  draft: 'In development',
+};
+
+const statusColors: Record<string, string> = {
+  active: 'var(--color-accent)',
+  complete: 'var(--color-blue)',
+  archived: 'var(--color-ink-tertiary)',
+  draft: 'var(--color-ink-secondary)',
+};
+---
+
+<BaseLayout
+  title="Experiments"
+  description="Interactive prototypes, AI workflows and practical applications that explore how Editorial Intelligence can be applied in real organisations."
+>
+  <div class="container-site py-16">
+    <header class="mb-12 max-w-2xl">
+      <p class="t-label mb-4">Experiments</p>
+      <h1 class="t-heading mb-4">Editorial Intelligence in practice</h1>
+      <p class="t-body">
+        Experiments are practical prototypes that test and evolve the Editorial Intelligence methodology. They demonstrate how EI moves beyond theory into tools, workflows and new ways of working.
+      </p>
+    </header>
+
+    <hr class="divider mb-12" />
+
+    <div class="exp-grid">
+      {sorted.map((exp) => {
+        const status = exp.data.status;
+        const statusLabel = statusLabels[status] ?? status;
+        const statusColor = statusColors[status] ?? 'var(--color-ink-tertiary)';
+        const totalRelated =
+          (exp.data.relatedFrameworks?.length ?? 0) +
+          (exp.data.relatedNarratives?.length ?? 0) +
+          (exp.data.relatedExperiments?.length ?? 0);
+        return (
+          <a href={`/experiments/${exp.slug}`} class="exp-card group no-underline">
+            <div class="exp-card-meta">
+              <span class="type-badge-exp">Experiment</span>
+              <span class="status-indicator" style={`--dot: ${statusColor}`}>
+                <span class="status-dot"></span>
+                <span class="status-text" style={`color: ${statusColor}`}>{statusLabel}</span>
+              </span>
+            </div>
+
+            <h2 class="exp-card-title group-hover:text-[var(--color-accent)] transition-colors">
+              {exp.data.title}
+            </h2>
+
+            {exp.data.subtitle && (
+              <p class="exp-card-subtitle">{exp.data.subtitle}</p>
+            )}
+
+            <p class="exp-card-excerpt">{exp.data.excerpt}</p>
+
+            {totalRelated > 0 && (
+              <div class="exp-card-footer">
+                <span class="connection-label-small">{totalRelated} connected {totalRelated === 1 ? 'piece' : 'pieces'}</span>
+              </div>
+            )}
+          </a>
+        );
+      })}
+    </div>
+
+    <div class="lab-note">
+      <p class="t-label mb-3">About this section</p>
+      <p class="t-body">
+        Each experiment documents a prototype being built and refined in real conditions. Some are active and evolving. Some are in early development. All of them demonstrate Editorial Intelligence applied, not just described.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .exp-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .exp-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .exp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.75rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-top: 2px solid var(--color-blue, #6a9fd8);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .exp-card:hover {
+    background: var(--color-surface-tertiary);
+    border-color: var(--color-blue, #6a9fd8);
+  }
+
+  .exp-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .type-badge-exp {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-surface, #18160f);
+    background: var(--color-blue, #6a9fd8);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--dot, var(--color-ink-tertiary));
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .exp-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .exp-card-subtitle {
+    font-size: 0.8125rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .exp-card-excerpt {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  .exp-card-footer {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-rule, #2c2920);
+    margin-top: auto;
+  }
+
+  .connection-label-small {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  .lab-note {
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-left: 2px solid var(--color-blue, #6a9fd8);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    max-width: 42rem;
+  }
+</style>

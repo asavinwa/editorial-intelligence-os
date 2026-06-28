@@ -1,0 +1,74 @@
+---
+import type { RelatedItem } from '../../lib/related';
+
+interface Props {
+  narratives?: RelatedItem[];
+  frameworks?: RelatedItem[];
+  writing?: RelatedItem[];
+  experiments?: RelatedItem[];
+}
+
+const {
+  narratives = [],
+  frameworks = [],
+  writing = [],
+  experiments = [],
+} = Astro.props;
+
+const hasContent =
+  narratives.length > 0 ||
+  frameworks.length > 0 ||
+  writing.length > 0 ||
+  experiments.length > 0;
+
+type Section = {
+  label: string;
+  items: RelatedItem[];
+  badgeClass: string;
+};
+
+const sections: Section[] = [
+  { label: 'Narratives', items: narratives, badgeClass: 'type-badge--narrative' },
+  { label: 'Frameworks', items: frameworks, badgeClass: 'type-badge--framework' },
+  { label: 'Writing', items: writing, badgeClass: 'type-badge--writing' },
+  { label: 'Experiments', items: experiments, badgeClass: 'type-badge--experiment' },
+].filter((s) => s.items.length > 0);
+---
+
+{hasContent && (
+  <aside aria-label="Connected thinking" class="connected-thinking">
+    <p class="t-label mb-6">Connected thinking</p>
+    <div class="flex flex-col gap-6">
+      {sections.map((section) => (
+        <div>
+          <p class={`t-label mb-3 ${section.badgeClass}`}>{section.label}</p>
+          <ul class="flex flex-col gap-3 list-none m-0 p-0">
+            {section.items.map((item) => (
+              <li>
+                <a
+                  href={item.url}
+                  class="group flex flex-col gap-1 no-underline"
+                >
+                  <span class="t-small text-[var(--color-ink-secondary)] group-hover:text-[var(--color-ink)] transition-colors leading-snug">
+                    {item.title}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </aside>
+)}
+
+<style>
+  .connected-thinking {
+    padding: 1.5rem;
+    border: 1px solid var(--color-surface-tertiary);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    position: sticky;
+    top: calc(3.5rem + 1.5rem);
+  }
+</style>

@@ -1,0 +1,334 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Editorial Intelligence"
+  description="Editorial Intelligence is the practice of identifying, connecting and developing organisational knowledge into strategic narratives and reusable assets."
+>
+  <article class="container-site py-20">
+    <div class="max-w-2xl">
+
+      <!-- Header -->
+      <header class="mb-16">
+        <p class="t-label mb-6">The discipline</p>
+        <h1 class="t-display mb-6">Editorial Intelligence</h1>
+        <p class="t-body text-lg leading-relaxed">
+          A manifesto for an emerging discipline.
+        </p>
+        <p class="t-small mt-4 italic">
+          Version 1. This framework evolves as new evidence is added.
+        </p>
+      </header>
+
+      <hr class="divider mb-16" />
+
+      <!-- 1. The problem -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">The problem</h2>
+        <div class="prose-section">
+          <p>Every organisation is trying to make sense of change.</p>
+          <p>They invest in research, listen to customers, attend industry events, build products and accumulate expertise. Every day they generate valuable signals about the markets they serve, the problems their customers face and the direction their industry is heading.</p>
+          <p>Yet these signals rarely become a coherent point of view.</p>
+          <p>Research is published once and forgotten. Customer stories remain isolated. Product knowledge stays within teams. Event insights disappear into presentation decks. AI produces more content, but without a distinctive perspective to guide it.</p>
+          <p class="font-medium text-[var(--color-ink)]">The challenge is not a lack of information.</p>
+          <p class="font-medium text-[var(--color-ink)]">It is the inability to connect that information into something larger than the sum of its parts.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- 2. The discipline -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">The discipline</h2>
+        <div class="prose-section">
+          <p>Editorial Intelligence is the practice of identifying, connecting and developing organisational knowledge into strategic narratives and reusable assets.</p>
+          <p>It begins with signals — the research findings, customer experiences, product insights, market observations and operational evidence that organisations generate continuously but rarely connect.</p>
+          <p>It transforms those signals into insights: meaningful patterns that reveal something true about customers, markets or the direction of an industry.</p>
+          <p class="font-medium text-[var(--color-ink)]">Editorial judgement determines which patterns are strategically meaningful and which are simply noise.</p>
+          <p>It organises those insights into narratives: strategic stories that give an organisation a coherent point of view, developed over time rather than produced once and forgotten.</p>
+          <p>And it expresses those narratives through editorial assets — articles, frameworks, diagnostics, case studies, AI workflows, playbooks — that allow knowledge to move across teams, audiences and time.</p>
+          <p>But the process does not end with publication.</p>
+          <p>Every asset creates new signals. Every new signal strengthens the narrative. Editorial Intelligence is designed as a continuous learning system rather than a linear production process.</p>
+          <p class="font-medium text-[var(--color-ink)]">The result is not a content programme. It is a knowledge system that learns.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- 3. The cycle -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">The Editorial Intelligence Cycle</h2>
+        <div class="prose-section">
+          <p>Editorial Intelligence is not a linear process. It is a cycle.</p>
+          <p>Every organisation that practises it moves through the same sequence — not once, but continuously, with each pass strengthening the work that came before.</p>
+        </div>
+
+        <!-- Cycle steps -->
+        <div class="cycle-steps mt-10">
+          {[
+            {
+              term: 'Signals',
+              def: 'Signals are observations that have the potential to change or strengthen an organisation\'s strategic understanding — customer interviews, research findings, product feedback, sales conversations, event discussions, market observations. Most organisations generate signals continuously. Few have a system for recognising which ones matter. Editorial judgement begins here, with the discipline of distinguishing meaningful observations from background noise.',
+            },
+            {
+              term: 'Insights',
+              def: 'Signals become insights when patterns emerge. An insight is not a single observation. It is the recognition that multiple signals — from different sources, at different times — are pointing at the same underlying truth. Not every signal becomes an insight. Most don\'t. The editorial judgement required at this stage is the capacity to sit with incomplete evidence long enough to recognise what it is actually revealing.',
+            },
+            {
+              term: 'Narratives',
+              def: 'Narratives are where organisational knowledge becomes strategic direction. They provide the organising structure that connects evidence across time, teams and channels — becoming more authoritative as new evidence is added, and more distinctive as they develop over time. Narratives are the centre of the Editorial Intelligence Cycle. Everything before them exists to discover them. Everything after them exists to strengthen them.',
+            },
+            {
+              term: 'Editorial assets',
+              def: 'Narratives are expressed through editorial assets — articles, frameworks, diagnostics, case studies, AI workflows, playbooks — designed from the start to be discovered, reused and extended. An editorial asset produced in isolation has limited value. The same asset, designed as part of a connected narrative system, becomes a foundation for future work. It makes the next piece stronger than the last.',
+            },
+            {
+              term: 'Evidence',
+              def: 'Every editorial asset generates new evidence. A published article surfaces new questions. A diagnostic reveals new patterns. A case study uncovers new examples. A framework, tested in practice, either holds or requires refinement. That evidence feeds back into the cycle as new signals — refining the narrative, strengthening the position, making the next pass more valuable than the previous one.',
+            },
+          ].map((step, i) => (
+            <div class="cycle-step">
+              <div class="cycle-step__marker">
+                <span class="t-label">{String(i + 1).padStart(2, '0')}</span>
+                {i < 4 && <div class="cycle-step__line" aria-hidden="true" />}
+              </div>
+              <div class="cycle-step__content">
+                <h3 class="t-title mb-3">{step.term}</h3>
+                <p class="t-body">{step.def}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 prose-section">
+          <p>This is the Editorial Intelligence Cycle.</p>
+          <p class="font-medium text-[var(--color-ink)]">Not a workflow that ends with publication. A system that learns.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- 4. In practice -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">Editorial Intelligence in practice</h2>
+        <div class="prose-section mb-10">
+          <p>The principles of Editorial Intelligence did not emerge from theory.</p>
+          <p>They emerged from work.</p>
+        </div>
+
+        <div class="flex flex-col gap-8">
+          {[
+            {
+              title: 'Hidden Hours',
+              href: '/narratives/hidden-hours',
+              body: 'Hidden Hours began as a research project into the invisible pressures facing accounting professionals — compliance burden, workflow friction, late payments, business change. The research uncovered a pattern: the operational challenges accountants described were not isolated problems. They were expressions of a deeper structural pressure on the profession. That pattern became a narrative. The narrative attracted more evidence — customer stories, practitioner interviews, event conversations, product feedback, regulatory changes. Each new signal strengthened the position. The narrative became a framework. The framework became a diagnostic. The diagnostic became an AI workflow. Hidden Hours is not a content campaign. It is a knowledge system that has compounded over time.',
+            },
+            {
+              title: 'Customer Stories',
+              href: '/narratives/customer-stories',
+              body: 'Most organisations treat customer stories as marketing assets — produced once, used briefly, then filed. At Sage, customer stories became something different: a continuously developing body of evidence about how real organisations solve operational problems. Rather than isolated case studies, they became connected evidence — each story adding to a growing picture of how businesses experience change, adopt technology and navigate pressure. The stories didn\'t just demonstrate product value. They became a strategic intelligence resource.',
+            },
+            {
+              title: 'Trusted AI',
+              href: '/narratives/trusted-ai',
+              body: 'When AI became a dominant industry conversation, the instinctive response for many organisations was to produce content about AI — announcements, explainers, opinion pieces. Trusted AI took a different approach. It began with a question: what do organisations actually need to know to implement AI responsibly? The answer required connecting research, governance thinking, customer experience and practical implementation evidence. The result was a coherent point of view on how trust in AI is built — developed through evidence, expressed through multiple assets, designed to strengthen over time.',
+            },
+          ].map((example) => (
+            <div class="practice-example">
+              <h3 class="t-title mb-3">
+                <a href={example.href} class="text-[var(--color-ink)] no-underline hover:text-[var(--color-accent)] transition-colors">
+                  {example.title}
+                </a>
+              </h3>
+              <p class="t-body">{example.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 prose-section">
+          <p>Three examples. Three different starting points — research, customer evidence, emerging technology. Three different outputs. The same underlying process.</p>
+          <p class="font-medium text-[var(--color-ink)]">Signals recognised. Insights developed. Narratives built. Editorial assets designed for reuse. Evidence accumulated over time.</p>
+          <p>That is Editorial Intelligence in practice.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- 5. Principles -->
+      <section class="mb-16">
+        <h2 class="t-label mb-4">The four principles of Editorial Intelligence</h2>
+        <p class="t-small mb-10">These principles emerged through practice and have been refined through repeated application. They are not rules. They are the beliefs that have proven most useful in developing organisational knowledge into strategic assets.</p>
+
+        <div class="flex flex-col gap-10">
+          {[
+            {
+              title: 'Knowledge before content',
+              body: 'Content is not the starting point. The starting point is organisational knowledge — research, customer insight, product expertise, market signals, operational experience. Content is one way that knowledge is expressed. It is never the source of it. Organisations that begin with content ask: what should we publish? Organisations that practise Editorial Intelligence ask: what do we know, and what does it mean?',
+            },
+            {
+              title: 'Narratives over campaigns',
+              body: 'Campaigns have a beginning and an end. Narratives evolve. A strong narrative connects multiple signals across months or years, accumulating evidence and authority with each new piece of work. It does not reset with each campaign cycle. It compounds. The measure of a narrative is not how many assets it produces. It is how much stronger the position becomes over time.',
+            },
+            {
+              title: 'Evidence over assertion',
+              body: 'Strategic positions are earned through accumulated evidence rather than asserted through isolated ideas. Research findings, customer experience, operational examples and market observations — each new piece either strengthens the position or refines it. The narrative becomes more authoritative not because it is stated with more confidence, but because it is supported by more evidence. Thought leadership communicates a point of view. Editorial Intelligence develops and strengthens one over time.',
+            },
+            {
+              title: 'Editorial judgement before AI scale',
+              body: 'AI accelerates production. It summarises, drafts, translates and distributes at a speed no editorial team can match. But acceleration without direction produces volume, not value. Editorial judgement determines which signals matter, which insights are worth developing, which narratives deserve investment and which assets will remain useful over time. It is the capacity to distinguish between what is merely interesting and what is strategically meaningful. In an AI-enabled workflow, editorial judgement does not diminish in importance. It becomes the scarcest and most valuable resource in the system.',
+            },
+          ].map((principle, i) => (
+            <div class="principle">
+              <div class="flex items-start gap-4">
+                <span class="t-label mt-1 shrink-0 w-6">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="t-title mb-3">{principle.title}</h3>
+                  <p class="t-body">{principle.body}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- 6. The OS -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">Editorial Intelligence OS</h2>
+        <div class="prose-section mb-10">
+          <p>Philosophy without implementation remains theoretical.</p>
+          <p>The Editorial Intelligence Cycle describes how knowledge becomes strategic assets. The Editorial Intelligence OS is the infrastructure that makes that cycle repeatable.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { name: 'Narrative Library', desc: 'Connected narratives, frameworks and editorial assets for discovery and reuse.' },
+            { name: 'Research Library', desc: 'Signal and insight repositories that feed the cycle continuously.' },
+            { name: 'Evidence Library', desc: 'Customer stories and case studies that validate strategic narratives.' },
+            { name: 'Workflow Library', desc: 'Repeatable editorial processes that improve with each iteration.' },
+            { name: 'Agent Library', desc: 'AI-enabled workflows that accelerate production from connected knowledge.' },
+            { name: 'Prompt Library', desc: 'Editorial prompts that support consistent judgement across the cycle.' },
+          ].map((component) => (
+            <div class="os-component">
+              <p class="t-small font-medium text-[var(--color-ink)] mb-1">{component.name}</p>
+              <p class="t-small">{component.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="t-small mt-8 italic">
+          The Editorial Intelligence OS is documented here as a working implementation. It will evolve as the discipline develops.
+        </p>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- 7. The ambition -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">The ambition</h2>
+        <div class="prose-section">
+          <p>Editorial Intelligence began as a way of describing a particular kind of work.</p>
+          <p>It has become something larger.</p>
+          <p>The organisations that will build lasting strategic advantage in the AI era will not be those that produce the most content. They will be those that best understand what they know, connect it into coherent positions and build systems that make that knowledge more valuable over time.</p>
+          <p>AI changes the economics of content production entirely. It does not change the value of genuine organisational knowledge, coherent strategic narratives or the editorial judgement required to develop them. If anything, as content becomes abundant, those things become scarcer and more valuable.</p>
+          <p>Editorial Intelligence is the discipline of building that value deliberately.</p>
+          <p class="font-medium text-[var(--color-ink)]">Not by publishing more.</p>
+          <p class="font-medium text-[var(--color-ink)]">By knowing more.</p>
+          <p>And by building systems that ensure that knowledge compounds — across teams, across time, across every new cycle of evidence.</p>
+          <p class="font-medium text-[var(--color-ink)]">The organisation that practises Editorial Intelligence does not simply produce better content. It becomes more intelligent over time.</p>
+        </div>
+      </section>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .prose-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Cycle steps */
+  .cycle-steps {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cycle-step {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1.5rem;
+  }
+
+  .cycle-step__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-top: 0.25rem;
+  }
+
+  .cycle-step__line {
+    width: 1px;
+    flex: 1;
+    background: var(--color-surface-tertiary);
+    margin: 0.75rem 0;
+    min-height: 2rem;
+  }
+
+  .cycle-step__content {
+    padding-bottom: 2rem;
+  }
+
+  .cycle-step__content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  /* Practice examples */
+  .practice-example {
+    padding: 1.5rem;
+    border-left: 2px solid var(--color-accent-light);
+    padding-left: 1.5rem;
+  }
+
+  .practice-example p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  /* OS components */
+  .os-component {
+    padding: 1.25rem;
+    border: 1px solid var(--color-surface-tertiary);
+    border-radius: 4px;
+  }
+
+  /* Principles */
+  .principle {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-surface-tertiary);
+  }
+
+  .principle:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .principle p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+</style>

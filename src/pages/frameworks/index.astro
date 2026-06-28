@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import FrameworkCard from '../../components/content/FrameworkCard.astro';
+import { getCollection } from 'astro:content';
+
+const frameworks = await getCollection('frameworks', ({ data }) => data.status === 'published');
+const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Frameworks"
+  description="Reusable models, processes and methodologies for developing organisational knowledge into strategic assets."
+>
+  <div class="container-site py-16">
+    <header class="mb-12 max-w-2xl">
+      <p class="t-label mb-4">Frameworks</p>
+      <h1 class="t-heading mb-4">Reusable models and methodologies</h1>
+      <p class="t-body">
+        Frameworks transform insights into repeatable ways of thinking — tools that can be applied across teams, campaigns and contexts.
+      </p>
+    </header>
+
+    <hr class="divider mb-12" />
+
+    {sorted.length === 0 ? (
+      <p class="t-body">No frameworks published yet.</p>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {sorted.map((fw) => (
+          <FrameworkCard
+            slug={fw.slug}
+            title={fw.data.title}
+            subtitle={fw.data.subtitle}
+            excerpt={fw.data.excerpt}
+            date={fw.data.date}
+            type={fw.data.type}
+            tags={fw.data.tags as string[]}
+            relatedCount={fw.data.relatedNarratives.length + fw.data.relatedArticles.length}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

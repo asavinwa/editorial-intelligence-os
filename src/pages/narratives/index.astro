@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import NarrativeCard from '../../components/content/NarrativeCard.astro';
+import { getCollection } from 'astro:content';
+
+const narratives = await getCollection('narratives', ({ data }) => data.status === 'published');
+const sorted = narratives.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Group by theme, ungrouped narratives go to a catch-all
+const themeOrder = ['Operational Pressure', 'Trusted AI', 'Customer Evidence'];
+
+const grouped = new Map<string, typeof sorted>();
+const ungrouped: typeof sorted = [];
+
+for (const n of sorted) {
+  const t = n.data.theme;
+  if (t) {
+    if (!grouped.has(t)) grouped.set(t, []);
+    grouped.get(t)!.push(n);
+  } else {
+    ungrouped.push(n);
+  }
+}
+
+// Order themes according to themeOrder, then any remaining
+const orderedThemes = [
+  ...themeOrder.filter(t => grouped.has(t)),
+  ...[...grouped.keys()].filter(t => !themeOrder.includes(t)),
+];
+---
+
+<BaseLayout
+  title="Narratives"
+  description="Long-form connected thinking about editorial systems, knowledge strategy and the AI era."
+>
+  <div class="container-site py-16">
+    <header class="mb-12 max-w-2xl">
+      <p class="t-label mb-4">Narratives</p>
+      <h1 class="t-heading mb-4">Long-form connected thinking</h1>
+      <p class="t-body">
+        Each narrative connects multiple signals into a strategic story — organised here by theme.
+      </p>
+    </header>
+
+    <hr class="divider mb-12" />
+
+    {sorted.length === 0 ? (
+      <p class="t-body">No narratives published yet.</p>
+    ) : (
+      <div class="flex flex-col gap-16">
+        {orderedThemes.map((theme) => (
+          <section>
+            <div class="theme-header mb-6">
+              <p class="t-label mb-1" style="color: var(--color-ink-tertiary)">Theme</p>
+              <h2 class="t-title m-0">{theme}</h2>
+            </div>
+            <div class="flex flex-col gap-4">
+              {grouped.get(theme)!.map((narrative) => (
+                <NarrativeCard
+                  slug={narrative.slug}
+                  title={narrative.data.title}
+                  subtitle={narrative.data.subtitle}
+                  excerpt={narrative.data.excerpt}
+                  date={narrative.data.date}
+                  readTime={narrative.data.readTime}
+                  tags={narrative.data.tags as string[]}
+                  theme={narrative.data.theme}
+                  relatedFrameworks={narrative.data.relatedFrameworks.length}
+                  relatedNarratives={narrative.data.relatedNarratives.length}
+                  relatedArticles={narrative.data.relatedArticles.length}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
+
+        {ungrouped.length > 0 && (
+          <section>
+            <div class="theme-header mb-6">
+              <p class="t-label mb-1" style="color: var(--color-ink-tertiary)">Narratives</p>
+              <h2 class="t-title m-0">Other</h2>
+            </div>
+            <div class="flex flex-col gap-4">
+              {ungrouped.map((narrative) => (
+                <NarrativeCard
+                  slug={narrative.slug}
+                  title={narrative.data.title}
+                  subtitle={narrative.data.subtitle}
+                  excerpt={narrative.data.excerpt}
+                  date={narrative.data.date}
+                  readTime={narrative.data.readTime}
+                  tags={narrative.data.tags as string[]}
+                  relatedFrameworks={narrative.data.relatedFrameworks.length}
+                  relatedNarratives={narrative.data.relatedNarratives.length}
+                  relatedArticles={narrative.data.relatedArticles.length}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .theme-header {
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-accent);
+  }
+</style>

@@ -1,0 +1,15 @@
+export const SITE = {
+  name: 'Editorial Intelligence OS',
+  title: 'Editorial Intelligence for the AI era',
+  description: 'Helping organisations turn research, customer insight and market knowledge into connected narratives, reusable systems and strategic content.',
+  author: 'Asavin Wattanajantra',
+  url: 'https://editorialintelligence.com',
+  nav: [
+    { label: 'Editorial Intelligence', href: '/intelligence' },
+    { label: 'The Cycle', href: '/cycle' },
+    { label: 'Frameworks', href: '/frameworks' },
+    { label: 'Narratives', href: '/narratives' },
+    { label: 'Experiments', href: '/experiments' },
+    { label: 'About', href: '/about' },
+  ],
+} as const;

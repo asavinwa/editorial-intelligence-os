@@ -1,0 +1,642 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+const stages = [
+  {
+    num: '01',
+    name: 'Signals',
+    question: 'What should we pay attention to?',
+    purpose: 'Recognise observations with strategic potential before they disappear into the noise.',
+    inputs: ['Customer interviews', 'Research findings', 'Event conversations', 'Sales observations', 'Product feedback', 'Market data'],
+    related: [
+      { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
+      { label: 'Hidden Hours', href: '/narratives/hidden-hours', type: 'narrative' },
+    ],
+    color: '#88806e',
+  },
+  {
+    num: '02',
+    name: 'Insights',
+    question: 'What does it mean?',
+    purpose: 'Connect multiple signals into meaningful patterns that reveal something strategically significant.',
+    outputs: ['Recurring themes', 'Structural tensions', 'Strategic opportunities', 'Industry risks', 'Audience truths'],
+    related: [
+      { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
+    ],
+    color: '#6a9fd8',
+  },
+  {
+    num: '03',
+    name: 'Narratives',
+    question: 'What position should we build?',
+    purpose: 'Organise insights into strategic stories an organisation can develop and strengthen over time.',
+    examples: ['Hidden Hours', 'Trusted AI', 'Customer Stories'],
+    exampleLinks: [
+      { label: 'Hidden Hours', href: '/narratives/hidden-hours' },
+      { label: 'Customer Stories', href: '/narratives/customer-stories' },
+    ],
+    related: [],
+    color: '#c8a96e',
+    centre: true,
+  },
+  {
+    num: '04',
+    name: 'Editorial Assets',
+    question: 'How should we express it?',
+    purpose: 'Turn narratives into reusable forms that move across teams, audiences and time.',
+    outputs: ['Articles', 'Frameworks', 'Diagnostics', 'Case studies', 'AI workflows', 'Playbooks'],
+    related: [
+      { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
+    ],
+    color: '#c8a96e',
+  },
+  {
+    num: '05',
+    name: 'Evidence',
+    question: 'What did we learn?',
+    purpose: 'Capture what each asset reveals after use, then feed that evidence back as new signals.',
+    outputs: ['New customer questions', 'Stakeholder feedback', 'Repeated patterns', 'Challenged assumptions'],
+    related: [
+      { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
+    ],
+    color: '#88806e',
+  },
+];
+
+const hiddenHoursSteps = [
+  { stage: 'Signals', text: 'Research into operational pressure on accountants — hidden work, compliance burden, workflow friction' },
+  { stage: 'Insights', text: 'Admin and workflow friction are structural pressures, not individual inefficiencies' },
+  { stage: 'Narratives', text: 'The Hidden Hours narrative — the profession absorbing structural change in silence' },
+  { stage: 'Editorial Assets', text: 'Articles, diagnostic tool, Editorial Intelligence Framework, AI workflow' },
+  { stage: 'Evidence', text: 'New signals from customer stories, practitioner conversations and stakeholder use' },
+  { stage: 'Signals', text: 'Cycle continues — each pass stronger than the last', loop: true },
+];
+---
+
+<BaseLayout
+  title="The Editorial Intelligence Cycle"
+  description="Not a workflow that ends with publication. A system that learns. How signals become insights, narratives, editorial assets and evidence — continuously."
+>
+
+  <!-- Hero -->
+  <section class="cycle-hero">
+    <div class="container-site py-24 md:py-32">
+      <div class="max-w-2xl mb-16">
+        <p class="t-label mb-6">The methodology</p>
+        <h1 class="t-display mb-6">The Editorial Intelligence Cycle</h1>
+        <p class="hero-line">
+          Editorial Intelligence is not a linear content workflow. It is a continuous learning system that transforms organisational knowledge into strategic narratives and reusable editorial assets.
+        </p>
+      </div>
+
+      <!-- Visual cycle diagram -->
+      <div class="cycle-diagram" aria-label="The Editorial Intelligence Cycle: Signals, Insights, Narratives, Editorial Assets, Evidence, back to Signals">
+        {stages.map((stage, i) => (
+          <div class="diagram-stage" data-centre={stage.centre}>
+            <div class="stage-node" style={`--c: ${stage.color}`}>
+              <span class="stage-node__num">{stage.num}</span>
+              <span class="stage-node__name">{stage.name}</span>
+            </div>
+            {i < stages.length - 1 && (
+              <div class="diagram-arrow" aria-hidden="true">
+                <svg width="24" height="12" viewBox="0 0 24 12" fill="none">
+                  <path d="M0 6h22M17 1l5 5-5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+        <div class="diagram-loop" aria-hidden="true">
+          <div class="loop-line"></div>
+          <span class="loop-label">back to signals</span>
+        </div>
+      </div>
+
+      <p class="cycle-axiom">
+        Not a workflow that ends with publication.<br />
+        <strong>A system that learns.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Why the cycle exists -->
+  <section class="container-site py-16 max-w-2xl">
+    <p class="t-label mb-6">Why the cycle exists</p>
+    <div class="why-body">
+      <p>Most organisations stop at publication.</p>
+      <p>A research report is published, used briefly, then filed. A customer story is approved, distributed, then forgotten. A framework is shared once and never updated. Each piece of work is treated as complete the moment it is produced.</p>
+      <p>Editorial Intelligence does not stop at publication.</p>
+      <p>Every article, framework, diagnostic, case study or AI workflow should generate new evidence — new questions, new signals, new patterns that the original work did not anticipate. That evidence feeds back into the next cycle, making each pass stronger than the last.</p>
+      <p class="why-emphasis">The organisation that practises Editorial Intelligence does not simply produce better content. It becomes more intelligent over time.</p>
+    </div>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- Five stages -->
+  <section class="container-site py-16">
+    <p class="t-label mb-10">Explore each stage</p>
+    <div class="stages-grid">
+      {stages.map((stage) => (
+        <div class="stage-card" style={`--c: ${stage.color}`}>
+          <div class="stage-card__header">
+            <span class="stage-card__num">{stage.num}</span>
+            <h2 class="stage-card__name">{stage.name}</h2>
+          </div>
+          <p class="stage-card__question">"{stage.question}"</p>
+          <p class="stage-card__purpose">{stage.purpose}</p>
+
+          {(stage.inputs ?? stage.outputs) && (
+            <div class="stage-card__items">
+              <p class="stage-card__items-label">{stage.inputs ? 'Inputs' : 'Outputs'}</p>
+              <ul class="stage-card__list">
+                {(stage.inputs ?? stage.outputs ?? []).map((item: string) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {stage.related && stage.related.length > 0 && (
+            <div class="stage-card__related">
+              {stage.related.map((r: { label: string; href: string; type: string }) => (
+                <a href={r.href} class:list={['stage-related-link', `stage-related-link--${r.type}`]}>
+                  {r.label} →
+                </a>
+              ))}
+            </div>
+          )}
+
+          {stage.centre && (
+            <div class="stage-card__centre-badge">Centre of the system</div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- Worked example: Hidden Hours -->
+  <section class="container-site py-16">
+    <div class="max-w-3xl">
+      <p class="t-label mb-2">Worked example</p>
+      <h2 class="t-heading mb-3">Hidden Hours</h2>
+      <p class="t-body mb-10">
+        A research project into operational pressure on accounting professionals — and how it became a knowledge system.
+      </p>
+
+      <div class="example-flow">
+        {hiddenHoursSteps.map((step, i) => (
+          <div class:list={['example-step', step.loop && 'example-step--loop']}>
+            <div class="example-step__marker">
+              <span class="example-step__stage">{step.stage}</span>
+              {i < hiddenHoursSteps.length - 1 && <div class="example-step__line" />}
+            </div>
+            <p class="example-step__text">{step.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10">
+        <a href="/narratives/hidden-hours" class="read-narrative-link">
+          Read the Hidden Hours narrative →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- Related knowledge objects -->
+  <section class="container-site py-16">
+    <p class="t-label mb-8">Related knowledge objects</p>
+    <div class="knowledge-grid">
+
+      <div class="knowledge-group">
+        <p class="knowledge-group__label type-badge type-badge--framework mb-4">Frameworks</p>
+        <ul class="knowledge-list">
+          <li><a href="/frameworks/customer-signal-framework" class="knowledge-link">Customer Signal Framework</a></li>
+          <li><a href="/frameworks/editorial-intelligence-framework" class="knowledge-link">Editorial Intelligence Framework</a></li>
+        </ul>
+      </div>
+
+      <div class="knowledge-group">
+        <p class="knowledge-group__label type-badge type-badge--narrative mb-4">Narratives</p>
+        <ul class="knowledge-list">
+          <li><a href="/narratives/hidden-hours" class="knowledge-link">Hidden Hours</a></li>
+          <li><a href="/narratives/customer-stories" class="knowledge-link">Customer Stories</a></li>
+          <li><span class="knowledge-link--pending">Trusted AI <span class="t-mono opacity-40">coming soon</span></span></li>
+        </ul>
+      </div>
+
+      <div class="knowledge-group">
+        <p class="knowledge-group__label type-badge type-badge--experiment mb-4">Experiments</p>
+        <ul class="knowledge-list">
+          <li><span class="knowledge-link--pending">Hidden Hours Diagnostic <span class="t-mono opacity-40">coming soon</span></span></li>
+          <li><span class="knowledge-link--pending">Case Study Agent <span class="t-mono opacity-40">coming soon</span></span></li>
+          <li><span class="knowledge-link--pending">EI OS Workflow <span class="t-mono opacity-40">coming soon</span></span></li>
+        </ul>
+      </div>
+
+      <div class="knowledge-group">
+        <p class="knowledge-group__label t-label mb-4">Principles</p>
+        <ul class="knowledge-list">
+          {['Knowledge before content', 'Narratives over campaigns', 'Evidence over assertion', 'Editorial judgement before AI scale'].map(p => (
+            <li><span class="knowledge-principle">{p}</span></li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .cycle-hero {
+    border-bottom: 1px solid var(--color-rule, #2c2920);
+    background: var(--color-surface);
+  }
+
+  .hero-line {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--color-ink-secondary);
+    max-width: 52ch;
+  }
+
+  /* Cycle diagram */
+  .cycle-diagram {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+
+  .cycle-diagram::-webkit-scrollbar { display: none; }
+
+  .diagram-stage {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .stage-node {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-top: 2px solid var(--c, var(--color-ink-tertiary));
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    min-width: 130px;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+
+  .stage-node:hover {
+    background: var(--color-surface-tertiary);
+    border-color: var(--c, var(--color-ink-tertiary));
+  }
+
+  .stage-node__num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--c, var(--color-ink-tertiary));
+    opacity: 0.7;
+  }
+
+  .stage-node__name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+
+  .diagram-arrow {
+    color: var(--color-rule, #2c2920);
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .diagram-loop {
+    position: absolute;
+    bottom: 0;
+    left: 1.25rem;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+  }
+
+  .loop-line {
+    height: 1px;
+    flex: 1;
+    background: var(--color-rule, #2c2920);
+    max-width: 700px;
+    position: relative;
+  }
+
+  .loop-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 6px;
+    height: 6px;
+    border-left: 1.25px solid var(--color-rule, #2c2920);
+    border-bottom: 1.25px solid var(--color-rule, #2c2920);
+    transform: rotate(45deg);
+  }
+
+  .loop-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-tertiary);
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .cycle-axiom {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    padding-top: 0.5rem;
+  }
+
+  .cycle-axiom strong {
+    color: var(--color-ink);
+  }
+
+  /* Why section */
+  .why-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+    margin-bottom: 1.25rem;
+    max-width: 58ch;
+  }
+
+  .why-emphasis {
+    color: var(--color-ink) !important;
+    font-weight: 500;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1rem;
+  }
+
+  /* Stage cards */
+  .stages-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .stages-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stages-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .stage-card {
+    padding: 1.75rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-top: 2px solid var(--c, var(--color-ink-tertiary));
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .stage-card__header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .stage-card__num {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--c, var(--color-ink-tertiary));
+    opacity: 0.7;
+  }
+
+  .stage-card__name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c, var(--color-ink));
+    margin: 0;
+  }
+
+  .stage-card__question {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .stage-card__purpose {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  .stage-card__items {
+    border-top: 1px solid var(--color-rule, #2c2920);
+    padding-top: 0.875rem;
+    margin-top: auto;
+  }
+
+  .stage-card__items-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .stage-card__list li {
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+    background: var(--color-surface-tertiary);
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 3px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .stage-card__related {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .stage-related-link {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .stage-related-link--framework { color: var(--color-blue, #6a9fd8); }
+  .stage-related-link--narrative { color: var(--color-accent); }
+  .stage-related-link:hover { opacity: 0.7; }
+
+  .stage-card__centre-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-surface);
+    background: var(--color-accent);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  /* Worked example */
+  .example-flow {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .example-step {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .example-step--loop .example-step__stage {
+    color: var(--color-ink-tertiary);
+    opacity: 0.5;
+  }
+
+  .example-step__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 0.25rem;
+  }
+
+  .example-step__stage {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+
+  .example-step__line {
+    width: 1px;
+    height: 2rem;
+    background: var(--color-rule, #2c2920);
+    margin: 0.5rem 0 0 0;
+  }
+
+  .example-step__text {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    padding-bottom: 1rem;
+    margin: 0;
+  }
+
+  .read-narrative-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .read-narrative-link:hover {
+    border-color: var(--color-accent);
+  }
+
+  /* Related knowledge */
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .knowledge-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .knowledge-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .knowledge-link {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .knowledge-link:hover {
+    color: var(--color-ink);
+  }
+
+  .knowledge-link--pending {
+    font-size: 0.875rem;
+    color: var(--color-ink-tertiary);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .knowledge-principle {
+    font-size: 0.8125rem;
+    color: var(--color-ink-secondary);
+    font-style: italic;
+    line-height: 1.5;
+  }
+</style>

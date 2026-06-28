@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import WritingRow from '../../components/content/WritingRow.astro';
+import { getCollection } from 'astro:content';
+
+const writing = await getCollection('writing', ({ data }) => data.status === 'published');
+const sorted = writing.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Writing"
+  description="Articles, notes and reflections on editorial intelligence, knowledge systems and the AI era."
+>
+  <div class="container-site py-16">
+    <header class="mb-12 max-w-2xl">
+      <p class="t-label mb-4">Writing</p>
+      <h1 class="t-heading mb-4">Articles and notes</h1>
+      <p class="t-body">
+        Shorter pieces exploring the ideas behind Editorial Intelligence — evidence that feeds the larger narratives.
+      </p>
+    </header>
+
+    <hr class="divider mb-4" />
+
+    {sorted.length === 0 ? (
+      <p class="t-body mt-8">No writing published yet.</p>
+    ) : (
+      <ul class="m-0 p-0">
+        {sorted.map((article) => (
+          <WritingRow
+            slug={article.slug}
+            title={article.data.title}
+            date={article.data.date}
+            readTime={article.data.readTime}
+            type={article.data.type}
+          />
+        ))}
+      </ul>
+    )}
+  </div>
+</BaseLayout>

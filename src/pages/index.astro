@@ -1,0 +1,354 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import NarrativeCard from '../components/content/NarrativeCard.astro';
+import FrameworkCard from '../components/content/FrameworkCard.astro';
+import CycleStrip from '../components/content/CycleStrip.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../config/site';
+
+const allNarratives = await getCollection('narratives', ({ data }) => data.status === 'published');
+const allFrameworks = await getCollection('frameworks', ({ data }) => data.status === 'published');
+const allWriting = await getCollection('writing', ({ data }) => data.status === 'published');
+
+const featuredNarrative = allNarratives.find((n) => n.data.featuredOnHome) ?? allNarratives[0];
+
+// Related writing for the featured narrative
+const featuredRelatedArticleSlugs = featuredNarrative?.data.relatedArticles ?? [];
+const featuredRelatedArticles = allWriting.filter(w => featuredRelatedArticleSlugs.includes(w.slug));
+
+// For the featured narrative, get its related framework(s) to surface below it
+const featuredRelatedFrameworkSlugs = featuredNarrative?.data.relatedFrameworks ?? [];
+const featuredRelatedFrameworks = allFrameworks.filter(f => featuredRelatedFrameworkSlugs.includes(f.slug));
+
+// Remaining frameworks
+const remainingFrameworks = allFrameworks
+  .filter(f => !featuredRelatedFrameworkSlugs.includes(f.slug))
+  .slice(0, 2);
+---
+
+<BaseLayout>
+  <!-- ① Hero: answer "what is EI and why care?" -->
+  <section class="container-site pt-28 pb-20 md:pt-36 md:pb-24">
+    <div class="max-w-3xl">
+      <p class="t-label mb-10">{SITE.author}</p>
+      <h1 class="t-display text-[var(--color-ink)] mb-6 leading-[1.08]">
+        Editorial Intelligence<br />for the AI era
+      </h1>
+      <p class="hero-definition mb-8">
+        Editorial Intelligence is the discipline of turning organisational knowledge — research, customer insight, market evidence — into strategic narratives that compound in value over time.
+      </p>
+      <p class="hero-body max-w-xl mb-12">
+        Most organisations generate signals continuously. Few have the systems to recognise which ones matter, build narratives from them, or accumulate evidence rather than recreate it. This site documents the frameworks, methods and working examples of a practice designed to change that.
+      </p>
+      <div class="flex flex-wrap items-center gap-8">
+        <a href="/intelligence" class="hero-link-primary">
+          What is Editorial Intelligence?
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/narratives" class="hero-link-secondary">
+          Explore narratives
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② The EI Cycle — the model made visible -->
+  <CycleStrip />
+
+  <!-- ③ Worked example — Hidden Hours as the entry point -->
+  {featuredNarrative && (
+    <section class="container-site py-16">
+      <div class="section-header mb-8">
+        <div>
+          <p class="t-label">Worked example</p>
+          <p class="section-subhead">See how the cycle operates in practice</p>
+        </div>
+      </div>
+      <NarrativeCard
+        slug={featuredNarrative.slug}
+        title={featuredNarrative.data.title}
+        subtitle={featuredNarrative.data.subtitle}
+        excerpt={featuredNarrative.data.excerpt}
+        date={featuredNarrative.data.date}
+        readTime={featuredNarrative.data.readTime}
+        tags={featuredNarrative.data.tags as string[]}
+        relatedFrameworks={featuredNarrative.data.relatedFrameworks.length}
+        relatedNarratives={featuredNarrative.data.relatedNarratives.length}
+        relatedArticles={featuredNarrative.data.relatedArticles.length}
+        featured={true}
+        startHere={true}
+      />
+
+      <!-- Supporting frameworks -->
+      {featuredRelatedFrameworks.length > 0 && (
+        <div class="mt-4">
+          <p class="t-mono mb-3 pl-1 opacity-50">Supporting frameworks</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {featuredRelatedFrameworks.map((fw) => (
+              <FrameworkCard
+                slug={fw.slug}
+                title={fw.data.title}
+                subtitle={fw.data.subtitle}
+                excerpt={fw.data.excerpt}
+                date={fw.data.date}
+                type={fw.data.type}
+                tags={fw.data.tags as string[]}
+                relatedNarratives={fw.data.relatedNarratives.length}
+                relatedArticles={fw.data.relatedArticles.length}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Related writing surfaced contextually -->
+      {featuredRelatedArticles.length > 0 && (
+        <div class="mt-4">
+          <p class="t-mono mb-3 pl-1 opacity-50">Related writing</p>
+          <ul class="related-articles">
+            {featuredRelatedArticles.map((article) => (
+              <li>
+                <a href={`/writing/${article.slug}`} class="related-article-link group">
+                  <span class="type-badge type-badge--writing shrink-0">Essay</span>
+                  <span class="t-small text-[var(--color-ink-secondary)] group-hover:text-[var(--color-ink)] transition-colors">{article.data.title}</span>
+                  <span class="t-mono opacity-40 shrink-0 ml-auto">{article.data.readTime} min</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  )}
+
+  <hr class="divider container-site" />
+
+  <!-- ④ All frameworks -->
+  {remainingFrameworks.length > 0 && (
+    <section class="container-site py-16">
+      <div class="section-header mb-8">
+        <div>
+          <p class="t-label">Frameworks</p>
+          <p class="section-subhead">Reusable methods and models</p>
+        </div>
+        <a href="/frameworks" class="section-link">All frameworks →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {remainingFrameworks.map((fw) => (
+          <FrameworkCard
+            slug={fw.slug}
+            title={fw.data.title}
+            subtitle={fw.data.subtitle}
+            excerpt={fw.data.excerpt}
+            date={fw.data.date}
+            type={fw.data.type}
+            tags={fw.data.tags as string[]}
+            relatedNarratives={fw.data.relatedNarratives.length}
+            relatedArticles={fw.data.relatedArticles.length}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ⑤ The OS — practical implementation -->
+  <section class="os-strip">
+    <div class="container-site py-20">
+      <div class="os-inner">
+        <div class="os-header">
+          <p class="t-label mb-2">Editorial Intelligence OS</p>
+          <p class="t-mono opacity-40">The implementation layer</p>
+        </div>
+        <div class="os-body">
+          <p class="os-lead">
+            The OS is not another framework. It is how an organisation operationalises the Editorial Intelligence Cycle through repeatable libraries, workflows and AI-assisted processes.
+          </p>
+          <ul class="os-capabilities">
+            <li>Recognise important signals earlier</li>
+            <li>Build stronger long-term narratives</li>
+            <li>Accumulate evidence rather than recreate it</li>
+            <li>Reuse knowledge across teams</li>
+            <li>Apply AI with greater context and editorial judgement</li>
+          </ul>
+          <a href="/intelligence" class="os-link">
+            Learn about the OS →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-definition {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: var(--color-ink);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25rem;
+  }
+
+  .hero-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  .hero-link-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .hero-link-primary:hover {
+    border-color: var(--color-accent);
+  }
+
+  .hero-link-secondary {
+    font-size: 0.875rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-link-secondary:hover {
+    color: var(--color-ink);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .section-subhead {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    margin-top: 0.25rem;
+  }
+
+  .section-link {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .section-link:hover {
+    color: var(--color-ink);
+  }
+
+  /* Related articles inline */
+  .related-articles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--color-surface-secondary);
+  }
+
+  .related-article-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule, #2c2920);
+    transition: background 0.15s;
+  }
+
+  .related-articles li:last-child .related-article-link {
+    border-bottom: none;
+  }
+
+  .related-article-link:hover {
+    background: var(--color-surface-tertiary);
+  }
+
+  /* OS strip */
+  .os-strip {
+    background: var(--color-surface-secondary);
+    border-top: 1px solid var(--color-rule, #2c2920);
+    margin-top: 2rem;
+  }
+
+  .os-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .os-inner {
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .os-header {
+    padding-top: 0.25rem;
+  }
+
+  .os-lead {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+    margin-bottom: 1.5rem;
+    max-width: 54ch;
+  }
+
+  .os-capabilities {
+    list-style: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .os-capabilities li {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-secondary);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .os-capabilities li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .os-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .os-link:hover {
+    border-color: var(--color-accent);
+  }
+</style>

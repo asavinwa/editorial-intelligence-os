@@ -1,0 +1,47 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  date: Date;
+  readTime: number;
+  type: string;
+}
+
+const { slug, title, date, readTime, type } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+}).format(date);
+---
+
+<li class="writing-row">
+  <a href={`/writing/${slug}`} class="flex items-center justify-between gap-6 no-underline group py-4">
+    <div class="flex items-baseline gap-4 min-w-0">
+      <span class="t-small font-medium text-[var(--color-ink-secondary)] group-hover:text-[var(--color-ink)] transition-colors leading-snug truncate">
+        {title}
+      </span>
+    </div>
+    <span class="t-small shrink-0 tabular-nums opacity-40 group-hover:opacity-80 transition-opacity">{readTime} min</span>
+  </a>
+</li>
+
+<style>
+  .writing-row {
+    border-top: 1px solid var(--color-surface-tertiary);
+    list-style: none;
+    transition: background 0.15s;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    border-radius: 4px;
+  }
+
+  .writing-row:last-child {
+    border-bottom: 1px solid var(--color-surface-tertiary);
+  }
+
+  .writing-row:hover {
+    background: var(--color-surface-secondary);
+  }
+</style>

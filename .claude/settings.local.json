@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/asavinwattanajantra/.nvm/**)",
+      "Bash(ls /pkg/env/global/bin/ 2>/dev/null | head -20)",
+      "Bash(cat /tmp/astro-dev.log)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(curl -s \"http://localhost:4321/_astro/$\\(curl -s http://localhost:4321/)",
+      "Bash(kill 29478)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(sed -n '18,24p' /Users/asavinwattanajantra/Downloads/eios/src/content/narratives/hidden-hours.mdx)",
+      "Bash(sed -n '18,24p' /Users/asavinwattanajantra/Downloads/eios/src/content/narratives/customer-stories.mdx)",
+      "Bash(sed -n '21,27p' /Users/asavinwattanajantra/Downloads/eios/src/content/narratives/trusted-ai.mdx)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
