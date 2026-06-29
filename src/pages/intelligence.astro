@@ -194,6 +194,65 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
       <hr class="divider mb-16" />
 
+      <!-- 5b. The operating model -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">The operating model</h2>
+        <div class="prose-section mb-10">
+          <p>At a higher level of abstraction, the cycle that powers Editorial Intelligence can be described in five stages.</p>
+          <p>This is not a new cycle. It is the same cycle described at the level of the whole organisation — showing where every team, channel and communication discipline connects to the same intelligence foundation.</p>
+        </div>
+
+        <!-- Five-stage loop diagram -->
+        <div class="loop-diagram">
+          {[
+            {
+              stage: 'Signals',
+              desc: 'Customer research, interviews, events, sales conversations, market trends, operational data',
+              color: 'var(--color-ink-secondary)',
+            },
+            {
+              stage: 'Editorial Intelligence',
+              desc: 'Identify recurring problems, connect evidence, develop narratives, prioritise opportunities',
+              color: 'var(--color-accent)',
+            },
+            {
+              stage: 'Narrative Development',
+              desc: 'Build reusable frameworks, strategic stories and editorial assets that compound over time',
+              color: 'var(--color-ink-secondary)',
+            },
+            {
+              stage: 'Activation',
+              desc: 'PR, editorial, thought leadership, customer marketing, sales enablement, social, events, executive communications',
+              color: 'var(--color-blue, #6a9fd8)',
+            },
+            {
+              stage: 'Learning',
+              desc: 'Coverage, engagement, customer feedback, sales conversations, new market signals — fed back into the system',
+              color: 'var(--color-ink-secondary)',
+            },
+          ].map((item, i) => (
+            <div class="loop-stage">
+              <div class="loop-stage__connector">
+                <span class="loop-stage__num">{String(i + 1).padStart(2, '0')}</span>
+                {i < 4 && <div class="loop-stage__line" />}
+                {i === 4 && <div class="loop-stage__return">↺</div>}
+              </div>
+              <div class="loop-stage__content">
+                <h3 class="loop-stage__name" style={`color: ${item.color}`}>{item.stage}</h3>
+                <p class="loop-stage__desc">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="prose-section mt-10">
+          <p>This is the complete operating model. Each stage feeds the next. Learning feeds back into signals. The cycle never ends — it compounds.</p>
+          <p><a href="/activation" class="text-[var(--color-accent)] no-underline hover:underline">Read about activation →</a></p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
       <!-- 6. The OS -->
       <section class="mb-16">
         <h2 class="t-label mb-8">Editorial Intelligence OS</h2>
@@ -204,15 +263,15 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
-            { name: 'Narrative Library', desc: 'Connected narratives, frameworks and editorial assets for discovery and reuse.' },
             { name: 'Research Library', desc: 'Signal and insight repositories that feed the cycle continuously.' },
-            { name: 'Evidence Library', desc: 'Customer stories and case studies that validate strategic narratives.' },
+            { name: 'Narrative Library', desc: 'Connected narratives, frameworks and editorial assets for discovery and reuse.' },
             { name: 'Workflow Library', desc: 'Repeatable editorial processes that improve with each iteration.' },
-            { name: 'Agent Library', desc: 'AI-enabled workflows that accelerate production from connected knowledge.' },
-            { name: 'Prompt Library', desc: 'Editorial prompts that support consistent judgement across the cycle.' },
+            { name: 'AI Agents', desc: 'AI-enabled workflows that accelerate production from connected knowledge.' },
+            { name: 'Activation Layer', desc: 'Where intelligence becomes communication. Every channel draws from the same narrative foundation.', highlight: true },
+            { name: 'Daily OS', desc: 'The operational rhythm that keeps the cycle running — signal capture, narrative review, activation planning, feedback collection.' },
           ].map((component) => (
-            <div class="os-component">
-              <p class="t-small font-medium text-[var(--color-ink)] mb-1">{component.name}</p>
+            <div class:list={['os-component', component.highlight && 'os-component--highlight']}>
+              <p class="t-small font-medium mb-1" style={component.highlight ? 'color: var(--color-accent)' : 'color: var(--color-ink)'}>{component.name}</p>
               <p class="t-small">{component.desc}</p>
             </div>
           ))}
@@ -308,11 +367,86 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     color: var(--color-ink-secondary);
   }
 
+  /* Five-stage loop diagram */
+  .loop-diagram {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--color-surface-secondary);
+  }
+
+  .loop-stage {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-rule, #2c2920);
+  }
+
+  .loop-stage:last-child { border-bottom: none; }
+
+  .loop-stage__connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    padding-top: 0.125rem;
+  }
+
+  .loop-stage__num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.05em;
+  }
+
+  .loop-stage__line {
+    width: 1px;
+    flex: 1;
+    min-height: 1rem;
+    background: var(--color-rule, #2c2920);
+  }
+
+  .loop-stage__return {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loop-stage__content {
+    padding: 0.125rem 0 0.5rem;
+  }
+
+  .loop-stage__name {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.375rem;
+  }
+
+  .loop-stage__desc {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+  }
+
   /* OS components */
   .os-component {
     padding: 1.25rem;
     border: 1px solid var(--color-surface-tertiary);
     border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .os-component--highlight {
+    border-color: var(--color-accent);
+    border-left: 2px solid var(--color-accent);
   }
 
   /* Principles */

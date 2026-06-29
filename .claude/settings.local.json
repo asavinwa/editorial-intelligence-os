@@ -17,7 +17,12 @@
       "Skill(run:*)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(gh auth *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(curl -s http://localhost:4321/activation)",
+      "Bash(grep -n '{[^\"}\\\\n]*$' /Users/asavinwattanajantra/Downloads/eios/src/pages/activation.astro)"
     ]
   }
 }
