@@ -42,6 +42,11 @@ export const TAGS = [
   'pricing',
   'tax',
   'accounting',
+  'ai-maturity',
+  'capacity-gap',
+  'workflow-integration',
+  'commercial-transformation',
+  'bookkeeping',
 ] as const;
 
 export type Tag = typeof TAGS[number];
