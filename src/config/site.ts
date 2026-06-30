@@ -10,6 +10,7 @@ export const SITE = {
     { label: 'Frameworks', href: '/frameworks' },
     { label: 'Narratives', href: '/narratives' },
     { label: 'Experiments', href: '/experiments' },
+    { label: 'Writing', href: '/writing' },
     { label: 'About', href: '/about' },
   ],
 } as const;
