@@ -51,6 +51,12 @@ export const TAGS = [
   'client-behaviour',
   'operational-reset',
   'continuous-compliance',
+  'workbook',
+  'guided-experience',
+  'ai-adoption',
+  'workflow-design',
+  'customer-proof',
+  'behaviour-change',
 ] as const;
 
 export type Tag = typeof TAGS[number];
@@ -124,7 +130,7 @@ const experiments = defineCollection({
     date: z.date(),
     status: z.enum(['active', 'complete', 'archived', 'draft']),
     tags: z.array(tagSchema),
-    type: z.enum(['prompt-library', 'diagnostic', 'workflow', 'tool', 'agent', 'os']),
+    type: z.enum(['prompt-library', 'diagnostic', 'workflow', 'tool', 'agent', 'os', 'workbook']),
     githubUrl: z.string().optional(),
     liveUrl: z.string().optional(),
     relatedFrameworks: z.array(z.string()).default([]),

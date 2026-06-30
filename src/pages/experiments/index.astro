@@ -7,7 +7,7 @@ const sorted = experiments.sort((a, b) => b.data.date.getTime() - a.data.date.ge
 
 const statusLabels: Record<string, string> = {
   active: 'Active experiment',
-  complete: 'Complete',
+  complete: 'Published experiment',
   archived: 'Archived',
   draft: 'In development',
 };
@@ -25,13 +25,24 @@ const statusColors: Record<string, string> = {
   description="Interactive prototypes, AI workflows and practical applications that explore how Editorial Intelligence can be applied in real organisations."
 >
   <div class="container-site py-16">
-    <header class="mb-12 max-w-2xl">
+    <header class="mb-10 max-w-2xl">
       <p class="t-label mb-4">Experiments</p>
       <h1 class="t-heading mb-4">Editorial Intelligence in practice</h1>
+      <p class="t-body mb-6">
+        Experiments are where Editorial Intelligence becomes practical. This section tracks prototypes, tools, workflows and editorial systems that test how customer insight, research, market signals and AI-supported methods can become useful public assets.
+      </p>
       <p class="t-body">
-        Experiments are practical prototypes that test and evolve the Editorial Intelligence methodology. They demonstrate how EI moves beyond theory into tools, workflows and new ways of working.
+        Some experiments are interactive tools. Some are workflows. Some are guided editorial experiences. The point is not to present each one as a finished product, but to show how ideas develop through use.
       </p>
     </header>
+
+    <div class="ei-method-strip">
+      <span class="method-item">Frameworks explain the thinking</span>
+      <span class="method-sep">·</span>
+      <span class="method-item">Methods show the process</span>
+      <span class="method-sep">·</span>
+      <span class="method-item method-item--highlight">Experiments prove the approach</span>
+    </div>
 
     <hr class="divider mb-12" />
 
@@ -77,7 +88,7 @@ const statusColors: Record<string, string> = {
     <div class="lab-note">
       <p class="t-label mb-3">About this section</p>
       <p class="t-body">
-        Each experiment documents a prototype being built and refined in real conditions. Some are active and evolving. Some are in early development. All of them demonstrate Editorial Intelligence applied, not just described.
+        Each experiment documents a prototype built and refined in real conditions — or a published asset examined as a demonstration of Editorial Intelligence method. Some are active and evolving. Some are complete. All of them show the approach applied, not just described.
       </p>
     </div>
   </div>
@@ -196,6 +207,36 @@ const statusColors: Record<string, string> = {
     font-size: 0.625rem;
     color: var(--color-ink-tertiary);
     letter-spacing: 0.02em;
+  }
+
+  .ei-method-strip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    margin-bottom: 2.5rem;
+  }
+
+  .method-item {
+    font-family: var(--font-mono);
+    font-size: 0.675rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .method-item--highlight {
+    color: var(--color-accent);
+  }
+
+  .method-sep {
+    font-family: var(--font-mono);
+    font-size: 0.675rem;
+    color: var(--color-rule, #2c2920);
   }
 
   .lab-note {
