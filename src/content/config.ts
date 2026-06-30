@@ -57,6 +57,11 @@ export const TAGS = [
   'workflow-design',
   'customer-proof',
   'behaviour-change',
+  'product-marketing',
+  'launch-narrative',
+  'sales-enablement',
+  'positioning',
+  'activation',
 ] as const;
 
 export type Tag = typeof TAGS[number];
