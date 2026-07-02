@@ -5,6 +5,9 @@ import { getCollection } from 'astro:content';
 
 const writing = await getCollection('writing', ({ data }) => data.status === 'published');
 const sorted = writing.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const articles = sorted.filter(w => w.data.type === 'article' || w.data.type === 'reflection');
+const notes = sorted.filter(w => w.data.type === 'note');
 ---
 
 <BaseLayout
@@ -20,22 +23,41 @@ const sorted = writing.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
       </p>
     </header>
 
-    <hr class="divider mb-4" />
+    <hr class="divider mb-12" />
 
-    {sorted.length === 0 ? (
-      <p class="t-body mt-8">No writing published yet.</p>
-    ) : (
-      <ul class="m-0 p-0">
-        {sorted.map((article) => (
-          <WritingRow
-            slug={article.slug}
-            title={article.data.title}
-            date={article.data.date}
-            readTime={article.data.readTime}
-            type={article.data.type}
-          />
-        ))}
-      </ul>
+    {articles.length > 0 && (
+      <section class="mb-16">
+        <p class="t-label mb-6">Articles & reflections</p>
+        <ul class="m-0 p-0">
+          {articles.map((article) => (
+            <WritingRow
+              slug={article.slug}
+              title={article.data.title}
+              date={article.data.date}
+              readTime={article.data.readTime}
+              type={article.data.type}
+            />
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {notes.length > 0 && (
+      <section>
+        <p class="t-label mb-2">Signal notes</p>
+        <p class="t-small mb-6" style="color: var(--color-ink-tertiary)">Observations on source material that feeds the EI OS — research, articles and events.</p>
+        <ul class="m-0 p-0">
+          {notes.map((article) => (
+            <WritingRow
+              slug={article.slug}
+              title={article.data.title}
+              date={article.data.date}
+              readTime={article.data.readTime}
+              type={article.data.type}
+            />
+          ))}
+        </ul>
+      </section>
     )}
   </div>
 </BaseLayout>
