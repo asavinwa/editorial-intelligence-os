@@ -285,6 +285,13 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         <p class="t-small mt-8 italic">
           The Editorial Intelligence OS is documented here as a working implementation. It will evolve as the discipline develops.
         </p>
+
+        <div class="os-links mt-8">
+          <a href="/dashboard" class="os-link-item">Dashboard OS — the operating system in detail →</a>
+          <a href="/practice" class="os-link-item">In practice — worked examples and evidence →</a>
+          <a href="/experiments" class="os-link-item">Experiments — active workflows and tools →</a>
+          <a href="/cycle" class="os-link-item">The cycle — the full model →</a>
+        </div>
       </section>
 
       <hr class="divider mb-16" />
@@ -490,5 +497,24 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     font-size: 1rem;
     line-height: 1.8;
     color: var(--color-ink-secondary);
+  }
+
+  .os-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-left: 2px solid var(--color-rule);
+    padding-left: 1rem;
+  }
+
+  .os-link-item {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .os-link-item:hover {
+    color: var(--color-accent);
   }
 </style>
