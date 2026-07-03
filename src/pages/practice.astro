@@ -74,6 +74,38 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         <h2 class="t-label mb-8">Examples from practice</h2>
         <div class="prose-section mb-8">
           <p>These frameworks didn't emerge from theory. Each one began as a practical problem and developed into a reusable method.</p>
+          <p>The Winning in Small H2 editorial brief illustrates what this looks like in practice. The shift it documents — from topic-driven content to pressure-driven systems — is Editorial Intelligence applied to a live content programme.</p>
+        </div>
+
+        <!-- WiS editorial system callout -->
+        <div class="system-callout mb-8">
+          <div class="system-callout-header">
+            <span class="system-callout-label">Worked example — Winning in Small H2 2026</span>
+          </div>
+          <div class="system-callout-cols">
+            <div class="system-col system-col--from">
+              <span class="system-col-head">From</span>
+              <p>A topic-driven, campaign-driven approach. Each asset built once and judged on reach.</p>
+              <ul class="system-list">
+                <li>MTD content</li>
+                <li>AI content</li>
+                <li>Growth content</li>
+                <li>Standalone assets</li>
+              </ul>
+            </div>
+            <div class="system-col-arrow">→</div>
+            <div class="system-col system-col--to">
+              <span class="system-col-head">To</span>
+              <p>A pressure-driven, system-driven approach. Content organised around where decisions are being made.</p>
+              <ul class="system-list">
+                <li>Where pressure builds</li>
+                <li>Who carries it</li>
+                <li>Connected journeys</li>
+                <li>Compounding evidence</li>
+              </ul>
+            </div>
+          </div>
+          <p class="system-callout-note">Through-line: complexity grows faster than visibility.</p>
         </div>
         <div class="examples-grid">
           {[
@@ -395,6 +427,98 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     font-size: 0.875rem;
     color: var(--color-ink-secondary);
     line-height: 1.5;
+  }
+
+  /* Editorial system callout */
+  .system-callout {
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--color-surface-secondary);
+  }
+
+  .system-callout-header {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-surface);
+  }
+
+  .system-callout-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
+
+  .system-callout-cols {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 1.25rem;
+  }
+
+  .system-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .system-col p {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .system-col-head {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-secondary);
+  }
+
+  .system-col--to .system-col-head {
+    color: var(--color-accent);
+  }
+
+  .system-col-arrow {
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    padding: 0 1.25rem;
+    align-self: center;
+  }
+
+  .system-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .system-list li {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  .system-col--to .system-list li {
+    color: var(--color-ink-secondary);
+  }
+
+  .system-callout-note {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--color-rule);
+    margin: 0;
   }
 
   /* Evidence of reuse */
