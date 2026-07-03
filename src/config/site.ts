@@ -12,6 +12,7 @@ export const SITE = {
     { label: 'Experiments', href: '/experiments' },
     { label: 'Writing', href: '/writing' },
     { label: 'In practice', href: '/practice' },
+    { label: 'Work with me', href: '/work' },
     { label: 'About', href: '/about' },
   ],
 } as const;
