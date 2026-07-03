@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Editorial Intelligence in practice"
+  description="How an editorial operating system emerged from day-to-day work across research, customer stories, thought leadership, product marketing and AI workflows."
+>
+  <article class="container-site py-20">
+    <div class="max-w-2xl">
+
+      <!-- Header -->
+      <header class="mb-16">
+        <p class="t-label mb-6">In practice</p>
+        <h1 class="t-display mb-6">Editorial Intelligence in practice</h1>
+        <p class="t-body text-lg leading-relaxed">
+          How an editorial operating system emerged from day-to-day work
+        </p>
+      </header>
+
+      <hr class="divider mb-16" />
+
+      <!-- Intro -->
+      <section class="mb-16">
+        <div class="prose-section">
+          <p>Every framework on this site began with a practical problem.</p>
+          <p>Not a theory. Not a startup idea. Not a consulting framework.</p>
+          <p>They emerged while working across research, customer stories, thought leadership, product marketing and event content — most extensively in my work at Sage.</p>
+          <p>The challenge was not producing more content. It was making better use of everything we were already learning.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- From production to systems -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">From content production to knowledge systems</h2>
+        <div class="prose-section">
+          <p>Modern content marketing often treats projects as standalone deliverables.</p>
+          <p>Research becomes a report. An event becomes a blog. A customer interview becomes a case study. Then everyone moves on.</p>
+          <p>The effort resets with every cycle. The insight from one project rarely informs the next. Nothing compounds.</p>
+          <p>Editorial Intelligence asks a different question:</p>
+          <p class="font-medium text-[var(--color-ink)]">What if every piece of work became part of a connected knowledge system?</p>
+          <p>Not a library of assets. A system where each new signal strengthens existing narratives, each framework makes the next easier to build, and each piece of evidence raises the quality of everything connected to it.</p>
+        </div>
+      </section>
+
+      <!-- Flow diagram -->
+      <section class="mb-16">
+        <div class="flow-diagram">
+          {[
+            { label: 'Day-to-day editorial work', desc: 'Research, events, customer interviews, campaigns' },
+            { label: 'Repeated problems', desc: 'The same questions arising across different projects' },
+            { label: 'Methods', desc: 'Approaches that consistently produced better results' },
+            { label: 'Reusable frameworks', desc: 'Methods documented and made transferable' },
+            { label: 'Editorial Intelligence OS', desc: 'The system that connects and compounds them' },
+            { label: 'Organisational capability', desc: 'When teams use the methods, not just one person' },
+          ].map((step, i) => (
+            <div class="flow-step">
+              <div class="flow-content">
+                <span class="flow-label">{step.label}</span>
+                <span class="flow-desc">{step.desc}</span>
+              </div>
+              {i < 5 && <div class="flow-arrow">↓</div>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- Examples from practice -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">Examples from practice</h2>
+        <div class="prose-section mb-8">
+          <p>These frameworks didn't emerge from theory. Each one began as a practical problem and developed into a reusable method.</p>
+        </div>
+        <div class="examples-grid">
+          {[
+            {
+              origin: 'Hidden Hours research',
+              became: 'Research as reusable narrative',
+              desc: 'Survey data became a strategic position that accumulated more evidence with every connected piece.',
+            },
+            {
+              origin: 'Event reporting',
+              became: 'Event Intelligence',
+              desc: 'Conferences became signal-gathering systems rather than one-off content moments.',
+            },
+            {
+              origin: 'Customer interviews',
+              became: 'Customer & Market Signals',
+              desc: 'Interview transcripts and notes became a structured evidence base, not isolated case studies.',
+            },
+            {
+              origin: 'Customer stories',
+              became: 'AI-supported editorial workflows',
+              desc: 'Producing consistent, high-quality customer evidence at scale without losing editorial quality.',
+            },
+            {
+              origin: 'AI adoption research',
+              became: 'AI Maturity Curve',
+              desc: 'Survey data on AI use became a framework for understanding where capacity gets lost and why.',
+            },
+          ].map((example) => (
+            <div class="example-card">
+              <div class="example-origin">{example.origin}</div>
+              <div class="example-arrow">→</div>
+              <div class="example-became">{example.became}</div>
+              <p class="example-desc">{example.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- Why document them -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">Why document them?</h2>
+        <div class="prose-section">
+          <p>The purpose of Editorial Intelligence OS is not to describe one organisation's marketing strategy.</p>
+          <p>It is to document repeatable editorial methods that can be adapted across thought leadership, customer marketing, PR, sales enablement, content strategy and knowledge management.</p>
+          <p>Editorial teams generate enormous amounts of organisational knowledge. Most of it disappears — into completed projects, departed colleagues, outdated documents.</p>
+          <p class="font-medium text-[var(--color-ink)]">Editorial Intelligence helps that knowledge compound instead of disappearing.</p>
+          <p>The frameworks here are not complete or final. They are documented at the point where they've proven useful — stable enough to share, open enough to develop.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- Organisational capability -->
+      <section class="mb-16">
+        <h2 class="t-label mb-8">From personal framework to organisational capability</h2>
+        <div class="prose-section mb-10">
+          <p>The next step is not creating more frameworks. It is embedding the strongest methods into real workflows.</p>
+          <p>A framework that lives in one person's practice has limited value. The same method embedded across a team becomes a different kind of asset.</p>
+        </div>
+        <div class="capability-grid">
+          {[
+            { role: 'Thought leadership', need: 'Repeatable research-to-narrative workflows' },
+            { role: 'Sales', need: 'Connected narratives that answer real objections' },
+            { role: 'PR', need: 'Research stories with built-in evidence trails' },
+            { role: 'Customer marketing', need: 'Consistent insight from every customer conversation' },
+            { role: 'Content writers', need: 'Faster, clearer editorial briefs' },
+            { role: 'Case study owners', need: 'Consistent quality and reusable proof points' },
+          ].map((item) => (
+            <div class="capability-row">
+              <span class="capability-role">{item.role}</span>
+              <span class="capability-need">{item.need}</span>
+            </div>
+          ))}
+        </div>
+        <div class="prose-section mt-10">
+          <p>When these methods make those jobs easier, Editorial Intelligence becomes operational capability rather than a personal project.</p>
+          <p>That's the direction this site is moving in.</p>
+        </div>
+      </section>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Flow diagram */
+  .flow-diagram {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .flow-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-surface-secondary);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .flow-step:last-child .flow-content {
+    border-bottom: none;
+    background: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface));
+  }
+
+  .flow-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: 0.02em;
+  }
+
+  .flow-step:last-child .flow-label {
+    color: var(--color-accent);
+  }
+
+  .flow-desc {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    text-align: center;
+    padding: 0.2rem 0;
+    font-size: 0.875rem;
+    color: var(--color-ink-tertiary);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  /* Examples grid */
+  .examples-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .example-card {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.25rem 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    align-items: center;
+  }
+
+  .example-card:last-child {
+    border-bottom: none;
+  }
+
+  .example-origin {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  .example-arrow {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .example-became {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: 0.02em;
+  }
+
+  .example-desc {
+    grid-column: 1 / -1;
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    line-height: 1.6;
+    margin: 0.25rem 0 0;
+  }
+
+  /* Capability grid */
+  .capability-grid {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .capability-row {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    align-items: baseline;
+  }
+
+  .capability-row:last-child {
+    border-bottom: none;
+  }
+
+  .capability-role {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: 0.02em;
+  }
+
+  .capability-need {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.5;
+  }
+</style>
