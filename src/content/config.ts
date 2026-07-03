@@ -62,6 +62,9 @@ export const TAGS = [
   'sales-enablement',
   'positioning',
   'activation',
+  'cfo',
+  'finance',
+  'manufacturing',
 ] as const;
 
 export type Tag = typeof TAGS[number];
