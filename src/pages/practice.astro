@@ -129,6 +129,83 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
       <hr class="divider mb-16" />
 
+      <!-- Evidence of reuse -->
+      <section class="mb-16">
+        <h2 class="t-label mb-3">Evidence of reuse</h2>
+        <p class="t-small mb-8" style="color: var(--color-ink-tertiary)">Examples where Editorial Intelligence assets were adopted, republished or extended beyond their original context.</p>
+
+        <div class="evidence-intro prose-section mb-10">
+          <p>There are three kinds of evidence that Editorial Intelligence is working.</p>
+          <p><strong style="color: var(--color-ink); font-weight: 500;">Framework evidence</strong> — research programmes and strategic models that hold up across multiple uses. Hidden Hours, AI Maturity Curve.</p>
+          <p><strong style="color: var(--color-ink); font-weight: 500;">Operational evidence</strong> — experiments and workflows that work in practice. Event Intelligence, Editorial Brief Generator, AI Action Workbook.</p>
+          <p><strong style="color: var(--color-ink); font-weight: 500;">Market evidence</strong> — examples where the work was adopted, republished or reused by external organisations without being commissioned to do so. That's a different signal: it suggests the ideas have value beyond their original platform.</p>
+          <p>The Enterprise Nation republication is the first documented example of the third kind.</p>
+        </div>
+
+        <!-- Case study card -->
+        <div class="reuse-card">
+          <div class="reuse-card-header">
+            <div>
+              <span class="reuse-label">Case study</span>
+              <h3 class="reuse-title">Enterprise Nation republication</h3>
+            </div>
+            <span class="reuse-tag">Market evidence</span>
+          </div>
+
+          <p class="reuse-desc">Three articles developed from the AI Maturity Curve framework were independently republished by Enterprise Nation — a leading small business platform — extending their reach to a new audience without requiring new content to be produced.</p>
+
+          <!-- Timeline -->
+          <div class="reuse-timeline">
+            {[
+              { step: 'Research', detail: 'Sage & AccountingWeb AI survey — 71% adoption, 7% transformation' },
+              { step: 'Framework', detail: 'AI Maturity Curve — four stages, capacity gap concept' },
+              { step: 'Sage publication', detail: 'Three articles developed from the framework' },
+              { step: 'Enterprise Nation republication', detail: 'Independent adoption by a small business platform', highlight: true },
+              { step: 'New audience', detail: 'Small business owners and advisers beyond the accounting sector' },
+            ].map((item, i) => (
+              <div class="timeline-step">
+                <div class={`timeline-node${item.highlight ? ' timeline-node--highlight' : ''}`}></div>
+                <div class="timeline-content">
+                  <span class={`timeline-step-label${item.highlight ? ' timeline-step-label--highlight' : ''}`}>{item.step}</span>
+                  <span class="timeline-detail">{item.detail}</span>
+                </div>
+                {i < 4 && <div class="timeline-line"></div>}
+              </div>
+            ))}
+          </div>
+
+          <!-- Articles -->
+          <div class="reuse-articles">
+            <p class="reuse-articles-label">Republished articles</p>
+            {[
+              {
+                title: 'Where is your accounting or bookkeeping firm on the AI maturity curve?',
+                url: 'https://www.enterprisenation.com/learn-something/ai-maturity-curve-accounting-bookkeeping-firms/',
+              },
+              {
+                title: 'What to automate: 30-day AI wins for accounting firms',
+                url: 'https://www.enterprisenation.com/learn-something/30-day-ai-wins-accounting-bookkeeping-firms/',
+              },
+              {
+                title: 'How to try AI without breaking your business',
+                url: 'https://www.enterprisenation.com/learn-something/how-to-try-ai-without-breaking-your-business/',
+              },
+            ].map((article) => (
+              <a href={article.url} target="_blank" rel="noopener noreferrer" class="reuse-article-link">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="flex-shrink:0; margin-top: 0.15em">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {article.title}
+              </a>
+            ))}
+          </div>
+
+          <p class="reuse-note">External republication is one indicator that a framework has value beyond its original context. It is not the measure of success — but it is a signal worth documenting.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
       <!-- Organisational capability -->
       <section class="mb-16">
         <h2 class="t-label mb-8">From personal framework to organisational capability</h2>
@@ -313,5 +390,173 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     font-size: 0.875rem;
     color: var(--color-ink-secondary);
     line-height: 1.5;
+  }
+
+  /* Evidence of reuse */
+  .reuse-card {
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 1.5rem;
+    background: var(--color-surface-secondary);
+  }
+
+  .reuse-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .reuse-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .reuse-title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .reuse-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+    border-radius: 3px;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .reuse-desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Timeline */
+  .reuse-timeline {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    gap: 0;
+  }
+
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 1rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.875rem;
+  }
+
+  .timeline-node {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-ink-tertiary);
+    margin-top: 0.3rem;
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: center;
+  }
+
+  .timeline-node--highlight {
+    background: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+  }
+
+  .timeline-line {
+    width: 1px;
+    height: 1.25rem;
+    background: var(--color-rule);
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: center;
+  }
+
+  .timeline-content {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .timeline-step-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-step-label--highlight {
+    color: var(--color-accent);
+  }
+
+  .timeline-detail {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    line-height: 1.4;
+    padding-bottom: 0.75rem;
+  }
+
+  /* Articles */
+  .reuse-articles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .reuse-articles-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .reuse-article-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: opacity 0.15s;
+  }
+
+  .reuse-article-link:hover {
+    opacity: 0.75;
+  }
+
+  .reuse-note {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    line-height: 1.6;
+    border-top: 1px solid var(--color-rule);
+    padding-top: 1rem;
+    margin: 0;
+    font-style: italic;
   }
 </style>
