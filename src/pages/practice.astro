@@ -125,39 +125,45 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
               origin: 'Hidden Hours research',
               became: 'Research as reusable narrative',
               desc: 'Survey data became a strategic position that accumulated more evidence with every connected piece.',
+              href: '/narratives/hidden-hours',
             },
             {
               origin: 'Event reporting',
               became: 'Event Intelligence',
               desc: 'Conferences became signal-gathering systems rather than one-off content moments.',
+              href: '/experiments/event-intelligence',
             },
             {
               origin: 'Customer interviews',
               became: 'Customer & Market Signals',
               desc: 'Interview transcripts and notes became a structured evidence base, not isolated case studies.',
+              href: '/narratives/customer-stories',
             },
             {
               origin: 'Customer stories',
               became: 'AI-supported editorial workflows',
               desc: 'Producing consistent, high-quality customer evidence at scale without losing editorial quality.',
+              href: '/experiments/case-study-agent',
             },
             {
               origin: 'AI adoption research',
               became: 'AI Maturity Curve',
               desc: 'Survey data on AI use became a framework for understanding where capacity gets lost and why.',
+              href: '/frameworks/ai-maturity-curve',
             },
             {
               origin: 'CFO research — 1,221 finance leaders',
               became: 'Mid-market thought leadership',
               desc: 'Global survey of senior finance leaders became a three-part narrative on the expanding CFO role, AI adoption gaps and wellbeing. The same structural patterns as Hidden Hours, from a different vantage point.',
+              href: '/narratives/expanding-cfo',
             },
           ].map((example) => (
-            <div class="example-card">
+            <a href={example.href} class="example-card example-card--link">
               <div class="example-origin">{example.origin}</div>
               <div class="example-arrow">→</div>
               <div class="example-became">{example.became}</div>
               <p class="example-desc">{example.desc}</p>
-            </div>
+            </a>
           ))}
         </div>
       </section>
@@ -185,8 +191,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
         <div class="evidence-intro prose-section mb-10">
           <p>There are three kinds of evidence that Editorial Intelligence is working.</p>
-          <p><strong style="color: var(--color-ink); font-weight: 500;">Framework evidence</strong> — research programmes and strategic models that hold up across multiple uses. Hidden Hours, AI Maturity Curve.</p>
-          <p><strong style="color: var(--color-ink); font-weight: 500;">Operational evidence</strong> — experiments and workflows that work in practice. Event Intelligence, Editorial Brief Generator, AI Action Workbook.</p>
+          <p><strong style="color: var(--color-ink); font-weight: 500;">Framework evidence</strong> — research programmes and strategic models that hold up across multiple uses. <a href="/narratives/hidden-hours" class="text-[var(--color-accent)] no-underline hover:underline">Hidden Hours</a>, <a href="/frameworks/ai-maturity-curve" class="text-[var(--color-accent)] no-underline hover:underline">AI Maturity Curve</a>.</p>
+          <p><strong style="color: var(--color-ink); font-weight: 500;">Operational evidence</strong> — experiments and workflows that work in practice. <a href="/experiments/event-intelligence" class="text-[var(--color-accent)] no-underline hover:underline">Event Intelligence</a>, <a href="/experiments/editorial-brief-generator" class="text-[var(--color-accent)] no-underline hover:underline">Editorial Brief Generator</a>, <a href="/experiments/ai-action-workbook" class="text-[var(--color-accent)] no-underline hover:underline">AI Action Workbook</a>.</p>
           <p><strong style="color: var(--color-ink); font-weight: 500;">Market evidence</strong> — examples where the work was adopted, republished or reused by external organisations without being commissioned to do so. That's a different signal: it suggests the ideas have value beyond their original platform.</p>
           <p>The Enterprise Nation republication is the first documented example of the third kind.</p>
         </div>
@@ -373,6 +379,15 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
   .example-card:last-child {
     border-bottom: none;
+  }
+
+  .example-card--link {
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .example-card--link:hover {
+    background: var(--color-surface-secondary);
   }
 
   .example-origin {
