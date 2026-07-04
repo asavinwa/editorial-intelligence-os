@@ -3,6 +3,7 @@ import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import { SITE } from '../../config/site';
 import '../../styles/global.css';
+import { Analytics } from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
@@ -49,5 +50,6 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
       <slot />
     </main>
     <Footer />
+    <Analytics />
   </body>
 </html>
