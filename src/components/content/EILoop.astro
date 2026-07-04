@@ -1,0 +1,150 @@
+---
+// The Editorial Intelligence Loop — reusable SVG diagram
+// Six-stage circular model: Signal → Synthesis → Activation → Evidence → Learning → Reuse
+---
+
+<figure class="ei-loop">
+  <svg
+    viewBox="0 0 700 640"
+    xmlns="http://www.w3.org/2000/svg"
+    class="ei-loop__svg"
+    role="img"
+    aria-label="The Editorial Intelligence Loop: six stages — Signal, Synthesis, Activation, Evidence, Learning, Reuse — cycling continuously"
+  >
+    <!-- Track: six clockwise arc segments, each spanning 60° -->
+    <path d="M 350 125 A 195 195 0 0 1 519 223" class="ei-arc" />
+    <path d="M 519 223 A 195 195 0 0 1 519 417" class="ei-arc" />
+    <path d="M 519 417 A 195 195 0 0 1 350 515" class="ei-arc" />
+    <path d="M 350 515 A 195 195 0 0 1 181 417" class="ei-arc" />
+    <path d="M 181 417 A 195 195 0 0 1 181 223" class="ei-arc" />
+    <path d="M 181 223 A 195 195 0 0 1 350 125" class="ei-arc" />
+
+    <!-- Clockwise direction arrows at midpoints of each arc -->
+    <!-- midpoint angles: -60°, 0°, 60°, 120°, 180°, 240° -->
+    <!-- arrow rotation = atan2(cos θ, −sin θ) for clockwise tangent in SVG coords -->
+    <polygon points="0,-4.5 9,0 0,4.5" transform="translate(447,151) rotate(30)"  class="ei-arrow" />
+    <polygon points="0,-4.5 9,0 0,4.5" transform="translate(545,320) rotate(90)"  class="ei-arrow" />
+    <polygon points="0,-4.5 9,0 0,4.5" transform="translate(447,489) rotate(150)" class="ei-arrow" />
+    <polygon points="0,-4.5 9,0 0,4.5" transform="translate(253,489) rotate(210)" class="ei-arrow" />
+    <polygon points="0,-4.5 9,0 0,4.5" transform="translate(155,320) rotate(270)" class="ei-arrow" />
+    <polygon points="0,-4.5 9,0 0,4.5" transform="translate(253,151) rotate(330)" class="ei-arrow" />
+
+    <!-- Centre -->
+    <circle cx="350" cy="320" r="80" class="ei-centre" />
+    <text x="350" y="309" text-anchor="middle" class="ei-centre-title">Editorial</text>
+    <text x="350" y="328" text-anchor="middle" class="ei-centre-title">Intelligence</text>
+    <text x="350" y="349" text-anchor="middle" class="ei-centre-sub">LOOP</text>
+
+    <!-- Node dots at each stage position -->
+    <circle cx="350" cy="125" r="6" class="ei-node" />
+    <circle cx="519" cy="223" r="6" class="ei-node" />
+    <circle cx="519" cy="417" r="6" class="ei-node" />
+    <circle cx="350" cy="515" r="6" class="ei-node" />
+    <circle cx="181" cy="417" r="6" class="ei-node" />
+    <circle cx="181" cy="223" r="6" class="ei-node" />
+
+    <!-- 01 Signal — top -->
+    <text x="350" y="81"  text-anchor="middle" class="ei-num">01</text>
+    <text x="350" y="101" text-anchor="middle" class="ei-lbl">Signal</text>
+
+    <!-- 02 Synthesis — upper right -->
+    <text x="549" y="201" text-anchor="start" class="ei-num">02</text>
+    <text x="549" y="221" text-anchor="start" class="ei-lbl">Synthesis</text>
+
+    <!-- 03 Activation — lower right -->
+    <text x="549" y="407" text-anchor="start" class="ei-num">03</text>
+    <text x="549" y="427" text-anchor="start" class="ei-lbl">Activation</text>
+
+    <!-- 04 Evidence — bottom -->
+    <text x="350" y="537" text-anchor="middle" class="ei-num">04</text>
+    <text x="350" y="557" text-anchor="middle" class="ei-lbl">Evidence</text>
+
+    <!-- 05 Learning — lower left -->
+    <text x="151" y="407" text-anchor="end" class="ei-num">05</text>
+    <text x="151" y="427" text-anchor="end" class="ei-lbl">Learning</text>
+
+    <!-- 06 Reuse — upper left -->
+    <text x="151" y="201" text-anchor="end" class="ei-num">06</text>
+    <text x="151" y="221" text-anchor="end" class="ei-lbl">Reuse</text>
+  </svg>
+
+  <figcaption class="ei-loop__caption">
+    Turning signal into strategy through synthesis, activation and learning.
+  </figcaption>
+</figure>
+
+<style>
+  .ei-loop {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .ei-loop__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ei-arc {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    opacity: 0.35;
+  }
+
+  .ei-arrow {
+    fill: var(--color-accent);
+    opacity: 0.7;
+  }
+
+  .ei-node {
+    fill: var(--color-accent);
+    opacity: 0.9;
+  }
+
+  .ei-centre {
+    fill: var(--color-surface-secondary);
+    stroke: var(--color-accent);
+    stroke-width: 1;
+  }
+
+  .ei-centre-title {
+    font-size: 13px;
+    fill: var(--color-ink);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .ei-centre-sub {
+    font-family: var(--font-mono, monospace);
+    font-size: 8.5px;
+    fill: var(--color-accent);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+
+  .ei-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 9px;
+    fill: var(--color-accent);
+    letter-spacing: 0.06em;
+    opacity: 0.8;
+  }
+
+  .ei-lbl {
+    font-size: 13px;
+    fill: var(--color-ink);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .ei-loop__caption {
+    text-align: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.02em;
+    margin-top: 1.25rem;
+  }
+</style>

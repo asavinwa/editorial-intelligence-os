@@ -3,6 +3,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 import NarrativeCard from '../components/content/NarrativeCard.astro';
 import FrameworkCard from '../components/content/FrameworkCard.astro';
 import CycleStrip from '../components/content/CycleStrip.astro';
+import EILoop from '../components/content/EILoop.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '../config/site';
 
@@ -54,7 +55,19 @@ const remainingFrameworks = allFrameworks
     </div>
   </section>
 
-  <!-- ② The EI Cycle — the model made visible -->
+  <!-- ② The EI Loop — the core visual model -->
+  <section class="container-site py-16">
+    <div class="max-w-xl mx-auto">
+      <EILoop />
+      <div class="loop-explainer mt-8">
+        <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, events and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- ③ The EI Cycle — the model made visible -->
   <CycleStrip />
 
   <!-- ③ Worked example — Hidden Hours as the entry point -->
@@ -298,6 +311,16 @@ const remainingFrameworks = allFrameworks
 
   .related-article-link:hover {
     background: var(--color-surface-tertiary);
+  }
+
+  /* Loop explainer */
+  .loop-explainer p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--color-ink-tertiary);
+    text-align: center;
+    max-width: 52ch;
+    margin: 0 auto;
   }
 
   /* Applications callout */

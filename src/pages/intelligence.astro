@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
+import EILoop from '../components/content/EILoop.astro';
 ---
 
 <BaseLayout
@@ -51,6 +52,16 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           <p>But the process does not end with publication.</p>
           <p>Every asset creates new signals. Every new signal strengthens the narrative. Editorial Intelligence is designed as a continuous learning system rather than a linear production process.</p>
           <p class="font-medium text-[var(--color-ink)]">The result is not a content programme. It is a knowledge system that learns.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <!-- The Loop visual -->
+      <section class="mb-16">
+        <EILoop />
+        <div class="loop-prose mt-8">
+          <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, events and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
         </div>
       </section>
 
@@ -322,6 +333,15 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     line-height: 1.8;
     color: var(--color-ink-secondary);
     margin-bottom: 1.25rem;
+  }
+
+  .loop-prose p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--color-ink-tertiary);
+    text-align: center;
+    max-width: 52ch;
+    margin: 0 auto;
   }
 
   .prose-section p:last-child {

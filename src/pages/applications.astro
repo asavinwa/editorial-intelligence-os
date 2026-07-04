@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
+import EILoop from '../components/content/EILoop.astro';
 ---
 
 <BaseLayout
@@ -203,23 +204,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         <div class="prose-section mb-10">
           <p>Each application follows the same underlying pattern. The context changes — research, events, customer stories, AI workflows — but the logic is consistent.</p>
         </div>
-        <div class="app-flow">
-          {[
-            { step: 'Signal', desc: 'Raw input — research, conversations, events, market observation' },
-            { step: 'Synthesis', desc: 'Pattern recognition — what is this telling us?' },
-            { step: 'Activation', desc: 'Expression — articles, tools, frameworks, briefings' },
-            { step: 'Evidence', desc: 'Audience response — what resonated, what questions surfaced' },
-            { step: 'Learning', desc: 'Editorial interpretation — what this reveals about the narrative' },
-            { step: 'Reuse', desc: 'The intelligence feeds the next cycle at a higher base' },
-          ].map((item, i) => (
-            <div class="app-flow-step">
-              <div class="app-flow-content">
-                <span class="app-flow-label">{item.step}</span>
-                <span class="app-flow-desc">{item.desc}</span>
-              </div>
-              {i < 5 && <div class="app-flow-arrow">↓</div>}
-            </div>
-          ))}
+        <EILoop />
+        <div class="app-loop-explainer mt-8">
+          <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, events and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
         </div>
       </section>
 
@@ -407,62 +394,13 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     border-color: var(--color-accent);
   }
 
-  /* Flow */
-  .app-flow {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--color-rule);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .app-flow-step {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .app-flow-content {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.875rem 1.25rem;
-    background: var(--color-surface-secondary);
-    border-bottom: 1px solid var(--color-rule);
-  }
-
-  .app-flow-step:last-child .app-flow-content {
-    background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface));
-    border-bottom: none;
-  }
-
-  .app-flow-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--color-ink);
-    letter-spacing: 0.02em;
-    min-width: 80px;
-    flex-shrink: 0;
-  }
-
-  .app-flow-step:last-child .app-flow-label {
-    color: var(--color-accent);
-  }
-
-  .app-flow-desc {
-    font-size: 0.8125rem;
+  .app-loop-explainer p {
+    font-size: 0.9rem;
+    line-height: 1.8;
     color: var(--color-ink-tertiary);
-    line-height: 1.5;
-  }
-
-  .app-flow-arrow {
     text-align: center;
-    padding: 0.15rem 0;
-    font-size: 0.75rem;
-    color: var(--color-ink-tertiary);
-    background: var(--color-surface);
-    border-bottom: 1px solid var(--color-rule);
-    opacity: 0.4;
+    max-width: 52ch;
+    margin: 0 auto;
   }
 
   /* Explore links */
