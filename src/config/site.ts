@@ -1,7 +1,7 @@
 export const SITE = {
-  name: 'Editorial Intelligence OS',
-  title: 'Editorial Intelligence for the AI era',
-  description: 'Helping organisations turn research, customer insight and market knowledge into connected narratives, reusable systems and strategic content.',
+  name: 'Editorial Intelligence',
+  title: 'Editorial Intelligence — Knowledge that compounds',
+  description: 'Editorial Intelligence is the discipline of turning organisational knowledge into strategic narratives that compound over time. Frameworks, methods and working examples.',
   author: 'Asavin Wattanajantra',
   url: 'https://editorialintelligence.com',
   nav: [
