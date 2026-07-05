@@ -1,0 +1,140 @@
+---
+// Agentic AI narrative progression: Generative → Practical → Trusted → Agentic
+---
+
+<div class="ans-grid">
+  <div class="ans-stage">
+    <div class="ans-stage-header">
+      <span class="ans-num">01</span>
+      <h3 class="ans-title">Generative AI</h3>
+    </div>
+    <p class="ans-question">What can AI create?</p>
+    <p class="ans-desc">The market question was possibility. Could AI write, summarise, translate, generate? The answer was yes — and it was faster and cheaper than expected. The editorial task was to calm the hype and give organisations practical guidance.</p>
+  </div>
+
+  <div class="ans-connector" aria-hidden="true">→</div>
+
+  <div class="ans-stage">
+    <div class="ans-stage-header">
+      <span class="ans-num">02</span>
+      <h3 class="ans-title">Practical AI</h3>
+    </div>
+    <p class="ans-question">How can businesses use it today?</p>
+    <p class="ans-desc">The market question shifted to application. Not what AI could do in theory, but how it could be embedded into real business workflows. For finance, this meant domain-specific models — not general tools that could hallucinate in high-stakes contexts.</p>
+  </div>
+
+  <div class="ans-connector" aria-hidden="true">→</div>
+
+  <div class="ans-stage">
+    <div class="ans-stage-header">
+      <span class="ans-num">03</span>
+      <h3 class="ans-title">Trusted AI</h3>
+    </div>
+    <p class="ans-question">Can we trust it with data, decisions and workflows?</p>
+    <p class="ans-desc">Governance, accuracy and appropriate use became market essentials. The argument shifted to Authentic Intelligence — AI capability built for a specific domain, with transparency about how it works and what it can be trusted to do.</p>
+  </div>
+
+  <div class="ans-connector" aria-hidden="true">→</div>
+
+  <div class="ans-stage ans-stage--current">
+    <div class="ans-stage-header">
+      <span class="ans-num">04</span>
+      <h3 class="ans-title">Agentic AI</h3>
+    </div>
+    <p class="ans-question">Can AI complete meaningful work on our behalf?</p>
+    <p class="ans-desc">The market question is now execution. Agents that monitor, decide, draft and route across complex tasks continuously — not when prompted, but when something needs to happen. The shift is from hindsight to foresight.</p>
+  </div>
+</div>
+
+<style>
+  .ans-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  @media (min-width: 640px) {
+    .ans-grid {
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: start;
+    }
+  }
+
+  .ans-connector {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    opacity: 0.5;
+    padding: 1.5rem 0.5rem 0;
+    align-self: start;
+  }
+
+  @media (min-width: 640px) {
+    .ans-connector {
+      display: block;
+    }
+  }
+
+  .ans-stage {
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    padding: 1.25rem;
+    background: var(--color-surface-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .ans-stage {
+      margin-bottom: 0;
+    }
+  }
+
+  .ans-stage--current {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface));
+  }
+
+  .ans-stage-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .ans-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-accent);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+  }
+
+  .ans-title {
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .ans-question {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  .ans-desc {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+</style>

@@ -198,17 +198,23 @@ import EILoop from '../components/content/EILoop.astro';
 
       <hr class="divider mb-16" />
 
-      <!-- How the applications work -->
-      <section class="mb-16">
+    </div><!-- /max-w-2xl -->
+
+    <!-- How the applications work — full container width -->
+    <section class="mb-16">
+      <div class="max-w-2xl mb-8">
         <h2 class="t-label mb-8">How the applications work</h2>
-        <div class="prose-section mb-10">
+        <div class="prose-section">
           <p>Each application follows the same underlying pattern. The context changes — research, events, customer stories, AI workflows — but the logic is consistent.</p>
         </div>
-        <EILoop />
-        <div class="app-loop-explainer mt-8">
-          <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, events and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
-        </div>
-      </section>
+      </div>
+      <EILoop />
+      <div class="app-loop-explainer mt-8 max-w-2xl mx-auto">
+        <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, events and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
+      </div>
+    </section>
+
+    <div class="max-w-2xl">
 
       <hr class="divider mb-16" />
 

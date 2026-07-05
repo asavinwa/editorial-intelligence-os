@@ -1,0 +1,117 @@
+---
+// The Editorial Intelligence stack for agentic AI
+// Prompt → Workflow → Skill → Agent → Editorial Operating System
+---
+
+<div class="as-stack">
+  <div class="as-layer">
+    <div class="as-layer-label">
+      <span class="as-num">01</span>
+      <span class="as-name">Prompt</span>
+    </div>
+    <p class="as-def">A one-off instruction to an AI model. Useful for discrete tasks. Does not accumulate knowledge or improve over time.</p>
+  </div>
+
+  <div class="as-arrow" aria-hidden="true">↓</div>
+
+  <div class="as-layer">
+    <div class="as-layer-label">
+      <span class="as-num">02</span>
+      <span class="as-name">Workflow</span>
+    </div>
+    <p class="as-def">A repeatable sequence of prompts and steps for a known task. More consistent than ad-hoc prompting. Still depends on the quality of the inputs at each stage.</p>
+  </div>
+
+  <div class="as-arrow" aria-hidden="true">↓</div>
+
+  <div class="as-layer">
+    <div class="as-layer-label">
+      <span class="as-num">03</span>
+      <span class="as-name">Skill</span>
+    </div>
+    <p class="as-def">A reusable capability — creating an editorial brief, analysing a customer signal, mapping event insight. A skill encodes a method, not just a task. It can be called by agents and applied across contexts.</p>
+  </div>
+
+  <div class="as-arrow" aria-hidden="true">↓</div>
+
+  <div class="as-layer">
+    <div class="as-layer-label">
+      <span class="as-num">04</span>
+      <span class="as-name">Agent</span>
+    </div>
+    <p class="as-def">A system that combines multiple skills to complete a task with some autonomy. Can research, decide, draft, route and iterate — but only as well as its underlying knowledge allows.</p>
+  </div>
+
+  <div class="as-arrow" aria-hidden="true">↓</div>
+
+  <div class="as-layer as-layer--foundation">
+    <div class="as-layer-label">
+      <span class="as-num">05</span>
+      <span class="as-name">Editorial Operating System</span>
+    </div>
+    <p class="as-def">The shared knowledge, narratives, frameworks, rules and examples that guide the agent's work. This is what Editorial Intelligence builds. Without it, agents produce generic outputs. With it, they produce work that reflects the organisation's point of view, argument and evidence.</p>
+  </div>
+</div>
+
+<style>
+  .as-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 600px;
+  }
+
+  .as-layer {
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    padding: 1.125rem 1.25rem;
+    background: var(--color-surface-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .as-layer--foundation {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface));
+  }
+
+  .as-arrow {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    opacity: 0.5;
+    padding: 0.25rem 0;
+    line-height: 1;
+  }
+
+  .as-layer-label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+  }
+
+  .as-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-accent);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+  }
+
+  .as-name {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+
+  .as-def {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+</style>
