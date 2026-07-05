@@ -198,6 +198,23 @@ import EILoop from '../components/content/EILoop.astro';
 
       <hr class="divider mb-16" />
 
+      <!-- AI systems callout -->
+      <section class="mb-16">
+        <div class="ai-systems-callout">
+          <div class="ai-systems-callout-body">
+            <p class="t-label mb-2">AI systems</p>
+            <h2 class="ai-systems-callout-title">From content systems to AI systems</h2>
+            <p class="ai-systems-callout-desc">As AI models become easier to access, the advantage shifts to organisations that can orchestrate knowledge, memory, judgement and execution. Editorial Intelligence is the layer that connects them.</p>
+          </div>
+          <a href="/ai-systems" class="ai-systems-callout-link">
+            Explore the orchestration model
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
     </div><!-- /max-w-2xl -->
 
     <!-- How the applications work — full container width -->
@@ -246,6 +263,10 @@ import EILoop from '../components/content/EILoop.astro';
           <a href="/narratives" class="explore-link">
             <span class="explore-link-title">Narratives</span>
             <span class="explore-link-desc">Strategic positions built from evidence</span>
+          </a>
+          <a href="/ai-systems" class="explore-link">
+            <span class="explore-link-title">AI systems</span>
+            <span class="explore-link-desc">The orchestration layer between knowledge and AI execution</span>
           </a>
           <a href="/experiments" class="explore-link">
             <span class="explore-link-title">Experiments</span>
@@ -452,5 +473,61 @@ import EILoop from '../components/content/EILoop.astro';
     font-size: 0.6875rem;
     color: var(--color-ink-tertiary);
     letter-spacing: 0.02em;
+  }
+
+  /* AI systems callout */
+  .ai-systems-callout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 5px;
+    background: var(--color-surface-secondary);
+  }
+
+  @media (min-width: 640px) {
+    .ai-systems-callout {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  .ai-systems-callout-title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .ai-systems-callout-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    margin: 0;
+    max-width: 44ch;
+  }
+
+  .ai-systems-callout-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+  }
+
+  .ai-systems-callout-link:hover {
+    border-color: var(--color-accent);
   }
 </style>
