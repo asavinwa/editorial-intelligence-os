@@ -32,9 +32,10 @@ const remainingFrameworks = allFrameworks
   <section class="container-site pt-28 pb-8 md:pt-36 md:pb-10">
     <div class="max-w-3xl">
       <p class="t-label mb-10">{SITE.author} · Content strategist at Sage</p>
-      <h1 class="t-display text-[var(--color-ink)] mb-6 leading-[1.08]">
+      <h1 class="t-display text-[var(--color-ink)] mb-3 leading-[1.08]">
         Editorial Intelligence<br />for the AI era
       </h1>
+      <p class="hero-tagline mb-6">Knowledge that compounds.</p>
       <p class="hero-definition mb-8">
         Editorial Intelligence is the discipline of turning organisational knowledge — research, customer insight, market evidence — into strategic narratives that compound in value over time.
       </p>
@@ -259,6 +260,15 @@ const remainingFrameworks = allFrameworks
     color: var(--color-accent);
     flex-shrink: 0;
     margin-left: auto;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.85;
   }
 
   .hero-definition {
