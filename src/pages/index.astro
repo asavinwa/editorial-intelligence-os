@@ -55,6 +55,15 @@ const remainingFrameworks = allFrameworks
     </div>
   </section>
 
+  <!-- Origin story callout -->
+  <section class="container-site pb-8">
+    <a href="/writing/why-content-work-needs-to-compound" class="origin-callout group">
+      <span class="origin-callout-label">Start here</span>
+      <span class="origin-callout-text">I was not tired of writing. I was tired of work that disappeared. — Why content work needs to compound</span>
+      <span class="origin-callout-arrow group-hover:translate-x-0.5 transition-transform">→</span>
+    </a>
+  </section>
+
   <!-- ② The EI Loop — the core visual model -->
   <section class="container-site pb-16">
     <EILoop />
@@ -211,6 +220,47 @@ const remainingFrameworks = allFrameworks
 </BaseLayout>
 
 <style>
+  /* Origin callout */
+  .origin-callout {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .origin-callout:hover {
+    background: var(--color-surface-tertiary);
+  }
+
+  .origin-callout-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    opacity: 0.8;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .origin-callout-text {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.5;
+  }
+
+  .origin-callout-arrow {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
   .hero-definition {
     font-family: var(--font-serif);
     font-size: clamp(1.125rem, 2vw, 1.3rem);
