@@ -1,0 +1,111 @@
+---
+const layers = [
+  {
+    label: 'Evidence',
+    desc: 'Research, customer interviews, event conversations, advisory boards, sales feedback and market analysis.',
+    highlight: false,
+    arrow: true,
+  },
+  {
+    label: 'Organisational memory',
+    desc: 'A structured evidence base that preserves what the organisation has already learned.',
+    highlight: false,
+    arrow: true,
+  },
+  {
+    label: 'Editorial orchestration',
+    desc: 'The frameworks, judgement and narrative logic that decide what matters, how it connects and where it should be used.',
+    highlight: true,
+    arrow: true,
+  },
+  {
+    label: 'AI agents',
+    desc: 'AI-assisted workflows that can brief, draft, adapt, repurpose, analyse and recommend.',
+    highlight: false,
+    arrow: true,
+  },
+  {
+    label: 'Content activation',
+    desc: 'Articles, reports, social posts, videos, newsletters, diagnostics, sales narratives and community discussions.',
+    highlight: false,
+    arrow: true,
+  },
+  {
+    label: 'Performance feedback',
+    desc: 'Search visibility, engagement, reuse, sales usefulness, customer resonance and internal adoption.',
+    highlight: false,
+    arrow: false,
+  },
+];
+---
+
+<div class="of-wrap">
+  {layers.map((layer) => (
+    <div>
+      <div class:list={['of-layer', layer.highlight ? 'of-layer--highlight' : '']}>
+        <div class="of-layer-label">{layer.label}</div>
+        <p class="of-layer-desc">{layer.desc}</p>
+      </div>
+      {layer.arrow && <div class="of-arrow" aria-hidden="true">↓</div>}
+    </div>
+  ))}
+  <div class="of-loop-note">↑ Learning feeds back into memory — the system improves with each cycle</div>
+</div>
+
+<style>
+  .of-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .of-layer {
+    border: 1px solid var(--color-rule);
+    border-radius: 5px;
+    background: var(--color-surface-secondary);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .of-layer--highlight {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface-secondary));
+  }
+
+  .of-layer-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+
+  .of-layer-desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  .of-arrow {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--color-accent);
+    opacity: 0.4;
+    line-height: 1.8;
+  }
+
+  .of-loop-note {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-tertiary);
+    opacity: 0.7;
+  }
+</style>
