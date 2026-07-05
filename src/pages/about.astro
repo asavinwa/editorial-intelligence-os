@@ -19,6 +19,10 @@ import { SITE } from '../config/site';
 
       <hr class="divider mb-16" />
 
+      <div class="about-photo mb-16">
+        <img src="/images/asavin.jpg" alt="Asavin Wattanajantra" class="about-img" />
+      </div>
+
       <div class="about-prose">
         <p>
           I'm a content strategist and editorial intelligence practitioner working at the intersection of research, narrative and knowledge systems.
@@ -147,5 +151,19 @@ import { SITE } from '../config/site';
   .contact-link svg {
     color: var(--color-ink-tertiary);
     flex-shrink: 0;
+  }
+
+  .about-photo {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .about-img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    object-fit: cover;
   }
 </style>
