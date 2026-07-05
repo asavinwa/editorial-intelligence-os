@@ -122,12 +122,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       <hr class="divider mb-16" />
 
       <section class="mb-8">
-        <h2 class="t-label mb-8">Get in touch</h2>
+        <h2 class="t-label mb-8">Start a conversation</h2>
         <div class="prose-section">
-          <p>If you are working on this kind of problem — or not sure yet whether you are — the best first step is a conversation.</p>
-          <p>
-            <a href="mailto:asavin@contentconsultant.net" class="text-[var(--color-accent)] no-underline hover:underline">asavin@contentconsultant.net</a>
-          </p>
+          <p>Most first conversations are straightforward: you want to understand the methodology, I want to understand the problem. If there is a useful fit, we go from there.</p>
+          <p>If what is on this site resonates with what you are working on, that is enough reason to get in touch.</p>
+          <a href="mailto:asavin@contentconsultant.net" class="contact-cta">
+            asavin@contentconsultant.net
+            <span class="contact-cta-arrow">→</span>
+          </a>
         </div>
       </section>
 
@@ -203,6 +205,32 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     font-weight: 400;
     color: var(--color-ink);
     letter-spacing: -0.01em;
+  }
+
+  .contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .contact-cta:hover {
+    border-color: var(--color-accent);
+  }
+
+  .contact-cta-arrow {
+    transition: transform 0.2s;
+  }
+
+  .contact-cta:hover .contact-cta-arrow {
+    transform: translateX(3px);
   }
 
   .engagement-outcome {
