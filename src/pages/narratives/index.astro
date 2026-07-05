@@ -4,29 +4,25 @@ import NarrativeCard from '../../components/content/NarrativeCard.astro';
 import { getCollection } from 'astro:content';
 
 const narratives = await getCollection('narratives', ({ data }) => data.status === 'published');
-const sorted = narratives.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-// Group by theme, ungrouped narratives go to a catch-all
-const themeOrder = ['Operational Pressure', 'Trusted AI', 'Customer Evidence'];
+// AI sequence — deliberate order
+const aiSequenceSlugs = ['generative-ai', 'agentic-ai', 'practical-ai', 'trusted-ai'];
+const aiSequence = aiSequenceSlugs
+  .map(slug => narratives.find(n => n.slug === slug))
+  .filter(Boolean);
 
-const grouped = new Map<string, typeof sorted>();
-const ungrouped: typeof sorted = [];
+// Everything else — sort by date descending
+const operationalSlugs = new Set(aiSequenceSlugs);
+const operational = narratives
+  .filter(n => !operationalSlugs.has(n.slug))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-for (const n of sorted) {
-  const t = n.data.theme;
-  if (t) {
-    if (!grouped.has(t)) grouped.set(t, []);
-    grouped.get(t)!.push(n);
-  } else {
-    ungrouped.push(n);
-  }
-}
-
-// Order themes according to themeOrder, then any remaining
-const orderedThemes = [
-  ...themeOrder.filter(t => grouped.has(t)),
-  ...[...grouped.keys()].filter(t => !themeOrder.includes(t)),
-];
+const aiDescriptions: Record<string, string> = {
+  'generative-ai': 'What can AI create?',
+  'agentic-ai': 'Can AI complete meaningful work on our behalf?',
+  'practical-ai': 'How can businesses use it today?',
+  'trusted-ai': 'Can we trust it with data, decisions and workflows?',
+};
 ---
 
 <BaseLayout
@@ -38,74 +34,173 @@ const orderedThemes = [
       <p class="t-label mb-4">Narratives</p>
       <h1 class="t-heading mb-4">Long-form connected thinking</h1>
       <p class="t-body">
-        Each narrative connects multiple signals into a strategic story — organised here by theme.
+        Each narrative connects multiple signals into a strategic position. Two bodies of work: an AI narrative sequence built over three years, and an operational intelligence strand grounded in accounting, finance and business change.
       </p>
     </header>
 
-    <hr class="divider mb-12" />
+    <hr class="divider mb-16" />
 
-    {sorted.length === 0 ? (
-      <p class="t-body">No narratives published yet.</p>
-    ) : (
-      <div class="flex flex-col gap-16">
-        {orderedThemes.map((theme) => (
-          <section>
-            <div class="theme-header mb-6">
-              <p class="t-label mb-1" style="color: var(--color-ink-tertiary)">Theme</p>
-              <h2 class="t-title m-0">{theme}</h2>
-            </div>
-            <div class="flex flex-col gap-4">
-              {grouped.get(theme)!.map((narrative) => (
-                <NarrativeCard
-                  slug={narrative.slug}
-                  title={narrative.data.title}
-                  subtitle={narrative.data.subtitle}
-                  excerpt={narrative.data.excerpt}
-                  date={narrative.data.date}
-                  readTime={narrative.data.readTime}
-                  tags={narrative.data.tags as string[]}
-                  theme={narrative.data.theme}
-                  relatedFrameworks={narrative.data.relatedFrameworks.length}
-                  relatedNarratives={narrative.data.relatedNarratives.length}
-                  relatedArticles={narrative.data.relatedArticles.length}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
-
-        {ungrouped.length > 0 && (
-          <section>
-            <div class="theme-header mb-6">
-              <p class="t-label mb-1" style="color: var(--color-ink-tertiary)">Narratives</p>
-              <h2 class="t-title m-0">Other</h2>
-            </div>
-            <div class="flex flex-col gap-4">
-              {ungrouped.map((narrative) => (
-                <NarrativeCard
-                  slug={narrative.slug}
-                  title={narrative.data.title}
-                  subtitle={narrative.data.subtitle}
-                  excerpt={narrative.data.excerpt}
-                  date={narrative.data.date}
-                  readTime={narrative.data.readTime}
-                  tags={narrative.data.tags as string[]}
-                  relatedFrameworks={narrative.data.relatedFrameworks.length}
-                  relatedNarratives={narrative.data.relatedNarratives.length}
-                  relatedArticles={narrative.data.relatedArticles.length}
-                />
-              ))}
-            </div>
-          </section>
-        )}
+    <!-- Section 1: The AI narrative sequence -->
+    <section class="mb-20">
+      <div class="section-intro mb-10">
+        <div class="section-intro-header">
+          <p class="t-label">The AI narrative</p>
+          <span class="seq-badge">4-part sequence</span>
+        </div>
+        <p class="section-intro-desc">A progression built in real time as the market moved — from the generative moment through the agentic vision, practical adoption and the trust argument. Each stage answered a different question.</p>
       </div>
-    )}
+
+      <div class="ai-sequence">
+        {aiSequence.map((narrative, i) => (
+          <a href={`/narratives/${narrative.slug}`} class="seq-item group">
+            <div class="seq-number">{String(i + 1).padStart(2, '0')}</div>
+            <div class="seq-body">
+              <p class="seq-question">{aiDescriptions[narrative.slug]}</p>
+              <h3 class="seq-title group-hover:text-[var(--color-accent)] transition-colors">{narrative.data.title}</h3>
+              <p class="seq-excerpt">{narrative.data.excerpt}</p>
+            </div>
+            <div class="seq-arrow">→</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <hr class="divider mb-16" />
+
+    <!-- Section 2: Operational intelligence -->
+    <section>
+      <div class="section-intro mb-10">
+        <div class="section-intro-header">
+          <p class="t-label">Operational intelligence</p>
+        </div>
+        <p class="section-intro-desc">Narratives grounded in accounting, finance and business change — how organisations work, how the hidden costs of modern work compound, and how MTD is restructuring practice.</p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        {operational.map((narrative) => (
+          <NarrativeCard
+            slug={narrative.slug}
+            title={narrative.data.title}
+            subtitle={narrative.data.subtitle}
+            excerpt={narrative.data.excerpt}
+            date={narrative.data.date}
+            readTime={narrative.data.readTime}
+            tags={narrative.data.tags as string[]}
+            relatedFrameworks={narrative.data.relatedFrameworks.length}
+            relatedNarratives={narrative.data.relatedNarratives.length}
+            relatedArticles={narrative.data.relatedArticles.length}
+          />
+        ))}
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
 
 <style>
-  .theme-header {
-    padding-left: 1rem;
-    border-left: 2px solid var(--color-accent);
+  .section-intro-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .seq-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .section-intro-desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    max-width: 56ch;
+  }
+
+  /* AI sequence list */
+  .ai-sequence {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .seq-item {
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+    transition: background 0.15s;
+  }
+
+  .seq-item:last-child {
+    border-bottom: none;
+  }
+
+  .seq-item:hover {
+    background: var(--color-surface-tertiary);
+  }
+
+  .seq-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    opacity: 0.6;
+    letter-spacing: 0.06em;
+    padding-top: 0.2rem;
+  }
+
+  .seq-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .seq-question {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .seq-title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .seq-excerpt {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+    margin: 0.35rem 0 0;
+    max-width: 60ch;
+  }
+
+  .seq-arrow {
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    opacity: 0.4;
+    padding-top: 0.3rem;
+    transition: opacity 0.15s;
+  }
+
+  .seq-item:hover .seq-arrow {
+    opacity: 0.9;
   }
 </style>
