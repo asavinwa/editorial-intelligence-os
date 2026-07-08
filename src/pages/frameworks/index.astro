@@ -20,6 +20,29 @@ const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.get
       </p>
     </header>
 
+    <!-- Five flagship frameworks -->
+    <div class="flagship-block mb-12">
+      <p class="t-label mb-6">Five flagship frameworks</p>
+      <p class="t-small mb-8" style="color: var(--color-ink-secondary); max-width: 56ch; line-height: 1.7;">
+        Together these frameworks describe an end-to-end operating model — from how organisations capture signals to how that knowledge compounds into commercial advantage.
+      </p>
+      <div class="flagship-grid">
+        {[
+          { num: '01', title: 'Editorial Intelligence', desc: 'The operating system. How organisations turn signals into knowledge that compounds over time.', href: '/intelligence' },
+          { num: '02', title: 'The Evidence Engine', desc: 'How organisations capture and connect signals from across the business into reusable evidence.', href: '/frameworks/editorial-intelligence-framework' },
+          { num: '03', title: 'Narrative Architecture', desc: 'How evidence becomes coherent strategic stories that accumulate authority over time.', href: '/frameworks/content-activation-framework' },
+          { num: '04', title: 'Content Activation', desc: 'How narratives become reputation — distributed across every channel where buyers and AI systems look.', href: '/frameworks/content-activation-framework' },
+          { num: '05', title: 'AI Visibility & Buyability', desc: 'How reputation influences AI discovery and buyer confidence, from signals through to commercial outcomes.', href: '/frameworks/ai-visibility-buyability' },
+        ].map((f) => (
+          <a href={f.href} class="flagship-item">
+            <span class="flagship-num">{f.num}</span>
+            <span class="flagship-title">{f.title}</span>
+            <span class="flagship-desc">{f.desc}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
     <hr class="divider mb-12" />
 
     {sorted.length === 0 ? (
@@ -42,3 +65,57 @@ const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.get
     )}
   </div>
 </BaseLayout>
+
+<style>
+  .flagship-grid {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .flagship-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule, #2c2920);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .flagship-item:last-child {
+    border-bottom: none;
+  }
+
+  .flagship-item:hover {
+    background: var(--color-surface-secondary);
+  }
+
+  .flagship-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    padding-top: 0.2rem;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  .flagship-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .flagship-desc {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--color-ink-tertiary);
+    display: block;
+  }
+</style>
