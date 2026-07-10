@@ -30,91 +30,58 @@ import { SITE } from '../config/site';
             The AI-enabled Content Writer Guide →
           </a>
         </div>
+
+        <div class="hero-credibility">
+          <p class="credibility-line">
+            Developed through work with Sage, customer research, executive thought leadership and AI experimentation.
+          </p>
+          <p class="credibility-tags">
+            Sage&nbsp;· Sage Advice&nbsp;· IDC&nbsp;· Enterprise Nation&nbsp;· Hidden Hours&nbsp;· #1 "Editorial Intelligence"
+          </p>
+        </div>
       </div>
 
-      <!-- Right: constellation diagram -->
+      <!-- Right: flow diagram -->
       <div class="hero-diagram" aria-hidden="true">
-        <svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" class="constellation-svg">
-          <defs>
-            <radialGradient id="bg-glow" cx="50%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#c8a96e" stop-opacity="0.07"/>
-              <stop offset="100%" stop-color="#c8a96e" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="node-glow-tl" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#c8a96e" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#c8a96e" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
+        <div class="flow-diagram">
+          <!-- Inputs -->
+          <div class="flow-section flow-section--inputs">
+            <p class="flow-section-label">Inputs</p>
+            <div class="flow-items">
+              {['Research', 'Customer insight', 'Executive expertise', 'Events', 'Market signals'].map(item => (
+                <div class="flow-item flow-item--in">{item}</div>
+              ))}
+            </div>
+          </div>
 
-          <!-- Background -->
-          <rect width="460" height="380" rx="6" fill="var(--constellation-bg, #16130f)"/>
-          <rect width="460" height="380" rx="6" fill="url(#bg-glow)"/>
+          <!-- Arrow down -->
+          <div class="flow-arrow" aria-hidden="true">
+            <div class="flow-arrow-line"></div>
+            <div class="flow-arrow-head">↓</div>
+          </div>
 
-          <!-- Grid lines (subtle) -->
-          <!-- Horizontals -->
-          <line x1="40" y1="190" x2="420" y2="190" stroke="#c8a96e" stroke-width="0.5" opacity="0.08"/>
-          <line x1="40" y1="120" x2="420" y2="120" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
-          <line x1="40" y1="260" x2="420" y2="260" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
-          <!-- Verticals -->
-          <line x1="230" y1="30" x2="230" y2="350" stroke="#c8a96e" stroke-width="0.5" opacity="0.08"/>
-          <line x1="130" y1="30" x2="130" y2="350" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
-          <line x1="330" y1="30" x2="330" y2="350" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
+          <!-- Engine -->
+          <div class="flow-engine">
+            <p class="flow-engine-label">Editorial Intelligence</p>
+            <p class="flow-engine-verbs">Capture · Connect · Synthesise · Activate</p>
+          </div>
 
-          <!-- Connection lines: cross diagonals through center -->
-          <line x1="100" y1="90" x2="360" y2="290" stroke="#c8a96e" stroke-width="0.75" opacity="0.3"/>
-          <line x1="360" y1="90" x2="100" y2="290" stroke="#c8a96e" stroke-width="0.75" opacity="0.3"/>
-          <!-- Outer square -->
-          <line x1="100" y1="90" x2="360" y2="90" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
-          <line x1="100" y1="290" x2="360" y2="290" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
-          <line x1="100" y1="90" x2="100" y2="290" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
-          <line x1="360" y1="90" x2="360" y2="290" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
+          <!-- Arrow down -->
+          <div class="flow-arrow" aria-hidden="true">
+            <div class="flow-arrow-line"></div>
+            <div class="flow-arrow-head">↓</div>
+          </div>
 
-          <!-- Midpoint markers on diagonals -->
-          <circle cx="165" cy="143" r="2" fill="#c8a96e" opacity="0.3"/>
-          <circle cx="295" cy="237" r="2" fill="#c8a96e" opacity="0.3"/>
-          <circle cx="295" cy="143" r="2" fill="#c8a96e" opacity="0.3"/>
-          <circle cx="165" cy="237" r="2" fill="#c8a96e" opacity="0.3"/>
-
-          <!-- Center node: EI / OS -->
-          <circle cx="230" cy="190" r="32" fill="var(--constellation-bg, #16130f)" stroke="#c8a96e" stroke-width="1" opacity="0.85"/>
-          <circle cx="230" cy="190" r="40" fill="none" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
-          <text x="230" y="185" text-anchor="middle" font-family="monospace" font-size="13" fill="#c8a96e" letter-spacing="0.08em" font-weight="500">EI</text>
-          <text x="230" y="201" text-anchor="middle" font-family="monospace" font-size="10" fill="#c8a96e" opacity="0.6" letter-spacing="0.06em">/ OS</text>
-
-          <!-- Node: Research (TL) -->
-          <circle cx="100" cy="95" r="18" fill="url(#node-glow-tl)"/>
-          <circle cx="100" cy="95" r="5.5" fill="#c8a96e" opacity="0.95"/>
-          <circle cx="100" cy="95" r="10" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
-          <text x="100" y="62" text-anchor="middle" font-family="monospace" font-size="10" fill="#c8a96e" letter-spacing="0.1em" opacity="0.95" font-weight="500">RESEARCH</text>
-          <text x="100" y="120" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#c8a96e" opacity="0.5" letter-spacing="0.03em">Signals &amp; evidence</text>
-
-          <!-- Node: Expertise (TR) -->
-          <circle cx="360" cy="95" r="18" fill="url(#node-glow-tl)"/>
-          <circle cx="360" cy="95" r="5.5" fill="#c8a96e" opacity="0.95"/>
-          <circle cx="360" cy="95" r="10" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
-          <text x="360" y="62" text-anchor="middle" font-family="monospace" font-size="10" fill="#c8a96e" letter-spacing="0.1em" opacity="0.95" font-weight="500">EXPERTISE</text>
-          <text x="360" y="120" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#c8a96e" opacity="0.5" letter-spacing="0.03em">Institutional knowledge</text>
-
-          <!-- Node: Narratives (BL) -->
-          <circle cx="100" cy="285" r="18" fill="url(#node-glow-tl)"/>
-          <circle cx="100" cy="285" r="5.5" fill="#c8a96e" opacity="0.95"/>
-          <circle cx="100" cy="285" r="10" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
-          <text x="100" y="258" text-anchor="middle" font-family="monospace" font-size="10" fill="#c8a96e" letter-spacing="0.1em" opacity="0.95" font-weight="500">NARRATIVES</text>
-          <text x="100" y="312" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#c8a96e" opacity="0.5" letter-spacing="0.03em">Strategic positions</text>
-
-          <!-- Node: Activation (BR) -->
-          <circle cx="360" cy="285" r="18" fill="url(#node-glow-tl)"/>
-          <circle cx="360" cy="285" r="5.5" fill="#c8a96e" opacity="0.95"/>
-          <circle cx="360" cy="285" r="10" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
-          <text x="360" y="258" text-anchor="middle" font-family="monospace" font-size="10" fill="#c8a96e" letter-spacing="0.1em" opacity="0.95" font-weight="500">ACTIVATION</text>
-          <text x="360" y="312" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#c8a96e" opacity="0.5" letter-spacing="0.03em">Reputation &amp; reach</text>
-
-          <!-- Decorative corner marks -->
-          <path d="M20 20 L20 35 M20 20 L35 20" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
-          <path d="M440 20 L440 35 M440 20 L425 20" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
-          <path d="M20 360 L20 345 M20 360 L35 360" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
-          <path d="M440 360 L440 345 M440 360 L425 360" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
-        </svg>
+          <!-- Outputs -->
+          <div class="flow-section flow-section--outputs">
+            <p class="flow-section-label">Outputs</p>
+            <div class="flow-items">
+              {['Thought leadership', 'Authority', 'AI visibility', 'Demand generation', 'Organisational knowledge'].map(item => (
+                <div class="flow-item flow-item--out">{item}</div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -328,22 +295,140 @@ import { SITE } from '../config/site';
     border-color: color-mix(in srgb, var(--color-ink-tertiary) 35%, transparent);
   }
 
-  /* ── Constellation ── */
+  /* ── Credibility ── */
+  .hero-credibility {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .credibility-line {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-tertiary);
+    max-width: 50ch;
+    margin-bottom: 0.625rem;
+  }
+
+  .credibility-tags {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.07em;
+    color: var(--color-accent);
+    opacity: 0.6;
+    line-height: 1.8;
+  }
+
+  /* ── Flow diagram ── */
   .hero-diagram {
     display: none;
   }
 
   @media (min-width: 900px) {
     .hero-diagram {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
-  .constellation-svg {
+  .flow-diagram {
     width: 100%;
-    height: auto;
-    display: block;
-    --constellation-bg: var(--color-surface-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 2rem 1.5rem;
+    background: var(--color-surface-secondary);
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+  }
+
+  .flow-section {
+    width: 100%;
+  }
+
+  .flow-section-label {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+    opacity: 0.6;
+    text-align: center;
+    margin-bottom: 0.625rem;
+  }
+
+  .flow-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .flow-item {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    padding: 0.4rem 0.875rem;
+    border-radius: 3px;
+    text-align: center;
+  }
+
+  .flow-item--in {
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    color: var(--color-ink-secondary);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+
+  .flow-item--out {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: var(--color-ink);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0.25rem 0;
+  }
+
+  .flow-arrow-line {
+    width: 1px;
+    height: 1.25rem;
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  }
+
+  .flow-arrow-head {
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    opacity: 0.5;
+    line-height: 1;
+  }
+
+  .flow-engine {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .flow-engine-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+
+  .flow-engine-verbs {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    opacity: 0.75;
   }
 
   /* ── Section header ── */
