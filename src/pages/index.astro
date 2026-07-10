@@ -2,8 +2,6 @@
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import NarrativeCard from '../components/content/NarrativeCard.astro';
 import FrameworkCard from '../components/content/FrameworkCard.astro';
-import CycleStrip from '../components/content/CycleStrip.astro';
-import EILoop from '../components/content/EILoop.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '../config/site';
 
@@ -13,37 +11,28 @@ const allWriting = await getCollection('writing', ({ data }) => data.status === 
 
 const featuredNarrative = allNarratives.find((n) => n.data.featuredOnHome) ?? allNarratives[0];
 
-// Related writing for the featured narrative
 const featuredRelatedArticleSlugs = featuredNarrative?.data.relatedArticles ?? [];
 const featuredRelatedArticles = allWriting.filter(w => featuredRelatedArticleSlugs.includes(w.slug));
 
-// For the featured narrative, get its related framework(s) to surface below it
 const featuredRelatedFrameworkSlugs = featuredNarrative?.data.relatedFrameworks ?? [];
 const featuredRelatedFrameworks = allFrameworks.filter(f => featuredRelatedFrameworkSlugs.includes(f.slug));
 
-// Remaining frameworks
 const remainingFrameworks = allFrameworks
   .filter(f => !featuredRelatedFrameworkSlugs.includes(f.slug))
   .slice(0, 2);
 ---
 
 <BaseLayout>
-  <!-- ① Hero: answer "what is EI and why care?" -->
-  <section class="container-site pt-28 pb-8 md:pt-36 md:pb-10">
+  <!-- Hero -->
+  <section class="container-site pt-28 pb-10 md:pt-36 md:pb-12">
     <div class="max-w-3xl">
       <p class="t-label mb-10">{SITE.author} · Content strategist at Sage</p>
       <h1 class="t-display text-[var(--color-ink)] mb-3 leading-[1.08]">
         Editorial Intelligence<br />for the AI era
       </h1>
-      <p class="hero-tagline mb-6">Knowledge that compounds.</p>
-      <p class="hero-definition mb-8">
-        Editorial Intelligence is the discipline of turning organisational knowledge — research, customer insight, market evidence — into strategic narratives that compound in value over time.
-      </p>
-      <p class="hero-body max-w-xl mb-6">
-        Most organisations generate signals continuously. Few have the systems to recognise which ones matter, build narratives from them, or accumulate evidence rather than recreate it. This site documents the frameworks, methods and working examples of a practice designed to change that.
-      </p>
-      <p class="hero-body max-w-xl mb-12" style="color: var(--color-ink-tertiary); font-style: italic;">
-        Not an AI operating system. An Editorial Intelligence operating system for the AI era.
+      <p class="hero-tagline mb-8">Knowledge that compounds.</p>
+      <p class="hero-problem mb-10">
+        Most organisations don't have a content problem.<br class="hidden md:block" /> They have an evidence problem.
       </p>
       <div class="flex flex-wrap items-center gap-8">
         <a href="/intelligence" class="hero-link-primary">
@@ -59,8 +48,58 @@ const remainingFrameworks = allFrameworks
     </div>
   </section>
 
-  <!-- Origin story callout -->
-  <section class="container-site pb-8">
+  <hr class="divider container-site" />
+
+  <!-- Hierarchy diagram -->
+  <section class="container-site py-16">
+    <p class="t-label mb-10">How it works</p>
+    <div class="hierarchy">
+      {[
+        { num: '01', label: 'Editorial Intelligence', sub: 'The discipline', href: '/intelligence' },
+        { num: '02', label: 'Evidence Engine', sub: 'The infrastructure', href: '/frameworks/evidence-engine' },
+        { num: '03', label: 'EI Cycle', sub: 'The operating model', href: '/intelligence' },
+        { num: '04', label: 'Daily OS', sub: 'The daily practice', href: '/frameworks/daily-os' },
+        { num: '05', label: 'Applications', sub: 'Proof in the real world', href: '/narratives' },
+      ].map((level, i) => (
+        <div class="hierarchy-row">
+          {i > 0 && <div class="hierarchy-connector" aria-hidden="true">↓</div>}
+          <a href={level.href} class="hierarchy-item">
+            <span class="hierarchy-num">{level.num}</span>
+            <span class="hierarchy-label">{level.label}</span>
+            <span class="hierarchy-sub">{level.sub}</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- Who it's for -->
+  <section class="container-site py-16">
+    <p class="t-label mb-8">Who it's for</p>
+    <div class="audience-grid">
+      {[
+        'Content leaders',
+        'CMOs',
+        'Thought leadership teams',
+        'Research teams',
+        'Customer marketing',
+        'Product marketing',
+        'Corporate communications',
+      ].map((role) => (
+        <div class="audience-item">{role}</div>
+      ))}
+    </div>
+    <p class="audience-body mt-8">
+      Editorial Intelligence is for anyone responsible for turning organisational knowledge into something that compounds — not just publishes.
+    </p>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- Start here -->
+  <section class="container-site pb-8 pt-16">
     <a href="/writing/why-content-work-needs-to-compound" class="origin-callout group">
       <span class="origin-callout-label">Start here</span>
       <span class="origin-callout-text">I was not tired of writing. I was tired of work that disappeared. — Why content work needs to compound</span>
@@ -68,22 +107,9 @@ const remainingFrameworks = allFrameworks
     </a>
   </section>
 
-  <!-- ② The EI Loop — the core visual model -->
-  <section class="container-site pb-16">
-    <EILoop />
-    <div class="loop-explainer mt-8">
-      <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, events and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
-    </div>
-  </section>
-
-  <hr class="divider container-site" />
-
-  <!-- ③ The EI Cycle — the model made visible -->
-  <CycleStrip />
-
-  <!-- ③ Worked example — Hidden Hours as the entry point -->
+  <!-- Worked example -->
   {featuredNarrative && (
-    <section class="container-site py-16">
+    <section class="container-site pb-16">
       <div class="section-header mb-8">
         <div>
           <p class="t-label">Worked example</p>
@@ -105,7 +131,6 @@ const remainingFrameworks = allFrameworks
         startHere={true}
       />
 
-      <!-- Supporting frameworks -->
       {featuredRelatedFrameworks.length > 0 && (
         <div class="mt-4">
           <p class="t-mono mb-3 pl-1 opacity-50">Supporting frameworks</p>
@@ -127,7 +152,6 @@ const remainingFrameworks = allFrameworks
         </div>
       )}
 
-      <!-- Related writing surfaced contextually -->
       {featuredRelatedArticles.length > 0 && (
         <div class="mt-4">
           <p class="t-mono mb-3 pl-1 opacity-50">Related writing</p>
@@ -149,7 +173,7 @@ const remainingFrameworks = allFrameworks
 
   <hr class="divider container-site" />
 
-  <!-- ④ All frameworks -->
+  <!-- Frameworks -->
   {remainingFrameworks.length > 0 && (
     <section class="container-site py-16">
       <div class="section-header mb-8">
@@ -176,54 +200,150 @@ const remainingFrameworks = allFrameworks
       </div>
     </section>
   )}
-
-  <!-- ④b Applications callout -->
-  <section class="container-site py-16">
-    <div class="applications-callout">
-      <div>
-        <p class="t-label mb-2">Editorial Intelligence in practice</p>
-        <p class="applications-callout-body">Explore how the methodology is applied across research, events, customer stories, AI workflows and content activation.</p>
-      </div>
-      <a href="/applications" class="applications-callout-link">
-        View applications
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <hr class="divider container-site" />
-
-  <!-- ⑤ The OS — practical implementation -->
-  <section class="os-strip">
-    <div class="container-site py-20">
-      <div class="os-inner">
-        <div class="os-header">
-          <p class="t-label mb-2">Editorial Intelligence OS</p>
-          <p class="t-mono opacity-40">The implementation layer</p>
-        </div>
-        <div class="os-body">
-          <p class="os-lead">
-            The OS is not another framework. It is how an organisation operationalises the Editorial Intelligence Cycle through repeatable libraries, workflows and AI-assisted processes.
-          </p>
-          <ul class="os-capabilities">
-            <li>Recognise important signals earlier</li>
-            <li>Build stronger long-term narratives</li>
-            <li>Accumulate evidence rather than recreate it</li>
-            <li>Reuse knowledge across teams</li>
-            <li>Apply AI with greater context and editorial judgement</li>
-          </ul>
-          <a href="/intelligence" class="os-link">
-            Learn about the OS →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .hero-problem {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    line-height: 1.5;
+    color: var(--color-ink);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25rem;
+    max-width: 44ch;
+  }
+
+  .hero-link-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .hero-link-primary:hover {
+    border-color: var(--color-accent);
+  }
+
+  .hero-link-secondary {
+    font-size: 0.875rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-link-secondary:hover {
+    color: var(--color-ink);
+  }
+
+  /* Hierarchy */
+  .hierarchy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    max-width: 480px;
+  }
+
+  .hierarchy-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .hierarchy-connector {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    opacity: 0.5;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    line-height: 1;
+  }
+
+  .hierarchy-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    text-decoration: none;
+    width: 100%;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .hierarchy-item:hover {
+    background: var(--color-surface-secondary);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-rule));
+  }
+
+  .hierarchy-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    grid-row: 1 / 3;
+    align-self: center;
+    opacity: 0.7;
+  }
+
+  .hierarchy-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  .hierarchy-sub {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+    display: block;
+    letter-spacing: 0.03em;
+  }
+
+  /* Audience */
+  .audience-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .audience-item {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    padding: 0.4rem 0.875rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 2px;
+    background: var(--color-surface-secondary);
+  }
+
+  .audience-body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink-tertiary);
+    max-width: 52ch;
+  }
+
   /* Origin callout */
   .origin-callout {
     display: flex;
@@ -265,60 +385,6 @@ const remainingFrameworks = allFrameworks
     margin-left: auto;
   }
 
-  .hero-tagline {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    opacity: 0.85;
-  }
-
-  .hero-definition {
-    font-family: var(--font-serif);
-    font-size: clamp(1.125rem, 2vw, 1.3rem);
-    line-height: 1.6;
-    color: var(--color-ink);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    border-left: 2px solid var(--color-accent);
-    padding-left: 1.25rem;
-  }
-
-  .hero-body {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: var(--color-ink-secondary);
-  }
-
-  .hero-link-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-accent);
-    text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-    padding-bottom: 1px;
-    transition: border-color 0.2s;
-  }
-
-  .hero-link-primary:hover {
-    border-color: var(--color-accent);
-  }
-
-  .hero-link-secondary {
-    font-size: 0.875rem;
-    color: var(--color-ink-tertiary);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .hero-link-secondary:hover {
-    color: var(--color-ink);
-  }
-
   .section-header {
     display: flex;
     align-items: flex-end;
@@ -345,7 +411,6 @@ const remainingFrameworks = allFrameworks
     color: var(--color-ink);
   }
 
-  /* Related articles inline */
   .related-articles {
     list-style: none;
     margin: 0;
@@ -372,125 +437,5 @@ const remainingFrameworks = allFrameworks
 
   .related-article-link:hover {
     background: var(--color-surface-tertiary);
-  }
-
-  /* Loop explainer */
-  .loop-explainer p {
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: var(--color-ink-tertiary);
-    text-align: center;
-    max-width: 52ch;
-    margin: 0 auto;
-  }
-
-  /* Applications callout */
-  .applications-callout {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 1.5rem;
-    border: 1px solid var(--color-rule);
-    border-left: 2px solid var(--color-accent);
-    border-radius: 4px;
-    background: var(--color-surface-secondary);
-  }
-
-  .applications-callout-body {
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--color-ink-secondary);
-    margin-top: 0.5rem;
-    max-width: 46ch;
-  }
-
-  .applications-callout-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-accent);
-    text-decoration: none;
-    white-space: nowrap;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-    padding-bottom: 1px;
-    flex-shrink: 0;
-    transition: border-color 0.2s;
-  }
-
-  .applications-callout-link:hover {
-    border-color: var(--color-accent);
-  }
-
-  /* OS strip */
-  .os-strip {
-    background: var(--color-surface-secondary);
-    border-top: 1px solid var(--color-rule, #2c2920);
-    margin-top: 2rem;
-  }
-
-  .os-inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .os-inner {
-      grid-template-columns: 200px 1fr;
-      gap: 4rem;
-    }
-  }
-
-  .os-header {
-    padding-top: 0.25rem;
-  }
-
-  .os-lead {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: var(--color-ink-secondary);
-    margin-bottom: 1.5rem;
-    max-width: 54ch;
-  }
-
-  .os-capabilities {
-    list-style: none;
-    margin: 0 0 2rem 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
-  }
-
-  .os-capabilities li {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-ink-secondary);
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .os-capabilities li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
-  }
-
-  .os-link {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-accent);
-    text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-    padding-bottom: 1px;
-    transition: border-color 0.2s;
-  }
-
-  .os-link:hover {
-    border-color: var(--color-accent);
   }
 </style>
