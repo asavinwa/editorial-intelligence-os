@@ -30,7 +30,39 @@ They conduct research. They talk to customers. They run events. They have sales 
 
 That knowledge exists. What is missing is the infrastructure to capture it, connect it and make it reusable.
 
-The Evidence Engine is the system that does that. It sits between raw organisational signals and published content — transforming what an organisation knows into evidence that compounds over time.
+The Evidence Engine is that infrastructure.
+
+> What's different about Editorial Intelligence? We build an engine that continuously turns organisational evidence into reusable knowledge.
+
+---
+
+## Where this sits
+
+<div class="where-sits">
+  <a href="/intelligence" class="where-sits-level">
+    <span class="where-sits-num">01</span>
+    <span class="where-sits-label">Editorial Intelligence</span>
+    <span class="where-sits-sub">The discipline</span>
+  </a>
+  <div class="where-sits-arrow">↓</div>
+  <div class="where-sits-level where-sits-current">
+    <span class="where-sits-num">02</span>
+    <span class="where-sits-label">Evidence Engine</span>
+    <span class="where-sits-sub">The infrastructure — captures and connects signals</span>
+  </div>
+  <div class="where-sits-arrow">↓ powers</div>
+  <a href="/intelligence#cycle" class="where-sits-level">
+    <span class="where-sits-num">03</span>
+    <span class="where-sits-label">EI Cycle</span>
+    <span class="where-sits-sub">The operating model — turns evidence into action and learning</span>
+  </a>
+  <div class="where-sits-arrow">↓</div>
+  <a href="/frameworks/daily-os" class="where-sits-level">
+    <span class="where-sits-num">04</span>
+    <span class="where-sits-label">Daily OS</span>
+    <span class="where-sits-sub">The daily practice</span>
+  </a>
+</div>
 
 > Evidence only compounds when it is connected.
 
@@ -38,43 +70,78 @@ The Evidence Engine is the system that does that. It sits between raw organisati
 
 ## What the Evidence Engine does
 
-The Evidence Engine performs five functions that most content systems skip entirely.
-
-**Capture**
-Signals are gathered from across the organisation — not just from the marketing team, but from sales conversations, customer success interactions, product usage data, support tickets, advisory boards, events, research programmes and executive thinking.
-
-Most of this signal is currently lost. It surfaces in a meeting, a customer call, a conference session — and then disappears. The Evidence Engine creates the infrastructure to catch it.
-
-**Connect**
-Individual signals become evidence when they are connected to each other and to the narratives they support.
-
-A single customer interview is a data point. Three customer interviews pointing at the same problem, connected to research findings from six months ago and a sales conversation from last week, is evidence of a pattern. That pattern is what narratives are built from.
-
-**Synthesise**
-Connected signals need to be interpreted — the pattern identified, the argument extracted, the strategic significance understood. This is where editorial judgement operates. Not every signal is meaningful. Not every pattern is worth building a narrative around. The Evidence Engine creates the space for that judgement to happen systematically rather than accidentally.
-
-**Prioritise**
-Not all evidence deserves activation. Some signals refine an existing narrative. Some open a new one. Some are interesting but not yet strategically significant. The Evidence Engine creates a way of deciding what to act on now, what to hold, and what to file for future use.
-
-**Maintain**
-Evidence ages. Research findings become dated. Customer stories need updating as businesses grow. Market positions shift as industries change. The Evidence Engine creates a system for keeping evidence current — not as a filing exercise, but as an ongoing editorial discipline.
+<div class="functions-grid">
+  <div class="function-item">
+    <span class="function-num">01</span>
+    <strong>Capture</strong>
+    <p>Signals are gathered from across the organisation — sales conversations, customer success, product usage, support tickets, advisory boards, events, research programmes and executive thinking. Most of this signal is currently lost. The Evidence Engine creates the infrastructure to catch it.</p>
+  </div>
+  <div class="function-item">
+    <span class="function-num">02</span>
+    <strong>Connect</strong>
+    <p>Individual signals become evidence when they are connected to each other and to the narratives they support. A single customer interview is a data point. Three interviews pointing at the same problem, connected to research from six months ago, is evidence of a pattern.</p>
+  </div>
+  <div class="function-item">
+    <span class="function-num">03</span>
+    <strong>Synthesise</strong>
+    <p>Connected signals need to be interpreted — the pattern identified, the argument extracted, the strategic significance understood. This is where editorial judgement operates. The Evidence Engine creates the space for that judgement to happen systematically rather than accidentally.</p>
+  </div>
+  <div class="function-item">
+    <span class="function-num">04</span>
+    <strong>Prioritise</strong>
+    <p>Not all evidence deserves activation. Some signals refine an existing narrative. Some open a new one. Some are interesting but not yet strategically significant. The Evidence Engine creates a way of deciding what to act on now, what to hold, and what to file for future use.</p>
+  </div>
+  <div class="function-item function-item--wide">
+    <span class="function-num">05</span>
+    <strong>Maintain</strong>
+    <p>Evidence ages. Research becomes dated. Customer stories need updating as businesses grow. Market positions shift as industries change. The Evidence Engine creates a system for keeping evidence current — not as a filing exercise, but as an ongoing editorial discipline.</p>
+  </div>
+</div>
 
 ---
 
 ## Where evidence comes from
 
-Evidence comes from everywhere in the organisation. The Evidence Engine connects sources that are typically managed in silos.
+<div class="sources-diagram">
+  <div class="sources-inputs">
+    <div class="sources-group">
+      <span class="sources-group-label">Customer</span>
+      <div class="sources-list">
+        {['Customer research', 'Customer interviews', 'Customer stories', 'Support conversations', 'Advisory boards', 'Community insight', 'Sales conversations'].map(s => (
+          <span class="source-tag">{s}</span>
+        ))}
+      </div>
+    </div>
+    <div class="sources-group">
+      <span class="sources-group-label">Internal</span>
+      <div class="sources-list">
+        {['SME expertise', 'Executive thinking', 'Product usage data', 'Operational data', 'Implementation experience', 'Lessons learned'].map(s => (
+          <span class="source-tag">{s}</span>
+        ))}
+      </div>
+    </div>
+    <div class="sources-group">
+      <span class="sources-group-label">External</span>
+      <div class="sources-list">
+        {['Industry research', 'Regulatory change', 'Market intelligence', 'Competitor positioning', 'Event conversations', 'Analyst reports'].map(s => (
+          <span class="source-tag">{s}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="sources-arrow" aria-hidden="true">↓</div>
+  <div class="sources-engine">
+    <span class="sources-engine-label">Evidence Engine</span>
+    <span class="sources-engine-sub">Captures · Connects · Synthesises · Prioritises · Maintains</span>
+  </div>
+  <div class="sources-arrow" aria-hidden="true">↓</div>
+  <div class="sources-output">
+    <span class="sources-output-label">Reusable evidence</span>
+    <span class="sources-output-sub">Feeds the EI Cycle → Narratives → Activation → AI Visibility → Buyability</span>
+  </div>
+</div>
 
-**Customer sources**
-Customer research · Customer interviews · Customer stories and case studies · Support conversations · Advisory board sessions · Community insight · Net Promoter feedback · Sales conversations
-
-**Internal sources**
-SME expertise · Executive thinking · Product usage data · Operational data · Finance insight · Implementation experience · Lessons learned
-
-**External sources**
-Industry research · Regulatory change · Market intelligence · Competitor positioning · Media coverage · Event conversations · Analyst reports · Policy developments
-
-Most organisations draw from only a fraction of these. The Evidence Engine makes the full range accessible — and connected.
+Most organisations draw from only a fraction of these sources. The Evidence Engine makes the full range accessible — and connected.
 
 ---
 
@@ -132,8 +199,8 @@ It is the layer that sits underneath all of those systems — connecting what th
 
 The Evidence Engine is the second of five interconnected frameworks that together describe the Editorial Intelligence operating model:
 
-1. **Editorial Intelligence** — the operating system
-2. **The Evidence Engine** — how signals become reusable knowledge
+1. **Editorial Intelligence** — the discipline
+2. **The Evidence Engine** — the infrastructure that feeds everything else
 3. **Narrative Architecture** — how evidence becomes connected strategic position
 4. **Content Activation** — how narratives reach buyers and AI systems
 5. **AI Visibility & Buyability** — how reputation influences discovery and purchase decisions
@@ -142,4 +209,232 @@ Without the Evidence Engine, the other four frameworks have nothing to work with
 
 ---
 
-*Connected frameworks: [Editorial Intelligence](/intelligence) · [Editorial Intelligence framework](/frameworks/editorial-intelligence-framework) · [Narrative Architecture](/frameworks/narrative-architecture) · [Content Activation](/frameworks/content-activation-framework) · [AI Visibility & Buyability](/frameworks/ai-visibility-buyability)*
+*Connected frameworks: [Editorial Intelligence](/intelligence) · [Narrative Architecture](/frameworks/narrative-architecture) · [Content Activation](/frameworks/content-activation-framework) · [AI Visibility & Buyability](/frameworks/ai-visibility-buyability) · [Daily OS](/frameworks/daily-os)*
+
+<style>{`
+  .where-sits {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 440px;
+    margin: 1.5rem 0;
+  }
+
+  .where-sits-level {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    width: 100%;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  a.where-sits-level:hover {
+    background: var(--color-surface-secondary, #1a1612);
+  }
+
+  .where-sits-current {
+    border-color: color-mix(in srgb, var(--color-accent, #c8a96e) 40%, var(--color-rule, #2c2920));
+    background: color-mix(in srgb, var(--color-accent, #c8a96e) 5%, transparent);
+  }
+
+  .where-sits-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent, #c8a96e);
+    grid-row: 1 / 3;
+    align-self: center;
+    opacity: 0.7;
+  }
+
+  .where-sits-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink, #f0ebe3);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  .where-sits-sub {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary, #7a6f5e);
+    display: block;
+    letter-spacing: 0.02em;
+  }
+
+  .where-sits-arrow {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8125rem;
+    color: var(--color-accent, #c8a96e);
+    opacity: 0.4;
+    padding: 0.2rem 0 0.2rem 1.25rem;
+    line-height: 1.4;
+  }
+
+  /* Functions grid */
+  .functions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--color-rule, #2c2920);
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .function-item {
+    background: var(--color-surface, #13110e);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .function-item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .function-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent, #c8a96e);
+    opacity: 0.7;
+  }
+
+  .function-item strong {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink, #f0ebe3);
+  }
+
+  .function-item p {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-tertiary, #7a6f5e);
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .functions-grid { grid-template-columns: 1fr; }
+    .function-item--wide { grid-column: 1; }
+  }
+
+  /* Sources diagram */
+  .sources-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .sources-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--color-rule, #2c2920);
+  }
+
+  .sources-group {
+    background: var(--color-surface-secondary, #1a1612);
+    padding: 1rem;
+  }
+
+  .sources-group-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent, #c8a96e);
+    text-transform: uppercase;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 0.625rem;
+  }
+
+  .sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .source-tag {
+    font-size: 0.75rem;
+    color: var(--color-ink-tertiary, #7a6f5e);
+    line-height: 1.4;
+  }
+
+  .sources-arrow {
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    color: var(--color-accent, #c8a96e);
+    opacity: 0.4;
+    text-align: center;
+    padding: 0.625rem;
+    background: var(--color-surface, #13110e);
+    border-top: 1px solid var(--color-rule, #2c2920);
+  }
+
+  .sources-engine {
+    background: color-mix(in srgb, var(--color-accent, #c8a96e) 8%, var(--color-surface, #13110e));
+    border-top: 1px solid color-mix(in srgb, var(--color-accent, #c8a96e) 30%, var(--color-rule, #2c2920));
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sources-engine-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-ink, #f0ebe3);
+  }
+
+  .sources-engine-sub {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    color: var(--color-accent, #c8a96e);
+    opacity: 0.7;
+    letter-spacing: 0.03em;
+  }
+
+  .sources-output {
+    background: var(--color-surface-secondary, #1a1612);
+    border-top: 1px solid var(--color-rule, #2c2920);
+    padding: 0.875rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sources-output-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink-secondary, #b8ab96);
+  }
+
+  .sources-output-sub {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary, #7a6f5e);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 600px) {
+    .sources-inputs { grid-template-columns: 1fr; }
+  }
+`}</style>
