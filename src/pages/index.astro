@@ -134,16 +134,16 @@ import { SITE } from '../config/site';
     <div class="narrative-cards">
       <!-- Hidden Hours -->
       <a href="/narratives/hidden-hours" class="ncard group">
-        <div class="ncard-visual ncard-visual--hh" aria-hidden="true">
-          <div class="ncard-visual-inner">
-            <div class="ncard-lines">
-              {Array.from({length: 7}).map((_, i) => (
-                <div class="ncard-line" style={`opacity: ${0.15 + i * 0.08}; width: ${40 + i * 8}%`}></div>
-              ))}
-            </div>
-            <div class="ncard-tag">The proof point</div>
-            <div class="ncard-num">05</div>
-          </div>
+        <div class="ncard-visual">
+          <img
+            src="https://picsum.photos/seed/hiddenhours/600/360"
+            alt=""
+            class="ncard-img"
+            loading="lazy"
+            width="600"
+            height="360"
+          />
+          <span class="ncard-tag">The proof point</span>
         </div>
         <div class="ncard-body">
           <p class="ncard-label">Hidden Hours</p>
@@ -157,16 +157,16 @@ import { SITE } from '../config/site';
 
       <!-- Winning in Small -->
       <a href="/narratives/winning-in-small" class="ncard group">
-        <div class="ncard-visual ncard-visual--ws" aria-hidden="true">
-          <div class="ncard-visual-inner">
-            <div class="ncard-diagonals">
-              {Array.from({length: 5}).map((_, i) => (
-                <div class="ncard-diag" style={`left: ${10 + i * 18}%`}></div>
-              ))}
-            </div>
-            <div class="ncard-tag">Operational intelligence</div>
-            <div class="ncard-num">02</div>
-          </div>
+        <div class="ncard-visual">
+          <img
+            src="https://picsum.photos/seed/winninginsmall/600/360"
+            alt=""
+            class="ncard-img"
+            loading="lazy"
+            width="600"
+            height="360"
+          />
+          <span class="ncard-tag">Operational intelligence</span>
         </div>
         <div class="ncard-body">
           <p class="ncard-label">Winning in Small</p>
@@ -180,16 +180,16 @@ import { SITE } from '../config/site';
 
       <!-- Trusted AI -->
       <a href="/narratives/trusted-ai" class="ncard group">
-        <div class="ncard-visual ncard-visual--tai" aria-hidden="true">
-          <div class="ncard-visual-inner">
-            <div class="ncard-dots">
-              {Array.from({length: 16}).map(() => (
-                <div class="ncard-dot"></div>
-              ))}
-            </div>
-            <div class="ncard-tag">AI narrative</div>
-            <div class="ncard-num">04</div>
-          </div>
+        <div class="ncard-visual">
+          <img
+            src="https://picsum.photos/seed/trustedai/600/360"
+            alt=""
+            class="ncard-img"
+            loading="lazy"
+            width="600"
+            height="360"
+          />
+          <span class="ncard-tag">AI narrative</span>
         </div>
         <div class="ncard-body">
           <p class="ncard-label">Trusted AI</p>
@@ -406,113 +406,41 @@ import { SITE } from '../config/site';
     border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-rule));
   }
 
-  /* Placeholder visual area */
+  /* Photo visual area */
   .ncard-visual {
-    height: 180px;
+    height: 200px;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    background: var(--color-surface-tertiary);
   }
 
-  .ncard-visual--hh {
-    background: linear-gradient(160deg, #241d10 0%, #1a1509 60%, #1e1a0e 100%);
+  .ncard-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+    filter: brightness(0.75) saturate(0.85);
   }
 
-  .ncard-visual--ws {
-    background: linear-gradient(160deg, #101820 0%, #0c141c 60%, #111921 100%);
-  }
-
-  .ncard-visual--tai {
-    background: linear-gradient(160deg, #141418 0%, #0f0f14 60%, #12121a 100%);
-  }
-
-  .ncard-visual-inner {
-    position: absolute;
-    inset: 0;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  /* Hidden Hours: stacked document lines */
-  .ncard-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    padding-top: 0.5rem;
-  }
-
-  .ncard-line {
-    height: 1px;
-    background: #c8a96e;
-    border-radius: 1px;
-  }
-
-  /* Winning in Small: diagonal speed lines */
-  .ncard-diagonals {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-
-  .ncard-diag {
-    position: absolute;
-    top: -20%;
-    bottom: -20%;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, rgba(120, 180, 220, 0.2) 30%, rgba(120, 180, 220, 0.2) 70%, transparent);
-    transform: skewX(-12deg);
-  }
-
-  /* Trusted AI: dot grid */
-  .ncard-dots {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.875rem;
-    padding: 0.5rem;
-  }
-
-  .ncard-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(160, 160, 200, 0.3);
-    justify-self: center;
-  }
-
-  .ncard-dots .ncard-dot:nth-child(3),
-  .ncard-dots .ncard-dot:nth-child(6),
-  .ncard-dots .ncard-dot:nth-child(11),
-  .ncard-dots .ncard-dot:nth-child(14) {
-    background: rgba(200, 169, 110, 0.5);
-    width: 5px;
-    height: 5px;
+  .ncard:hover .ncard-img {
+    transform: scale(1.03);
   }
 
   .ncard-tag {
     font-family: var(--font-mono);
     font-size: 0.5625rem;
     letter-spacing: 0.1em;
-    color: var(--color-accent);
-    opacity: 0.8;
+    color: #fff;
     text-transform: uppercase;
     position: absolute;
-    top: 1rem;
-    left: 1.25rem;
-  }
-
-  .ncard-num {
-    font-family: var(--font-mono);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    opacity: 0.08;
-    position: absolute;
-    bottom: 0.5rem;
-    right: 1rem;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    bottom: 0.875rem;
+    left: 1rem;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
   }
 
   .ncard-body {
