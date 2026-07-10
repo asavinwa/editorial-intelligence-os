@@ -134,15 +134,13 @@ import { SITE } from '../config/site';
     <div class="narrative-cards">
       <!-- Hidden Hours -->
       <a href="/narratives/hidden-hours" class="ncard group">
-        <div class="ncard-visual">
-          <img
-            src="https://picsum.photos/seed/hiddenhours/600/360"
-            alt=""
-            class="ncard-img"
-            loading="lazy"
-            width="600"
-            height="360"
-          />
+        <div class="ncard-visual ncard-visual--hh" aria-hidden="true">
+          <div class="ncard-lines">
+            {Array.from({length: 8}).map((_, i) => (
+              <div class="ncard-line" style={`opacity: ${0.12 + i * 0.07}; width: ${35 + i * 7}%`}></div>
+            ))}
+          </div>
+          <span class="ncard-num">01</span>
           <span class="ncard-tag">The proof point</span>
         </div>
         <div class="ncard-body">
@@ -157,15 +155,13 @@ import { SITE } from '../config/site';
 
       <!-- Winning in Small -->
       <a href="/narratives/winning-in-small" class="ncard group">
-        <div class="ncard-visual">
-          <img
-            src="https://picsum.photos/seed/winninginsmall/600/360"
-            alt=""
-            class="ncard-img"
-            loading="lazy"
-            width="600"
-            height="360"
-          />
+        <div class="ncard-visual ncard-visual--ws" aria-hidden="true">
+          <div class="ncard-diagonals">
+            {Array.from({length: 6}).map((_, i) => (
+              <div class="ncard-diag" style={`left: ${6 + i * 16}%`}></div>
+            ))}
+          </div>
+          <span class="ncard-num">02</span>
           <span class="ncard-tag">Operational intelligence</span>
         </div>
         <div class="ncard-body">
@@ -180,15 +176,13 @@ import { SITE } from '../config/site';
 
       <!-- Trusted AI -->
       <a href="/narratives/trusted-ai" class="ncard group">
-        <div class="ncard-visual">
-          <img
-            src="https://picsum.photos/seed/trustedai/600/360"
-            alt=""
-            class="ncard-img"
-            loading="lazy"
-            width="600"
-            height="360"
-          />
+        <div class="ncard-visual ncard-visual--tai" aria-hidden="true">
+          <div class="ncard-dots">
+            {Array.from({length: 20}).map(() => (
+              <div class="ncard-dot"></div>
+            ))}
+          </div>
+          <span class="ncard-num">03</span>
           <span class="ncard-tag">AI narrative</span>
         </div>
         <div class="ncard-body">
@@ -406,41 +400,104 @@ import { SITE } from '../config/site';
     border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-rule));
   }
 
-  /* Photo visual area */
+  /* Visual area */
   .ncard-visual {
-    height: 200px;
+    height: 190px;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
-    background: var(--color-surface-tertiary);
   }
 
-  .ncard-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-    filter: brightness(0.75) saturate(0.85);
+  .ncard-visual--hh {
+    background: linear-gradient(160deg, #241d10 0%, #1a1509 60%, #1e1a0e 100%);
   }
 
-  .ncard:hover .ncard-img {
-    transform: scale(1.03);
+  .ncard-visual--ws {
+    background: linear-gradient(160deg, #101820 0%, #0c141c 60%, #111921 100%);
+  }
+
+  .ncard-visual--tai {
+    background: linear-gradient(160deg, #141418 0%, #0f0f14 60%, #12121a 100%);
+  }
+
+  /* Hidden Hours: stacked document lines */
+  .ncard-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1.5rem 1.25rem 0;
+  }
+
+  .ncard-line {
+    height: 1px;
+    background: #c8a96e;
+    border-radius: 1px;
+  }
+
+  /* Winning in Small: diagonal speed lines */
+  .ncard-diagonals {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .ncard-diag {
+    position: absolute;
+    top: -20%;
+    bottom: -20%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(120, 180, 220, 0.22) 30%, rgba(120, 180, 220, 0.22) 70%, transparent);
+    transform: skewX(-14deg);
+  }
+
+  /* Trusted AI: dot grid */
+  .ncard-dots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.8rem;
+    padding: 1.5rem 1.25rem 0;
+  }
+
+  .ncard-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(160, 160, 200, 0.28);
+    justify-self: center;
+  }
+
+  .ncard-dots .ncard-dot:nth-child(3),
+  .ncard-dots .ncard-dot:nth-child(7),
+  .ncard-dots .ncard-dot:nth-child(13),
+  .ncard-dots .ncard-dot:nth-child(18) {
+    background: rgba(200, 169, 110, 0.55);
+    width: 5px;
+    height: 5px;
+  }
+
+  .ncard-num {
+    font-family: var(--font-mono);
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    opacity: 0.07;
+    position: absolute;
+    bottom: 0.25rem;
+    right: 0.875rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
 
   .ncard-tag {
     font-family: var(--font-mono);
     font-size: 0.5625rem;
     letter-spacing: 0.1em;
-    color: #fff;
+    color: var(--color-accent);
+    opacity: 0.75;
     text-transform: uppercase;
     position: absolute;
-    bottom: 0.875rem;
-    left: 1rem;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(4px);
-    padding: 0.25rem 0.5rem;
-    border-radius: 2px;
+    bottom: 1rem;
+    left: 1.25rem;
   }
 
   .ncard-body {
