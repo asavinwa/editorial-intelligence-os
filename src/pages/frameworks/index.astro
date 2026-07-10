@@ -5,6 +5,9 @@ import { getCollection } from 'astro:content';
 
 const frameworks = await getCollection('frameworks', ({ data }) => data.status === 'published');
 const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const flagshipSlugs = new Set(['evidence-engine', 'narrative-architecture', 'content-activation-framework', 'ai-visibility-buyability', 'editorial-intelligence-framework', 'daily-os', 'workflow-library']);
+const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
 ---
 
 <BaseLayout
@@ -45,22 +48,26 @@ const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.get
 
     <hr class="divider mb-12" />
 
-    {sorted.length === 0 ? (
-      <p class="t-body">No frameworks published yet.</p>
-    ) : (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {sorted.map((fw) => (
-          <FrameworkCard
-            slug={fw.slug}
-            title={fw.data.title}
-            subtitle={fw.data.subtitle}
-            excerpt={fw.data.excerpt}
-            date={fw.data.date}
-            type={fw.data.type}
-            tags={fw.data.tags as string[]}
-            relatedCount={fw.data.relatedNarratives.length + fw.data.relatedArticles.length}
-          />
-        ))}
+    {supporting.length > 0 && (
+      <div>
+        <p class="t-label mb-2">Supporting frameworks</p>
+        <p class="t-small mb-8" style="color: var(--color-ink-secondary); max-width: 56ch; line-height: 1.7;">
+          Additional models and methodologies that sit alongside the five flagship frameworks.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {supporting.map((fw) => (
+            <FrameworkCard
+              slug={fw.slug}
+              title={fw.data.title}
+              subtitle={fw.data.subtitle}
+              excerpt={fw.data.excerpt}
+              date={fw.data.date}
+              type={fw.data.type}
+              tags={fw.data.tags as string[]}
+              relatedCount={fw.data.relatedNarratives.length + fw.data.relatedArticles.length}
+            />
+          ))}
+        </div>
       </div>
     )}
   </div>
