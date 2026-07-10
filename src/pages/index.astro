@@ -1,230 +1,309 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
-import NarrativeCard from '../components/content/NarrativeCard.astro';
-import FrameworkCard from '../components/content/FrameworkCard.astro';
-import { getCollection } from 'astro:content';
 import { SITE } from '../config/site';
-
-const allNarratives = await getCollection('narratives', ({ data }) => data.status === 'published');
-const allFrameworks = await getCollection('frameworks', ({ data }) => data.status === 'published');
-const allWriting = await getCollection('writing', ({ data }) => data.status === 'published');
-
-const featuredNarrative = allNarratives.find((n) => n.data.featuredOnHome) ?? allNarratives[0];
-
-const featuredRelatedArticleSlugs = featuredNarrative?.data.relatedArticles ?? [];
-const featuredRelatedArticles = allWriting.filter(w => featuredRelatedArticleSlugs.includes(w.slug));
-
-const featuredRelatedFrameworkSlugs = featuredNarrative?.data.relatedFrameworks ?? [];
-const featuredRelatedFrameworks = allFrameworks.filter(f => featuredRelatedFrameworkSlugs.includes(f.slug));
-
-const remainingFrameworks = allFrameworks
-  .filter(f => !featuredRelatedFrameworkSlugs.includes(f.slug))
-  .slice(0, 2);
 ---
 
 <BaseLayout>
-  <!-- Hero -->
-  <section class="container-site pt-28 pb-10 md:pt-36 md:pb-12">
-    <div class="max-w-3xl">
-      <p class="t-label mb-10">{SITE.author} · Content strategist at Sage</p>
-      <h1 class="t-display text-[var(--color-ink)] mb-3 leading-[1.08]">
-        Editorial Intelligence<br />for the AI era
-      </h1>
-      <p class="hero-tagline mb-8">Knowledge that compounds.</p>
-      <p class="hero-problem mb-10">
-        Most organisations don't have a content problem.<br class="hidden md:block" /> They have an evidence problem.
-      </p>
-      <div class="flex flex-wrap items-center gap-8">
-        <a href="/intelligence" class="hero-link-primary">
-          What is Editorial Intelligence?
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="/narratives" class="hero-link-secondary">
-          Explore narratives
-        </a>
+  <!-- Hero: two-column -->
+  <section class="hero-section">
+    <div class="container-site hero-grid">
+      <!-- Left: text -->
+      <div class="hero-text">
+        <p class="t-label mb-6">{SITE.author} · Content strategist at Sage</p>
+        <h1 class="t-display text-[var(--color-ink)] mb-4 leading-[1.08]">
+          Editorial Intelligence<br />for the AI era
+        </h1>
+        <p class="hero-oneliner mb-8">
+          I help organisations turn research, customer insight and expertise into connected narratives that build authority, visibility and impact over time.
+        </p>
+        <p class="hero-problem mb-10">
+          Most organisations don't have a content problem. They have an evidence problem.
+        </p>
+        <div class="hero-ctas">
+          <a href="/intelligence" class="hero-cta-primary">
+            What is Editorial Intelligence?
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="/guide" class="hero-cta-guide">
+            The AI-enabled Content Writer Guide →
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: constellation diagram -->
+      <div class="hero-diagram" aria-hidden="true">
+        <svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" class="constellation-svg">
+          <defs>
+            <radialGradient id="bg-glow" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#c8a96e" stop-opacity="0.07"/>
+              <stop offset="100%" stop-color="#c8a96e" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="node-glow-tl" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#c8a96e" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#c8a96e" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Background -->
+          <rect width="460" height="380" rx="6" fill="var(--constellation-bg, #16130f)"/>
+          <rect width="460" height="380" rx="6" fill="url(#bg-glow)"/>
+
+          <!-- Grid lines (subtle) -->
+          <!-- Horizontals -->
+          <line x1="40" y1="190" x2="420" y2="190" stroke="#c8a96e" stroke-width="0.5" opacity="0.08"/>
+          <line x1="40" y1="120" x2="420" y2="120" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
+          <line x1="40" y1="260" x2="420" y2="260" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
+          <!-- Verticals -->
+          <line x1="230" y1="30" x2="230" y2="350" stroke="#c8a96e" stroke-width="0.5" opacity="0.08"/>
+          <line x1="130" y1="30" x2="130" y2="350" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
+          <line x1="330" y1="30" x2="330" y2="350" stroke="#c8a96e" stroke-width="0.5" opacity="0.05"/>
+
+          <!-- Connection lines: cross diagonals through center -->
+          <line x1="100" y1="90" x2="360" y2="290" stroke="#c8a96e" stroke-width="0.75" opacity="0.3"/>
+          <line x1="360" y1="90" x2="100" y2="290" stroke="#c8a96e" stroke-width="0.75" opacity="0.3"/>
+          <!-- Outer square -->
+          <line x1="100" y1="90" x2="360" y2="90" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
+          <line x1="100" y1="290" x2="360" y2="290" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
+          <line x1="100" y1="90" x2="100" y2="290" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
+          <line x1="360" y1="90" x2="360" y2="290" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
+
+          <!-- Midpoint markers on diagonals -->
+          <circle cx="165" cy="143" r="2" fill="#c8a96e" opacity="0.3"/>
+          <circle cx="295" cy="237" r="2" fill="#c8a96e" opacity="0.3"/>
+          <circle cx="295" cy="143" r="2" fill="#c8a96e" opacity="0.3"/>
+          <circle cx="165" cy="237" r="2" fill="#c8a96e" opacity="0.3"/>
+
+          <!-- Center node: EI / OS -->
+          <circle cx="230" cy="190" r="28" fill="var(--constellation-bg, #16130f)" stroke="#c8a96e" stroke-width="1" opacity="0.85"/>
+          <circle cx="230" cy="190" r="34" fill="none" stroke="#c8a96e" stroke-width="0.5" opacity="0.18"/>
+          <text x="230" y="186" text-anchor="middle" font-family="monospace" font-size="9.5" fill="#c8a96e" letter-spacing="0.08em" font-weight="500">EI</text>
+          <text x="230" y="200" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#c8a96e" opacity="0.55" letter-spacing="0.06em">/ OS</text>
+
+          <!-- Node: Research (TL) -->
+          <circle cx="100" cy="90" r="18" fill="url(#node-glow-tl)"/>
+          <circle cx="100" cy="90" r="5" fill="#c8a96e" opacity="0.95"/>
+          <circle cx="100" cy="90" r="8" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
+          <text x="100" y="64" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8a96e" letter-spacing="0.1em" opacity="0.9">RESEARCH</text>
+          <text x="100" y="113" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a96e" opacity="0.4" letter-spacing="0.04em">Signals &amp; evidence</text>
+
+          <!-- Node: Expertise (TR) -->
+          <circle cx="360" cy="90" r="18" fill="url(#node-glow-tl)"/>
+          <circle cx="360" cy="90" r="5" fill="#c8a96e" opacity="0.95"/>
+          <circle cx="360" cy="90" r="8" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
+          <text x="360" y="64" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8a96e" letter-spacing="0.1em" opacity="0.9">EXPERTISE</text>
+          <text x="360" y="113" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a96e" opacity="0.4" letter-spacing="0.04em">Institutional knowledge</text>
+
+          <!-- Node: Narratives (BL) -->
+          <circle cx="100" cy="290" r="18" fill="url(#node-glow-tl)"/>
+          <circle cx="100" cy="290" r="5" fill="#c8a96e" opacity="0.95"/>
+          <circle cx="100" cy="290" r="8" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
+          <text x="100" y="268" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8a96e" letter-spacing="0.1em" opacity="0.9">NARRATIVES</text>
+          <text x="100" y="311" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a96e" opacity="0.4" letter-spacing="0.04em">Strategic positions</text>
+
+          <!-- Node: Activation (BR) -->
+          <circle cx="360" cy="290" r="18" fill="url(#node-glow-tl)"/>
+          <circle cx="360" cy="290" r="5" fill="#c8a96e" opacity="0.95"/>
+          <circle cx="360" cy="290" r="8" fill="none" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/>
+          <text x="360" y="268" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8a96e" letter-spacing="0.1em" opacity="0.9">ACTIVATION</text>
+          <text x="360" y="311" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a96e" opacity="0.4" letter-spacing="0.04em">Reputation &amp; reach</text>
+
+          <!-- Decorative corner marks -->
+          <path d="M20 20 L20 35 M20 20 L35 20" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
+          <path d="M440 20 L440 35 M440 20 L425 20" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
+          <path d="M20 360 L20 345 M20 360 L35 360" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
+          <path d="M440 360 L440 345 M440 360 L425 360" stroke="#c8a96e" stroke-width="0.75" opacity="0.2"/>
+        </svg>
       </div>
     </div>
   </section>
 
   <hr class="divider container-site" />
 
-  <!-- Hierarchy diagram -->
+  <!-- Narratives: EI in practice -->
   <section class="container-site py-16">
-    <p class="t-label mb-10">How it works</p>
-    <div class="hierarchy">
-      {[
-        { num: '01', label: 'Editorial Intelligence', sub: 'The discipline', href: '/intelligence' },
-        { num: '02', label: 'Evidence Engine', sub: 'The infrastructure', href: '/frameworks/evidence-engine' },
-        { num: '03', label: 'EI Cycle', sub: 'The operating model', href: '/intelligence' },
-        { num: '04', label: 'Daily OS', sub: 'The daily practice', href: '/frameworks/daily-os' },
-        { num: '05', label: 'Applications', sub: 'Proof in the real world', href: '/narratives' },
-      ].map((level, i) => (
-        <div class="hierarchy-row">
-          {i > 0 && <div class="hierarchy-connector" aria-hidden="true">↓</div>}
-          <a href={level.href} class="hierarchy-item">
-            <span class="hierarchy-num">{level.num}</span>
-            <span class="hierarchy-label">{level.label}</span>
-            <span class="hierarchy-sub">{level.sub}</span>
-          </a>
+    <div class="section-header mb-10">
+      <div>
+        <p class="t-label mb-2">Editorial Intelligence in practice</p>
+        <p class="section-subhead">Narratives that connect signals into strategic position</p>
+      </div>
+      <a href="/narratives" class="section-link">All narratives →</a>
+    </div>
+
+    <div class="narrative-cards">
+      <!-- Hidden Hours -->
+      <a href="/narratives/hidden-hours" class="ncard group">
+        <div class="ncard-visual ncard-visual--hh" aria-hidden="true">
+          <div class="ncard-visual-inner">
+            <div class="ncard-lines">
+              {Array.from({length: 7}).map((_, i) => (
+                <div class="ncard-line" style={`opacity: ${0.15 + i * 0.08}; width: ${40 + i * 8}%`}></div>
+              ))}
+            </div>
+            <div class="ncard-tag">The proof point</div>
+            <div class="ncard-num">05</div>
+          </div>
         </div>
-      ))}
+        <div class="ncard-body">
+          <p class="ncard-label">Hidden Hours</p>
+          <h3 class="ncard-title group-hover:text-[var(--color-accent)] transition-colors">
+            The hidden cost of modern work
+          </h3>
+          <p class="ncard-excerpt">Research into the operational pressures facing accounting professionals — compliance burden, workflow friction, late payments and business change.</p>
+          <span class="ncard-cta">Explore the narrative →</span>
+        </div>
+      </a>
+
+      <!-- Winning in Small -->
+      <a href="/narratives/winning-in-small" class="ncard group">
+        <div class="ncard-visual ncard-visual--ws" aria-hidden="true">
+          <div class="ncard-visual-inner">
+            <div class="ncard-diagonals">
+              {Array.from({length: 5}).map((_, i) => (
+                <div class="ncard-diag" style={`left: ${10 + i * 18}%`}></div>
+              ))}
+            </div>
+            <div class="ncard-tag">Operational intelligence</div>
+            <div class="ncard-num">02</div>
+          </div>
+        </div>
+        <div class="ncard-body">
+          <p class="ncard-label">Winning in Small</p>
+          <h3 class="ncard-title group-hover:text-[var(--color-accent)] transition-colors">
+            Why speed relocates pressure
+          </h3>
+          <p class="ncard-excerpt">Speed doesn't remove pressure. It relocates it. A narrative about what it takes to operate effectively as complexity grows faster than visibility.</p>
+          <span class="ncard-cta">Explore the narrative →</span>
+        </div>
+      </a>
+
+      <!-- Trusted AI -->
+      <a href="/narratives/trusted-ai" class="ncard group">
+        <div class="ncard-visual ncard-visual--tai" aria-hidden="true">
+          <div class="ncard-visual-inner">
+            <div class="ncard-dots">
+              {Array.from({length: 16}).map(() => (
+                <div class="ncard-dot"></div>
+              ))}
+            </div>
+            <div class="ncard-tag">AI narrative</div>
+            <div class="ncard-num">04</div>
+          </div>
+        </div>
+        <div class="ncard-body">
+          <p class="ncard-label">Trusted AI</p>
+          <h3 class="ncard-title group-hover:text-[var(--color-accent)] transition-colors">
+            AI trust is built through connected evidence
+          </h3>
+          <p class="ncard-excerpt">AI trust is not built through claims about innovation. It is built through connected evidence — how AI is governed, how humans remain accountable.</p>
+          <span class="ncard-cta">Explore the narrative →</span>
+        </div>
+      </a>
     </div>
   </section>
 
   <hr class="divider container-site" />
 
-  <!-- Who it's for -->
+  <!-- Guide CTA -->
   <section class="container-site py-16">
-    <p class="t-label mb-8">Who it's for</p>
-    <div class="audience-grid">
-      {[
-        'Content leaders',
-        'CMOs',
-        'Thought leadership teams',
-        'Research teams',
-        'Customer marketing',
-        'Product marketing',
-        'Corporate communications',
-      ].map((role) => (
-        <div class="audience-item">{role}</div>
-      ))}
+    <div class="guide-block">
+      <div class="guide-block-text">
+        <p class="t-label mb-3">For content writers</p>
+        <h2 class="guide-title">The AI-enabled Content Writer Guide</h2>
+        <p class="guide-desc">
+          A practical guide to working at the intersection of editorial judgement and AI capability — covering strategy, prompting, workflow and the skills that compound over time.
+        </p>
+        <a href="/guide" class="guide-cta">
+          Read the guide
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="guide-block-meta">
+        <div class="guide-meta-item">
+          <span class="guide-meta-num">7</span>
+          <span class="guide-meta-label">Parts</span>
+        </div>
+        <div class="guide-meta-item">
+          <span class="guide-meta-num">90</span>
+          <span class="guide-meta-label">Day plan</span>
+        </div>
+        <div class="guide-meta-item">
+          <span class="guide-meta-num">∞</span>
+          <span class="guide-meta-label">Compounds</span>
+        </div>
+      </div>
     </div>
-    <p class="audience-body mt-8">
-      Editorial Intelligence is for anyone responsible for turning organisational knowledge into something that compounds — not just publishes.
-    </p>
   </section>
 
   <hr class="divider container-site" />
 
   <!-- Start here -->
-  <section class="container-site pb-8 pt-16">
+  <section class="container-site py-12">
     <a href="/writing/why-content-work-needs-to-compound" class="origin-callout group">
       <span class="origin-callout-label">Start here</span>
       <span class="origin-callout-text">I was not tired of writing. I was tired of work that disappeared. — Why content work needs to compound</span>
       <span class="origin-callout-arrow group-hover:translate-x-0.5 transition-transform">→</span>
     </a>
   </section>
-
-  <!-- Worked example -->
-  {featuredNarrative && (
-    <section class="container-site pb-16">
-      <div class="section-header mb-8">
-        <div>
-          <p class="t-label">Worked example</p>
-          <p class="section-subhead">See how the cycle operates in practice</p>
-        </div>
-      </div>
-      <NarrativeCard
-        slug={featuredNarrative.slug}
-        title={featuredNarrative.data.title}
-        subtitle={featuredNarrative.data.subtitle}
-        excerpt={featuredNarrative.data.excerpt}
-        date={featuredNarrative.data.date}
-        readTime={featuredNarrative.data.readTime}
-        tags={featuredNarrative.data.tags as string[]}
-        relatedFrameworks={featuredNarrative.data.relatedFrameworks.length}
-        relatedNarratives={featuredNarrative.data.relatedNarratives.length}
-        relatedArticles={featuredNarrative.data.relatedArticles.length}
-        featured={true}
-        startHere={true}
-      />
-
-      {featuredRelatedFrameworks.length > 0 && (
-        <div class="mt-4">
-          <p class="t-mono mb-3 pl-1 opacity-50">Supporting frameworks</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {featuredRelatedFrameworks.map((fw) => (
-              <FrameworkCard
-                slug={fw.slug}
-                title={fw.data.title}
-                subtitle={fw.data.subtitle}
-                excerpt={fw.data.excerpt}
-                date={fw.data.date}
-                type={fw.data.type}
-                tags={fw.data.tags as string[]}
-                relatedNarratives={fw.data.relatedNarratives.length}
-                relatedArticles={fw.data.relatedArticles.length}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {featuredRelatedArticles.length > 0 && (
-        <div class="mt-4">
-          <p class="t-mono mb-3 pl-1 opacity-50">Related writing</p>
-          <ul class="related-articles">
-            {featuredRelatedArticles.map((article) => (
-              <li>
-                <a href={`/writing/${article.slug}`} class="related-article-link group">
-                  <span class="type-badge type-badge--writing shrink-0">Essay</span>
-                  <span class="t-small text-[var(--color-ink-secondary)] group-hover:text-[var(--color-ink)] transition-colors">{article.data.title}</span>
-                  <span class="t-mono opacity-40 shrink-0 ml-auto">{article.data.readTime} min</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </section>
-  )}
-
-  <hr class="divider container-site" />
-
-  <!-- Frameworks -->
-  {remainingFrameworks.length > 0 && (
-    <section class="container-site py-16">
-      <div class="section-header mb-8">
-        <div>
-          <p class="t-label">Frameworks</p>
-          <p class="section-subhead">Reusable methods and models</p>
-        </div>
-        <a href="/frameworks" class="section-link">All frameworks →</a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {remainingFrameworks.map((fw) => (
-          <FrameworkCard
-            slug={fw.slug}
-            title={fw.data.title}
-            subtitle={fw.data.subtitle}
-            excerpt={fw.data.excerpt}
-            date={fw.data.date}
-            type={fw.data.type}
-            tags={fw.data.tags as string[]}
-            relatedNarratives={fw.data.relatedNarratives.length}
-            relatedArticles={fw.data.relatedArticles.length}
-          />
-        ))}
-      </div>
-    </section>
-  )}
 </BaseLayout>
 
 <style>
-  .hero-tagline {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    opacity: 0.85;
+  /* ── Hero ── */
+  .hero-section {
+    padding-top: clamp(5rem, 10vw, 8rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .hero-text {
+    max-width: 56ch;
+  }
+
+  .hero-oneliner {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    font-weight: 400;
+    max-width: 50ch;
   }
 
   .hero-problem {
     font-family: var(--font-serif);
-    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
     line-height: 1.5;
     color: var(--color-ink);
     font-weight: 400;
     letter-spacing: -0.01em;
     border-left: 2px solid var(--color-accent);
     padding-left: 1.25rem;
-    max-width: 44ch;
+    max-width: 40ch;
   }
 
-  .hero-link-primary {
+  .hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    align-items: flex-start;
+  }
+
+  .hero-cta-primary {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -237,114 +316,338 @@ const remainingFrameworks = allFrameworks
     transition: border-color 0.2s;
   }
 
-  .hero-link-primary:hover {
+  .hero-cta-primary:hover {
     border-color: var(--color-accent);
   }
 
-  .hero-link-secondary {
-    font-size: 0.875rem;
+  .hero-cta-guide {
+    font-size: 0.8125rem;
     color: var(--color-ink-tertiary);
     text-decoration: none;
-    transition: color 0.2s;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .hero-link-secondary:hover {
+  .hero-cta-guide:hover {
+    color: var(--color-ink-secondary);
+    border-color: color-mix(in srgb, var(--color-ink-tertiary) 35%, transparent);
+  }
+
+  /* ── Constellation ── */
+  .hero-diagram {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .hero-diagram {
+      display: block;
+    }
+  }
+
+  .constellation-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    --constellation-bg: var(--color-surface-secondary);
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .section-subhead {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    margin-top: 0.25rem;
+  }
+
+  .section-link {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+
+  .section-link:hover {
     color: var(--color-ink);
   }
 
-  /* Hierarchy */
-  .hierarchy {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    max-width: 480px;
+  /* ── Narrative cards ── */
+  .narrative-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .hierarchy-row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+  @media (min-width: 640px) {
+    .narrative-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  .hierarchy-connector {
+  .ncard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .ncard:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-rule));
+  }
+
+  /* Placeholder visual area */
+  .ncard-visual {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .ncard-visual--hh {
+    background: linear-gradient(160deg, #241d10 0%, #1a1509 60%, #1e1a0e 100%);
+  }
+
+  .ncard-visual--ws {
+    background: linear-gradient(160deg, #101820 0%, #0c141c 60%, #111921 100%);
+  }
+
+  .ncard-visual--tai {
+    background: linear-gradient(160deg, #141418 0%, #0f0f14 60%, #12121a 100%);
+  }
+
+  .ncard-visual-inner {
+    position: absolute;
+    inset: 0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Hidden Hours: stacked document lines */
+  .ncard-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+  }
+
+  .ncard-line {
+    height: 1px;
+    background: #c8a96e;
+    border-radius: 1px;
+  }
+
+  /* Winning in Small: diagonal speed lines */
+  .ncard-diagonals {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .ncard-diag {
+    position: absolute;
+    top: -20%;
+    bottom: -20%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(120, 180, 220, 0.2) 30%, rgba(120, 180, 220, 0.2) 70%, transparent);
+    transform: skewX(-12deg);
+  }
+
+  /* Trusted AI: dot grid */
+  .ncard-dots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  .ncard-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(160, 160, 200, 0.3);
+    justify-self: center;
+  }
+
+  .ncard-dots .ncard-dot:nth-child(3),
+  .ncard-dots .ncard-dot:nth-child(6),
+  .ncard-dots .ncard-dot:nth-child(11),
+  .ncard-dots .ncard-dot:nth-child(14) {
+    background: rgba(200, 169, 110, 0.5);
+    width: 5px;
+    height: 5px;
+  }
+
+  .ncard-tag {
     font-family: var(--font-mono);
-    font-size: 0.875rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
     color: var(--color-accent);
-    opacity: 0.5;
-    padding: 0.25rem 0 0.25rem 1.25rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+  }
+
+  .ncard-num {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    opacity: 0.08;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .ncard-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    background: var(--color-surface-secondary);
+  }
+
+  .ncard-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .ncard-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .ncard-excerpt {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+    flex: 1;
+  }
+
+  .ncard-cta {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+
+  .ncard:hover .ncard-cta {
+    opacity: 1;
+  }
+
+  /* ── Guide block ── */
+  .guide-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2rem 2rem 2rem 2rem;
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  @media (min-width: 640px) {
+    .guide-block {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
+
+  .guide-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+
+  .guide-desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    max-width: 60ch;
+    margin-bottom: 1.25rem;
+  }
+
+  .guide-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .guide-cta:hover {
+    border-color: var(--color-accent);
+  }
+
+  .guide-block-meta {
+    display: flex;
+    gap: 2rem;
+    flex-shrink: 0;
+  }
+
+  .guide-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .guide-meta-num {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-accent);
     line-height: 1;
   }
 
-  .hierarchy-item {
-    display: grid;
-    grid-template-columns: 2.5rem 1fr;
-    grid-template-rows: auto auto;
-    column-gap: 0.75rem;
-    padding: 0.875rem 1.25rem;
-    border: 1px solid var(--color-rule);
-    border-radius: 4px;
-    text-decoration: none;
-    width: 100%;
-    transition: background 0.15s, border-color 0.15s;
-  }
-
-  .hierarchy-item:hover {
-    background: var(--color-surface-secondary);
-    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-rule));
-  }
-
-  .hierarchy-num {
+  .guide-meta-label {
     font-family: var(--font-mono);
-    font-size: 0.625rem;
-    letter-spacing: 0.06em;
-    color: var(--color-accent);
-    grid-row: 1 / 3;
-    align-self: center;
-    opacity: 0.7;
-  }
-
-  .hierarchy-label {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: var(--color-ink);
-    display: block;
-    margin-bottom: 0.1rem;
-  }
-
-  .hierarchy-sub {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
     color: var(--color-ink-tertiary);
-    display: block;
-    letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
 
-  /* Audience */
-  .audience-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .audience-item {
-    font-size: 0.875rem;
-    color: var(--color-ink-secondary);
-    padding: 0.4rem 0.875rem;
-    border: 1px solid var(--color-rule);
-    border-radius: 2px;
-    background: var(--color-surface-secondary);
-  }
-
-  .audience-body {
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    color: var(--color-ink-tertiary);
-    max-width: 52ch;
-  }
-
-  /* Origin callout */
+  /* ── Origin callout ── */
   .origin-callout {
     display: flex;
     align-items: baseline;
@@ -383,59 +686,5 @@ const remainingFrameworks = allFrameworks
     color: var(--color-accent);
     flex-shrink: 0;
     margin-left: auto;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .section-subhead {
-    font-size: 0.8125rem;
-    color: var(--color-ink-tertiary);
-    margin-top: 0.25rem;
-  }
-
-  .section-link {
-    font-size: 0.8125rem;
-    color: var(--color-ink-tertiary);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.15s;
-    flex-shrink: 0;
-  }
-
-  .section-link:hover {
-    color: var(--color-ink);
-  }
-
-  .related-articles {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border: 1px solid var(--color-rule, #2c2920);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--color-surface-secondary);
-  }
-
-  .related-article-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1.25rem;
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-rule, #2c2920);
-    transition: background 0.15s;
-  }
-
-  .related-articles li:last-child .related-article-link {
-    border-bottom: none;
-  }
-
-  .related-article-link:hover {
-    background: var(--color-surface-tertiary);
   }
 </style>
