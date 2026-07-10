@@ -1,0 +1,832 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+const sections = [
+  { id: 'introduction', label: 'Introduction' },
+  { id: 'part-1', label: 'Part 1 — Why production is changing' },
+  { id: 'part-2', label: 'Part 2 — What AI is replacing' },
+  { id: 'part-3', label: 'Part 3 — What editorial judgement does' },
+  { id: 'part-4', label: 'Part 4 — The Editorial Intelligence mindset' },
+  { id: 'part-5', label: 'Part 5 — From writer to EI designer' },
+  { id: 'part-6', label: 'Part 6 — Skills worth developing' },
+  { id: 'part-7', label: 'Part 7 — Your next 90 days' },
+  { id: 'closing', label: 'A final thought' },
+];
+---
+
+<BaseLayout
+  title="The AI-enabled Content Writer Guide"
+  description="How experienced writers become editorial intelligence practitioners. A guide to thriving in an era where producing content is the easiest part of the job."
+>
+  <div class="guide-layout container-site py-16">
+
+    <!-- Left nav -->
+    <aside class="guide-nav">
+      <div class="guide-nav-inner">
+        <p class="guide-nav-title">The AI-enabled Content Writer Guide</p>
+        <nav>
+          <ul class="guide-nav-list">
+            {sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} class="guide-nav-link">{s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div class="guide-nav-footer">
+          <a href="/frameworks/evidence-engine" class="guide-nav-related">Evidence Engine →</a>
+          <a href="/intelligence" class="guide-nav-related">Editorial Intelligence →</a>
+          <a href="/frameworks/daily-os" class="guide-nav-related">Daily OS →</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="guide-content">
+
+      <!-- Header -->
+      <header class="guide-header">
+        <p class="t-label mb-4">Guide</p>
+        <h1 class="guide-title">The AI-enabled Content Writer Guide</h1>
+        <p class="guide-subtitle">How experienced writers become editorial intelligence practitioners</p>
+      </header>
+
+      <!-- Introduction -->
+      <section id="introduction" class="guide-section">
+        <p>If you've worked in content for more than a few years, you've probably experienced several waves of change.</p>
+        <p>The rise of social media changed distribution. SEO reshaped how articles were planned and structured. Marketing automation increased the demand for content at scale.</p>
+        <p>Now AI is changing something much deeper.</p>
+        <p>For the first time, machines can perform many of the tasks that once defined the day-to-day work of professional content writers. Drafting articles, summarising research, rewriting copy, generating headlines and adapting content into different formats can all be done in seconds.</p>
+        <p>That has led to a familiar question.</p>
+        <p class="guide-question">Will AI replace content writers?</p>
+        <p>It's the wrong question.</p>
+        <p>A better question is:</p>
+        <p class="guide-key">How does the role of a content writer change when producing content becomes the easiest part of the job?</p>
+        <p>This guide argues that the role isn't disappearing. It's evolving.</p>
+        <p>The writers who thrive won't simply become better prompt engineers. They'll become better editors, researchers, synthesisers and designers of knowledge.</p>
+        <p>In other words, they'll move from producing content to creating editorial intelligence.</p>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 1 -->
+      <section id="part-1" class="guide-section">
+        <p class="guide-part-label">Part 1</p>
+        <h2 class="guide-h2">Why content production is changing</h2>
+        <p>For decades, most content teams followed a familiar process. Research was collected. A brief was written. A writer created an article. An editor reviewed it. The piece was published. Then everyone moved on to the next campaign.</p>
+        <p>This workflow made sense because writing itself was expensive. Producing a well-researched article required time, specialist skills and multiple rounds of editing.</p>
+        <p>AI changes that equation. Today, creating a first draft is often the fastest step in the process. Large language models can produce summaries, outlines, alternative headlines, social posts, newsletter copy and even multiple versions of the same article almost instantly.</p>
+        <p>The bottleneck is no longer writing. The bottleneck is deciding:</p>
+        <ul class="guide-list">
+          <li>What deserves to be written</li>
+          <li>Which evidence is trustworthy</li>
+          <li>Which stories matter</li>
+          <li>How ideas connect over time</li>
+          <li>How knowledge accumulates instead of disappearing after publication</li>
+        </ul>
+        <p class="guide-key">Ironically, AI has made editorial judgement more valuable, not less. As production becomes easier, deciding <em>what should exist</em> becomes the scarce skill.</p>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 2 -->
+      <section id="part-2" class="guide-section">
+        <p class="guide-part-label">Part 2</p>
+        <h2 class="guide-h2">What AI is replacing</h2>
+        <p>There is understandable anxiety about AI because many familiar writing tasks are becoming automated. It's important to distinguish between tasks and professions.</p>
+        <p>AI is replacing many tasks. It is not replacing the need for experienced editorial thinking.</p>
+
+        <div class="guide-tasks">
+          {[
+            { task: 'First drafts', desc: 'Blank pages are becoming optional. AI can produce an initial structure in seconds, allowing writers to spend more time improving ideas rather than simply creating them.' },
+            { task: 'Research summaries', desc: 'Long reports, transcripts, customer interviews and meeting notes can be condensed quickly, making large volumes of information easier to review.' },
+            { task: 'Repurposing', desc: 'One article can become a newsletter, LinkedIn post, executive summary or webinar description with minimal effort.' },
+            { task: 'Copy editing', desc: 'Grammar, spelling, readability and tone adjustments are increasingly automated.' },
+            { task: 'SEO optimisation', desc: 'Headline suggestions, metadata, keyword placement and structural recommendations are now readily available.' },
+            { task: 'Routine research', desc: 'Finding definitions, comparing products, identifying trends and gathering background information has become dramatically faster.' },
+          ].map(t => (
+            <div class="guide-task">
+              <span class="guide-task-name">{t.task}</span>
+              <p class="guide-task-desc">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="guide-key">All of these improvements increase productivity. None of them automatically improve thinking. Producing more content does not guarantee producing better ideas.</p>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 3 -->
+      <section id="part-3" class="guide-section">
+        <p class="guide-part-label">Part 3</p>
+        <h2 class="guide-h2">What editorial judgement still does</h2>
+        <p>If AI reduces the cost of producing content, where does human value move? Towards judgement. Editorial judgement has always existed, but it often sat quietly behind the visible work of writing. Now it becomes the work itself.</p>
+
+        <div class="guide-judgements">
+          {[
+            { label: 'Spotting patterns', desc: 'Markets rarely change because of a single event. They change through repeated signals. Editorial thinkers notice those patterns before they become obvious.' },
+            { label: 'Connecting evidence', desc: 'Customer interviews, research reports, sales conversations, events, support tickets, community discussions — separately these are observations. Together they become insight. The ability to connect those sources into one coherent narrative remains deeply human.' },
+            { label: 'Deciding what matters', desc: 'AI produces possibilities. Editors decide priorities. Knowing what to ignore is often more valuable than knowing what to include.' },
+            { label: 'Asking better questions', desc: 'Strong prompting isn\'t about clever wording. It\'s about curiosity. The quality of AI outputs usually reflects the quality of the questions behind them.' },
+            { label: 'Protecting trust', desc: 'Evidence still matters. Accuracy still matters. Context still matters. Editorial judgement remains responsible for deciding whether a claim deserves to be published.' },
+          ].map((j, i) => (
+            <div class="guide-judgement">
+              <span class="guide-judgement-num">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <strong class="guide-judgement-label">{j.label}</strong>
+                <p class="guide-judgement-desc">{j.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 4 -->
+      <section id="part-4" class="guide-section">
+        <p class="guide-part-label">Part 4</p>
+        <h2 class="guide-h2">The Editorial Intelligence mindset</h2>
+        <p>Most organisations already possess more knowledge than they realise. Research reports sit in shared drives. Customer interviews disappear into notebooks. Events generate conversations that are never revisited. Sales teams hear recurring concerns. Support teams recognise emerging issues. Executives commission expensive research that produces a short campaign before quietly disappearing into archives.</p>
+        <p>The problem is rarely a lack of information. The problem is fragmentation.</p>
+        <p>Editorial Intelligence begins with a different assumption: knowledge is an organisational asset. Content is one way of activating it.</p>
+        <p>Rather than asking <em>"What should we publish this month?"</em> Editorial Intelligence asks: <em>"What are we learning, and how can that learning continue creating value?"</em></p>
+
+        <div class="guide-principles">
+          {[
+            { label: 'Evidence before opinion', desc: 'Strong narratives are supported by genuine evidence rather than confident assertions.' },
+            { label: 'Narratives over campaigns', desc: 'Campaigns have start and end dates. Narratives evolve over months and years.' },
+            { label: 'Systems over assets', desc: 'Individual articles matter less than repeatable ways of creating better work.' },
+            { label: 'Knowledge that compounds', desc: 'Each piece of research should strengthen future content rather than disappear after publication.' },
+            { label: 'Human judgement, AI execution', desc: 'AI accelerates production. Humans remain responsible for direction.' },
+          ].map(p => (
+            <div class="guide-principle">
+              <strong>{p.label}</strong>
+              <p>{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 5 -->
+      <section id="part-5" class="guide-section">
+        <p class="guide-part-label">Part 5</p>
+        <h2 class="guide-h2">From content writer to Editorial Intelligence designer</h2>
+        <p>Career progression is increasingly about expanding capability rather than changing job titles.</p>
+
+        <div class="guide-stages">
+          {[
+            {
+              stage: 'Stage 1',
+              title: 'AI-enabled content writer',
+              desc: 'AI becomes part of everyday practice. You understand the strengths and weaknesses of multiple language models. You use AI to speed up drafting, summarising, editing and repurposing. You don\'t accept outputs blindly — you edit critically and remain accountable for quality.',
+            },
+            {
+              stage: 'Stage 2',
+              title: 'Editorial Intelligence practitioner',
+              desc: 'The focus shifts beyond individual pieces of content. You begin connecting research, customer insight and organisational knowledge. You identify recurring themes. You build reusable frameworks. You help teams recognise patterns they had not previously noticed. Writing becomes one expression of a broader editorial capability.',
+            },
+            {
+              stage: 'Stage 3',
+              title: 'Editorial Intelligence designer',
+              desc: 'This stage moves beyond creating content altogether. Instead, you design systems. You create repeatable editorial workflows. You develop knowledge repositories. You orchestrate AI tools around evidence rather than prompts alone. At this level, the outcome is no longer simply better articles — it is better organisational thinking.',
+            },
+          ].map((s, i) => (
+            <div class="guide-stage">
+              <div class="guide-stage-header">
+                <span class="guide-stage-num">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <span class="guide-stage-label">{s.stage}</span>
+                  <strong class="guide-stage-title">{s.title}</strong>
+                </div>
+              </div>
+              <p class="guide-stage-desc">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 6 -->
+      <section id="part-6" class="guide-section">
+        <p class="guide-part-label">Part 6</p>
+        <h2 class="guide-h2">Skills worth developing</h2>
+        <p>As AI takes over repetitive production, the most valuable skills become those that strengthen judgement. Interestingly, very few of these are primarily writing skills — they are thinking skills.</p>
+
+        <div class="guide-skills">
+          {[
+            'Research synthesis',
+            'Customer interviewing',
+            'Evidence mapping',
+            'Narrative architecture',
+            'Knowledge management',
+            'Prompt design',
+            'AI orchestration',
+            'Workshop facilitation',
+            'Editorial strategy',
+            'Cross-functional collaboration',
+          ].map(s => (
+            <div class="guide-skill">{s}</div>
+          ))}
+        </div>
+
+        <p>Writing remains important. It simply becomes one output of a much broader capability.</p>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Part 7 -->
+      <section id="part-7" class="guide-section">
+        <p class="guide-part-label">Part 7</p>
+        <h2 class="guide-h2">Your next 90 days</h2>
+        <p>You don't need permission to begin working differently.</p>
+
+        <div class="guide-months">
+          {[
+            {
+              month: 'Month one',
+              actions: [
+                'Experiment with several AI models rather than relying on just one',
+                'Identify repetitive tasks you can automate',
+                'Use the time you save to read more deeply, interview customers or analyse research',
+              ],
+            },
+            {
+              month: 'Month two',
+              actions: [
+                'Choose one topic your organisation cares about',
+                'Collect evidence from multiple sources',
+                'Look for recurring patterns rather than isolated stories',
+                'Try producing a narrative map instead of immediately writing another article',
+              ],
+            },
+            {
+              month: 'Month three',
+              actions: [
+                'Design one repeatable editorial workflow',
+                'Document it',
+                'Test it',
+                'Improve it',
+                'Share what you\'ve learned with colleagues',
+              ],
+            },
+          ].map(m => (
+            <div class="guide-month">
+              <span class="guide-month-label">{m.month}</span>
+              <ul class="guide-month-actions">
+                {m.actions.map(a => <li>{a}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <p class="guide-key">Your goal isn't simply to produce more content. It's to help your organisation become better at turning knowledge into action.</p>
+      </section>
+
+      <hr class="guide-divider" />
+
+      <!-- Closing -->
+      <section id="closing" class="guide-section">
+        <p class="guide-part-label">A final thought</p>
+        <p>AI will continue improving. Writing tools will become faster, cheaper and more capable. That trend is unlikely to reverse.</p>
+        <p>But organisations will always need people who can make sense of complexity. People who recognise weak signals before they become obvious. People who know which evidence deserves attention. People who can connect ideas across departments, campaigns and years.</p>
+        <p>The future isn't defined by humans competing with AI. It's defined by humans using AI to amplify editorial judgement.</p>
+        <p class="guide-key">That's the opportunity for experienced content writers. And it's why editorial intelligence may become one of the most valuable capabilities of the next decade.</p>
+
+        <div class="guide-related">
+          <p class="t-label mb-4">Go deeper</p>
+          <div class="guide-related-links">
+            <a href="/intelligence" class="guide-related-link">
+              <span>What is Editorial Intelligence?</span>
+              <span class="guide-related-arrow">→</span>
+            </a>
+            <a href="/frameworks/evidence-engine" class="guide-related-link">
+              <span>The Evidence Engine</span>
+              <span class="guide-related-arrow">→</span>
+            </a>
+            <a href="/frameworks/daily-os" class="guide-related-link">
+              <span>The Daily OS — how to practise this every day</span>
+              <span class="guide-related-arrow">→</span>
+            </a>
+            <a href="/frameworks/narrative-architecture" class="guide-related-link">
+              <span>Narrative Architecture</span>
+              <span class="guide-related-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .guide-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .guide-layout {
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+    }
+  }
+
+  /* Left nav */
+  .guide-nav {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .guide-nav {
+      display: block;
+    }
+
+    .guide-nav-inner {
+      position: sticky;
+      top: 2rem;
+    }
+  }
+
+  .guide-nav-title {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .guide-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .guide-nav-link {
+    display: block;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+  }
+
+  .guide-nav-link:hover {
+    color: var(--color-ink);
+    border-left-color: var(--color-accent);
+  }
+
+  .guide-nav-footer {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-rule);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .guide-nav-related {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .guide-nav-related:hover {
+    color: var(--color-accent);
+  }
+
+  /* Content */
+  .guide-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .guide-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .guide-subtitle {
+    font-size: 1rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.6;
+  }
+
+  .guide-section {
+    margin-bottom: 0;
+    scroll-margin-top: 2rem;
+  }
+
+  .guide-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+    margin-bottom: 1.25rem;
+    max-width: 64ch;
+  }
+
+  .guide-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .guide-divider {
+    border: none;
+    border-top: 1px solid var(--color-rule);
+    margin: 3rem 0;
+  }
+
+  .guide-part-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .guide-h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+
+  .guide-question {
+    font-style: italic;
+    color: var(--color-ink-tertiary) !important;
+  }
+
+  .guide-key {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem !important;
+    color: var(--color-ink) !important;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25rem;
+    margin-top: 1.75rem !important;
+    font-style: italic;
+  }
+
+  .guide-list {
+    margin: 0 0 1.25rem 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .guide-list li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .guide-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    opacity: 0.6;
+    font-size: 0.8125rem;
+  }
+
+  /* Tasks grid */
+  .guide-tasks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--color-rule);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .guide-task {
+    background: var(--color-surface-secondary);
+    padding: 1.125rem 1.25rem;
+  }
+
+  .guide-task-name {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 0.375rem;
+  }
+
+  .guide-task-desc {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  @media (max-width: 600px) {
+    .guide-tasks { grid-template-columns: 1fr; }
+  }
+
+  /* Judgements */
+  .guide-judgements {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .guide-judgement {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .guide-judgement-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    opacity: 0.7;
+    padding-top: 0.2rem;
+  }
+
+  .guide-judgement-label {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 0.375rem;
+  }
+
+  .guide-judgement-desc {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+    max-width: none !important;
+  }
+
+  /* Principles */
+  .guide-principles {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .guide-principle {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+  }
+
+  .guide-principle:last-child { border-bottom: none; }
+
+  .guide-principle strong {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .guide-principle p {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Stages */
+  .guide-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .guide-stage {
+    padding: 1.25rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .guide-stage-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .guide-stage-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    opacity: 0.7;
+    padding-top: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .guide-stage-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+  }
+
+  .guide-stage-title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .guide-stage-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0;
+    max-width: none !important;
+  }
+
+  /* Skills */
+  .guide-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .guide-skill {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    padding: 0.4rem 0.875rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 2px;
+    background: var(--color-surface-secondary);
+  }
+
+  /* 90 days */
+  .guide-months {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--color-rule);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .guide-month {
+    background: var(--color-surface-secondary);
+    padding: 1.25rem;
+  }
+
+  .guide-month-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.875rem;
+  }
+
+  .guide-month-actions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .guide-month-actions li {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--color-ink-secondary);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .guide-month-actions li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    opacity: 0.5;
+    font-size: 0.6875rem;
+  }
+
+  @media (max-width: 700px) {
+    .guide-months { grid-template-columns: 1fr; }
+  }
+
+  /* Related links */
+  .guide-related {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .guide-related-links {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .guide-related-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    background: var(--color-surface-secondary);
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .guide-related-link:last-child { border-bottom: none; }
+
+  .guide-related-link:hover {
+    background: var(--color-surface-tertiary);
+    color: var(--color-ink);
+  }
+
+  .guide-related-arrow {
+    color: var(--color-accent);
+    opacity: 0.5;
+    font-size: 0.8125rem;
+  }
+</style>
+
+<script>
+  // Highlight active nav link on scroll
+  const links = document.querySelectorAll('.guide-nav-link');
+  const sections = document.querySelectorAll('.guide-section');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(link => {
+            link.style.borderLeftColor = 'transparent';
+            link.style.color = '';
+          });
+          const active = document.querySelector(`.guide-nav-link[href="#${entry.target.id}"]`);
+          if (active) {
+            active.style.borderLeftColor = 'var(--color-accent)';
+            active.style.color = 'var(--color-ink)';
+          }
+        }
+      });
+    },
+    { rootMargin: '-20% 0px -70% 0px' }
+  );
+
+  sections.forEach(s => observer.observe(s));
+</script>
