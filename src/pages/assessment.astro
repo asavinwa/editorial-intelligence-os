@@ -1,0 +1,648 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+const assessmentConfig = {
+  dimensions: [
+    {
+      id: 'capture',
+      name: 'Capture',
+      description: 'How reliably does your organisation preserve useful knowledge before it disappears?',
+      questions: [
+        'Valuable insights from customer conversations are documented in a reusable form.',
+        'Event discussions, roundtables and expert interviews are captured beyond basic meeting notes.',
+        'Research findings are stored in a way that makes them easy to find and reuse.',
+        'Executive and practitioner expertise is captured before it remains trapped in meetings, inboxes or individual memory.',
+      ],
+      diagnoses: {
+        strong: 'Your organisation is good at preserving useful knowledge before it disappears. This gives future work a stronger evidence base.',
+        constraint: 'Useful insight is likely being lost in meetings, transcripts, inboxes and individual memory. Without stronger capture, every later stage of Editorial Intelligence becomes harder.',
+      },
+      recommendations: [
+        { text: 'Create a shared signal-capture process for customer conversations, events and expert insight.' },
+        { text: 'Define which forms of evidence should be preserved and who owns the process.' },
+        { text: 'Start with one recurring workflow rather than attempting to capture everything.' },
+        { toolkit: 'Signal Capture Template', href: null },
+      ],
+    },
+    {
+      id: 'connect',
+      name: 'Connect',
+      description: 'How effectively does your organisation link evidence across teams, formats and projects?',
+      questions: [
+        'Research findings are compared with customer insight, market signals and internal expertise.',
+        'Teams can find relevant evidence created elsewhere in the organisation.',
+        'New projects build on previous learning instead of starting again from scratch.',
+        'Content, campaign, product and customer teams regularly share evidence with one another.',
+      ],
+      diagnoses: {
+        strong: 'Your organisation is able to bring together evidence from different teams, sources and projects. This helps knowledge compound rather than remain fragmented.',
+        constraint: 'Evidence may exist, but it remains distributed across projects and teams. This creates duplication and makes recurring patterns harder to identify.',
+      },
+      recommendations: [
+        { text: 'Build an evidence map showing where research, customer insight, executive expertise and market signals currently live.' },
+        { text: 'Choose one active narrative and compare evidence from at least three sources.' },
+        { text: 'Create shared language or tags that make related insight easier to find.' },
+        { toolkit: 'Evidence Mapping Canvas', href: null },
+      ],
+    },
+    {
+      id: 'synthesise',
+      name: 'Synthesise',
+      description: 'How well does your organisation turn separate signals into meaningful patterns?',
+      questions: [
+        'Important narratives are based on several evidence sources rather than one report or opinion.',
+        'The organisation can distinguish a recurring pattern from an isolated anecdote.',
+        'AI or analytical tools are used to compare evidence without replacing human judgement.',
+        'Competing interpretations are tested against evidence before a direction is chosen.',
+      ],
+      diagnoses: {
+        strong: 'Your organisation can turn multiple signals into coherent interpretations while testing conclusions against evidence.',
+        constraint: 'Your organisation may be collecting evidence without consistently deciding what it means. This creates activity without clear narrative direction.',
+      },
+      recommendations: [
+        { text: 'Separate evidence gathering from interpretation.' },
+        { text: 'Test every major narrative against more than one independent source.' },
+        { text: 'Use AI to surface patterns, then require human review before conclusions are adopted.' },
+        { toolkit: 'Narrative Audit Lite', href: null },
+      ],
+    },
+    {
+      id: 'activate',
+      name: 'Activate',
+      description: 'How consistently does evidence become useful action?',
+      questions: [
+        'Research and insight inform more than a single article, campaign or presentation.',
+        'Evidence is translated into formats useful to different audiences, including leadership, sales, customers and content teams.',
+        'Strong narratives are developed over time rather than abandoned after one campaign.',
+        'Insight directly influences decisions, priorities or experiences, rather than only producing content.',
+      ],
+      diagnoses: {
+        strong: 'Your organisation is effective at translating evidence into useful narratives, decisions and experiences across different formats and audiences.',
+        constraint: 'Insight is being generated but not converted into enough practical value. Research may end with a report, while strong narratives disappear after one campaign.',
+      },
+      recommendations: [
+        { text: 'Plan multiple uses for evidence before commissioning new research.' },
+        { text: 'Translate one strong narrative into leadership, customer, sales and editorial formats.' },
+        { text: 'Assign ownership for developing narratives beyond individual campaigns.' },
+        { toolkit: 'Content Activation Framework', href: '/frameworks/content-activation-framework' },
+      ],
+    },
+    {
+      id: 'learn',
+      name: 'Learn',
+      description: 'How effectively does your organisation learn from what it publishes and decides?',
+      questions: [
+        'Performance data is used to refine narratives, not only measure individual assets.',
+        'Feedback from audiences, customers and stakeholders becomes new evidence.',
+        'Useful knowledge accumulates across projects and becomes easier to use over time.',
+        'The organisation regularly reviews where insight was lost, underused or poorly activated.',
+      ],
+      diagnoses: {
+        strong: 'Your organisation uses performance, feedback and new evidence to improve future work. Knowledge is becoming cumulative.',
+        constraint: 'The organisation may repeat work because outputs and outcomes are not feeding back into the evidence system. Learning remains project-based rather than organisational.',
+      },
+      recommendations: [
+        { text: 'Review performance at narrative level, not only asset level.' },
+        { text: 'Capture audience and stakeholder feedback as new evidence.' },
+        { text: 'Add a learning review at the end of major projects.' },
+        { toolkit: 'Editorial Intelligence Cycle', href: '/cycle' },
+      ],
+    },
+  ],
+  maturityLevels: [
+    {
+      range: [20, 34],
+      level: 1,
+      label: 'Content producer',
+      description: 'Your organisation creates outputs, but evidence is frequently fragmented, underused or lost. Work tends to begin with a brief or content requirement rather than a connected understanding of what the organisation already knows.',
+      priority: 'Build reliable capture and evidence-mapping habits.',
+    },
+    {
+      range: [35, 49],
+      level: 2,
+      label: 'Evidence collector',
+      description: 'Your organisation generates useful research and insight, but connections between sources, teams and projects remain inconsistent. Strong evidence exists, but it does not yet compound.',
+      priority: 'Connect existing sources and identify recurring narratives.',
+    },
+    {
+      range: [50, 64],
+      level: 3,
+      label: 'Editorial Intelligence practitioner',
+      description: 'Your organisation regularly connects multiple evidence sources and uses editorial judgement to shape stronger narratives and decisions. The main opportunity is to make the practice more repeatable and widely adopted.',
+      priority: 'Standardise synthesis, activation and learning workflows.',
+    },
+    {
+      range: [65, 80],
+      level: 4,
+      label: 'Editorial Intelligence organisation',
+      description: 'Evidence is captured, connected and activated as part of a coherent organisational system. Insight informs decisions across teams, learning compounds and AI supports synthesis without replacing judgement.',
+      priority: 'Scale the system, improve governance and deepen strategic use.',
+    },
+  ],
+  dimensionBands: [
+    { range: [4, 7], label: 'Major constraint' },
+    { range: [8, 10], label: 'Developing' },
+    { range: [11, 13], label: 'Established' },
+    { range: [14, 16], label: 'Advanced' },
+  ],
+};
+---
+
+<BaseLayout
+  title="Editorial Intelligence Self-Assessment"
+  description="Assess how effectively your organisation turns research, customer insight, expertise and market signals into evidence-led decisions and reusable knowledge."
+>
+  <div id="assessment-root" class="container-site py-16 max-w-3xl">
+    <!-- Content rendered by JS -->
+  </div>
+
+  <p class="container-site max-w-3xl pb-12 privacy-note">
+    Your answers are processed in your browser and are not stored by this website.
+  </p>
+</BaseLayout>
+
+<style is:global>
+  /* ── Intro ── */
+  .a-eyebrow { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1rem; }
+  .a-heading { font-family: var(--font-serif); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; color: var(--color-ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.5rem; }
+  .a-body { font-size: 1rem; line-height: 1.75; color: var(--color-ink-secondary); max-width: 60ch; margin-bottom: 2rem; }
+  .a-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.5rem; }
+  .a-meta-item { display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.875rem; color: var(--color-ink-tertiary); }
+  .a-meta-dot { color: var(--color-accent); font-size: 0.6rem; }
+  .a-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-accent); color: var(--color-surface); font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; font-weight: 600; padding: 0.75rem 1.5rem; border: none; border-radius: 3px; cursor: pointer; transition: opacity 0.15s; text-decoration: none; }
+  .a-btn:hover { opacity: 0.85; }
+  .a-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .a-btn-ghost { background: transparent; color: var(--color-ink-secondary); border: 1px solid var(--color-rule); }
+  .a-btn-ghost:hover { color: var(--color-ink); border-color: var(--color-ink-secondary); opacity: 1; }
+  .a-link { font-size: 0.875rem; color: var(--color-ink-tertiary); text-decoration: none; border-bottom: 1px solid var(--color-rule); transition: color 0.15s; }
+  .a-link:hover { color: var(--color-accent); }
+  .a-ctas { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+
+  /* ── Progress ── */
+  .a-progress { margin-bottom: 2.5rem; }
+  .a-progress-label { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-tertiary); margin-bottom: 0.75rem; }
+  .a-progress-bar { height: 2px; background: var(--color-rule); border-radius: 1px; overflow: hidden; }
+  .a-progress-fill { height: 100%; background: var(--color-accent); border-radius: 1px; transition: width 0.3s ease; }
+
+  /* ── Dimension step ── */
+  .a-dim-name { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.4rem; }
+  .a-dim-desc { font-size: 0.9375rem; color: var(--color-ink-secondary); line-height: 1.65; margin-bottom: 2rem; max-width: 56ch; }
+  .a-questions { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.5rem; }
+  .a-question { }
+  .a-question-text { font-size: 0.9375rem; color: var(--color-ink); line-height: 1.55; margin-bottom: 0.75rem; }
+  .a-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+  @media (max-width: 560px) { .a-options { grid-template-columns: repeat(2, 1fr); } }
+  .a-option { position: relative; }
+  .a-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .a-option label { display: flex; align-items: center; justify-content: center; text-align: center; padding: 0.6rem 0.5rem; border: 1px solid var(--color-rule); border-radius: 3px; font-size: 0.8125rem; color: var(--color-ink-tertiary); cursor: pointer; transition: background 0.12s, border-color 0.12s, color 0.12s; min-height: 2.5rem; background: var(--color-surface-secondary); }
+  .a-option label:hover { border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-rule)); color: var(--color-ink-secondary); }
+  .a-option input:checked + label { background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface)); border-color: var(--color-accent); color: var(--color-ink); font-weight: 500; }
+  .a-option input:focus-visible + label { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  .a-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+  /* ── Results ── */
+  .a-results-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-rule); }
+  .a-maturity-label { font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--color-ink); font-weight: 400; margin-bottom: 0.35rem; }
+  .a-score-line { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--color-ink-tertiary); margin-bottom: 1rem; }
+  .a-maturity-desc { font-size: 0.9375rem; line-height: 1.7; color: var(--color-ink-secondary); max-width: 58ch; margin-bottom: 0.75rem; }
+  .a-maturity-priority { font-size: 0.875rem; color: var(--color-ink-tertiary); font-style: italic; }
+
+  /* Dimension bars */
+  .a-dims { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.5rem; }
+  .a-dim-row { }
+  .a-dim-row-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
+  .a-dim-row-name { font-size: 0.875rem; font-weight: 500; color: var(--color-ink); }
+  .a-dim-row-meta { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.06em; color: var(--color-ink-tertiary); }
+  .a-dim-bar-track { height: 4px; background: var(--color-rule); border-radius: 2px; margin-bottom: 0.4rem; }
+  .a-dim-bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+  .a-dim-diag { font-size: 0.8125rem; color: var(--color-ink-tertiary); line-height: 1.55; }
+
+  /* Capability panels */
+  .a-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  @media (max-width: 560px) { .a-panels { grid-template-columns: 1fr; } }
+  .a-panel { padding: 1.25rem; border-radius: 4px; border: 1px solid var(--color-rule); }
+  .a-panel-strong { border-left: 2px solid var(--color-accent); background: var(--color-surface-secondary); }
+  .a-panel-constraint { border-left: 2px solid color-mix(in srgb, var(--color-accent) 50%, var(--color-ink-tertiary)); background: var(--color-surface-secondary); }
+  .a-panel-label { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-tertiary); margin-bottom: 0.5rem; }
+  .a-panel-dim { font-size: 0.9375rem; font-weight: 500; color: var(--color-ink); margin-bottom: 0.5rem; }
+  .a-panel-text { font-size: 0.8125rem; line-height: 1.6; color: var(--color-ink-secondary); }
+
+  /* Next steps */
+  .a-steps { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .a-step { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.25rem; border: 1px solid var(--color-rule); border-radius: 4px; background: var(--color-surface-secondary); }
+  .a-step-num { font-family: var(--font-mono); font-size: 0.625rem; color: var(--color-accent); flex-shrink: 0; margin-top: 0.2rem; letter-spacing: 0.04em; }
+  .a-step-text { font-size: 0.875rem; line-height: 1.6; color: var(--color-ink-secondary); }
+  .a-toolkit-badge { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-tertiary); border: 1px solid var(--color-rule); padding: 0.2rem 0.4rem; border-radius: 2px; text-decoration: none; }
+  .a-toolkit-badge[href]:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .a-toolkit-soon { opacity: 0.5; cursor: default; }
+
+  /* CTA block */
+  .a-cta-block { padding: 1.75rem; border: 1px solid var(--color-rule); border-left: 2px solid var(--color-accent); border-radius: 4px; background: var(--color-surface-secondary); margin-bottom: 1.5rem; }
+  .a-cta-block-heading { font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-ink); margin-bottom: 0.5rem; }
+  .a-cta-block-body { font-size: 0.875rem; line-height: 1.65; color: var(--color-ink-secondary); margin-bottom: 1.25rem; max-width: 52ch; }
+
+  /* Share */
+  .a-share { margin-bottom: 2.5rem; }
+  .a-share-label { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-tertiary); margin-bottom: 0.75rem; }
+  .a-share-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .a-share-btn { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.06em; padding: 0.5rem 0.875rem; border: 1px solid var(--color-rule); border-radius: 3px; background: transparent; color: var(--color-ink-secondary); cursor: pointer; transition: border-color 0.15s, color 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .a-share-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+  /* Dividers */
+  .a-section-label { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-tertiary); margin-bottom: 1rem; }
+  .a-divider { border: none; border-top: 1px solid var(--color-rule); margin: 2.5rem 0; }
+  .privacy-note { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.06em; color: var(--color-ink-tertiary); opacity: 0.5; padding-bottom: 3rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a-progress-fill, .a-dim-bar-fill { transition: none; }
+  }
+</style>
+
+<script define:vars={{ assessmentConfig }}>
+  const STORAGE_KEY = 'ei-assessment-answers';
+  const root = document.getElementById('assessment-root');
+  const dims = assessmentConfig.dimensions;
+
+  // State
+  let state = {
+    screen: 'intro', // intro | step | results
+    step: 0,
+    answers: Array(5).fill(null).map(() => Array(4).fill(null)),
+  };
+
+  // Try restore partial progress
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.answers && parsed.step !== undefined) {
+        state = { ...state, ...parsed, screen: 'step' };
+      }
+    }
+  } catch {}
+
+  function save() {
+    if (state.screen !== 'results') {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers: state.answers, step: state.step })); } catch {}
+    } else {
+      try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    }
+  }
+
+  function dimScore(dimIdx) {
+    return state.answers[dimIdx].reduce((s, v) => s + (v || 0), 0);
+  }
+
+  function totalScore() {
+    return dims.map((_, i) => dimScore(i)).reduce((s, v) => s + v, 0);
+  }
+
+  function bandLabel(score) {
+    for (const b of assessmentConfig.dimensionBands) {
+      if (score >= b.range[0] && score <= b.range[1]) return b.label;
+    }
+    return '';
+  }
+
+  function maturityLevel(total) {
+    for (const m of assessmentConfig.maturityLevels) {
+      if (total >= m.range[0] && total <= m.range[1]) return m;
+    }
+    return assessmentConfig.maturityLevels[0];
+  }
+
+  // Priority order for ties: capture, connect, synthesise, activate, learn (indices 0..4)
+  function extremeDim(scores, findMax) {
+    let best = findMax ? -1 : 999;
+    let idx = 0;
+    for (let i = 0; i < scores.length; i++) {
+      if (findMax ? scores[i] > best : scores[i] < best) {
+        best = scores[i];
+        idx = i;
+      }
+    }
+    return idx;
+  }
+
+  function dimBarColor(score) {
+    if (score <= 7) return '#8a7a6a';
+    if (score <= 10) return '#b09060';
+    if (score <= 13) return 'var(--color-accent)';
+    return '#e0b96e';
+  }
+
+  function getRecommendations() {
+    const scores = dims.map((_, i) => dimScore(i));
+    // Collect the 3 lowest-scoring dimension recommendations
+    const sorted = [...scores.map((s, i) => ({ s, i }))]
+      .sort((a, b) => a.s - b.s || a.i - b.i);
+    const picks = sorted.slice(0, 3).map(({ i }) => ({
+      dim: dims[i],
+      score: scores[i],
+    }));
+    return picks;
+  }
+
+  function shareText() {
+    const total = totalScore();
+    const ml = maturityLevel(total);
+    const scores = dims.map((_, i) => dimScore(i));
+    const strongest = dims[extremeDim(scores, true)].name;
+    const weakest = dims[extremeDim(scores, false)].name;
+    return `My organisation is at the "${ml.label}" stage of Editorial Intelligence. Our strongest capability is ${strongest}, while our biggest opportunity is ${weakest}.`;
+  }
+
+  // ── Renderers ──
+
+  function renderIntro() {
+    root.innerHTML = `
+      <header class="mb-12">
+        <p class="a-eyebrow">Editorial Intelligence Self-Assessment</p>
+        <h1 class="a-heading">How well does your organisation turn evidence into decisions?</h1>
+        <p class="a-body">Most organisations already generate more insight than they use. Research reports, customer conversations, events, market analysis and internal expertise are often created continuously, but rarely connected into a system that improves future decisions.</p>
+        <p class="a-body" style="margin-top:-1rem">This assessment helps you identify where your organisation is strong, where knowledge is being lost and what to improve next.</p>
+        <div class="a-meta">
+          <div class="a-meta-item"><span class="a-meta-dot">◆</span> Takes approximately five minutes</div>
+          <div class="a-meta-item"><span class="a-meta-dot">◆</span> Produces a score across five Editorial Intelligence dimensions</div>
+          <div class="a-meta-item"><span class="a-meta-dot">◆</span> Identifies your strongest capability and biggest constraint</div>
+          <div class="a-meta-item"><span class="a-meta-dot">◆</span> Generates three practical next steps</div>
+          <div class="a-meta-item"><span class="a-meta-dot">◆</span> No email required before seeing your results</div>
+        </div>
+        <div class="a-ctas">
+          <button class="a-btn" id="start-btn">Start the assessment →</button>
+          <a href="/intelligence" class="a-link">Learn about Editorial Intelligence</a>
+        </div>
+      </header>
+    `;
+    document.getElementById('start-btn').addEventListener('click', () => {
+      state.screen = 'step';
+      state.step = 0;
+      render();
+    });
+  }
+
+  function renderStep() {
+    const dim = dims[state.step];
+    const stepNum = state.step + 1;
+    const pct = (stepNum / 5) * 100;
+    const labels = ['Rarely', 'Sometimes', 'Usually', 'Consistently'];
+
+    const questionsHtml = dim.questions.map((q, qi) => {
+      const name = `q-${state.step}-${qi}`;
+      const optionsHtml = labels.map((label, li) => {
+        const val = li + 1;
+        const checked = state.answers[state.step][qi] === val ? 'checked' : '';
+        return `
+          <div class="a-option">
+            <input type="radio" name="${name}" id="${name}-${li}" value="${val}" ${checked}>
+            <label for="${name}-${li}">${label}</label>
+          </div>
+        `;
+      }).join('');
+      return `
+        <div class="a-question">
+          <p class="a-question-text">${q}</p>
+          <div class="a-options" role="radiogroup" aria-label="${q}">${optionsHtml}</div>
+        </div>
+      `;
+    }).join('');
+
+    root.innerHTML = `
+      <div class="a-progress">
+        <p class="a-progress-label">Step ${stepNum} of 5 · ${dim.name}</p>
+        <div class="a-progress-bar"><div class="a-progress-fill" style="width:${pct}%"></div></div>
+      </div>
+      <p class="a-dim-name">${dim.name}</p>
+      <p class="a-dim-desc">${dim.description}</p>
+      <div class="a-questions">${questionsHtml}</div>
+      <div class="a-nav">
+        <button class="a-btn a-btn-ghost" id="prev-btn">${state.step === 0 ? '← Back to intro' : '← Previous'}</button>
+        <button class="a-btn" id="next-btn" disabled>${state.step === 4 ? 'See results →' : 'Continue →'}</button>
+      </div>
+    `;
+
+    // Wire radios
+    const nextBtn = document.getElementById('next-btn');
+    function checkComplete() {
+      const answered = state.answers[state.step].every(v => v !== null);
+      nextBtn.disabled = !answered;
+    }
+    checkComplete();
+
+    root.querySelectorAll('input[type=radio]').forEach(input => {
+      input.addEventListener('change', () => {
+        const [, , dimIdx, qIdx] = input.id.split('-').map(Number);
+        // id is q-{step}-{qi}-{li}, value is 1-4
+        const parts = input.name.split('-'); // q, step, qi
+        const qi = parseInt(parts[2]);
+        state.answers[state.step][qi] = parseInt(input.value);
+        save();
+        checkComplete();
+      });
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (state.step === 0) {
+        state.screen = 'intro';
+      } else {
+        state.step--;
+      }
+      render();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (state.step === 4) {
+        state.screen = 'results';
+        save();
+        render();
+      } else {
+        state.step++;
+        render();
+      }
+    });
+  }
+
+  function renderResults() {
+    const total = totalScore();
+    const ml = maturityLevel(total);
+    const scores = dims.map((_, i) => dimScore(i));
+    const strongestIdx = extremeDim(scores, true);
+    const weakestIdx = extremeDim(scores, false);
+    const recs = getRecommendations();
+
+    const dimBarsHtml = dims.map((dim, i) => {
+      const score = scores[i];
+      const band = bandLabel(score);
+      const pct = ((score - 4) / 12) * 100;
+      const color = dimBarColor(score);
+      const diag = score >= 11 ? dim.diagnoses.strong : dim.diagnoses.constraint;
+      return `
+        <div class="a-dim-row">
+          <div class="a-dim-row-header">
+            <span class="a-dim-row-name">${dim.name}</span>
+            <span class="a-dim-row-meta">${score} / 16 · ${band}</span>
+          </div>
+          <div class="a-dim-bar-track">
+            <div class="a-dim-bar-fill" style="width:${pct}%;background:${color}"></div>
+          </div>
+          <p class="a-dim-diag">${diag}</p>
+        </div>
+      `;
+    }).join('');
+
+    const recsHtml = recs.flatMap(({ dim }, ri) => {
+      return dim.recommendations.map((r, rri) => {
+        if (r.toolkit) {
+          const toolkitEl = r.href
+            ? `<a href="${r.href}" class="a-toolkit-badge">Toolkit → ${r.toolkit}</a>`
+            : `<span class="a-toolkit-badge a-toolkit-soon">Coming soon · ${r.toolkit}</span>`;
+          return `
+            <div class="a-step">
+              <span class="a-step-num">${ri * 4 + rri + 1}</span>
+              <div>
+                <p class="a-step-text">${toolkitEl}</p>
+              </div>
+            </div>
+          `;
+        }
+        return `
+          <div class="a-step">
+            <span class="a-step-num">${ri === 0 ? rri + 1 : ''}</span>
+            <p class="a-step-text">${r.text}</p>
+          </div>
+        `;
+      });
+    });
+
+    // Build cleaner recs: 3 steps from weakest dims
+    const recsClean = (() => {
+      const sortedIdxs = [...scores.map((s, i) => ({ s, i }))]
+        .sort((a, b) => a.s - b.s || a.i - b.i)
+        .map(x => x.i);
+      let steps = [];
+      let stepNum = 1;
+      for (const idx of sortedIdxs) {
+        const dim = dims[idx];
+        const textRecs = dim.recommendations.filter(r => r.text);
+        if (textRecs.length > 0 && steps.length < 3) {
+          const r = textRecs[0];
+          steps.push({ num: stepNum++, text: r.text, dim: dim.name });
+        }
+        if (steps.length >= 3) break;
+      }
+      // Add toolkit for the weakest dim
+      const weakDim = dims[sortedIdxs[0]];
+      const toolkit = weakDim.recommendations.find(r => r.toolkit);
+      const toolkitEl = toolkit
+        ? (toolkit.href
+            ? `<a href="${toolkit.href}" class="a-toolkit-badge">Toolkit → ${toolkit.toolkit}</a>`
+            : `<span class="a-toolkit-badge a-toolkit-soon">Coming soon · ${toolkit.toolkit}</span>`)
+        : '';
+      return { steps, toolkitEl };
+    })();
+
+    const stepsHtml = recsClean.steps.map(s => `
+      <div class="a-step">
+        <span class="a-step-num">${s.num}</span>
+        <p class="a-step-text">${s.text}</p>
+      </div>
+    `).join('') + (recsClean.toolkitEl ? `
+      <div class="a-step" style="border-style:dashed;opacity:0.8">
+        <span class="a-step-num">→</span>
+        <div>${recsClean.toolkitEl}</div>
+      </div>
+    ` : '');
+
+    root.innerHTML = `
+      <div class="a-results-header">
+        <p class="a-eyebrow">Your Editorial Intelligence profile</p>
+        <h1 class="a-maturity-label">${ml.label}</h1>
+        <p class="a-score-line">Total score: ${total} / 80</p>
+        <p class="a-maturity-desc">${ml.description}</p>
+        <p class="a-maturity-priority">Primary priority: ${ml.priority}</p>
+      </div>
+
+      <p class="a-section-label">Dimension profile</p>
+      <div class="a-dims" role="list" aria-label="Dimension scores">${dimBarsHtml}</div>
+
+      <hr class="a-divider">
+
+      <div class="a-panels">
+        <div class="a-panel a-panel-strong">
+          <p class="a-panel-label">Your strongest capability</p>
+          <p class="a-panel-dim">${dims[strongestIdx].name}</p>
+          <p class="a-panel-text">${dims[strongestIdx].diagnoses.strong}</p>
+        </div>
+        <div class="a-panel a-panel-constraint">
+          <p class="a-panel-label">Your biggest constraint</p>
+          <p class="a-panel-dim">${dims[weakestIdx].name}</p>
+          <p class="a-panel-text">${dims[weakestIdx].diagnoses.constraint}</p>
+        </div>
+      </div>
+
+      <hr class="a-divider">
+
+      <p class="a-section-label">Recommended next steps</p>
+      <div class="a-steps">${stepsHtml}</div>
+
+      <hr class="a-divider">
+
+      <div class="a-cta-block">
+        <h2 class="a-cta-block-heading">Turn your result into a practical next step</h2>
+        <p class="a-cta-block-body">Your score is only useful if it changes how your organisation works. Explore the Editorial Intelligence frameworks and tools designed to help teams capture evidence, connect insight and activate stronger narratives.</p>
+        <div class="a-ctas">
+          <a href="/frameworks/editorial-intelligence-framework" class="a-btn">Explore the Editorial Intelligence framework →</a>
+          <button class="a-btn a-btn-ghost" id="retake-btn">Retake the assessment</button>
+        </div>
+      </div>
+
+      <div class="a-share">
+        <p class="a-share-label">Share your result</p>
+        <div class="a-share-btns">
+          <button class="a-share-btn" id="copy-btn">Copy result</button>
+          <a class="a-share-btn" id="linkedin-btn" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
+        </div>
+        <p id="copy-confirm" style="font-family:var(--font-mono);font-size:0.5625rem;color:var(--color-accent);margin-top:0.5rem;opacity:0;transition:opacity 0.3s"></p>
+      </div>
+    `;
+
+    // Animate bars
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.a-dim-bar-fill').forEach(el => {
+        const w = el.style.width;
+        el.style.width = '0';
+        requestAnimationFrame(() => { el.style.width = w; });
+      });
+    });
+
+    document.getElementById('retake-btn').addEventListener('click', () => {
+      state = { screen: 'intro', step: 0, answers: Array(5).fill(null).map(() => Array(4).fill(null)) };
+      try { localStorage.removeItem(STORAGE_KEY); } catch {}
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const copyBtn = document.getElementById('copy-btn');
+    const copyConfirm = document.getElementById('copy-confirm');
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(shareText()).then(() => {
+        copyConfirm.textContent = 'Copied to clipboard';
+        copyConfirm.style.opacity = '1';
+        setTimeout(() => { copyConfirm.style.opacity = '0'; }, 2500);
+      });
+    });
+
+    const linkedinBtn = document.getElementById('linkedin-btn');
+    const encoded = encodeURIComponent(shareText() + '\n\nhttps://editorialintelligence.co/assessment');
+    linkedinBtn.href = `https://www.linkedin.com/sharing/share-offsite/?text=${encoded}`;
+  }
+
+  function render() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (state.screen === 'intro') renderIntro();
+    else if (state.screen === 'step') renderStep();
+    else renderResults();
+  }
+
+  render();
+</script>

@@ -10,6 +10,7 @@ export const SITE = {
     { label: 'Narratives', href: '/narratives' },
     { label: 'Frameworks', href: '/frameworks' },
     { label: 'Field Notes', href: '/writing' },
+    { label: 'Assessment', href: '/assessment' },
     { label: 'Work with me', href: '/work' },
     { label: 'About', href: '/about' },
   ],
