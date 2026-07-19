@@ -6,9 +6,8 @@ export const SITE = {
   url: 'https://editorialintelligence.com',
   nav: [
     { label: 'Editorial Intelligence', href: '/intelligence' },
-    { label: 'Applications', href: '/applications' },
-    { label: 'Narratives', href: '/narratives' },
     { label: 'Frameworks', href: '/frameworks' },
+    { label: 'EI OS', href: '/editorial-intelligence-os' },
     { label: 'Field Notes', href: '/writing' },
     { label: 'Assessment', href: '/assessment' },
     { label: 'Work with me', href: '/work' },

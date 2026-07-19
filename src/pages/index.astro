@@ -9,7 +9,7 @@ import { SITE } from '../config/site';
     <div class="container-site hero-grid">
       <!-- Left: text -->
       <div class="hero-text">
-        <p class="t-label mb-6">{SITE.author} · Content strategist at Sage</p>
+        <p class="t-label mb-6">{SITE.author} · Editorial Intelligence practitioner</p>
         <h1 class="t-display text-[var(--color-ink)] mb-4 leading-[1.08]">
           Editorial Intelligence<br />for the AI era
         </h1>
@@ -113,6 +113,38 @@ import { SITE } from '../config/site';
 
         </div>
       </div>
+    </div>
+  </section>
+
+  <hr class="divider container-site" />
+
+  <!-- From discipline to implementation -->
+  <section class="container-site py-12">
+    <p class="t-label mb-8">From discipline to implementation</p>
+    <div class="discipline-hierarchy">
+      <a href="/intelligence" class="dh-item">
+        <span class="dh-num">01</span>
+        <div class="dh-body">
+          <p class="dh-label">Editorial Intelligence</p>
+          <p class="dh-sub">The discipline — how organisations turn evidence into decisions and narratives</p>
+        </div>
+      </a>
+      <div class="dh-connector">↓</div>
+      <a href="/editorial-intelligence-os" class="dh-item">
+        <span class="dh-num">02</span>
+        <div class="dh-body">
+          <p class="dh-label">Editorial Intelligence OS</p>
+          <p class="dh-sub">The operating system — frameworks, methods, assessments, AI workflows</p>
+        </div>
+      </a>
+      <div class="dh-connector">↓</div>
+      <a href="/work" class="dh-item">
+        <span class="dh-num">03</span>
+        <div class="dh-body">
+          <p class="dh-label">Consulting</p>
+          <p class="dh-sub">Implementation — helping organisations build the capability</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -923,6 +955,65 @@ import { SITE } from '../config/site';
     letter-spacing: 0.08em;
     color: var(--color-ink-tertiary);
     text-transform: uppercase;
+  }
+
+  /* ── Discipline hierarchy ── */
+  .discipline-hierarchy {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 42rem;
+  }
+
+  .dh-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    column-gap: 0.875rem;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    background: var(--color-surface-secondary);
+    transition: background 0.15s;
+  }
+
+  .dh-item:hover { background: var(--color-surface-tertiary); }
+
+  .dh-num {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    opacity: 0.6;
+  }
+
+  .dh-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 0.2rem 0;
+  }
+
+  .dh-sub {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .dh-connector {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    opacity: 0.3;
+    padding: 0.3rem 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-rule);
+    border-bottom: 1px solid var(--color-rule);
   }
 
   /* ── Origin callout ── */
