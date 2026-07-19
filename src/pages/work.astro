@@ -202,7 +202,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         <h2 class="t-label mb-6">A small, senior practice</h2>
         <div class="prose-section">
           <p>I am not an agency. I work on a small number of engagements at a time, which means the analysis, synthesis and strategic thinking are carried out by me rather than delegated through a larger team.</p>
-          <p>The work is particularly suited to B2B organisations in fintech, SaaS, professional services and other complex markets where credibility depends on connecting evidence with genuine subject expertise.</p>
+          <p>The work is particularly suited to established B2B organisations, startups and scaleups in fintech, SaaS, professional services and other complex markets where credibility depends on connecting evidence with genuine subject expertise.</p>
+          <p>For startups, Editorial Intelligence can also help build and test the initial position before a large body of evidence has accumulated. <a href="/applications/startups-scaleups" class="work-inline-link">Explore Editorial Intelligence for startups and scaleups →</a></p>
         </div>
       </section>
 
@@ -599,6 +600,16 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
 
   .contact-cta:hover { border-color: var(--color-accent); }
+
+  .work-inline-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+  }
+
+  .work-inline-link:hover { border-color: var(--color-accent); }
 
   .contact-cta-arrow { transition: transform 0.2s; }
   .contact-cta:hover .contact-cta-arrow { transform: translateX(3px); }
