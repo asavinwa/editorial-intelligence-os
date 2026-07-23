@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import LabSignup from '../../components/LabSignup.astro';
 
 const writing = await getCollection('writing', ({ data }) => data.status === 'published');
 const sorted = writing.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -98,6 +99,8 @@ function formatDate(date: Date) {
         </div>
       </div>
     )}
+
+    <LabSignup headline="Follow the discipline as it develops" />
 
   </div>
 </BaseLayout>
