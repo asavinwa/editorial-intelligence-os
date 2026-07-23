@@ -8,7 +8,7 @@ export const SITE = {
     { label: 'Editorial Intelligence', href: '/intelligence' },
     { label: 'Frameworks', href: '/frameworks' },
     { label: 'EI OS', href: '/editorial-intelligence-os' },
-    { label: 'Lab', href: '/lab' },
+    { label: 'EI Lab', href: '/lab' },
     { label: 'Assessment', href: '/assessment' },
     { label: 'Work with me', href: '/work' },
     { label: 'About', href: '/about' },
