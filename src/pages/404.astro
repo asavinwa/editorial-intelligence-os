@@ -9,8 +9,13 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     <p class="t-body mb-8 max-w-md mx-auto">
       This signal doesn't connect to anything in the system yet.
     </p>
-    <a href="/" class="t-small text-[var(--color-accent)] no-underline hover:underline">
-      Return home →
-    </a>
+    <div class="flex flex-col items-center gap-3">
+      <a href="/" class="t-small text-[var(--color-accent)] no-underline hover:underline">
+        Return home →
+      </a>
+      <a href="/start" class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)]">
+        Not sure where to go? Start here →
+      </a>
+    </div>
   </div>
 </BaseLayout>

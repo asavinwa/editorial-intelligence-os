@@ -54,6 +54,7 @@ const sections = [
 
       <!-- Introduction -->
       <section id="introduction" class="guide-section">
+        <a href="/start" class="guide-start-link">New to Editorial Intelligence? Get a full orientation first →</a>
         <p>If you've worked in content for more than a few years, you've probably experienced several waves of change.</p>
         <p>The rise of social media changed distribution. SEO reshaped how articles were planned and structured. Marketing automation increased the demand for content at scale.</p>
         <p>Now AI is changing something much deeper.</p>
@@ -441,6 +442,19 @@ const sections = [
     color: var(--color-ink-secondary);
     line-height: 1.6;
   }
+
+  .guide-start-link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.15s;
+  }
+
+  .guide-start-link:hover { color: var(--color-ink); }
 
   .guide-section {
     margin-bottom: 0;

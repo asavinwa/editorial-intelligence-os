@@ -25,7 +25,10 @@ const year = new Date().getFullYear();
     </div>
     <div class="mt-12 pt-6 border-t border-[var(--color-rule,#2c2920)] flex flex-col md:flex-row justify-between gap-2">
       <p class="t-small">{SITE.author}</p>
-      <p class="t-small">&copy; {year}. This framework evolves as new evidence is added.</p>
+      <div class="flex items-center gap-6">
+        <a href="/start" class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)] transition-colors">Start here</a>
+        <p class="t-small">&copy; {year}. This framework evolves as new evidence is added.</p>
+      </div>
     </div>
   </div>
 </footer>
