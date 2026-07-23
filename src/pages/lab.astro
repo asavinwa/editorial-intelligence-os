@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import LabSignup from '../components/LabSignup.astro';
+---
+
+<BaseLayout
+  title="Editorial Intelligence Lab"
+  description="The Editorial Intelligence Lab is a Substack publication where the discipline is developed in public — field notes, essays, AI narrative research and applications as they emerge."
+>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.va?.('track', 'lab_page_view');
+    });
+  </script>
+
+  <div class="lab-inner container-site">
+
+    <header class="lab-header">
+      <p class="t-label mb-4">Editorial Intelligence Lab</p>
+      <h1 class="lab-h1">Join the first 100 readers</h1>
+      <p class="lab-lede">The Lab is where Editorial Intelligence is developed in public. Each issue connects field notes, AI narrative research and cross-sector applications into thinking you can use — before it becomes a framework.</p>
+    </header>
+
+    <div class="lab-signup-primary">
+      <LabSignup variant="full" headline="" />
+    </div>
+
+    <hr class="divider" />
+
+    <section class="lab-section">
+      <h2 class="lab-h2">What you will receive</h2>
+      <ul class="lab-list">
+        <li>Field notes from active engagements — what the evidence is showing, what changed, what held</li>
+        <li>AI visibility research and how it is shifting what Editorial Intelligence work actually involves</li>
+        <li>Applications of the frameworks across sectors — accounting, professional services, B2B technology, media</li>
+        <li>Early access to new tools, assessments and framework iterations before they appear on the main site</li>
+        <li>Writing that reflects the discipline in practice, not just describes it</li>
+      </ul>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="lab-section">
+      <h2 class="lab-h2">The Lab's place in the system</h2>
+      <div class="lab-prose">
+        <p>Editorial Intelligence OS is being built in public. The frameworks are live and in use. The assessment is operational. The Lab is where the material that eventually becomes frameworks first appears — rough, in progress, genuinely useful.</p>
+        <p>The Lab is not a newsletter in the traditional sense. It does not attempt to be complete or authoritative on publication. It captures the work as it develops and shares what is most useful to practitioners who are doing similar things, or thinking through similar questions.</p>
+        <p>If you are in content, editorial, marketing or communications — or in a knowledge or strategy function trying to make evidence more usable — this is the publication most likely to be directly relevant to what you are working on.</p>
+      </div>
+      <a href="/writing" class="lab-archive-link">Browse the full writing archive →</a>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="lab-section lab-section--cta">
+      <LabSignup
+        variant="full"
+        headline="Start receiving the Lab"
+        body="New issues when the work produces something worth sharing — not on a fixed schedule."
+      />
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .lab-inner {
+    max-width: 42rem;
+    padding-top: clamp(4rem, 8vw, 6rem);
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+  }
+
+  .lab-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .lab-h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--color-ink);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .lab-lede {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    max-width: 52ch;
+  }
+
+  .lab-signup-primary {
+    margin: 2.5rem 0;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-rule);
+    margin: 3rem 0;
+  }
+
+  .lab-section {
+    margin-bottom: 0;
+  }
+
+  .lab-h2 {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    color: var(--color-ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .lab-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .lab-list li {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .lab-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .lab-prose {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .lab-prose p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+  }
+
+  .lab-archive-link {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .lab-archive-link:hover {
+    text-decoration: underline;
+  }
+
+  .lab-section--cta {
+    padding-top: 0.5rem;
+  }
+</style>

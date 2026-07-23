@@ -1,0 +1,111 @@
+---
+export interface Props {
+  variant?: 'compact' | 'full';
+  eyebrow?: string;
+  headline?: string;
+  body?: string;
+}
+
+const {
+  variant = 'compact',
+  eyebrow,
+  headline = variant === 'full'
+    ? 'Join the first 100 readers'
+    : 'Follow the discipline as it develops',
+  body,
+} = Astro.props;
+---
+
+<div class={`lab-signup lab-signup--${variant}`}>
+  {eyebrow && <p class="lab-signup-eyebrow">{eyebrow}</p>}
+  {headline && <p class="lab-signup-headline">{headline}</p>}
+  {body && <p class="lab-signup-body">{body}</p>}
+  <div class="lab-signup-embed">
+    <iframe
+      src="https://editorialintelligence.substack.com/embed"
+      width="100%"
+      height="150"
+      frameborder="0"
+      scrolling="no"
+      title="Subscribe to Editorial Intelligence Lab"
+    ></iframe>
+    <p class="lab-signup-fallback">
+      Or <a
+        href="https://editorialintelligence.substack.com"
+        class="lab-signup-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="window.va?.('track', 'substack_external_click')"
+      >open Substack directly →</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .lab-signup {
+    margin: 2rem 0;
+  }
+
+  .lab-signup--compact {
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .lab-signup-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .lab-signup-headline {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--color-ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .lab-signup--full .lab-signup-headline {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .lab-signup-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    margin-bottom: 0.75rem;
+    max-width: 52ch;
+  }
+
+  .lab-signup-embed {
+    margin-top: 0.75rem;
+  }
+
+  .lab-signup-embed iframe {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    min-height: 150px;
+  }
+
+  .lab-signup-fallback {
+    font-size: 0.8125rem;
+    color: var(--color-ink-tertiary);
+    margin-top: 0.5rem;
+  }
+
+  .lab-signup-link {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .lab-signup-link:hover {
+    text-decoration: underline;
+  }
+</style>

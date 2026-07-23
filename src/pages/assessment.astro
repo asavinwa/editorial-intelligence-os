@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
+import LabSignup from '../components/LabSignup.astro';
 
 const assessmentConfig = {
   dimensions: [
@@ -154,6 +155,10 @@ const assessmentConfig = {
 >
   <div id="assessment-root" class="container-site py-16 max-w-3xl">
     <!-- Content rendered by JS -->
+  </div>
+
+  <div id="lab-signup-assessment" class="container-site max-w-3xl" style="display:none">
+    <LabSignup headline="Build on your result" />
   </div>
 
   <p class="container-site max-w-3xl pb-12 privacy-note">
@@ -463,6 +468,8 @@ const assessmentConfig = {
   }
 
   function renderResults() {
+    const labBlock = document.getElementById('lab-signup-assessment');
+    if (labBlock) labBlock.style.display = 'block';
     const total = totalScore();
     const ml = maturityLevel(total);
     const scores = dims.map((_, i) => dimScore(i));
