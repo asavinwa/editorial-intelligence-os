@@ -67,10 +67,10 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         <div class="prose-section">
           <p>Editorial Intelligence is the practice of identifying, connecting and developing organisational knowledge into strategic narratives and reusable assets.</p>
           <p>It begins with signals — the research findings, customer experiences, product insights, market observations and operational evidence that organisations generate continuously but rarely connect.</p>
-          <p>It transforms those signals into insights: meaningful patterns that reveal something true about customers, markets or the direction of an industry.</p>
+          <p>It synthesises those signals into insights: meaningful patterns that reveal something true about customers, markets or the direction of an industry.</p>
           <p class="font-medium text-[var(--color-ink)]">Editorial judgement determines which patterns are strategically meaningful and which are simply noise.</p>
           <p>It organises those insights into narratives: strategic stories that give an organisation a coherent point of view, developed over time rather than produced once and forgotten.</p>
-          <p>And it expresses those narratives through editorial assets — articles, frameworks, diagnostics, case studies, AI workflows, playbooks — that allow knowledge to move across teams, audiences and time.</p>
+          <p>And it activates those narratives through formats and channels suited to each audience and purpose — articles, frameworks, case studies, video, social content, sales enablement, event presentations — designed from the start to be discovered, reused and extended.</p>
           <p>But the process does not end with publication.</p>
           <p>Every asset creates new signals. Every new signal strengthens the narrative. Editorial Intelligence is designed as a continuous learning system rather than a linear production process.</p>
           <p class="font-medium text-[var(--color-ink)]">The result is not a content programme. It is a knowledge system that learns.</p>
@@ -110,26 +110,30 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
               def: 'Signals are observations that have the potential to change or strengthen an organisation\'s strategic understanding — customer interviews, research findings, product feedback, sales conversations, event discussions, market observations. Most organisations generate signals continuously. Few have a system for recognising which ones matter. Editorial judgement begins here, with the discipline of distinguishing meaningful observations from background noise.',
             },
             {
-              term: 'Insights',
-              def: 'Signals become insights when patterns emerge. An insight is not a single observation. It is the recognition that multiple signals — from different sources, at different times — are pointing at the same underlying truth. Not every signal becomes an insight. Most don\'t. The editorial judgement required at this stage is the capacity to sit with incomplete evidence long enough to recognise what it is actually revealing.',
+              term: 'Synthesis',
+              def: 'Signals become insights through synthesis — the recognition that multiple observations from different sources are pointing at the same underlying truth. Not every signal survives synthesis. Most don\'t. The editorial judgement required here is the capacity to sit with incomplete evidence long enough to recognise what it is actually revealing, and to resist the impulse to publish before the pattern is clear.',
             },
             {
               term: 'Narratives',
               def: 'Narratives are where organisational knowledge becomes strategic direction. They provide the organising structure that connects evidence across time, teams and channels — becoming more authoritative as new evidence is added, and more distinctive as they develop over time. Narratives are the centre of the Editorial Intelligence Cycle. Everything before them exists to discover them. Everything after them exists to strengthen them.',
             },
             {
-              term: 'Editorial assets',
-              def: 'Narratives are expressed through editorial assets — articles, frameworks, diagnostics, case studies, AI workflows, playbooks — designed from the start to be discovered, reused and extended. An editorial asset produced in isolation has limited value. The same asset, designed as part of a connected narrative system, becomes a foundation for future work. It makes the next piece stronger than the last.',
+              term: 'Activation',
+              def: 'Narratives are activated through the formats and channels suited to the audience and purpose — articles, frameworks, diagnostics, case studies, AI workflows, playbooks, video, social content, event presentations, sales enablement, executive communications. Format and channel selection is a strategic decision, not an afterthought. The question at this stage is not "how do we produce content?" but "which form will make this narrative most useful to this audience, in this context?"',
             },
             {
               term: 'Evidence',
-              def: 'Every editorial asset generates new evidence. A published article surfaces new questions. A diagnostic reveals new patterns. A case study uncovers new examples. A framework, tested in practice, either holds or requires refinement. That evidence feeds back into the cycle as new signals — refining the narrative, strengthening the position, making the next pass more valuable than the previous one.',
+              def: 'Every piece of activated content generates new evidence. A published article surfaces new questions. A social post reveals what resonates. A webinar generates new practitioner insights. A diagnostic uncovers new patterns. A framework, tested in practice, either holds or requires refinement. That evidence feeds back into the cycle as new signals — refining the narrative, strengthening the position, making the next pass more valuable than the previous one.',
+            },
+            {
+              term: 'Learning and reuse',
+              def: 'The final stage closes the loop. Evidence is applied: the narrative is refined where it needs sharpening, high-performing elements are repurposed in new contexts, and the signal capture capability that feeds into the next cycle improves with each pass. The organisation does not simply produce better content over time. It becomes more intelligent — a system that compounds its editorial knowledge rather than starting fresh with each campaign.',
             },
           ].map((step, i) => (
             <div class="cycle-step">
               <div class="cycle-step__marker">
                 <span class="t-label">{String(i + 1).padStart(2, '0')}</span>
-                {i < 4 && <div class="cycle-step__line" aria-hidden="true" />}
+                {i < 5 && <div class="cycle-step__line" aria-hidden="true" />}
               </div>
               <div class="cycle-step__content">
                 <h3 class="t-title mb-3">{step.term}</h3>
@@ -186,7 +190,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
         <div class="mt-10 prose-section">
           <p>Three examples. Three different starting points — research, customer evidence, emerging technology. Three different outputs. The same underlying process.</p>
-          <p class="font-medium text-[var(--color-ink)]">Signals recognised. Insights developed. Narratives built. Editorial assets designed for reuse. Evidence accumulated over time.</p>
+          <p class="font-medium text-[var(--color-ink)]">Signals recognised. Synthesised into insights. Narratives built. Activated across formats and channels. Evidence accumulated. Learning applied.</p>
           <p>That is Editorial Intelligence in practice.</p>
         </div>
       </section>

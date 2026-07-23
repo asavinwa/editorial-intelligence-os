@@ -16,9 +16,9 @@ const stages = [
   },
   {
     num: '02',
-    name: 'Insights',
+    name: 'Synthesis',
     question: 'What does it mean?',
-    purpose: 'Connect multiple signals into meaningful patterns that reveal something strategically significant.',
+    purpose: 'Connect multiple signals into meaningful patterns that reveal something strategically significant. This is where raw observations become insights — recurring themes, structural tensions, underlying truths.',
     outputs: ['Recurring themes', 'Structural tensions', 'Strategic opportunities', 'Industry risks', 'Audience truths'],
     related: [
       { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
@@ -41,23 +41,34 @@ const stages = [
   },
   {
     num: '04',
-    name: 'Editorial Assets',
-    question: 'How should we express it?',
-    purpose: 'Turn narratives into reusable forms that move across teams, audiences and time.',
-    outputs: ['Articles', 'Frameworks', 'Diagnostics', 'Case studies', 'AI workflows', 'Playbooks'],
+    name: 'Activation',
+    question: 'How and where should we express it?',
+    purpose: 'Turn narratives into reusable forms, then deploy them in the formats and channels suited to the audience and purpose. Format and channel selection is a strategic decision — not content atomisation.',
+    outputs: ['Articles and reports', 'Video and audio', 'Social content', 'Newsletter and email', 'Frameworks and diagnostics', 'Sales enablement', 'Event and webinar content', 'Executive communications'],
     related: [
-      { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
+      { label: 'Content Activation Framework', href: '/frameworks/content-activation-framework', type: 'framework' },
     ],
     color: '#c8a96e',
   },
   {
     num: '05',
     name: 'Evidence',
-    question: 'What did we learn?',
-    purpose: 'Capture what each asset reveals after use, then feed that evidence back as new signals.',
-    outputs: ['New customer questions', 'Stakeholder feedback', 'Repeated patterns', 'Challenged assumptions'],
+    question: 'What did this generate?',
+    purpose: 'Capture what each activated piece reveals — engagement patterns, audience questions, platform signals, stakeholder feedback — then feed that evidence back as new signals for the next cycle.',
+    outputs: ['Audience questions and replies', 'Platform engagement signals', 'Stakeholder feedback', 'New patterns and tensions', 'Challenged or confirmed assumptions'],
     related: [
       { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
+    ],
+    color: '#88806e',
+  },
+  {
+    num: '06',
+    name: 'Learning and reuse',
+    question: 'How do we get smarter?',
+    purpose: 'Apply what the evidence reveals: refine the narrative, improve future activation decisions, repurpose high-performing elements, and build on what worked. The organisation becomes more intelligent with every completed cycle.',
+    outputs: ['Refined narrative positions', 'Improved format and channel judgement', 'Repurposed high-performing elements', 'Stronger signal capture for the next cycle'],
+    related: [
+      { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
     ],
     color: '#88806e',
   },
@@ -65,17 +76,17 @@ const stages = [
 
 const hiddenHoursSteps = [
   { stage: 'Signals', text: 'Research into operational pressure on accountants — hidden work, compliance burden, workflow friction' },
-  { stage: 'Insights', text: 'Admin and workflow friction are structural pressures, not individual inefficiencies' },
+  { stage: 'Synthesis', text: 'Admin and workflow friction are structural pressures, not individual inefficiencies' },
   { stage: 'Narratives', text: 'The Hidden Hours narrative — the profession absorbing structural change in silence' },
-  { stage: 'Editorial Assets', text: 'Articles, diagnostic tool, Editorial Intelligence Framework, AI workflow' },
-  { stage: 'Evidence', text: 'New signals from customer stories, practitioner conversations and stakeholder use' },
-  { stage: 'Signals', text: 'Cycle continues — each pass stronger than the last', loop: true },
+  { stage: 'Activation', text: 'Articles, diagnostic tool, social content, event presentations, editorial framework' },
+  { stage: 'Evidence', text: 'New signals from customer stories, practitioner conversations, platform responses and stakeholder use' },
+  { stage: 'Learning and reuse', text: 'Narrative refined. High-performing elements repurposed. Cycle continues — each pass stronger than the last', loop: true },
 ];
 ---
 
 <BaseLayout
   title="The Editorial Intelligence Cycle"
-  description="Not a workflow that ends with publication. A system that learns. How signals become insights, narratives, editorial assets and evidence — continuously."
+  description="Not a workflow that ends with publication. A system that learns. How signals become synthesis, narratives, activation, evidence and learning — continuously."
 >
 
   <!-- Hero -->
@@ -90,7 +101,7 @@ const hiddenHoursSteps = [
       </div>
 
       <!-- Visual cycle diagram -->
-      <div class="cycle-diagram" aria-label="The Editorial Intelligence Cycle: Signals, Insights, Narratives, Editorial Assets, Evidence, back to Signals">
+      <div class="cycle-diagram" aria-label="The Editorial Intelligence Cycle: Signals, Synthesis, Narratives, Activation, Evidence, Learning and reuse, back to Signals">
         {stages.map((stage, i) => (
           <div class="diagram-stage" data-centre={stage.centre}>
             <div class="stage-node" style={`--c: ${stage.color}`}>
@@ -133,7 +144,7 @@ const hiddenHoursSteps = [
 
   <hr class="divider container-site" />
 
-  <!-- Five stages -->
+  <!-- Six stages -->
   <section class="container-site py-16">
     <p class="t-label mb-10">Explore each stage</p>
     <div class="stages-grid">
