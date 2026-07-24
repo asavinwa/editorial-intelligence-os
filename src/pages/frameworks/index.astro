@@ -6,8 +6,14 @@ import { getCollection } from 'astro:content';
 const frameworks = await getCollection('frameworks', ({ data }) => data.status === 'published');
 const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const flagshipSlugs = new Set(['evidence-engine', 'narrative-architecture', 'content-activation-framework', 'ai-visibility-buyability', 'editorial-intelligence-framework', 'daily-os', 'workflow-library']);
-const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
+// Foundational and operational slugs are hardcoded (some are Astro pages, not content collection)
+const curatedSlugs = new Set([
+  'evidence-engine', 'narrative-architecture', 'ai-visibility-buyability',
+  'editorial-intelligence-framework', 'daily-os', 'workflow-library',
+  'customer-signal-framework',
+]);
+const operational = sorted.filter(fw => curatedSlugs.has(fw.slug));
+const applied = sorted.filter(fw => !curatedSlugs.has(fw.slug));
 ---
 
 <BaseLayout
@@ -15,28 +21,50 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
   description="Reusable models, processes and methodologies for developing organisational knowledge into strategic assets."
 >
   <div class="container-site py-16">
+
     <header class="mb-12 max-w-2xl">
       <p class="t-label mb-4">Frameworks</p>
-      <h1 class="t-heading mb-4">Reusable models and methodologies</h1>
+      <h1 class="t-heading mb-4">Models and methodologies</h1>
       <p class="t-body">
-        Frameworks transform insights into repeatable ways of thinking — tools that can be applied across teams, campaigns and contexts.
+        The frameworks on this site translate Editorial Intelligence principles into repeatable ways of thinking — tools that can be applied across teams, contexts and editorial cycles.
       </p>
     </header>
 
-    <!-- Flagship frameworks -->
-    <div class="flagship-block mb-12">
-      <p class="t-label mb-6">Flagship frameworks</p>
-      <p class="t-small mb-8" style="color: var(--color-ink-secondary); max-width: 56ch; line-height: 1.7;">
-        Together these frameworks describe an end-to-end operating model — from how organisations capture signals to how that knowledge compounds into commercial advantage.
-      </p>
+    <!-- Where to start -->
+    <div class="fw-sequence mb-16">
+      <p class="t-label mb-5">Where to start</p>
+      <p class="fw-sequence-intro mb-6">New to the frameworks? Read them in this order. Each one builds on the last.</p>
+      <div class="fw-sequence-row">
+        {[
+          { label: 'Editorial Intelligence', href: '/intelligence', note: 'The discipline and cycle' },
+          { label: 'Evidence Engine', href: '/frameworks/evidence-engine', note: 'Capturing and connecting signals' },
+          { label: 'Narrative Architecture', href: '/frameworks/narrative-architecture', note: 'Structuring evidence into position' },
+          { label: 'Editorial Activation', href: '/frameworks/editorial-activation', note: 'Turning narrative into coordinated action' },
+        ].map((step, i) => (
+          <div class="fw-seq-step-wrap">
+            <a href={step.href} class="fw-seq-step">
+              <span class="fw-seq-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="fw-seq-label">{step.label}</span>
+              <span class="fw-seq-note">{step.note}</span>
+            </a>
+            {i < 3 && <span class="fw-seq-arrow" aria-hidden="true">→</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <hr class="divider mb-16" />
+
+    <!-- Foundational frameworks (hardcoded Astro pages + key collection items) -->
+    <div class="mb-16">
+      <p class="t-label mb-2">Foundational</p>
+      <p class="fw-tier-intro mb-8">The core models. Understand these first.</p>
       <div class="flagship-grid">
         {[
-          { num: '01', title: 'Editorial Intelligence', desc: 'The operating system. How organisations turn signals into knowledge that compounds over time.', href: '/intelligence' },
-          { num: '02', title: 'The Evidence Engine', desc: 'How organisations capture and connect signals from across the business into reusable evidence.', href: '/frameworks/evidence-engine' },
-          { num: '03', title: 'Narrative Architecture', desc: 'How evidence becomes coherent strategic stories that accumulate authority over time.', href: '/frameworks/narrative-architecture' },
-          { num: '04', title: 'Editorial Activation', desc: 'Turn research, customer insight and organisational expertise into coordinated thought leadership, PR, social, sales and customer marketing outcomes.', href: '/frameworks/editorial-activation' },
-          { num: '05', title: 'Content Activation', desc: 'How narratives are activated across articles, video, social, events and sales enablement — and how each channel generates evidence that feeds the next cycle.', href: '/frameworks/content-activation-framework' },
-          { num: '06', title: 'AI Visibility & Buyability', desc: 'How reputation influences AI discovery and buyer confidence, from signals through to commercial outcomes.', href: '/frameworks/ai-visibility-buyability' },
+          { num: '01', title: 'Editorial Intelligence', desc: 'The discipline — how organisations turn distributed signals into knowledge that compounds over time.', href: '/intelligence' },
+          { num: '02', title: 'Evidence Engine', desc: 'How organisations capture and connect signals from research, customers, events and market change into reusable evidence.', href: '/frameworks/evidence-engine' },
+          { num: '03', title: 'Narrative Architecture', desc: 'How evidence becomes coherent strategic stories that accumulate authority with every addition.', href: '/frameworks/narrative-architecture' },
+          { num: '04', title: 'Editorial Activation', desc: 'How narratives reach audiences — coordinated across editorial, PR, social, events, sales and customer marketing.', href: '/frameworks/editorial-activation' },
         ].map((f) => (
           <a href={f.href} class="flagship-item">
             <span class="flagship-num">{f.num}</span>
@@ -47,16 +75,34 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
       </div>
     </div>
 
+    <!-- Operational frameworks -->
+    <div class="mb-16">
+      <p class="t-label mb-2">Operational</p>
+      <p class="fw-tier-intro mb-8">Apply the model — tools for day-to-day practice and specific problems.</p>
+      <div class="flagship-grid">
+        {[
+          { title: 'AI Visibility & Buyability', desc: 'How reputation influences AI discovery and buyer confidence, from signals through to commercial outcomes.', href: '/frameworks/ai-visibility-buyability' },
+          { title: 'Customer Signal Framework', desc: 'How to identify, capture and organise customer signals so they strengthen the evidence base over time.', href: '/frameworks/customer-signal-framework' },
+          { title: 'Daily OS', desc: 'The day-to-day practice — how Editorial Intelligence becomes a repeatable operating rhythm.', href: '/frameworks/daily-os' },
+          { title: 'Workflow Library', desc: 'AI-assisted workflows for signal capture, synthesis, briefing, diagnostics and editorial review.', href: '/frameworks/workflow-library' },
+        ].map((f) => (
+          <a href={f.href} class="flagship-item flagship-item--operational">
+            <span class="flagship-title">{f.title}</span>
+            <span class="flagship-desc">{f.desc}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
     <hr class="divider mb-12" />
 
-    {supporting.length > 0 && (
+    <!-- Applied frameworks (from content collection, excluding curated ones) -->
+    {applied.length > 0 && (
       <div>
-        <p class="t-label mb-2">Supporting frameworks</p>
-        <p class="t-small mb-8" style="color: var(--color-ink-secondary); max-width: 56ch; line-height: 1.7;">
-          Additional models and methodologies that sit alongside the five flagship frameworks.
-        </p>
+        <p class="t-label mb-2">Applied</p>
+        <p class="fw-tier-intro mb-8">Context-specific models for particular industries, roles or use cases.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {supporting.map((fw) => (
+          {applied.map((fw) => (
             <FrameworkCard
               slug={fw.slug}
               title={fw.data.title}
@@ -71,10 +117,89 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
         </div>
       </div>
     )}
+
   </div>
 </BaseLayout>
 
 <style>
+  /* ── Where to start ── */
+  .fw-sequence {
+    background: var(--color-surface-secondary);
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+
+  .fw-sequence-intro {
+    font-size: 0.9375rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.6;
+  }
+
+  .fw-sequence-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .fw-seq-step-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .fw-seq-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--color-rule, #2c2920);
+    border-radius: 3px;
+    background: var(--color-surface);
+    text-decoration: none;
+    transition: background 0.15s;
+    min-width: 140px;
+  }
+
+  .fw-seq-step:hover {
+    background: var(--color-surface-tertiary, var(--color-surface-secondary));
+  }
+
+  .fw-seq-num {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+
+  .fw-seq-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .fw-seq-note {
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+    line-height: 1.4;
+  }
+
+  .fw-seq-arrow {
+    font-size: 0.875rem;
+    color: var(--color-ink-tertiary);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  /* ── Tier intro ── */
+  .fw-tier-intro {
+    font-size: 0.875rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── Flagship grid (shared by Foundational + Operational) ── */
   .flagship-grid {
     display: flex;
     flex-direction: column;
@@ -92,6 +217,10 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
     border-bottom: 1px solid var(--color-rule, #2c2920);
     text-decoration: none;
     transition: background 0.15s;
+  }
+
+  .flagship-item--operational {
+    grid-template-columns: 1fr;
   }
 
   .flagship-item:last-child {
@@ -125,5 +254,23 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
     line-height: 1.5;
     color: var(--color-ink-tertiary);
     display: block;
+  }
+
+  @media (max-width: 480px) {
+    .fw-sequence-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .fw-seq-step-wrap {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .fw-seq-arrow {
+      transform: rotate(90deg);
+    }
+    .fw-seq-step {
+      min-width: unset;
+      width: 100%;
+    }
   }
 </style>
