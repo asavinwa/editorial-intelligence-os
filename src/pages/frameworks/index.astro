@@ -23,9 +23,9 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
       </p>
     </header>
 
-    <!-- Five flagship frameworks -->
+    <!-- Flagship frameworks -->
     <div class="flagship-block mb-12">
-      <p class="t-label mb-6">Five flagship frameworks</p>
+      <p class="t-label mb-6">Flagship frameworks</p>
       <p class="t-small mb-8" style="color: var(--color-ink-secondary); max-width: 56ch; line-height: 1.7;">
         Together these frameworks describe an end-to-end operating model — from how organisations capture signals to how that knowledge compounds into commercial advantage.
       </p>
@@ -34,8 +34,9 @@ const supporting = sorted.filter(fw => !flagshipSlugs.has(fw.slug));
           { num: '01', title: 'Editorial Intelligence', desc: 'The operating system. How organisations turn signals into knowledge that compounds over time.', href: '/intelligence' },
           { num: '02', title: 'The Evidence Engine', desc: 'How organisations capture and connect signals from across the business into reusable evidence.', href: '/frameworks/evidence-engine' },
           { num: '03', title: 'Narrative Architecture', desc: 'How evidence becomes coherent strategic stories that accumulate authority over time.', href: '/frameworks/narrative-architecture' },
-          { num: '04', title: 'Content Activation', desc: 'How narratives are activated across articles, video, social, events and sales enablement — and how each channel generates evidence that feeds the next cycle.', href: '/frameworks/content-activation-framework' },
-          { num: '05', title: 'AI Visibility & Buyability', desc: 'How reputation influences AI discovery and buyer confidence, from signals through to commercial outcomes.', href: '/frameworks/ai-visibility-buyability' },
+          { num: '04', title: 'Editorial Activation', desc: 'Turn research, customer insight and organisational expertise into coordinated thought leadership, PR, social, sales and customer marketing outcomes.', href: '/frameworks/editorial-activation' },
+          { num: '05', title: 'Content Activation', desc: 'How narratives are activated across articles, video, social, events and sales enablement — and how each channel generates evidence that feeds the next cycle.', href: '/frameworks/content-activation-framework' },
+          { num: '06', title: 'AI Visibility & Buyability', desc: 'How reputation influences AI discovery and buyer confidence, from signals through to commercial outcomes.', href: '/frameworks/ai-visibility-buyability' },
         ].map((f) => (
           <a href={f.href} class="flagship-item">
             <span class="flagship-num">{f.num}</span>
