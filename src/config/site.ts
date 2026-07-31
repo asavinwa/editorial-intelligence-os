@@ -6,10 +6,19 @@ export const SITE = {
   url: 'https://www.editorialintelligence.co',
   nav: [
     { label: 'Editorial Intelligence', href: '/intelligence' },
-    { label: 'Frameworks', href: '/frameworks' },
-    { label: 'EI OS', href: '/editorial-intelligence-os' },
-    { label: 'EI Lab', href: '/lab' },
-    { label: 'Assessment', href: '/assessment' },
+    {
+      label: 'EI OS',
+      href: '/editorial-intelligence-os',
+      children: [
+        { label: 'Overview', href: '/editorial-intelligence-os', description: 'The operating system' },
+        { label: 'Frameworks', href: '/frameworks', description: 'Models for thinking' },
+        { label: 'Methods', href: '/methods', description: 'Repeatable ways of working' },
+        { label: 'Guide', href: '/guide', description: 'How to begin' },
+        { label: 'Assessment', href: '/assessment', description: 'Diagnose your capability' },
+      ],
+    },
+    { label: 'Applications', href: '/applications' },
+    { label: 'Field notes', href: '/writing' },
     { label: 'Work with me', href: '/work' },
     { label: 'About', href: '/about' },
   ],
