@@ -171,6 +171,8 @@ const assessmentConfig = {
   .a-eyebrow { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1rem; }
   .a-heading { font-family: var(--font-serif); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; color: var(--color-ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.5rem; }
   .a-body { font-size: 1rem; line-height: 1.75; color: var(--color-ink-secondary); max-width: 60ch; margin-bottom: 2rem; }
+  .a-inline-link { color: var(--color-ink); text-decoration-color: var(--color-rule); text-underline-offset: 0.18em; }
+  .a-inline-link:hover { color: var(--color-accent); }
   .a-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.5rem; }
   .a-meta-item { display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.875rem; color: var(--color-ink-tertiary); }
   .a-meta-dot { color: var(--color-accent); font-size: 0.6rem; }
@@ -365,7 +367,7 @@ const assessmentConfig = {
         <p class="a-eyebrow">Editorial Intelligence Self-Assessment</p>
         <h1 class="a-heading">How well does your organisation turn evidence into decisions?</h1>
         <p class="a-body">Most organisations already generate more insight than they use. Research reports, customer conversations, events, market analysis and internal expertise are often created continuously, but rarely connected into a system that improves future decisions.</p>
-        <p class="a-body" style="margin-top:-1rem">This assessment helps you identify where your organisation is strong, where knowledge is being lost and what to improve next.</p>
+        <p class="a-body" style="margin-top:-1rem">This is the diagnostic within <a href="/editorial-intelligence-os" class="a-inline-link">Editorial Intelligence OS</a>. It helps you identify where your organisation is strong, where knowledge is being lost and which part of the operating system to improve next.</p>
         <div class="a-meta">
           <div class="a-meta-item"><span class="a-meta-dot">◆</span> Takes approximately five minutes</div>
           <div class="a-meta-item"><span class="a-meta-dot">◆</span> Produces a score across five Editorial Intelligence dimensions</div>
@@ -375,7 +377,7 @@ const assessmentConfig = {
         </div>
         <div class="a-ctas">
           <button class="a-btn" id="start-btn">Start the assessment →</button>
-          <a href="/intelligence" class="a-link">Learn about Editorial Intelligence</a>
+          <a href="/editorial-intelligence-os" class="a-link">Explore the operating system</a>
         </div>
       </header>
     `;

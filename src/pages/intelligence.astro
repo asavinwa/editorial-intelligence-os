@@ -28,10 +28,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       <div class="hierarchy mb-16">
         {[
           { num: '01', label: 'Editorial Intelligence', sub: 'The discipline', href: '/intelligence', current: true },
-          { num: '02', label: 'Evidence Engine', sub: 'The infrastructure — captures and connects signals', href: '/frameworks/evidence-engine' },
-          { num: '03', label: 'EI Cycle', sub: 'The operating model — turns evidence into action and learning', href: '#cycle' },
-          { num: '04', label: 'Daily OS', sub: 'The daily practice', href: '/frameworks/daily-os' },
-          { num: '05', label: 'Applications', sub: 'Proof in the real world', href: '/narratives' },
+          { num: '02', label: 'Editorial Intelligence OS', sub: 'The operating system — frameworks, methods and workflows', href: '/editorial-intelligence-os' },
+          { num: '03', label: 'Applications', sub: 'The OS in practice', href: '/applications' },
+          { num: '04', label: 'Consulting', sub: 'Implementation inside organisations', href: '/work' },
         ].map((level, i) => (
           <div class="hierarchy-row">
             {i > 0 && <div class="hierarchy-connector" aria-hidden="true">↓</div>}

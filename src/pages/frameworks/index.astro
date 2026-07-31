@@ -118,6 +118,15 @@ const applied = sorted.filter(fw => !curatedSlugs.has(fw.slug));
       </div>
     )}
 
+    <div class="fw-os-callout mt-16">
+      <div>
+        <p class="t-label mb-2">The wider system</p>
+        <p class="fw-os-title">These frameworks form part of Editorial Intelligence OS.</p>
+        <p class="fw-tier-intro">See how the frameworks connect with assessments, applications, guides and AI workflows to make the discipline repeatable.</p>
+      </div>
+      <a href="/editorial-intelligence-os" class="fw-os-link">Explore the EI OS →</a>
+    </div>
+
   </div>
 </BaseLayout>
 
@@ -128,6 +137,39 @@ const applied = sorted.filter(fw => !curatedSlugs.has(fw.slug));
     border: 1px solid var(--color-rule, #2c2920);
     border-radius: 4px;
     padding: 1.5rem;
+  }
+
+  .fw-os-callout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .fw-os-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    margin-bottom: 0.35rem;
+  }
+
+  .fw-os-link {
+    flex: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .fw-os-callout {
+      align-items: flex-start;
+      flex-direction: column;
+    }
   }
 
   .fw-sequence-intro {

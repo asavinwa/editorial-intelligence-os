@@ -21,6 +21,14 @@ import LabSignup from '../components/LabSignup.astro';
         </div>
       </header>
 
+      <!-- Defining principle -->
+      <section class="os-principle mb-16">
+        <p class="t-label mb-3">A living operating system</p>
+        <h2 class="os-principle-title mb-4">Not a fixed playbook</h2>
+        <p>Editorial Intelligence is an organisational capability for continually updating how a business thinks, publishes and learns as technology, audiences and markets change.</p>
+        <p>A playbook codifies what worked before. Editorial Intelligence builds the ability to respond to what happens next.</p>
+      </section>
+
       <!-- Positioning hierarchy -->
       <div class="os-hierarchy mb-16">
         <a href="/intelligence" class="os-hier-item">
@@ -189,7 +197,10 @@ import LabSignup from '../components/LabSignup.astro';
           <p>I help organisations implement Editorial Intelligence — building the narrative systems, evidence workflows and editorial capability that turn distributed knowledge into a compounding strategic asset.</p>
           <p>Clients leave with narrative systems, evidence libraries, editorial workflows, knowledge assets and reusable thinking — not simply articles or reports.</p>
         </div>
-        <a href="/work" class="os-cta">Explore how we can work together →</a>
+        <div class="os-cta-group">
+          <a href="/assessment" class="os-cta">Start with the assessment →</a>
+          <a href="/work" class="os-secondary-cta">Explore how we can work together →</a>
+        </div>
       </section>
 
     </div>
@@ -219,6 +230,30 @@ import LabSignup from '../components/LabSignup.astro';
     font-weight: 400;
     color: var(--color-ink);
     letter-spacing: -0.01em;
+  }
+
+  .os-principle {
+    padding: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 28%, var(--color-rule));
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
+  }
+
+  .os-principle-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--color-ink);
+  }
+
+  .os-principle p:not(.t-label) {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--color-ink-secondary);
+  }
+
+  .os-principle p + p {
+    margin-top: 0.75rem;
   }
 
   /* ── Hierarchy ── */
@@ -452,4 +487,23 @@ import LabSignup from '../components/LabSignup.astro';
   }
 
   .os-cta:hover { border-color: var(--color-accent); }
+
+  .os-cta-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .os-secondary-cta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .os-secondary-cta:hover {
+    color: var(--color-accent);
+  }
 </style>
