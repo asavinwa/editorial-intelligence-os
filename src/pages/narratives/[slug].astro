@@ -26,7 +26,12 @@ const totalRelated =
   related.experiments.length;
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.excerpt}>
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.excerpt}
+  pageType="article"
+  datePublished={entry.data.date}
+>
   <div class="container-site py-16">
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" class="mb-10">

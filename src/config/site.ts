@@ -3,7 +3,13 @@ export const SITE = {
   title: 'Editorial Intelligence — Knowledge that compounds',
   description: 'Editorial Intelligence is the discipline of turning organisational knowledge into strategic narratives that compound over time. Frameworks, methods and working examples.',
   author: 'Asavin Wattanajantra',
+  email: 'asavin@editorialintelligence.co',
   url: 'https://www.editorialintelligence.co',
+  authorImage: '/Images/asavin.jpg',
+  profiles: [
+    'https://www.linkedin.com/in/ashwat/',
+    'https://authory.com/asavin',
+  ],
   nav: [
     { label: 'Editorial Intelligence', href: '/intelligence' },
     {

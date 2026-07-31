@@ -5,7 +5,7 @@ import { getCollection, render } from 'astro:content';
 import { getRelatedContent } from '../../lib/related';
 
 export async function getStaticPaths() {
-  const experiments = await getCollection('experiments');
+  const experiments = await getCollection('experiments', ({ data }) => data.status !== 'draft');
   return experiments.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
 }
 
@@ -38,7 +38,12 @@ const totalRelated =
   related.experiments.length;
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.excerpt}>
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.excerpt}
+  pageType="article"
+  datePublished={entry.data.date}
+>
   <div class="container-site py-16">
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" class="mb-10">

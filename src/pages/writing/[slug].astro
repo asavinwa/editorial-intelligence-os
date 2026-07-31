@@ -19,7 +19,12 @@ const formattedDate = new Intl.DateTimeFormat('en-GB', {
 }).format(entry.data.date);
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.excerpt}>
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.excerpt}
+  pageType="article"
+  datePublished={entry.data.date}
+>
   <div class="container-site py-16">
     <nav aria-label="Breadcrumb" class="mb-10">
       <ol class="flex items-center gap-2 list-none m-0 p-0">

@@ -2,7 +2,7 @@
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const experiments = await getCollection('experiments');
+const experiments = await getCollection('experiments', ({ data }) => data.status !== 'draft');
 const sorted = experiments.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const statusLabels: Record<string, string> = {
@@ -23,6 +23,7 @@ const statusColors: Record<string, string> = {
 <BaseLayout
   title="Experiments"
   description="Interactive prototypes, AI workflows and practical applications that explore how Editorial Intelligence can be applied in real organisations."
+  pageType="collection"
 >
   <div class="container-site py-16">
     <header class="mb-10 max-w-2xl">

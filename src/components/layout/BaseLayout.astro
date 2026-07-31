@@ -8,18 +8,125 @@ import Analytics from '@vercel/analytics/astro';
 interface Props {
   title?: string;
   description?: string;
+  ogDescription?: string;
   ogImage?: string;
+  pageType?: 'website' | 'collection' | 'article' | 'service' | 'profile';
+  datePublished?: Date | string;
+  dateModified?: Date | string;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = SITE.description,
+  ogDescription = description,
   ogImage,
+  pageType = 'website',
+  datePublished,
+  dateModified,
+  noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name}`;
+const pageTitle = title
+  ? title.includes(SITE.name) ? title : `${title} — ${SITE.name}`
+  : SITE.title;
+const metaDescription = description.length > 160
+  ? `${description.slice(0, 157).replace(/\s+\S*$/, '')}…`
+  : description;
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 const socialImage = new URL(ogImage ?? '/og-image.png', SITE.url).toString();
+const personId = `${SITE.url}/#person`;
+const websiteId = `${SITE.url}/#website`;
+
+const nameOverrides: Record<string, string> = {
+  'editorial-intelligence-os': 'Editorial Intelligence OS',
+  'ai-visibility-audit': 'AI Visibility Audit',
+};
+
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = segments.map((segment, index) => ({
+  '@type': 'ListItem',
+  position: index + 2,
+  name: index === segments.length - 1 && title
+    ? title.split('|')[0].trim()
+    : nameOverrides[segment] ?? segment.replaceAll('-', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()),
+  item: new URL(`/${segments.slice(0, index + 1).join('/')}`, SITE.url).toString(),
+}));
+
+const pageSchemaType = pageType === 'collection'
+  ? 'CollectionPage'
+  : pageType === 'profile'
+    ? 'ProfilePage'
+    : 'WebPage';
+
+const pageSchema = pageType === 'article'
+  ? {
+      '@type': 'Article',
+      '@id': `${canonical}#article`,
+      headline: title,
+      description,
+      image: socialImage,
+      mainEntityOfPage: canonical,
+      author: { '@id': personId },
+      publisher: { '@id': personId },
+      datePublished: datePublished ? new Date(datePublished).toISOString() : undefined,
+      dateModified: dateModified ? new Date(dateModified).toISOString() : undefined,
+      inLanguage: 'en-GB',
+    }
+  : pageType === 'service'
+    ? {
+        '@type': 'Service',
+        '@id': `${canonical}#service`,
+        name: title,
+        description,
+        url: canonical,
+        provider: { '@id': personId },
+        areaServed: { '@type': 'Country', name: 'United Kingdom' },
+      }
+    : {
+        '@type': pageSchemaType,
+        '@id': `${canonical}#webpage`,
+        url: canonical,
+        name: pageTitle,
+        description,
+        isPartOf: { '@id': websiteId },
+        about: pageType === 'profile' ? { '@id': personId } : undefined,
+        inLanguage: 'en-GB',
+      };
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      creator: { '@id': personId },
+      inLanguage: 'en-GB',
+    },
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: SITE.author,
+      url: `${SITE.url}/about`,
+      image: new URL(SITE.authorImage, SITE.url).toString(),
+      email: `mailto:${SITE.email}`,
+      jobTitle: 'Editorial Intelligence practitioner',
+      sameAs: SITE.profiles,
+    },
+    pageSchema,
+    ...(segments.length > 0 ? [{
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+        ...breadcrumbItems,
+      ],
+    }] : []),
+  ],
+};
 ---
 
 <!doctype html>
@@ -27,14 +134,15 @@ const socialImage = new URL(ogImage ?? '/og-image.png', SITE.url).toString();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={ogDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType === 'article' ? 'article' : 'website'} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:width" content="1200" />
@@ -44,12 +152,13 @@ const socialImage = new URL(ogImage ?? '/og-image.png', SITE.url).toString();
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:image:alt" content="Editorial Intelligence — Knowledge that compounds." />
 
     <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="min-h-screen flex flex-col">
     <Nav />
