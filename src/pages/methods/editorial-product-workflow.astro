@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+
+const stages = [
+  { num: '01', title: 'Evidence', question: 'What do we actually know?', desc: 'Gather the research, interviews, customer stories, performance data, market signals and organisational expertise relevant to the problem.', output: 'Evidence map and source inventory' },
+  { num: '02', title: 'Editorial synthesis', question: 'What does the evidence mean together?', desc: 'Identify patterns, tensions, recurring pressures and gaps. Separate what is merely interesting from what can support a useful argument.', output: 'Synthesis notes and insight territories' },
+  { num: '03', title: 'Narrative', question: 'What is the central argument?', desc: 'Define the throughline, supporting themes and evidence hierarchy. Give the organisation a position it can credibly own and extend.', output: 'Narrative brief' },
+  { num: '04', title: 'Experience design', question: 'How should an audience move through it?', desc: 'Translate the narrative into an information journey. Decide what people need to understand, explore and do — then shape the wireframe around that journey.', output: 'Journey, structure and wireframe' },
+  { num: '05', title: 'Editorial copy', question: 'What does each part need to communicate?', desc: 'Write the page-level copy, transitions, context and calls to action required to carry the argument through the experience.', output: 'Build-ready copy deck' },
+  { num: '06', title: 'Asset mapping', question: 'What role does each asset play?', desc: 'Connect articles, videos, data, case studies, tools and calls to action to the journey. Remove assets that do not advance the narrative or user need.', output: 'Asset map and content requirements' },
+  { num: '07', title: 'Web build', question: 'Can another team implement the intent?', desc: 'Turn the editorial specification into a build the web team can execute without reconstructing the strategy from scattered documents and conversations.', output: 'Implemented editorial experience' },
+  { num: '08', title: 'Published experience', question: 'What do we learn once people use it?', desc: 'Publish, observe behaviour and collect new audience, search, sales and stakeholder signals. Feed those signals back into the evidence base.', output: 'Performance signals and next decisions' },
+];
+---
+
+<BaseLayout title="Editorial Product Workflow" description="An eight-stage Editorial Intelligence method for turning distributed evidence into a coherent, implementable and measurable digital experience.">
+  <article class="container-site py-20">
+    <div class="workflow-inner">
+      <nav aria-label="Breadcrumb" class="mb-12">
+        <ol class="workflow-breadcrumb"><li><a href="/methods">Methods</a></li><li aria-hidden="true">→</li><li>Editorial Product Workflow</li></ol>
+      </nav>
+
+      <header class="workflow-hero mb-16">
+        <p class="t-label mb-6">Working method · Eight-stage workflow</p>
+        <h1 class="t-display mb-6">Editorial Product Workflow</h1>
+        <p class="workflow-subtitle mb-8">From raw evidence to a published experience a team can build, use and improve.</p>
+        <div class="workflow-intro">
+          <p>Most editorial web projects begin with a format: a page, a hub, a campaign or an article.</p>
+          <p>The Editorial Product Workflow begins earlier, with the evidence and the argument.</p>
+          <p>It connects editorial judgement with experience design and implementation, so the final product is not simply a container for content. It is a structured way for an audience to understand and act on organisational knowledge.</p>
+        </div>
+      </header>
+
+      <section class="workflow-definition mb-16">
+        <p class="t-label mb-3">Definition</p>
+        <blockquote>The Editorial Product Workflow turns distributed evidence into a coherent, implementable and measurable editorial experience.</blockquote>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <section class="mb-16">
+        <p class="t-label mb-4">The workflow</p>
+        <h2 class="workflow-h2 mb-4">Eight connected stages</h2>
+        <p class="workflow-section-intro mb-10">The stages are sequential enough to create clarity, but not rigid. New evidence can change the narrative; build constraints can improve the experience design; audience behaviour can restart the whole cycle.</p>
+        <div class="workflow-map" aria-label="Editorial Product Workflow from evidence to published experience and back to evidence">
+          {stages.map((stage, i) => (
+            <div class="workflow-stage-wrap">
+              <div class="workflow-stage">
+                <div class="stage-heading"><span class="stage-num">{stage.num}</span><h3 class="stage-title">{stage.title}</h3></div>
+                <p class="stage-question">{stage.question}</p>
+                <p class="stage-desc">{stage.desc}</p>
+                <div class="stage-output"><span>Output</span><strong>{stage.output}</strong></div>
+              </div>
+              {i < stages.length - 1 && <div class="workflow-arrow" aria-hidden="true">↓</div>}
+            </div>
+          ))}
+          <div class="workflow-loop">
+            <span class="loop-arrow" aria-hidden="true">↻</span>
+            <div><p class="loop-title">Learning returns to evidence</p><p class="loop-desc">The published experience creates new signals. Those signals update the Evidence Engine, strengthen the narrative and shape the next iteration.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <section class="mb-16">
+        <p class="t-label mb-4">What changes</p>
+        <h2 class="workflow-h2 mb-10">From filling a page to designing an editorial product</h2>
+        <div class="workflow-comparison">
+          <div class="comparison-card comparison-card--muted">
+            <p class="comparison-title">Content production</p>
+            <ul><li>Starts with a requested format</li><li>Treats source material as input for copy</li><li>Design and editorial often develop separately</li><li>Success is attached to the asset</li><li>The project ends at publication</li></ul>
+          </div>
+          <div class="comparison-card comparison-card--active">
+            <p class="comparison-title">Editorial product design</p>
+            <ul><li>Starts with evidence and audience need</li><li>Uses synthesis to establish the argument</li><li>Designs narrative, journey and assets together</li><li>Success is attached to understanding and action</li><li>Publication creates evidence for the next cycle</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="workflow-outputs mb-16">
+        <p class="t-label mb-4">Implementation package</p>
+        <h2 class="workflow-h2 mb-4">What the method produces</h2>
+        <p class="workflow-section-intro mb-8">The web build should not depend on a development team piecing the editorial intent together. The workflow creates a connected specification.</p>
+        <div class="output-grid">
+          {[
+            ['Narrative brief', 'The central argument, evidence hierarchy and supporting themes.'],
+            ['Experience structure', 'The audience journey, page logic and wireframe.'],
+            ['Editorial copy deck', 'Page-level copy, context, transitions and calls to action.'],
+            ['Asset map', 'The role, location and requirements of every supporting asset.'],
+            ['Build notes', 'Editorial intent, component behaviour and implementation decisions.'],
+            ['Learning questions', 'What the published experience needs to reveal next.'],
+          ].map(([title, desc]) => (
+            <div class="output-item"><p class="output-title">{title}</p><p class="output-desc">{desc}</p></div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <section class="mb-16">
+        <p class="t-label mb-4">When to use it</p>
+        <div class="use-grid">
+          <div>
+            <h2 class="workflow-h2 mb-5">Useful when the experience carries an argument</h2>
+            <ul class="use-list"><li>Research needs to become more than a report launch.</li><li>Several stories, videos or data sources need one coherent home.</li><li>A content hub needs an editorial thesis, not just navigation.</li><li>A web team needs a build-ready specification rather than a loose copy document.</li><li>The experience should keep learning after publication.</li></ul>
+          </div>
+          <div class="use-caution"><p class="t-label mb-3">Do not over-engineer it</p><p>Not every article needs an eight-stage process. Use the workflow when multiple evidence sources, assets, audiences or implementation teams create enough complexity to justify designing the editorial experience as a product.</p></div>
+        </div>
+      </section>
+
+      <section class="workflow-proof mb-16">
+        <p class="t-label mb-3">Developed through practice</p>
+        <h2 class="workflow-proof-title mb-4">A method discovered in the work</h2>
+        <p>This workflow began to emerge while moving an evidence-led project beyond articles and into a connected web experience. The pattern was not “write the copy, then hand it over”. It was evidence, synthesis, narrative, experience design and an implementation package that preserved the editorial logic through the build.</p>
+        <p>That is the point at which content production becomes editorial product design.</p>
+        <p>The method is documented here so it can be tested, adapted and strengthened through the next project rather than remembered as a one-off process.</p>
+      </section>
+
+      <section class="workflow-next">
+        <div>
+          <p class="t-label mb-3">The wider system</p>
+          <h2 class="workflow-next-title">One method within Editorial Intelligence OS</h2>
+          <p class="workflow-next-desc">The workflow draws on the Evidence Engine, Narrative Architecture and Editorial Activation. It gives those capabilities a shared path from source material to a live experience.</p>
+        </div>
+        <div class="workflow-next-links"><a href="/editorial-intelligence-os">Explore the EI OS →</a><a href="/work/narrative-audit">Start with a Narrative Audit →</a></div>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .workflow-inner { max-width: 900px; }
+  .workflow-breadcrumb { display: flex; align-items: center; gap: 0.5rem; padding: 0; margin: 0; list-style: none; font-size: 0.8125rem; color: var(--color-ink-tertiary); }
+  .workflow-breadcrumb a { color: var(--color-ink-tertiary); text-decoration: none; }
+  .workflow-breadcrumb a:hover { color: var(--color-ink); }
+  .workflow-hero { max-width: 740px; }
+  .workflow-subtitle { max-width: 60ch; font-size: 1.15rem; line-height: 1.6; color: var(--color-ink-secondary); }
+  .workflow-intro p { font-size: 1rem; line-height: 1.8; color: var(--color-ink-secondary); }
+  .workflow-intro p + p { margin-top: 0.8rem; }
+  .workflow-intro p:nth-child(2) { color: var(--color-ink); }
+  .workflow-definition { padding: 1.5rem; border-left: 2px solid var(--color-accent); background: var(--color-surface-secondary); }
+  .workflow-definition blockquote { max-width: 70ch; font-family: var(--font-serif); font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.45; color: var(--color-ink); }
+  .workflow-h2, .workflow-proof-title, .workflow-next-title { font-family: var(--font-serif); font-weight: 400; color: var(--color-ink); }
+  .workflow-h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+  .workflow-section-intro { max-width: 70ch; font-size: 0.9375rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .workflow-map { max-width: 760px; }
+  .workflow-stage-wrap { display: flex; flex-direction: column; }
+  .workflow-stage { display: grid; grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1.25fr); column-gap: 2rem; row-gap: 0.6rem; padding: 1.35rem; border: 1px solid var(--color-rule); border-radius: 4px; background: var(--color-surface-secondary); }
+  .stage-heading { display: flex; align-items: baseline; gap: 0.8rem; grid-row: 1 / 3; }
+  .stage-num { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; color: var(--color-accent); }
+  .stage-title { font-size: 1rem; font-weight: 500; color: var(--color-ink); }
+  .stage-question { font-size: 0.875rem; font-weight: 500; color: var(--color-ink); }
+  .stage-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .stage-output { grid-column: 2; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; padding-top: 0.55rem; border-top: 1px solid var(--color-rule); }
+  .stage-output span { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-tertiary); }
+  .stage-output strong { font-size: 0.75rem; font-weight: 500; color: var(--color-accent); }
+  .workflow-arrow { align-self: center; padding: 0.45rem 0; color: var(--color-accent); opacity: 0.55; }
+  .workflow-loop { display: flex; align-items: center; gap: 1rem; margin-top: 0.75rem; padding: 1rem 1.25rem; border: 1px solid color-mix(in srgb, var(--color-accent) 50%, var(--color-rule)); border-radius: 4px; background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface)); }
+  .loop-arrow { flex: 0 0 auto; font-size: 1.5rem; color: var(--color-accent); }
+  .loop-title { font-size: 0.875rem; font-weight: 500; color: var(--color-ink); }
+  .loop-desc { margin-top: 0.2rem; font-size: 0.8rem; line-height: 1.55; color: var(--color-ink-secondary); }
+  .workflow-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .comparison-card { padding: 1.5rem; border: 1px solid var(--color-rule); border-radius: 4px; }
+  .comparison-card--muted { background: var(--color-surface-secondary); }
+  .comparison-card--active { border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-rule)); background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface)); }
+  .comparison-title { margin-bottom: 1rem; font-size: 0.95rem; font-weight: 500; color: var(--color-ink); }
+  .comparison-card ul, .use-list { margin: 0; padding-left: 1.2rem; }
+  .comparison-card li, .use-list li { margin-bottom: 0.6rem; font-size: 0.875rem; line-height: 1.6; color: var(--color-ink-secondary); }
+  .comparison-card li:last-child, .use-list li:last-child { margin-bottom: 0; }
+  .workflow-outputs { padding: 1.5rem; border: 1px solid var(--color-rule); border-radius: 5px; background: var(--color-surface-secondary); }
+  .output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--color-rule); background: var(--color-rule); }
+  .output-item { padding: 1rem; background: var(--color-surface); }
+  .output-title { font-size: 0.85rem; font-weight: 500; color: var(--color-ink); }
+  .output-desc { margin-top: 0.3rem; font-size: 0.8rem; line-height: 1.55; color: var(--color-ink-secondary); }
+  .use-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr); gap: 2rem; align-items: start; }
+  .use-caution { padding: 1.25rem; border-left: 2px solid var(--color-signal); background: var(--color-surface-secondary); }
+  .use-caution > p:last-child { font-size: 0.875rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .workflow-proof { padding: 1.5rem; border: 1px solid var(--color-rule); border-radius: 4px; background: var(--color-surface-secondary); }
+  .workflow-proof-title { font-size: 1.35rem; }
+  .workflow-proof > p:not(.t-label) { font-size: 0.9375rem; line-height: 1.75; color: var(--color-ink-secondary); }
+  .workflow-proof > p + p { margin-top: 0.75rem; }
+  .workflow-next { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-rule); }
+  .workflow-next-title { font-size: 1.4rem; }
+  .workflow-next-desc { margin-top: 0.5rem; max-width: 60ch; font-size: 0.875rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .workflow-next-links { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
+  .workflow-next-links a { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent); text-decoration: none; }
+  @media (max-width: 720px) {
+    .workflow-stage { grid-template-columns: 1fr; gap: 0.65rem; }
+    .stage-heading { grid-row: auto; }
+    .stage-output { grid-column: 1; }
+    .workflow-comparison, .output-grid, .use-grid { grid-template-columns: 1fr; }
+    .workflow-next { align-items: flex-start; flex-direction: column; }
+    .workflow-next-links { align-items: flex-start; }
+  }
+</style>

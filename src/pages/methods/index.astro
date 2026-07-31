@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+
+const methods = [
+  { num: '01', title: 'Evidence mapping', desc: 'Locate the research, customer insight, expertise and market signals already available — then expose the gaps, contradictions and unused connections.' },
+  { num: '02', title: 'Editorial synthesis', desc: 'Move beyond summarising sources to identify patterns, tensions, useful distinctions and the argument the evidence can support.' },
+  { num: '03', title: 'Narrative design', desc: 'Turn the strongest insight into a clear position, supporting themes and a narrative structure that can hold future evidence.' },
+  { num: '04', title: 'Experience design', desc: 'Design how an audience moves through the knowledge before deciding what the page, hub, tool or journey should contain.' },
+  { num: '05', title: 'Asset mapping', desc: 'Give every article, video, data point, case study and call to action a defined role within the wider editorial experience.' },
+  { num: '06', title: 'Customer signal analysis', desc: 'Structure recurring customer language, pressures and outcomes so individual conversations strengthen a reusable evidence base.' },
+];
+---
+
+<BaseLayout title="Editorial Intelligence methods" description="Repeatable methods for turning organisational evidence into narratives, editorial experiences and knowledge that can be used again.">
+  <article class="container-site py-20">
+    <div class="methods-inner">
+      <header class="methods-hero mb-16">
+        <p class="t-label mb-6">Methods</p>
+        <h1 class="t-display mb-6">How the work gets done</h1>
+        <div class="methods-intro">
+          <p>Frameworks explain how to think about Editorial Intelligence.</p>
+          <p>Methods make the work repeatable.</p>
+          <p>They turn broad capabilities such as synthesis, narrative and activation into practical sequences a team can use on real research, customer evidence and editorial projects.</p>
+        </div>
+      </header>
+
+      <section class="methods-distinction mb-16" aria-label="The role of methods">
+        <div class="distinction-item">
+          <span class="distinction-num">01</span>
+          <div><p class="distinction-title">Frameworks</p><p class="distinction-desc">Models for understanding the problem.</p></div>
+        </div>
+        <div class="distinction-arrow" aria-hidden="true">→</div>
+        <div class="distinction-item distinction-item--current">
+          <span class="distinction-num">02</span>
+          <div><p class="distinction-title">Methods</p><p class="distinction-desc">Repeatable ways of doing the work.</p></div>
+        </div>
+        <div class="distinction-arrow" aria-hidden="true">→</div>
+        <div class="distinction-item">
+          <span class="distinction-num">03</span>
+          <div><p class="distinction-title">Applications</p><p class="distinction-desc">The OS applied to a specific context.</p></div>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <section class="mb-16">
+        <p class="t-label mb-4">Flagship method</p>
+        <a href="/methods/editorial-product-workflow" class="flagship-method">
+          <div class="flagship-copy">
+            <span class="flagship-kicker">Working method · Evidence to experience</span>
+            <h2 class="flagship-title">Editorial Product Workflow</h2>
+            <p class="flagship-desc">A repeatable eight-stage process for turning distributed evidence into a coherent editorial experience that a web team can build, publish and learn from.</p>
+            <span class="flagship-link">Explore the workflow →</span>
+          </div>
+          <div class="flagship-flow" aria-label="Evidence, synthesis, narrative, experience, build and learning">
+            {['Evidence', 'Synthesis', 'Narrative', 'Experience', 'Build', 'Learning'].map((stage, i) => (
+              <div class="flagship-stage"><span>{stage}</span>{i < 5 && <span class="flagship-arrow" aria-hidden="true">↓</span>}</div>
+            ))}
+          </div>
+        </a>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <section class="mb-16">
+        <p class="t-label mb-4">Method library</p>
+        <h2 class="methods-h2 mb-4">Connected practices across the OS</h2>
+        <p class="methods-section-intro mb-10">These practices are being documented from live work. Some sit directly inside the Editorial Product Workflow; others support the wider OS. For now, they are defined together because their value comes from how they connect, not from treating each one as a standalone template.</p>
+        <div class="method-list">
+          {methods.map((method) => (
+            <div class="method-row">
+              <span class="method-num">{method.num}</span>
+              <div><h3 class="method-title">{method.title}</h3><p class="method-desc">{method.desc}</p></div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="methods-principle mb-16">
+        <p class="t-label mb-3">Working principle</p>
+        <h2 class="methods-principle-title mb-4">Document the method when a repeatable pattern appears</h2>
+        <p>The aim is not to turn every useful idea into another framework. A working method belongs here when recurring steps become clear, make judgement easier to transfer and produce recognisable outputs another person could use. It should remain open to revision until further projects test it.</p>
+      </section>
+
+      <section class="methods-next">
+        <div>
+          <p class="t-label mb-3">Start with a live problem</p>
+          <h2 class="methods-next-title">Have evidence but no clear argument?</h2>
+          <p class="methods-next-desc">The Narrative Audit uses evidence mapping, synthesis and narrative design to identify the strongest position hidden inside what you already have.</p>
+        </div>
+        <a href="/work/narrative-audit" class="methods-cta">Explore the Narrative Audit →</a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .methods-inner { max-width: 900px; }
+  .methods-hero { max-width: 720px; }
+  .methods-intro p { font-size: 1.05rem; line-height: 1.75; color: var(--color-ink-secondary); }
+  .methods-intro p + p { margin-top: 0.75rem; }
+  .methods-intro p:nth-child(2) { color: var(--color-ink); }
+  .methods-distinction { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 0.75rem; }
+  .distinction-item { display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; padding: 1rem; border: 1px solid var(--color-rule); border-radius: 4px; background: var(--color-surface-secondary); }
+  .distinction-item--current { border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-rule)); background: color-mix(in srgb, var(--color-accent) 7%, var(--color-surface)); }
+  .distinction-num, .method-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--color-accent); letter-spacing: 0.08em; }
+  .distinction-title { font-size: 0.875rem; font-weight: 500; color: var(--color-ink); }
+  .distinction-desc { margin-top: 0.25rem; font-size: 0.75rem; line-height: 1.5; color: var(--color-ink-tertiary); }
+  .distinction-arrow { align-self: center; color: var(--color-ink-tertiary); opacity: 0.55; }
+  .flagship-method { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(210px, 0.6fr); gap: 2.5rem; padding: 2rem; border: 1px solid color-mix(in srgb, var(--color-accent) 55%, var(--color-rule)); border-radius: 6px; background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface)); text-decoration: none; transition: background 0.15s, border-color 0.15s; }
+  .flagship-method:hover { background: color-mix(in srgb, var(--color-accent) 9%, var(--color-surface)); border-color: var(--color-accent); }
+  .flagship-kicker { display: block; margin-bottom: 0.75rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
+  .flagship-title, .methods-h2, .methods-principle-title, .methods-next-title { font-family: var(--font-serif); font-weight: 400; color: var(--color-ink); }
+  .flagship-title { font-size: clamp(1.6rem, 4vw, 2.25rem); line-height: 1.15; }
+  .flagship-desc { margin-top: 1rem; max-width: 56ch; font-size: 0.95rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .flagship-link { display: block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent); }
+  .flagship-flow { display: flex; flex-direction: column; justify-content: center; }
+  .flagship-stage { display: flex; flex-direction: column; align-items: center; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--color-ink-secondary); }
+  .flagship-arrow { padding: 0.25rem 0; color: var(--color-accent); opacity: 0.55; }
+  .methods-h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+  .methods-section-intro { max-width: 68ch; font-size: 0.9375rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .method-list { border: 1px solid var(--color-rule); border-radius: 4px; overflow: hidden; }
+  .method-row { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding: 1.25rem; border-bottom: 1px solid var(--color-rule); }
+  .method-row:last-child { border-bottom: 0; }
+  .method-title { font-size: 0.95rem; font-weight: 500; color: var(--color-ink); }
+  .method-desc { margin-top: 0.35rem; font-size: 0.875rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .methods-principle { padding: 1.5rem; border-left: 2px solid var(--color-accent); background: var(--color-surface-secondary); }
+  .methods-principle-title { font-size: 1.35rem; }
+  .methods-principle > p:last-child { max-width: 68ch; font-size: 0.9375rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .methods-next { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-rule); }
+  .methods-next-title { font-size: 1.4rem; }
+  .methods-next-desc { margin-top: 0.5rem; max-width: 58ch; font-size: 0.875rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .methods-cta { flex: 0 0 auto; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent); text-decoration: none; }
+  @media (max-width: 720px) {
+    .methods-distinction { grid-template-columns: 1fr; }
+    .distinction-arrow { transform: rotate(90deg); justify-self: center; }
+    .flagship-method { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; }
+    .flagship-flow { align-items: stretch; }
+    .methods-next { align-items: flex-start; flex-direction: column; }
+  }
+</style>
