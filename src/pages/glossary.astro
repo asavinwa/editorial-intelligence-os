@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+const terms = [
+  {
+    term: 'Application',
+    definition: 'A specific context in which Editorial Intelligence is used. Applications show how the OS changes work such as research activation, customer evidence, event intelligence or AI visibility.',
+    distinction: 'An application is where the work is used; a method is how the work is done.',
+    href: '/applications',
+    linkLabel: 'Explore applications',
+  },
+  {
+    term: 'Asset mapping',
+    definition: 'The practice of giving each article, video, data point, case study and call to action a defined role within a larger editorial experience. It identifies what already exists, what is missing and what should connect.',
+    href: '/methods',
+    linkLabel: 'See the method library',
+  },
+  {
+    term: 'Customer signal',
+    definition: 'A recurring piece of evidence found in customer language, behaviour, pressures or outcomes. A single comment may be anecdotal; repeated signals can reveal a pattern worth investigating and connecting to other evidence.',
+    href: '/frameworks/customer-signal-framework',
+    linkLabel: 'Explore the Customer Signal Framework',
+  },
+  {
+    term: 'Editorial activation',
+    definition: 'The planned movement of an idea through the channels, formats and moments where it can create value. It connects narrative, audience journey, assets, distribution and learning rather than treating publication as the end of the work.',
+    distinction: 'Activation is not simply promotion after publication. It begins when the editorial experience is designed.',
+    href: '/frameworks/editorial-activation',
+    linkLabel: 'Explore Editorial Activation',
+  },
+  {
+    term: 'Editorial experience',
+    definition: 'The way an audience encounters and moves through connected knowledge. It may take the form of a page, hub, diagnostic, series or journey combining evidence, narrative, media and useful next steps.',
+    distinction: 'The experience is the audience-facing journey; the editorial product is the designed system that creates and sustains it.',
+    href: '/methods/editorial-product-workflow',
+    linkLabel: 'See the Editorial Product Workflow',
+  },
+  {
+    term: 'Editorial Intelligence',
+    definition: 'The discipline of turning organisational evidence into better decisions, stronger narratives and reusable knowledge. It connects research, customer insight, expertise and market signals so they can create value beyond the project that produced them.',
+    distinction: 'Editorial Intelligence is the discipline. Editorial Intelligence OS is the practical system used to make it repeatable.',
+    href: '/intelligence',
+    linkLabel: 'Learn about the discipline',
+  },
+  {
+    term: 'Editorial Intelligence Cycle',
+    definition: 'The recurring movement from signals to synthesis, activation and learning. Each published experience or decision creates new evidence that can strengthen the next cycle.',
+    href: '/cycle',
+    linkLabel: 'Explore the cycle',
+  },
+  {
+    term: 'Editorial Intelligence OS',
+    definition: 'The operating system that makes Editorial Intelligence usable across an organisation. It brings together frameworks, methods, assessments, guides, workflows and AI tools.',
+    distinction: 'It is a living system for building capability, not a fixed playbook of instructions.',
+    href: '/editorial-intelligence-os',
+    linkLabel: 'Explore Editorial Intelligence OS',
+  },
+  {
+    term: 'Editorial product',
+    definition: 'A deliberately designed editorial system that brings evidence, narrative, audience need, assets and learning together. Unlike an isolated content asset, it is built to be used, extended and improved over time.',
+    href: '/methods/editorial-product-workflow',
+    linkLabel: 'See the Editorial Product Workflow',
+  },
+  {
+    term: 'Editorial synthesis',
+    definition: 'The work of finding patterns, tensions, distinctions and implications across multiple sources. It moves beyond summarising what each source says to identify the argument the combined evidence can support.',
+    distinction: 'Summarising compresses information. Synthesis creates a new and defensible understanding from the connections between it.',
+    href: '/methods',
+    linkLabel: 'See the method library',
+  },
+  {
+    term: 'Evidence Engine',
+    definition: 'The organisational infrastructure for capturing, connecting and reusing research, customer insight, expertise and market signals. It prevents valuable evidence from disappearing when the original project ends.',
+    href: '/frameworks/evidence-engine',
+    linkLabel: 'Explore the Evidence Engine',
+  },
+  {
+    term: 'Evidence mapping',
+    definition: 'The practice of locating the evidence an organisation already holds, understanding its strength and exposing gaps, contradictions and unused connections. It establishes what can be credibly argued before new content is commissioned.',
+    href: '/methods',
+    linkLabel: 'See the method library',
+  },
+  {
+    term: 'Framework',
+    definition: 'A conceptual model that helps people understand a recurring Editorial Intelligence problem. Frameworks make relationships visible and support judgement; they do not prescribe every step.',
+    distinction: 'A framework explains how to think about the problem. A method provides a repeatable way to work through it.',
+    href: '/frameworks',
+    linkLabel: 'Explore frameworks',
+  },
+  {
+    term: 'Knowledge compounding',
+    definition: 'The increase in value that occurs when evidence and learning are retained, connected and reused. New work strengthens the existing knowledge base instead of starting again from an empty page.',
+    distinction: 'This is not content volume. It is the growing usefulness of connected organisational knowledge.',
+    href: '/writing/why-content-work-needs-to-compound',
+    linkLabel: 'Read why content work needs to compound',
+  },
+  {
+    term: 'Method',
+    definition: 'A repeatable way of performing Editorial Intelligence work. Methods translate broad capabilities such as synthesis, narrative design and activation into a practical sequence with recognisable decisions and outputs.',
+    distinction: 'Methods should be documented from recurring practice and remain open to revision as more work tests them.',
+    href: '/methods',
+    linkLabel: 'Explore methods',
+  },
+  {
+    term: 'Narrative design',
+    definition: 'The practice of turning an evidence-backed insight into a clear position, supporting themes and a structure that can hold future evidence. It determines the argument before deciding which assets to produce.',
+    href: '/frameworks/narrative-architecture',
+    linkLabel: 'Explore Narrative Architecture',
+  },
+  {
+    term: 'Narrative system',
+    definition: 'A connected structure through which a strategic argument can develop over time. It gives research, customer stories, expert insight and editorial assets a shared direction while allowing new evidence to update the position.',
+    href: '/narratives',
+    linkLabel: 'See narrative systems in practice',
+  },
+];
+
+const letters = [...new Set(terms.map((item) => item.term.charAt(0)))];
+---
+
+<BaseLayout
+  title="Editorial Intelligence glossary"
+  description="Clear definitions of the core terms used across Editorial Intelligence, from evidence mapping and editorial synthesis to frameworks, methods and applications."
+>
+  <article class="container-site py-20">
+    <div class="glossary-inner">
+      <header class="glossary-hero mb-16">
+        <p class="t-label mb-6">Reference</p>
+        <h1 class="t-display mb-6">Editorial Intelligence glossary</h1>
+        <div class="glossary-intro">
+          <p>Editorial Intelligence is developing through practice. Its language needs to be precise enough to make the work clearer without turning every idea into jargon.</p>
+          <p>This glossary defines the terms used across the site and, where the distinction matters, explains what each one is not.</p>
+        </div>
+      </header>
+
+      <section class="system-map mb-16" aria-labelledby="system-map-title">
+        <p class="t-label mb-3">The system at a glance</p>
+        <h2 id="system-map-title" class="glossary-h2 mb-4">How the main layers relate</h2>
+        <p class="system-map-intro mb-8">The discipline provides the principles. The OS makes them repeatable. Frameworks explain the work, methods structure it and applications place it in context.</p>
+        <div class="system-map-grid">
+          <a href="/intelligence" class="system-node system-node--wide">
+            <span class="system-node-label">Editorial Intelligence</span>
+            <span class="system-node-desc">The discipline</span>
+          </a>
+          <span class="system-arrow" aria-hidden="true">↓</span>
+          <a href="/editorial-intelligence-os" class="system-node system-node--wide">
+            <span class="system-node-label">Editorial Intelligence OS</span>
+            <span class="system-node-desc">The operating system</span>
+          </a>
+          <span class="system-arrow" aria-hidden="true">↓</span>
+          <div class="system-branches">
+            <a href="/frameworks" class="system-node"><span class="system-node-label">Frameworks</span><span class="system-node-desc">How to think</span></a>
+            <a href="/methods" class="system-node"><span class="system-node-label">Methods</span><span class="system-node-desc">How to work</span></a>
+            <a href="/applications" class="system-node"><span class="system-node-label">Applications</span><span class="system-node-desc">Where it is used</span></a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider mb-12" />
+
+      <nav class="letter-nav mb-12" aria-label="Glossary letters">
+        <span class="letter-nav-label">Jump to</span>
+        {letters.map((letter) => <a href={`#letter-${letter.toLowerCase()}`}>{letter}</a>)}
+      </nav>
+
+      <div class="glossary-list">
+        {letters.map((letter) => (
+          <section class="letter-section" id={`letter-${letter.toLowerCase()}`} aria-labelledby={`heading-${letter.toLowerCase()}`}>
+            <h2 class="letter-heading" id={`heading-${letter.toLowerCase()}`}>{letter}</h2>
+            <dl class="term-list">
+              {terms.filter((item) => item.term.startsWith(letter)).map((item) => (
+                <div class="term-entry">
+                  <dt>{item.term}</dt>
+                  <dd>
+                    <p>{item.definition}</p>
+                    {item.distinction && <p class="term-distinction">{item.distinction}</p>}
+                    <a href={item.href} class="term-link">{item.linkLabel} →</a>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+      </div>
+
+      <section class="glossary-note mt-16">
+        <div>
+          <p class="t-label mb-3">A working vocabulary</p>
+          <h2 class="glossary-note-title">Definitions should sharpen as the practice develops</h2>
+          <p>The glossary records the clearest current definitions. It will change when real work exposes a distinction that is more useful, or shows that two terms are doing the same job.</p>
+        </div>
+        <a href="/methods" class="glossary-note-link">See the methods in development →</a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .glossary-inner { max-width: 52rem; }
+  .glossary-hero { max-width: 45rem; }
+  .glossary-intro { display: flex; flex-direction: column; gap: 0.9rem; }
+  .glossary-intro p { font-size: 1.05rem; line-height: 1.75; color: var(--color-ink-secondary); }
+  .glossary-h2, .glossary-note-title { font-family: var(--font-serif); font-weight: 400; color: var(--color-ink); }
+  .glossary-h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+  .system-map { padding: 1.75rem; border: 1px solid var(--color-rule); border-radius: 6px; background: var(--color-surface-secondary); }
+  .system-map-intro { max-width: 67ch; font-size: 0.9375rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .system-map-grid { display: flex; flex-direction: column; align-items: center; }
+  .system-node { display: flex; flex-direction: column; gap: 0.25rem; width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--color-rule); border-radius: 4px; background: var(--color-surface); text-align: center; text-decoration: none; transition: border-color 0.15s, background 0.15s; }
+  .system-node:hover { border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface)); }
+  .system-node--wide { max-width: 25rem; }
+  .system-node-label { font-size: 0.875rem; font-weight: 500; color: var(--color-ink); }
+  .system-node-desc { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-ink-tertiary); }
+  .system-arrow { padding: 0.4rem; color: var(--color-accent); opacity: 0.65; }
+  .system-branches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; width: 100%; }
+  .letter-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; padding: 0.9rem 1rem; border: 1px solid var(--color-rule); border-radius: 4px; }
+  .letter-nav-label { margin-right: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-ink-tertiary); text-transform: uppercase; letter-spacing: 0.07em; }
+  .letter-nav a { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--color-accent); text-decoration: none; }
+  .letter-nav a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .glossary-list { display: flex; flex-direction: column; gap: 3rem; }
+  .letter-section { scroll-margin-top: 6rem; display: grid; grid-template-columns: 3.25rem 1fr; gap: 1.5rem; }
+  .letter-heading { position: sticky; top: 6rem; align-self: start; font-family: var(--font-serif); font-size: 1.75rem; font-weight: 400; color: var(--color-accent); }
+  .term-list { border-top: 1px solid var(--color-rule); }
+  .term-entry { display: grid; grid-template-columns: minmax(9rem, 0.65fr) minmax(0, 1.35fr); gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--color-rule); }
+  .term-entry dt { font-family: var(--font-serif); font-size: 1.2rem; line-height: 1.35; color: var(--color-ink); }
+  .term-entry dd { margin: 0; }
+  .term-entry dd > p:first-child { font-size: 0.9375rem; line-height: 1.72; color: var(--color-ink-secondary); }
+  .term-distinction { margin-top: 0.8rem; padding-left: 0.8rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 65%, transparent); font-size: 0.875rem; line-height: 1.65; color: var(--color-ink); }
+  .term-link { display: inline-block; margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent); text-decoration: none; }
+  .term-link:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .glossary-note { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.5rem; border-left: 2px solid var(--color-accent); background: var(--color-surface-secondary); }
+  .glossary-note-title { font-size: 1.35rem; }
+  .glossary-note p:last-child { margin-top: 0.65rem; max-width: 60ch; font-size: 0.9rem; line-height: 1.7; color: var(--color-ink-secondary); }
+  .glossary-note-link { flex: 0 0 auto; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent); text-decoration: none; }
+
+  @media (max-width: 720px) {
+    .system-map { padding: 1.25rem; }
+    .system-branches { grid-template-columns: 1fr; }
+    .letter-section { grid-template-columns: 1fr; gap: 0.75rem; }
+    .letter-heading { position: static; font-size: 1.4rem; }
+    .term-entry { grid-template-columns: 1fr; gap: 0.65rem; }
+    .glossary-note { align-items: flex-start; flex-direction: column; }
+  }
+</style>

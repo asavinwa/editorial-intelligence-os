@@ -14,6 +14,7 @@ export const SITE = {
         { label: 'Frameworks', href: '/frameworks', description: 'Models for thinking' },
         { label: 'Methods', href: '/methods', description: 'Repeatable ways of working' },
         { label: 'Guide', href: '/guide', description: 'How to begin' },
+        { label: 'Glossary', href: '/glossary', description: 'Shared language' },
         { label: 'Assessment', href: '/assessment', description: 'Diagnose your capability' },
       ],
     },
