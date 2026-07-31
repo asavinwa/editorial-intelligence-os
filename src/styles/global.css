@@ -190,3 +190,35 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Mobile readability floor
+   The desktop system uses very small mono labels as a visual device. On phone
+   screens those details carry meaning, so labels stay at 12px and supporting
+   copy at 14px or above. */
+@media (max-width: 767px) {
+  .t-small {
+    font-size: 0.875rem;
+  }
+
+  html body .t-label[class],
+  html body .t-mono[class],
+  html body .type-badge[class],
+  html body [class][class*="-eyebrow"],
+  html body [class][class*="-label"],
+  html body [class][class*="-badge"],
+  html body [class][class*="-kicker"],
+  html body [class][class*="-meta"],
+  html body [class][class*="-tag"],
+  html body [class][class*="-num"] {
+    font-size: 0.75rem !important;
+    line-height: 1.4;
+  }
+
+  html body [class][class*="-desc"],
+  html body [class][class*="-description"],
+  html body [class][class*="-excerpt"],
+  html body [class][class*="-note"] {
+    font-size: 0.875rem !important;
+    line-height: 1.55;
+  }
+}

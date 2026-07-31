@@ -20,24 +20,15 @@ const {
   {eyebrow && <p class="lab-signup-eyebrow">{eyebrow}</p>}
   {headline && <p class="lab-signup-headline">{headline}</p>}
   {body && <p class="lab-signup-body">{body}</p>}
-  <div class="lab-signup-embed">
-    <iframe
-      src="https://editorialintelligence.substack.com/embed"
-      width="100%"
-      height="150"
-      frameborder="0"
-      scrolling="no"
-      title="Subscribe to Editorial Intelligence Lab"
-    ></iframe>
-    <p class="lab-signup-fallback">
-      Or <a
-        href="https://editorialintelligence.substack.com"
-        class="lab-signup-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        onclick="window.va?.('track', 'substack_external_click')"
-      >open Substack directly →</a>
-    </p>
+  <div class="lab-signup-action">
+    <a
+      href="https://editorialintelligence.substack.com/subscribe?utm_source=editorialintelligence.co&utm_medium=website"
+      class="lab-signup-button"
+      target="_blank"
+      rel="noopener noreferrer"
+      onclick="window.va?.('track', 'substack_subscribe_click')"
+    >Subscribe to the Lab <span aria-hidden="true">→</span></a>
+    <span class="lab-signup-note">Free · Opens in Substack</span>
   </div>
 </div>
 
@@ -83,29 +74,67 @@ const {
     max-width: 52ch;
   }
 
-  .lab-signup-embed {
-    margin-top: 0.75rem;
+  .lab-signup-action {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    margin-top: 1rem;
   }
 
-  .lab-signup-embed iframe {
-    display: block;
-    width: 100%;
-    max-width: 480px;
-    min-height: 150px;
-  }
-
-  .lab-signup-fallback {
-    font-size: 0.8125rem;
-    color: var(--color-ink-tertiary);
-    margin-top: 0.5rem;
-  }
-
-  .lab-signup-link {
-    color: var(--color-accent);
+  .lab-signup-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 3px;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-decoration: none;
+    transition: opacity 0.15s;
   }
 
-  .lab-signup-link:hover {
-    text-decoration: underline;
+  .lab-signup-button:hover {
+    opacity: 0.86;
+  }
+
+  .lab-signup-note {
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 767px) {
+    .lab-signup {
+      margin: 1.5rem 0;
+    }
+
+    .lab-signup--compact {
+      padding: 1.25rem;
+    }
+
+    .lab-signup-eyebrow,
+    .lab-signup-button,
+    .lab-signup-note {
+      font-size: 0.75rem;
+    }
+
+    .lab-signup-headline {
+      font-size: 1.125rem;
+      line-height: 1.35;
+    }
+
+    .lab-signup--full .lab-signup-headline {
+      font-size: 1.5rem;
+    }
+
+    .lab-signup-body {
+      font-size: 0.9375rem;
+    }
   }
 </style>
