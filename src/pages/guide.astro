@@ -4,27 +4,27 @@ import LabSignup from '../components/LabSignup.astro';
 
 const sections = [
   { id: 'introduction', label: 'Introduction' },
-  { id: 'part-1', label: 'Part 1 — Why production is changing' },
-  { id: 'part-2', label: 'Part 2 — What AI is replacing' },
-  { id: 'part-3', label: 'Part 3 — What editorial judgement does' },
-  { id: 'part-4', label: 'Part 4 — The Editorial Intelligence mindset' },
-  { id: 'part-5', label: 'Part 5 — From writer to EI designer' },
+  { id: 'part-1', label: 'Part 1 — The evidence problem' },
+  { id: 'part-2', label: 'Part 2 — What the capability does' },
+  { id: 'part-3', label: 'Part 3 — Where judgement matters' },
+  { id: 'part-4', label: 'Part 4 — From discipline to OS' },
+  { id: 'part-5', label: 'Part 5 — How capability develops' },
   { id: 'part-6', label: 'Part 6 — Skills worth developing' },
-  { id: 'part-7', label: 'Part 7 — Your next 90 days' },
+  { id: 'part-7', label: 'Part 7 — The first 90 days' },
   { id: 'closing', label: 'A final thought' },
 ];
 ---
 
 <BaseLayout
-  title="The AI-enabled Content Writer Guide"
-  description="How experienced writers become editorial intelligence practitioners. A guide to thriving in an era where producing content is the easiest part of the job."
+  title="A Practical Guide to Editorial Intelligence"
+  description="How B2B research, thought-leadership, editorial and content teams turn scattered evidence into stronger narratives, decisions and reusable knowledge."
 >
   <div class="guide-layout container-site py-16">
 
     <!-- Left nav -->
     <aside class="guide-nav">
       <div class="guide-nav-inner">
-        <p class="guide-nav-title">The AI-enabled Content Writer Guide</p>
+        <p class="guide-nav-title">A practical guide to Editorial Intelligence</p>
         <nav>
           <ul class="guide-nav-list">
             {sections.map((s) => (
@@ -35,9 +35,9 @@ const sections = [
           </ul>
         </nav>
         <div class="guide-nav-footer">
-          <a href="/frameworks/evidence-engine" class="guide-nav-related">Evidence Engine →</a>
-          <a href="/intelligence" class="guide-nav-related">Editorial Intelligence →</a>
-          <a href="/frameworks/daily-os" class="guide-nav-related">Daily OS →</a>
+          <a href="/editorial-intelligence-os" class="guide-nav-related">Explore the EI OS →</a>
+          <a href="/assessment" class="guide-nav-related">Assess your organisation →</a>
+          <a href="/work/narrative-audit" class="guide-nav-related">Explore the Narrative Audit →</a>
         </div>
       </div>
     </aside>
@@ -48,25 +48,20 @@ const sections = [
       <!-- Header -->
       <header class="guide-header">
         <p class="t-label mb-4">Guide</p>
-        <h1 class="guide-title">The AI-enabled Content Writer Guide</h1>
-        <p class="guide-subtitle">How experienced writers become editorial intelligence practitioners</p>
+        <h1 class="guide-title">A practical guide to Editorial Intelligence</h1>
+        <p class="guide-subtitle">How B2B teams turn scattered evidence into stronger narratives, decisions and reusable knowledge</p>
       </header>
 
       <!-- Introduction -->
       <section id="introduction" class="guide-section">
-        <a href="/start" class="guide-start-link">New to Editorial Intelligence? Get a full orientation first →</a>
-        <p>If you've worked in content for more than a few years, you've probably experienced several waves of change.</p>
-        <p>The rise of social media changed distribution. SEO reshaped how articles were planned and structured. Marketing automation increased the demand for content at scale.</p>
-        <p>Now AI is changing something much deeper.</p>
-        <p>For the first time, machines can perform many of the tasks that once defined the day-to-day work of professional content writers. Drafting articles, summarising research, rewriting copy, generating headlines and adapting content into different formats can all be done in seconds.</p>
-        <p>That has led to a familiar question.</p>
-        <p class="guide-question">Will AI replace content writers?</p>
-        <p>It's the wrong question.</p>
-        <p>A better question is:</p>
-        <p class="guide-key">How does the role of a content writer change when producing content becomes the easiest part of the job?</p>
-        <p>This guide argues that the role isn't disappearing. It's evolving.</p>
-        <p>The writers who thrive won't simply become better prompt engineers. They'll become better editors, researchers, synthesisers and designers of knowledge.</p>
-        <p>In other words, they'll move from producing content to creating editorial intelligence.</p>
+        <a href="/start" class="guide-start-link">Need the map first? Start with the site orientation →</a>
+        <p>Most B2B organisations do not lack content. They lack a reliable way to turn what they already know into something useful.</p>
+        <p>Research is published once and forgotten. Customer insight remains inside separate teams. Event conversations disappear into recordings. Product expertise is repeatedly translated from scratch. AI makes it easier to produce more, but it does not decide which evidence matters or what argument the organisation can credibly own.</p>
+        <p>Editorial Intelligence addresses that gap.</p>
+        <p class="guide-key">It is the discipline of turning distributed evidence, expertise and audience signals into narratives, decisions and knowledge that compound over time.</p>
+        <p>This guide is for B2B research, thought-leadership, editorial and content leaders who want to build that capability. It is also for experienced writers whose work is expanding beyond production into synthesis, systems and organisational thinking.</p>
+        <p>The practical question is no longer simply <em>“What should we publish?”</em> It is:</p>
+        <p class="guide-question">What are we learning, what does it mean and how can it continue creating value?</p>
       </section>
 
       <hr class="guide-divider" />
@@ -74,19 +69,18 @@ const sections = [
       <!-- Part 1 -->
       <section id="part-1" class="guide-section">
         <p class="guide-part-label">Part 1</p>
-        <h2 class="guide-h2">Why content production is changing</h2>
-        <p>For decades, most content teams followed a familiar process. Research was collected. A brief was written. A writer created an article. An editor reviewed it. The piece was published. Then everyone moved on to the next campaign.</p>
-        <p>This workflow made sense because writing itself was expensive. Producing a well-researched article required time, specialist skills and multiple rounds of editing.</p>
-        <p>AI changes that equation. Today, creating a first draft is often the fastest step in the process. Large language models can produce summaries, outlines, alternative headlines, social posts, newsletter copy and even multiple versions of the same article almost instantly.</p>
-        <p>The bottleneck is no longer writing. The bottleneck is deciding:</p>
+        <h2 class="guide-h2">The problem is not information. It is fragmentation.</h2>
+        <p>Most organisations already hold valuable research, customer insight, market signals and specialist expertise. The problem is that this knowledge is distributed across reports, transcripts, dashboards, inboxes and individual memory.</p>
+        <p>Traditional content workflows rarely fix this. They begin with an output requirement, move through briefing and production, then end at publication. Useful thinking is treated as an input to an asset rather than an organisational resource that should remain available.</p>
+        <p>AI lowers the cost of drafting, summarising, editing and adaptation. That is useful, but it also exposes the real constraint. The difficult questions are now:</p>
         <ul class="guide-list">
-          <li>What deserves to be written</li>
-          <li>Which evidence is trustworthy</li>
-          <li>Which stories matter</li>
-          <li>How ideas connect over time</li>
-          <li>How knowledge accumulates instead of disappearing after publication</li>
+          <li>Which evidence deserves attention?</li>
+          <li>What pattern appears across different sources?</li>
+          <li>What can the organisation credibly argue?</li>
+          <li>How should that argument change for different audiences and contexts?</li>
+          <li>What should be learned from the response?</li>
         </ul>
-        <p class="guide-key">Ironically, AI has made editorial judgement more valuable, not less. As production becomes easier, deciding <em>what should exist</em> becomes the scarce skill.</p>
+        <p class="guide-key">As production becomes easier, synthesis, direction and judgement become more valuable.</p>
       </section>
 
       <hr class="guide-divider" />
@@ -94,18 +88,17 @@ const sections = [
       <!-- Part 2 -->
       <section id="part-2" class="guide-section">
         <p class="guide-part-label">Part 2</p>
-        <h2 class="guide-h2">What AI is replacing</h2>
-        <p>There is understandable anxiety about AI because many familiar writing tasks are becoming automated. It's important to distinguish between tasks and professions.</p>
-        <p>AI is replacing many tasks. It is not replacing the need for experienced editorial thinking.</p>
+        <h2 class="guide-h2">What Editorial Intelligence does</h2>
+        <p>Editorial Intelligence connects work that organisations often treat separately. It creates a repeatable movement from evidence to interpretation, from interpretation to activation and from audience response back to learning.</p>
 
         <div class="guide-tasks">
           {[
-            { task: 'First drafts', desc: 'Blank pages are becoming optional. AI can produce an initial structure in seconds, allowing writers to spend more time improving ideas rather than simply creating them.' },
-            { task: 'Research summaries', desc: 'Long reports, transcripts, customer interviews and meeting notes can be condensed quickly, making large volumes of information easier to review.' },
-            { task: 'Repurposing', desc: 'One article can become a newsletter, LinkedIn post, executive summary or webinar description with minimal effort.' },
-            { task: 'Copy editing', desc: 'Grammar, spelling, readability and tone adjustments are increasingly automated.' },
-            { task: 'SEO optimisation', desc: 'Headline suggestions, metadata, keyword placement and structural recommendations are now readily available.' },
-            { task: 'Routine research', desc: 'Finding definitions, comparing products, identifying trends and gathering background information has become dramatically faster.' },
+            { task: 'Capture', desc: 'Preserve useful research, customer insight, event conversations, practitioner expertise and market signals before they disappear.' },
+            { task: 'Connect', desc: 'Bring evidence together across teams, formats and projects so recurring themes become visible.' },
+            { task: 'Synthesise', desc: 'Use human judgement, supported by AI, to test patterns and decide what the evidence means.' },
+            { task: 'Shape', desc: 'Turn the strongest interpretation into a clear narrative, position and editorial direction.' },
+            { task: 'Activate', desc: 'Express the narrative through the formats, voices and experiences most useful to each audience.' },
+            { task: 'Learn', desc: 'Treat performance, questions and audience response as new evidence that improves the next decision.' },
           ].map(t => (
             <div class="guide-task">
               <span class="guide-task-name">{t.task}</span>
@@ -114,7 +107,7 @@ const sections = [
           ))}
         </div>
 
-        <p class="guide-key">All of these improvements increase productivity. None of them automatically improve thinking. Producing more content does not guarantee producing better ideas.</p>
+        <p class="guide-key">The output may be an article, campaign, event, tool, sales narrative or product experience. The capability is the system that makes those outputs more connected and useful.</p>
       </section>
 
       <hr class="guide-divider" />
@@ -122,16 +115,16 @@ const sections = [
       <!-- Part 3 -->
       <section id="part-3" class="guide-section">
         <p class="guide-part-label">Part 3</p>
-        <h2 class="guide-h2">What editorial judgement still does</h2>
-        <p>If AI reduces the cost of producing content, where does human value move? Towards judgement. Editorial judgement has always existed, but it often sat quietly behind the visible work of writing. Now it becomes the work itself.</p>
+        <h2 class="guide-h2">Where human judgement matters</h2>
+        <p>AI can compare large volumes of material, surface possible patterns and accelerate execution. It cannot take responsibility for what an organisation chooses to believe, argue or publish. That remains editorial work.</p>
 
         <div class="guide-judgements">
           {[
-            { label: 'Spotting patterns', desc: 'Markets rarely change because of a single event. They change through repeated signals. Editorial thinkers notice those patterns before they become obvious.' },
-            { label: 'Connecting evidence', desc: 'Customer interviews, research reports, sales conversations, webinars and events, support tickets, community discussions — separately these are observations. Together they become insight. The ability to connect those sources into one coherent narrative remains deeply human.' },
-            { label: 'Deciding what matters', desc: 'AI produces possibilities. Editors decide priorities. Knowing what to ignore is often more valuable than knowing what to include.' },
-            { label: 'Asking better questions', desc: 'Strong prompting isn\'t about clever wording. It\'s about curiosity. The quality of AI outputs usually reflects the quality of the questions behind them.' },
-            { label: 'Protecting trust', desc: 'Evidence still matters. Accuracy still matters. Context still matters. Editorial judgement remains responsible for deciding whether a claim deserves to be published.' },
+            { label: 'Spotting patterns', desc: 'Markets rarely change because of one event. Editorial thinkers notice repeated signals and distinguish an emerging pattern from an isolated anecdote.' },
+            { label: 'Testing interpretation', desc: 'The same evidence can support several stories. Judgement means comparing explanations, challenging assumptions and refusing the most convenient conclusion when the evidence is weak.' },
+            { label: 'Deciding what matters', desc: 'AI produces possibilities. People decide priorities. Knowing what to ignore is often more valuable than knowing what to include.' },
+            { label: 'Finding the argument', desc: 'A collection of facts is not yet a position. Editorial judgement identifies the tension, point of view and practical consequence that make evidence meaningful.' },
+            { label: 'Protecting trust', desc: 'Accuracy, provenance and context remain human responsibilities. A claim should not be published simply because a model can express it confidently.' },
           ].map((j, i) => (
             <div class="guide-judgement">
               <span class="guide-judgement-num">{String(i + 1).padStart(2, '0')}</span>
@@ -149,19 +142,19 @@ const sections = [
       <!-- Part 4 -->
       <section id="part-4" class="guide-section">
         <p class="guide-part-label">Part 4</p>
-        <h2 class="guide-h2">The Editorial Intelligence mindset</h2>
-        <p>Most organisations already possess more knowledge than they realise. Research reports sit in shared drives. Customer interviews disappear into notebooks. Webinars and events generate conversations that are never revisited. Sales teams hear recurring concerns. Support teams recognise emerging issues. Executives commission expensive research that produces a short campaign before quietly disappearing into archives.</p>
-        <p>The problem is rarely a lack of information. The problem is fragmentation.</p>
-        <p>Editorial Intelligence begins with a different assumption: knowledge is an organisational asset. Content is one way of activating it.</p>
-        <p>Rather than asking <em>"What should we publish this month?"</em> Editorial Intelligence asks: <em>"What are we learning, and how can that learning continue creating value?"</em></p>
+        <h2 class="guide-h2">From discipline to operating system</h2>
+        <p>Editorial Intelligence is the discipline. <a href="/editorial-intelligence-os">Editorial Intelligence OS</a> is the practical operating system that makes the discipline repeatable inside an organisation.</p>
+        <p>The OS is not a fixed playbook. It is a living capability for continually updating how an organisation thinks, publishes and learns as technology, audiences and markets change.</p>
 
         <div class="guide-principles">
           {[
-            { label: 'Evidence before opinion', desc: 'Strong narratives are supported by genuine evidence rather than confident assertions.' },
-            { label: 'Narratives over campaigns', desc: 'Campaigns have start and end dates. Narratives evolve over months and years.' },
-            { label: 'Systems over assets', desc: 'Individual articles matter less than repeatable ways of creating better work.' },
-            { label: 'Knowledge that compounds', desc: 'Each piece of research should strengthen future content rather than disappear after publication.' },
-            { label: 'Human judgement, AI execution', desc: 'AI accelerates production. Humans remain responsible for direction.' },
+            { label: 'Evidence Engine', desc: 'Captures and connects the research, expertise and signals the organisation already holds.' },
+            { label: 'Narrative Architecture', desc: 'Identifies the arguments and narrative territories the evidence can credibly support.' },
+            { label: 'Editorial Strategy', desc: 'Sets priorities, audiences, formats and editorial direction.' },
+            { label: 'Editorial Activation', desc: 'Turns narratives into coordinated articles, social posts, video, events, executive voices and experiences.' },
+            { label: 'AI Visibility', desc: 'Makes knowledge clear, structured and retrievable for both people and AI systems.' },
+            { label: 'Measurement', desc: 'Evaluates reach, use, influence and contribution at narrative level, not only asset level.' },
+            { label: 'Continuous Learning', desc: 'Feeds audience response, performance and new evidence back into every other capability.' },
           ].map(p => (
             <div class="guide-principle">
               <strong>{p.label}</strong>
@@ -169,6 +162,7 @@ const sections = [
             </div>
           ))}
         </div>
+        <p>The parts reinforce one another. Activation creates new signals. Measurement shows what people used, questioned or ignored. Continuous learning then updates the evidence, narrative and strategy.</p>
       </section>
 
       <hr class="guide-divider" />
@@ -176,25 +170,30 @@ const sections = [
       <!-- Part 5 -->
       <section id="part-5" class="guide-section">
         <p class="guide-part-label">Part 5</p>
-        <h2 class="guide-h2">From content writer to Editorial Intelligence designer</h2>
-        <p>Career progression is increasingly about expanding capability rather than changing job titles.</p>
+        <h2 class="guide-h2">How the capability develops</h2>
+        <p>Editorial Intelligence is not something an organisation either has or lacks. It develops as evidence, judgement and learning become more connected and repeatable.</p>
 
         <div class="guide-stages">
           {[
             {
               stage: 'Stage 1',
-              title: 'AI-enabled content writer',
-              desc: 'AI becomes part of everyday practice. You understand the strengths and weaknesses of multiple language models. You use AI to speed up drafting, summarising, editing and repurposing. You don\'t accept outputs blindly — you edit critically and remain accountable for quality.',
+              title: 'Content producer',
+              desc: 'Work begins with briefs and output requirements. Useful evidence is often rediscovered for each project, and learning tends to end when an asset is published.',
             },
             {
               stage: 'Stage 2',
-              title: 'Editorial Intelligence practitioner',
-              desc: 'The focus shifts beyond individual pieces of content. You begin connecting research, customer insight and organisational knowledge. You identify recurring themes. You build reusable frameworks. You help teams recognise patterns they had not previously noticed. Writing becomes one expression of a broader editorial capability.',
+              title: 'Evidence collector',
+              desc: 'Research and insight are preserved more consistently, but connections across teams and projects remain uneven. The organisation knows more than it can readily use.',
             },
             {
               stage: 'Stage 3',
-              title: 'Editorial Intelligence designer',
-              desc: 'This stage moves beyond creating content altogether. Instead, you design systems. You create repeatable editorial workflows. You develop knowledge repositories. You orchestrate AI tools around evidence rather than prompts alone. At this level, the outcome is no longer simply better articles — it is better organisational thinking.',
+              title: 'Editorial Intelligence practitioner',
+              desc: 'Teams connect multiple evidence sources, use editorial judgement to shape narratives and activate those ideas across formats. The opportunity is to make the practice repeatable.',
+            },
+            {
+              stage: 'Stage 4',
+              title: 'Editorial Intelligence organisation',
+              desc: 'Evidence is captured, synthesised, activated and reviewed through a shared system. Insight influences decisions across teams, learning compounds and AI supports judgement without replacing it.',
             },
           ].map((s, i) => (
             <div class="guide-stage">
@@ -209,6 +208,7 @@ const sections = [
             </div>
           ))}
         </div>
+        <p>Experienced writers often become early practitioners because they already know how to interrogate evidence, recognise a story and protect trust. But the capability belongs across research, marketing, product, customer and leadership teams.</p>
       </section>
 
       <hr class="guide-divider" />
@@ -217,7 +217,7 @@ const sections = [
       <section id="part-6" class="guide-section">
         <p class="guide-part-label">Part 6</p>
         <h2 class="guide-h2">Skills worth developing</h2>
-        <p>As AI takes over repetitive production, the most valuable skills become those that strengthen judgement. Interestingly, very few of these are primarily writing skills — they are thinking skills.</p>
+        <p>The most valuable skills strengthen an organisation's ability to make sense of evidence and act on it. Few are purely production skills.</p>
 
         <div class="guide-skills">
           {[
@@ -225,18 +225,19 @@ const sections = [
             'Customer interviewing',
             'Evidence mapping',
             'Narrative architecture',
-            'Knowledge management',
-            'Prompt design',
-            'AI orchestration',
-            'Workshop facilitation',
             'Editorial strategy',
+            'Experience design',
+            'Knowledge management',
+            'AI orchestration',
+            'Editorial activation',
+            'Measurement design',
             'Cross-functional collaboration',
           ].map(s => (
             <div class="guide-skill">{s}</div>
           ))}
         </div>
 
-        <p>Writing remains important. It simply becomes one output of a much broader capability.</p>
+        <p>Writing remains important. It is one expression of a broader capability that also shapes decisions, workflows, experiences and shared organisational knowledge.</p>
       </section>
 
       <hr class="guide-divider" />
@@ -244,36 +245,33 @@ const sections = [
       <!-- Part 7 -->
       <section id="part-7" class="guide-section">
         <p class="guide-part-label">Part 7</p>
-        <h2 class="guide-h2">Your next 90 days</h2>
-        <p>You don't need permission to begin working differently.</p>
+        <h2 class="guide-h2">A practical first 90 days</h2>
+        <p>Do not begin by designing a complete operating system. Start with one important narrative and use it to expose where evidence is lost, disconnected or underused.</p>
 
         <div class="guide-months">
           {[
             {
               month: 'Month one',
               actions: [
-                'Experiment with several AI models rather than relying on just one',
-                'Identify repetitive tasks you can automate',
-                'Use the time you save to read more deeply, interview customers or analyse research',
+                'Choose one live business question or narrative',
+                'Map the research, customer insight, expertise and performance evidence already available',
+                'Identify important gaps, duplicated work and knowledge at risk of disappearing',
               ],
             },
             {
               month: 'Month two',
               actions: [
-                'Choose one topic your organisation cares about',
-                'Collect evidence from multiple sources',
-                'Look for recurring patterns rather than isolated stories',
-                'Try producing a narrative map instead of immediately writing another article',
+                'Compare evidence from at least three different sources',
+                'Use AI to surface possible patterns, then test them with human judgement',
+                'Create a narrative map before deciding which assets to produce',
               ],
             },
             {
               month: 'Month three',
               actions: [
-                'Design one repeatable editorial workflow',
-                'Document it',
-                'Test it',
-                'Improve it',
-                'Share what you\'ve learned with colleagues',
+                'Activate the narrative through the formats and voices that fit the audience',
+                'Measure questions, use and response as well as reach',
+                'Run a learning review and document what should change next time',
               ],
             },
           ].map(m => (
@@ -286,7 +284,7 @@ const sections = [
           ))}
         </div>
 
-        <p class="guide-key">Your goal isn't simply to produce more content. It's to help your organisation become better at turning knowledge into action.</p>
+        <p class="guide-key">The first useful outcome is not more content. It is a visible, repeatable path from evidence to action and back to learning.</p>
       </section>
 
       <hr class="guide-divider" />
@@ -294,32 +292,27 @@ const sections = [
       <!-- Closing -->
       <section id="closing" class="guide-section">
         <p class="guide-part-label">A final thought</p>
-        <p>AI will continue improving. Writing tools will become faster, cheaper and more capable. That trend is unlikely to reverse.</p>
-        <p>But organisations will always need people who can make sense of complexity. People who recognise weak signals before they become obvious. People who know which evidence deserves attention. People who can connect ideas across departments, campaigns and years.</p>
-        <p>The future isn't defined by humans competing with AI. It's defined by humans using AI to amplify editorial judgement.</p>
-        <p class="guide-key">That's the opportunity for experienced content writers. And it's why editorial intelligence may become one of the most valuable capabilities of the next decade.</p>
+        <p>AI will continue making production faster and cheaper. That does not remove the need for editorial capability. It makes the difference between production and understanding harder to ignore.</p>
+        <p>Organisations still need people who can recognise weak signals, test competing interpretations, connect ideas across teams and decide what deserves to become part of the organisation's point of view.</p>
+        <p class="guide-key">Editorial Intelligence is not another content playbook. It is the capability to keep improving how an organisation thinks, publishes and learns.</p>
 
         <div class="guide-related">
-          <p class="t-label mb-4">Go deeper</p>
+          <p class="t-label mb-4">Choose your next step</p>
           <div class="guide-related-links">
-            <a href="/intelligence" class="guide-related-link">
-              <span>What is Editorial Intelligence?</span>
-              <span class="guide-related-arrow">→</span>
-            </a>
             <a href="/editorial-intelligence-os" class="guide-related-link">
-              <span>Editorial Intelligence OS — the practical operating system</span>
+              <span>Explore Editorial Intelligence OS</span>
               <span class="guide-related-arrow">→</span>
             </a>
-            <a href="/frameworks/evidence-engine" class="guide-related-link">
-              <span>The Evidence Engine</span>
+            <a href="/assessment" class="guide-related-link">
+              <span>Assess your organisation across five dimensions</span>
               <span class="guide-related-arrow">→</span>
             </a>
-            <a href="/frameworks/daily-os" class="guide-related-link">
-              <span>The Daily OS — how to practise this every day</span>
+            <a href="/work/narrative-audit" class="guide-related-link">
+              <span>Explore the Narrative Audit</span>
               <span class="guide-related-arrow">→</span>
             </a>
-            <a href="/frameworks/narrative-architecture" class="guide-related-link">
-              <span>Narrative Architecture</span>
+            <a href="/intelligence" class="guide-related-link">
+              <span>Read the definition of Editorial Intelligence</span>
               <span class="guide-related-arrow">→</span>
             </a>
           </div>
@@ -327,7 +320,7 @@ const sections = [
       </section>
 
       <div class="guide-lab-signup">
-        <LabSignup headline="Continue the writer-to-operator journey" />
+        <LabSignup headline="Follow Editorial Intelligence in practice" />
       </div>
 
     </main>
