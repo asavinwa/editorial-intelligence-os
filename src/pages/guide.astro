@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import LabSignup from '../components/LabSignup.astro';
+import CompareNotesCallout from '../components/CompareNotesCallout.astro';
 
 const sections = [
   { id: 'introduction', label: 'Introduction' },
@@ -319,6 +320,15 @@ const sections = [
         </div>
       </section>
 
+      <div class="guide-compare-notes">
+        <CompareNotesCallout
+          heading="Does this describe how your organisation works?"
+          body="I’m comparing how different teams handle evidence, narrative and editorial learning — including where this guide fits and where it misses something important."
+          linkLabel="Compare approaches"
+          compact
+        />
+      </div>
+
       <div class="guide-lab-signup">
         <LabSignup headline="Follow Editorial Intelligence in practice" />
       </div>
@@ -328,6 +338,7 @@ const sections = [
 </BaseLayout>
 
 <style>
+  .guide-compare-notes { margin-top: 3rem; }
   .guide-layout {
     display: grid;
     grid-template-columns: 1fr;

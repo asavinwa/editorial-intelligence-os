@@ -1,0 +1,100 @@
+---
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  body?: string;
+  linkLabel?: string;
+  compact?: boolean;
+}
+
+const {
+  eyebrow = 'An open research invitation',
+  heading = 'Want to compare approaches?',
+  body = 'I’m speaking with people responsible for turning expertise into content and organisational knowledge. These are research conversations, not sales calls.',
+  linkLabel = 'Compare notes',
+  compact = false,
+} = Astro.props;
+---
+
+<aside class:list={['compare-callout', { 'compare-callout--compact': compact }]} aria-label="Compare notes invitation">
+  <div class="compare-callout-copy">
+    <p class="compare-callout-eyebrow">{eyebrow}</p>
+    <h2 class="compare-callout-heading">{heading}</h2>
+    <p class="compare-callout-body">{body}</p>
+  </div>
+  <a href="/compare-notes" class="compare-callout-link">
+    {linkLabel}
+    <span aria-hidden="true">→</span>
+  </a>
+</aside>
+
+<style>
+  .compare-callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
+  }
+
+  .compare-callout--compact { padding: 1.5rem; }
+
+  .compare-callout-copy { max-width: 58ch; }
+
+  .compare-callout-eyebrow {
+    margin-bottom: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .compare-callout-heading {
+    margin-bottom: 0.55rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+    line-height: 1.25;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+
+  .compare-callout-body {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+  }
+
+  .compare-callout-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    white-space: nowrap;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, transform 0.15s;
+  }
+
+  .compare-callout-link:hover {
+    background: var(--color-accent);
+    color: var(--color-surface);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 640px) {
+    .compare-callout { grid-template-columns: 1fr; gap: 1.25rem; }
+    .compare-callout-link { justify-self: start; }
+  }
+</style>

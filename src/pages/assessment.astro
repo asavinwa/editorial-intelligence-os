@@ -247,6 +247,11 @@ const assessmentConfig = {
   .a-cta-block { padding: 1.75rem; border: 1px solid var(--color-rule); border-left: 2px solid var(--color-accent); border-radius: 4px; background: var(--color-surface-secondary); margin-bottom: 1.5rem; }
   .a-cta-block-heading { font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-ink); margin-bottom: 0.5rem; }
   .a-cta-block-body { font-size: 0.875rem; line-height: 1.65; color: var(--color-ink-secondary); margin-bottom: 1.25rem; max-width: 52ch; }
+  .a-compare-block { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; padding: 1.5rem; border: 1px solid var(--color-rule); border-radius: 4px; margin-bottom: 1.5rem; }
+  .a-compare-eyebrow { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.45rem; }
+  .a-compare-heading { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; color: var(--color-ink); margin-bottom: 0.45rem; }
+  .a-compare-body { max-width: 52ch; font-size: 0.8125rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  @media (max-width: 640px) { .a-compare-block { grid-template-columns: 1fr; } .a-compare-block .a-btn { justify-self: start; } }
 
   /* Share */
   .a-share { margin-bottom: 2.5rem; }
@@ -603,6 +608,15 @@ const assessmentConfig = {
           <a href="/frameworks/editorial-intelligence-framework" class="a-btn">Explore the Editorial Intelligence framework →</a>
           <button class="a-btn a-btn-ghost" id="retake-btn">Retake the assessment</button>
         </div>
+      </div>
+
+      <div class="a-compare-block">
+        <div>
+          <p class="a-compare-eyebrow">Compare approaches</p>
+          <h2 class="a-compare-heading">Recognise these challenges?</h2>
+          <p class="a-compare-body">I’m speaking with people about how their organisations handle evidence, narrative and editorial learning. These are research conversations, not sales calls.</p>
+        </div>
+        <a href="/compare-notes" class="a-btn a-btn-ghost">Compare notes →</a>
       </div>
 
       <div class="a-share">

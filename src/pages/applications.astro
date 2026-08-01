@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import EILoop from '../components/content/EILoop.astro';
+import CompareNotesCallout from '../components/CompareNotesCallout.astro';
 ---
 
 <BaseLayout
@@ -331,6 +332,15 @@ import EILoop from '../components/content/EILoop.astro';
           </a>
         </div>
       </section>
+
+      <div class="mt-12 mb-8">
+        <CompareNotesCallout
+          heading="Where could this apply in your organisation?"
+          body="The applications are still being tested across different contexts. If you work with research, customer evidence, thought leadership or performance learning, I’d like to compare what transfers — and what does not."
+          linkLabel="Compare applications"
+          compact
+        />
+      </div>
 
     </div>
   </article>

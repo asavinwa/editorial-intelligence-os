@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../components/layout/BaseLayout.astro';
+import CompareNotesCallout from '../../components/CompareNotesCallout.astro';
 
 const methods = [
   { num: '01', title: 'Evidence mapping', desc: 'Locate the research, customer insight, expertise and market signals already available — then expose the gaps, contradictions and unused connections.' },
@@ -90,6 +91,15 @@ const methods = [
         </div>
         <a href="/work/narrative-audit" class="methods-cta">Explore the Narrative Audit →</a>
       </section>
+
+      <div class="mt-12">
+        <CompareNotesCallout
+          heading="How does your team do this work?"
+          body="These methods are being documented from practice and remain open to revision. I’m interested in where your process follows a similar pattern — and where it does not."
+          linkLabel="Compare methods"
+          compact
+        />
+      </div>
     </div>
   </article>
 </BaseLayout>

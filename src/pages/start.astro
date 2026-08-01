@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import LabSignup from '../components/LabSignup.astro';
+import CompareNotesCallout from '../components/CompareNotesCallout.astro';
 ---
 
 <BaseLayout
@@ -15,6 +16,14 @@ import LabSignup from '../components/LabSignup.astro';
       <h1 class="sh-h1">New to Editorial Intelligence?</h1>
       <p class="sh-sub">Everything you need to understand Editorial Intelligence, how it works, and where to begin.</p>
       <p class="sh-support">Whether you're a content leader, marketer, researcher, product team or simply curious about the future of editorial, this page will help you navigate the site.</p>
+    </div>
+    <div class="mt-8">
+      <CompareNotesCallout
+        heading="Prefer to begin with a conversation?"
+        body="If you recognise the problem but are unsure whether Editorial Intelligence is the right language for it, I’d be interested in comparing how your organisation approaches the work."
+        linkLabel="Compare notes"
+        compact
+      />
     </div>
   </section>
 
