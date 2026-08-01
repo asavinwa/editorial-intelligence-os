@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Let's compare notes"
+  description="An invitation to compare notes on how organisations turn research, customer insight and internal expertise into ideas that influence decisions."
+>
+  <header class="compare-hero">
+    <div class="container-site compare-hero-grid">
+      <div>
+        <p class="t-label mb-6">An open research invitation</p>
+        <h1 class="t-display mb-6">Let's compare notes</h1>
+        <p class="compare-question">
+          How do organisations turn research, customer insight and internal expertise into ideas that actually influence decisions?
+        </p>
+      </div>
+      <div class="compare-intro">
+        <p>
+          Over the past year, I've been developing what I call Editorial Intelligence — a way of thinking about how evidence becomes narrative, and how narrative becomes organisational knowledge.
+        </p>
+        <p>
+          Much of that thinking has come from my work in B2B technology and enterprise software. Now I'd like to test it beyond that environment.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container-site compare-section">
+      <div class="compare-section-heading">
+        <p class="t-label">Who I'd like to hear from</p>
+        <h2>People responsible for turning expertise into something useful</h2>
+      </div>
+      <div class="people-grid" role="list">
+        {[
+          'Content leaders',
+          'Editorial teams',
+          'Product marketers',
+          'Research teams',
+          'Consultants',
+          'Founders',
+        ].map((person, index) => (
+          <div class="person-item" role="listitem">
+            <span class="person-num">{String(index + 1).padStart(2, '0')}</span>
+            <span>{person}</span>
+          </div>
+        ))}
+      </div>
+      <p class="people-note">
+        The job title matters less than the responsibility. If part of your work involves turning knowledge, evidence or expertise into content, I'd be interested in your perspective.
+      </p>
+    </section>
+
+    <hr class="divider container-site" />
+
+    <section class="container-site compare-section questions-section">
+      <div class="questions-intro">
+        <p class="t-label mb-5">What we could discuss</p>
+        <h2>I'm looking for honest conversations</h2>
+        <p>
+          I'm not selling anything through these conversations. I want to understand where the work breaks down, what has changed and what still feels harder than it should.
+        </p>
+      </div>
+      <div class="question-list">
+        {[
+          'What is the hardest part of creating thought leadership?',
+          'Where does valuable knowledge get lost?',
+          'Has AI changed the way your team works?',
+          'What still feels harder than it should?',
+        ].map((question, index) => (
+          <div class="question-item">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <p>{question}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="learning-section">
+      <div class="container-site learning-grid">
+        <div>
+          <p class="t-label mb-5">What I'm hoping to learn</p>
+          <h2>A useful idea should survive contact with other people's work</h2>
+        </div>
+        <ul class="learning-list">
+          <li>Does Editorial Intelligence describe a problem you already recognise?</li>
+          <li>Which parts resonate most — and which don't?</li>
+          <li>Where does it overlap with existing roles or disciplines?</li>
+          <li>What would make it genuinely useful in your organisation?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container-site closing-section">
+      <div class="closing-copy">
+        <p>If my thinking is useful, brilliant.</p>
+        <p>If it's wrong, I'd rather find out now than in three years' time.</p>
+      </div>
+      <div class="closing-invite">
+        <h2>Would you spend 30 minutes comparing notes?</h2>
+        <p>Tell me a little about the work you do and the problem you keep encountering. We'll take it from there.</p>
+        <div class="closing-actions">
+          <a
+            href="mailto:asavin@editorialintelligence.co?subject=Let's%20compare%20notes&body=Hi%20Asavin%2C%0A%0AI'd%20be%20happy%20to%20compare%20notes.%20A%20little%20about%20my%20work%3A%0A%0A"
+            class="compare-btn"
+          >
+            Start a conversation
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ashwat/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+            Or message me on LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .compare-hero {
+    padding-block: clamp(5rem, 11vw, 9rem) clamp(4rem, 8vw, 7rem);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .compare-hero-grid,
+  .learning-grid,
+  .closing-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .compare-question {
+    max-width: 25ch;
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+    line-height: 1.45;
+    color: var(--color-accent);
+  }
+
+  .compare-intro {
+    align-self: end;
+    max-width: 55ch;
+  }
+
+  .compare-intro p,
+  .questions-intro > p:last-child,
+  .closing-invite > p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  .compare-intro p + p {
+    margin-top: 1.25rem;
+  }
+
+  .compare-section {
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .compare-section-heading {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .compare-section-heading h2,
+  .questions-intro h2,
+  .learning-grid h2,
+  .closing-invite h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+
+  .compare-section-heading h2,
+  .questions-intro h2,
+  .learning-grid h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.25;
+  }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--color-rule);
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .person-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    min-height: 5rem;
+    padding: 1.35rem;
+    border-right: 1px solid var(--color-rule);
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--color-ink);
+  }
+
+  .person-num,
+  .question-item > span {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+  }
+
+  .people-note {
+    max-width: 64ch;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-tertiary);
+  }
+
+  .questions-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .questions-intro {
+    max-width: 52ch;
+  }
+
+  .questions-intro h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .question-list {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .question-item {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .question-item p {
+    font-family: var(--font-serif);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  .learning-section {
+    padding-block: clamp(4rem, 8vw, 7rem);
+    background: var(--color-surface-secondary);
+    border-block: 1px solid var(--color-rule);
+  }
+
+  .learning-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-surface-tertiary);
+  }
+
+  .learning-list li {
+    position: relative;
+    padding: 1.15rem 0 1.15rem 1.5rem;
+    border-bottom: 1px solid var(--color-surface-tertiary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+  }
+
+  .learning-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .closing-section {
+    padding-block: clamp(4rem, 9vw, 8rem);
+  }
+
+  .closing-copy {
+    align-self: center;
+    font-family: var(--font-serif);
+    font-size: clamp(1.45rem, 3vw, 2.1rem);
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  .closing-copy p + p {
+    margin-top: 0.5rem;
+    color: var(--color-accent);
+  }
+
+  .closing-invite {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+  }
+
+  .closing-invite h2 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    line-height: 1.3;
+  }
+
+  .closing-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-top: 1.75rem;
+  }
+
+  .compare-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .compare-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+
+  .linkedin-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .linkedin-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 760px) {
+    .compare-hero-grid,
+    .learning-grid,
+    .closing-section {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(3rem, 8vw, 7rem);
+    }
+
+    .compare-section-heading {
+      grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+      align-items: start;
+    }
+
+    .people-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .questions-section {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(3rem, 8vw, 7rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .people-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .closing-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .compare-btn {
+      width: 100%;
+    }
+  }
+</style>

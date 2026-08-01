@@ -290,7 +290,7 @@ import LabSignup from '../components/LabSignup.astro';
       <span class="origin-callout-arrow group-hover:translate-x-0.5 transition-transform">→</span>
     </a>
     <p class="in-public-note">
-      Editorial Intelligence is being developed in public. External responses and cross-sector applications will help shape what it becomes.
+      Editorial Intelligence is being developed in public. External responses and cross-sector applications will help shape what it becomes. <a href="/compare-notes">Spend 30 minutes comparing notes →</a>
     </p>
     <LabSignup headline="Follow the discipline as it develops" />
   </section>
@@ -696,14 +696,20 @@ import LabSignup from '../components/LabSignup.astro';
 
   .in-public-note {
     font-family: var(--font-mono);
-    font-size: 0.625rem;
+    font-size: 0.75rem;
     letter-spacing: 0.04em;
     line-height: 1.7;
     color: var(--color-ink-tertiary);
-    opacity: 0.5;
     margin-top: 1.25rem;
-    max-width: 60ch;
+    max-width: 68ch;
   }
+
+  .in-public-note a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .in-public-note a:hover { text-decoration: underline; }
 
   /* ── Section header ── */
   .section-header {
