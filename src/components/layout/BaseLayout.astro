@@ -1,6 +1,7 @@
 ---
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import FlagshipJourney from '../FlagshipJourney.astro';
 import { SITE } from '../../config/site';
 import '../../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
@@ -162,6 +163,7 @@ const structuredData = {
   </head>
   <body class="min-h-screen flex flex-col">
     <Nav />
+    <FlagshipJourney />
     <main class="flex-1">
       <slot />
     </main>
