@@ -170,11 +170,38 @@ const structuredData = {
     <Footer />
     <Analytics />
     <script>
-      // Block analytics for site owner — set localStorage flag 'ei_owner' to skip tracking
       if (typeof window !== 'undefined' && window.localStorage.getItem('ei_owner') === 'true') {
         window.__va_disable = true;
       }
-      // Homepage cards are rendered directly in the page template to preserve styling and order.
+
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('.hero-text > a.guide-callout'));
+        const byHref = new Map(cards.map((card) => [card.getAttribute('href'), card]));
+        const start = byHref.get('/start');
+        const guide = byHref.get('/guide');
+        const assessment = byHref.get('/assessment');
+        const aiVisibility = byHref.get('/work/ai-visibility-audit');
+
+        if (start && guide && assessment && aiVisibility) {
+          const marketing = guide.cloneNode(true) as HTMLAnchorElement;
+          marketing.href = '/applications/marketing';
+          const badge = marketing.querySelector('.guide-callout-badge');
+          const title = marketing.querySelector('.guide-callout-title');
+          const description = marketing.querySelector('.guide-callout-sub');
+
+          if (badge) badge.textContent = 'Apply';
+          if (title) title.textContent = 'Editorial Intelligence for marketing';
+          if (description) description.textContent = 'See how the discipline connects research, customer evidence, campaign learning and internal expertise →';
+
+          const parent = start.parentElement;
+          if (parent) {
+            const marker = document.createComment('homepage learning journey');
+            parent.insertBefore(marker, start);
+            [start, guide, marketing, assessment, aiVisibility].forEach((card) => parent.insertBefore(card, marker));
+            marker.remove();
+          }
+        }
+      }
     </script>
   </body>
 </html>
