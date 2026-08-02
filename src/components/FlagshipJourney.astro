@@ -58,11 +58,16 @@ const journeys: Record<string, {
 };
 
 const journey = journeys[pathname];
+const isApplications = pathname === '/applications';
 ---
 
 {journey && pathname !== '/applications/marketing' && (
-  <aside class="flagship-journey" aria-label="Recommended Editorial Intelligence journey">
-    <div class="container-site flagship-journey-inner">
+  <aside
+    class:list={['flagship-journey', isApplications && 'flagship-journey--application']}
+    data-flagship-placement={isApplications ? 'applications' : undefined}
+    aria-label="Recommended Editorial Intelligence journey"
+  >
+    <div class:list={['flagship-journey-inner', !isApplications && 'container-site']}>
       <div class="flagship-journey-copy">
         <p class="t-label">{journey.eyebrow}</p>
         <h2>{journey.title}</h2>
@@ -76,6 +81,16 @@ const journey = journeys[pathname];
       </div>
     </div>
   </aside>
+)}
+
+{isApplications && (
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const flagship = document.querySelector('[data-flagship-placement="applications"]');
+      const applicationGrid = document.querySelector('.app-grid');
+      if (flagship && applicationGrid) applicationGrid.prepend(flagship);
+    });
+  </script>
 )}
 
 <style>
@@ -120,8 +135,38 @@ const journey = journeys[pathname];
   .flagship-secondary { color: var(--color-ink-secondary); }
   .flagship-primary:hover,
   .flagship-secondary:hover { color: var(--color-ink); }
+
+  .flagship-journey--application {
+    order: -1;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 52%, var(--color-rule));
+    border-left: 4px solid var(--color-accent);
+    border-radius: 8px;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 58%),
+      var(--color-surface-secondary);
+    box-shadow: 0 12px 36px color-mix(in srgb, var(--color-accent) 10%, transparent);
+    overflow: hidden;
+  }
+  .flagship-journey--application .flagship-journey-inner {
+    padding: 1.75rem;
+  }
+  .flagship-journey--application .flagship-journey-copy h2 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+  }
+  .flagship-journey--application .t-label {
+    color: var(--color-accent);
+  }
+  .flagship-journey--application .flagship-primary {
+    display: inline-flex;
+    padding: 0.75rem 0.95rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+
   @media (max-width: 760px) {
     .flagship-journey-inner { grid-template-columns: 1fr; gap: 1.25rem; }
     .flagship-journey-actions { min-width: 0; }
+    .flagship-journey--application .flagship-journey-inner { padding: 1.35rem; }
   }
 </style>
