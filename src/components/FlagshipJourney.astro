@@ -10,27 +10,18 @@ const journeys: Record<string, {
   secondaryLabel?: string;
   secondaryHref?: string;
 }> = {
-  '/': {
-    eyebrow: 'Start here',
-    title: 'Editorial Intelligence for marketing',
-    body: 'Marketing has become more specialised. It has not necessarily become more connected. Explore how Editorial Intelligence turns scattered evidence into shared understanding.',
-    primaryLabel: 'Read the flagship application',
-    primaryHref: '/applications/marketing',
-    secondaryLabel: 'Take the assessment',
-    secondaryHref: '/assessment',
-  },
   '/applications': {
     eyebrow: 'Flagship application',
     title: 'Editorial Intelligence for marketing',
-    body: 'The clearest introduction to how Editorial Intelligence connects research, customer evidence, campaign learning and internal expertise across a modern marketing organisation.',
-    primaryLabel: 'Explore the flagship',
+    body: 'How marketing teams connect research, customer evidence, campaign learning and internal expertise into stronger decisions, narratives and knowledge that compounds.',
+    primaryLabel: 'Explore this application',
     primaryHref: '/applications/marketing',
   },
   '/guide': {
     eyebrow: 'New here?',
-    title: 'Begin with the marketing application',
-    body: 'Read the flagship application first, then use this guide to explore the discipline, operating system, frameworks and practical first steps.',
-    primaryLabel: 'Start with marketing',
+    title: 'See the discipline applied to marketing',
+    body: 'Use the marketing application as a practical example, then return to this guide for the wider discipline, operating system and methods.',
+    primaryLabel: 'Explore the marketing application',
     primaryHref: '/applications/marketing',
     secondaryLabel: 'Continue to the guide',
     secondaryHref: '#introduction',
@@ -47,8 +38,8 @@ const journeys: Record<string, {
   '/assessment': {
     eyebrow: 'Before you assess',
     title: 'Understand the capability first',
-    body: 'The flagship marketing application explains the problem the assessment is designed to diagnose: where valuable knowledge stops moving across an organisation.',
-    primaryLabel: 'Read the flagship application',
+    body: 'The marketing application explains the problem the assessment is designed to diagnose: where valuable knowledge stops moving across an organisation.',
+    primaryLabel: 'Read the marketing application',
     primaryHref: '/applications/marketing',
     secondaryLabel: 'Continue to the assessment',
     secondaryHref: '#assessment',
@@ -56,15 +47,15 @@ const journeys: Record<string, {
   '/compare-notes': {
     eyebrow: 'Before we talk',
     title: 'Start from a shared understanding',
-    body: 'Spend ten minutes with the flagship marketing application, then bring the parts that feel most familiar—or most wrong—to the conversation.',
-    primaryLabel: 'Read the flagship application',
+    body: 'Spend ten minutes with the marketing application, then bring the parts that feel most familiar—or most wrong—to the conversation.',
+    primaryLabel: 'Read the marketing application',
     primaryHref: '/applications/marketing',
   },
   '/work/narrative-audit': {
     eyebrow: 'Editorial Intelligence in practice',
     title: 'The Narrative Audit applies the discipline inside your organisation',
-    body: 'Start with the flagship explanation, then see how an audit identifies the argument already present in your research, customer insight and market evidence.',
-    primaryLabel: 'Read the flagship application',
+    body: 'See the marketing application for the broader capability, then explore how an audit identifies the argument already present in your evidence.',
+    primaryLabel: 'Read the marketing application',
     primaryHref: '/applications/marketing',
     secondaryLabel: 'Explore the audit',
     secondaryHref: '#narrative-audit',
@@ -72,10 +63,11 @@ const journeys: Record<string, {
 };
 
 const journey = journeys[pathname];
+const isApplicationFeature = pathname === '/applications';
 ---
 
 {journey && pathname !== '/applications/marketing' && (
-  <aside class="flagship-journey" aria-label="Recommended Editorial Intelligence journey">
+  <aside class:list={['flagship-journey', { 'flagship-journey--application': isApplicationFeature }]} aria-label="Recommended Editorial Intelligence journey">
     <div class="container-site flagship-journey-inner">
       <div class="flagship-journey-copy">
         <p class="t-label">{journey.eyebrow}</p>
@@ -97,6 +89,10 @@ const journey = journeys[pathname];
     border-bottom: 1px solid var(--color-rule);
     background: var(--color-surface-secondary);
   }
+  .flagship-journey--application {
+    border-top: 1px solid var(--color-rule);
+    background: var(--color-surface);
+  }
   .flagship-journey-inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -105,12 +101,19 @@ const journey = journeys[pathname];
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
+  .flagship-journey--application .flagship-journey-inner {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
   .flagship-journey-copy { max-width: 46rem; }
   .flagship-journey-copy h2 {
     margin-top: 0.35rem;
     font-size: clamp(1.25rem, 2.2vw, 1.8rem);
     line-height: 1.25;
     color: var(--color-ink);
+  }
+  .flagship-journey--application .flagship-journey-copy h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2.15rem);
   }
   .flagship-journey-copy > p:last-child {
     margin-top: 0.5rem;
