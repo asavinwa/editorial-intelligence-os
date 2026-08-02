@@ -1,0 +1,141 @@
+---
+const pathname = Astro.url.pathname;
+
+const journeys: Record<string, {
+  eyebrow: string;
+  title: string;
+  body: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}> = {
+  '/': {
+    eyebrow: 'Start here',
+    title: 'Editorial Intelligence for marketing',
+    body: 'Marketing has become more specialised. It has not necessarily become more connected. Explore how Editorial Intelligence turns scattered evidence into shared understanding.',
+    primaryLabel: 'Read the flagship application',
+    primaryHref: '/applications/marketing',
+    secondaryLabel: 'Take the assessment',
+    secondaryHref: '/assessment',
+  },
+  '/applications': {
+    eyebrow: 'Flagship application',
+    title: 'Editorial Intelligence for marketing',
+    body: 'The clearest introduction to how Editorial Intelligence connects research, customer evidence, campaign learning and internal expertise across a modern marketing organisation.',
+    primaryLabel: 'Explore the flagship',
+    primaryHref: '/applications/marketing',
+  },
+  '/guide': {
+    eyebrow: 'New here?',
+    title: 'Begin with the marketing application',
+    body: 'Read the flagship application first, then use this guide to explore the discipline, operating system, frameworks and practical first steps.',
+    primaryLabel: 'Start with marketing',
+    primaryHref: '/applications/marketing',
+    secondaryLabel: 'Continue to the guide',
+    secondaryHref: '#introduction',
+  },
+  '/editorial-intelligence-os': {
+    eyebrow: 'The OS in practice',
+    title: 'See Editorial Intelligence applied to marketing',
+    body: 'The marketing application shows how the operating system connects evidence, narrative, activation and learning across specialist functions.',
+    primaryLabel: 'Explore the marketing application',
+    primaryHref: '/applications/marketing',
+    secondaryLabel: 'See all applications',
+    secondaryHref: '/applications',
+  },
+  '/assessment': {
+    eyebrow: 'Before you assess',
+    title: 'Understand the capability first',
+    body: 'The flagship marketing application explains the problem the assessment is designed to diagnose: where valuable knowledge stops moving across an organisation.',
+    primaryLabel: 'Read the flagship application',
+    primaryHref: '/applications/marketing',
+    secondaryLabel: 'Continue to the assessment',
+    secondaryHref: '#assessment',
+  },
+  '/compare-notes': {
+    eyebrow: 'Before we talk',
+    title: 'Start from a shared understanding',
+    body: 'Spend ten minutes with the flagship marketing application, then bring the parts that feel most familiar—or most wrong—to the conversation.',
+    primaryLabel: 'Read the flagship application',
+    primaryHref: '/applications/marketing',
+  },
+  '/work/narrative-audit': {
+    eyebrow: 'Editorial Intelligence in practice',
+    title: 'The Narrative Audit applies the discipline inside your organisation',
+    body: 'Start with the flagship explanation, then see how an audit identifies the argument already present in your research, customer insight and market evidence.',
+    primaryLabel: 'Read the flagship application',
+    primaryHref: '/applications/marketing',
+    secondaryLabel: 'Explore the audit',
+    secondaryHref: '#narrative-audit',
+  },
+};
+
+const journey = journeys[pathname];
+---
+
+{journey && pathname !== '/applications/marketing' && (
+  <aside class="flagship-journey" aria-label="Recommended Editorial Intelligence journey">
+    <div class="container-site flagship-journey-inner">
+      <div class="flagship-journey-copy">
+        <p class="t-label">{journey.eyebrow}</p>
+        <h2>{journey.title}</h2>
+        <p>{journey.body}</p>
+      </div>
+      <div class="flagship-journey-actions">
+        <a class="flagship-primary" href={journey.primaryHref}>{journey.primaryLabel} →</a>
+        {journey.secondaryHref && journey.secondaryLabel && (
+          <a class="flagship-secondary" href={journey.secondaryHref}>{journey.secondaryLabel} →</a>
+        )}
+      </div>
+    </div>
+  </aside>
+)}
+
+<style>
+  .flagship-journey {
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+  }
+  .flagship-journey-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .flagship-journey-copy { max-width: 46rem; }
+  .flagship-journey-copy h2 {
+    margin-top: 0.35rem;
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    line-height: 1.25;
+    color: var(--color-ink);
+  }
+  .flagship-journey-copy > p:last-child {
+    margin-top: 0.5rem;
+    color: var(--color-ink-secondary);
+    line-height: 1.65;
+  }
+  .flagship-journey-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    min-width: 13rem;
+  }
+  .flagship-primary,
+  .flagship-secondary {
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .flagship-primary { color: var(--color-accent); font-weight: 600; }
+  .flagship-secondary { color: var(--color-ink-secondary); }
+  .flagship-primary:hover,
+  .flagship-secondary:hover { color: var(--color-ink); }
+  @media (max-width: 760px) {
+    .flagship-journey-inner { grid-template-columns: 1fr; gap: 1.25rem; }
+    .flagship-journey-actions { min-width: 0; }
+  }
+</style>
