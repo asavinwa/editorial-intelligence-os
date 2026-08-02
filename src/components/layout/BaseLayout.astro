@@ -172,6 +172,44 @@ const structuredData = {
         window.__va_disable = true;
       }
 
+      if (window.location.pathname === '/applications/marketing' || window.location.pathname === '/applications/marketing/') {
+        const style = document.createElement('style');
+        style.textContent = `
+          .marketing-page { padding: 3.5rem 0 5rem !important; }
+          .marketing-page .hero { gap: clamp(2.5rem, 5vw, 5rem) !important; padding-bottom: 4rem !important; }
+          .marketing-page .hero h1 { font-size: clamp(2.65rem, 5vw, 4.25rem) !important; line-height: 1.02 !important; letter-spacing: -.035em !important; margin-bottom: 1.6rem !important; }
+          .marketing-page .hero-thesis { font-size: clamp(1.18rem, 2vw, 1.5rem) !important; line-height: 1.45 !important; margin-bottom: 1.1rem !important; }
+          .marketing-page .hero-summary { font-size: 1rem !important; line-height: 1.72 !important; }
+          .marketing-page .page-grid { grid-template-columns: 10.5rem minmax(0, 44rem) !important; gap: clamp(2.5rem, 5vw, 5rem) !important; }
+          .marketing-page .chapter { padding: 3.75rem 0 !important; }
+          .marketing-page .chapter h2 { font-size: clamp(1.75rem, 3vw, 2.35rem) !important; line-height: 1.16 !important; letter-spacing: -.025em !important; margin: .85rem 0 1.5rem !important; }
+          .marketing-page .prose { gap: 1rem !important; max-width: 40rem !important; }
+          .marketing-page .prose p { font-size: .98rem !important; line-height: 1.72 !important; }
+          .marketing-page blockquote { margin-top: 2.25rem !important; padding-top: 1.5rem !important; font-size: clamp(1.25rem, 2.3vw, 1.75rem) !important; }
+          .marketing-page .principle-card { padding: 1.25rem !important; min-height: 10.5rem !important; }
+          .marketing-page .principle-card h3 { font-size: 1.05rem !important; margin: 1.6rem 0 .65rem !important; }
+          .marketing-page .principle-card p { font-size: .84rem !important; line-height: 1.58 !important; }
+          .marketing-page .evidence-card { padding: 1.25rem !important; }
+          .marketing-page .evidence-card h3 { font-size: 1.18rem !important; margin: .8rem 0 1rem !important; }
+          .marketing-page .learning-system,
+          .marketing-page .connected-model { margin: 2.25rem 0 !important; }
+          .marketing-page .next-step-card { min-height: 15rem !important; padding: 1.25rem !important; }
+          .marketing-page .next-step-card h3 { margin: 1.4rem 0 .7rem !important; font-size: 1.15rem !important; }
+          .marketing-page .chapter-nav a { font-size: .72rem !important; padding: .45rem .7rem !important; }
+          .marketing-page .ai-chapter h2 { font-size: clamp(1.9rem, 3.4vw, 2.65rem) !important; }
+          @media (max-width: 1024px) {
+            .marketing-page .page-grid { grid-template-columns: 1fr !important; }
+          }
+          @media (max-width: 680px) {
+            .marketing-page { padding-top: 2.5rem !important; }
+            .marketing-page .hero { padding-bottom: 3rem !important; }
+            .marketing-page .hero h1 { font-size: 2.55rem !important; }
+            .marketing-page .chapter { padding: 3rem 0 !important; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
       if (window.location.pathname === '/' || window.location.pathname === '') {
         const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('.hero-text > a.guide-callout'));
         const byHref = new Map(cards.map((card) => [card.getAttribute('href'), card]));
