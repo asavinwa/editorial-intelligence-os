@@ -1,0 +1,392 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import CompareNotesCallout from '../../components/CompareNotesCallout.astro';
+
+const chapters = [
+  ['problem', 'The problem'],
+  ['principles', 'Principles'],
+  ['capability', 'The capability'],
+  ['evidence', 'Evidence'],
+  ['learning', 'Learning system'],
+  ['why-now', 'Why now'],
+  ['diagnose', 'Diagnose'],
+];
+
+const principles = [
+  ['01', 'Evidence before opinion', 'Start with what the organisation knows, not what it wants to say.'],
+  ['02', 'Understanding before communication', 'Communication becomes stronger when the organisation has first made sense of the evidence.'],
+  ['03', 'Narratives emerge from connected evidence', 'The strongest ideas are usually recognised across multiple signals, not invented in isolation.'],
+  ['04', 'Knowledge should keep moving', 'Research, customer insight and campaign learning should continue shaping future work.'],
+  ['05', 'Knowledge should compound', 'Every project should leave the organisation better able to understand and act next time.'],
+];
+
+const evidenceCases = [
+  {
+    label: 'Research to narrative',
+    title: 'Hidden Hours',
+    challenge: 'Research identified the operational pressures facing accountants, but a report alone would have captured only part of its value.',
+    connection: 'The evidence was connected to practitioner interviews, events, customer stories, newsletters, search content and campaign planning.',
+    outcome: 'A single research programme became a durable narrative that kept producing insight and new applications.',
+    principle: 'Knowledge should keep moving.',
+    href: '/narratives/hidden-hours',
+  },
+  {
+    label: 'Stories to shared argument',
+    title: 'Winning in Small',
+    challenge: 'Individual football clubs offered useful stories, but isolated profiles risked becoming disconnected examples.',
+    connection: 'Recurring patterns across alignment, continuous improvement and opportunity were brought together into a larger editorial thesis.',
+    outcome: 'Different club stories became evidence for a shared argument about how organisations create the conditions for success.',
+    principle: 'Narratives emerge from connected evidence.',
+    href: '/narratives/winning-in-small',
+  },
+  {
+    label: 'Knowledge to discovery',
+    title: 'AI visibility',
+    challenge: 'Organisations often approach AI discovery as a publishing or optimisation problem.',
+    connection: 'Editorial Intelligence starts earlier, making expertise explicit, coherent and consistently reinforced across the organisation.',
+    outcome: 'Visibility becomes an outcome of stronger knowledge architecture rather than simply more content.',
+    principle: 'Understanding before communication.',
+    href: '/work/ai-visibility-audit',
+  },
+  {
+    label: 'Experience to strategic knowledge',
+    title: 'Customer story intelligence',
+    challenge: 'A case study usually proves that one customer succeeded, then remains an isolated asset.',
+    connection: 'Patterns across customer language, decisions, implementation barriers and operational change are captured and compared.',
+    outcome: 'Customer experience becomes reusable evidence for positioning, product marketing, sales and future campaigns.',
+    principle: 'Knowledge should compound.',
+    href: '/narratives/customer-stories',
+  },
+];
+---
+
+<BaseLayout
+  title="Editorial Intelligence for marketing"
+  description="How marketing teams turn scattered evidence into connected understanding, stronger narratives and knowledge that compounds."
+  pageType="collection"
+>
+  <article class="marketing-page">
+    <header class="hero container-site">
+      <div class="hero-copy">
+        <div class="hero-meta">
+          <span>Editorial Intelligence application</span>
+          <span>12 minute read</span>
+        </div>
+        <h1>Editorial Intelligence for marketing</h1>
+        <p class="hero-thesis">Marketing has become more specialised. It has not necessarily become more connected.</p>
+        <p class="hero-summary">Editorial Intelligence helps marketing teams turn scattered research, customer insight, campaign learning and internal expertise into shared understanding, stronger decisions and knowledge that compounds.</p>
+      </div>
+      <div class="hero-model" aria-label="Editorial Intelligence knowledge flow model">
+        <p class="model-label">How knowledge moves</p>
+        <div class="signal-grid">
+          {['Research', 'Customers', 'Sales', 'Product', 'Campaigns', 'Search', 'Leadership', 'Market'].map((item) => <span>{item}</span>)}
+        </div>
+        <div class="flow-line"><span></span></div>
+        <div class="model-core">
+          <strong>Editorial Intelligence</strong>
+          <small>Capture · Connect · Interpret · Frame · Activate · Learn</small>
+        </div>
+        <div class="flow-line"><span></span></div>
+        <div class="model-outcomes">
+          <strong>Shared understanding</strong>
+          <p>Better decisions · Stronger narratives · Connected marketing</p>
+        </div>
+        <div class="flow-line"><span></span></div>
+        <p class="model-result">Knowledge that compounds</p>
+      </div>
+    </header>
+
+    <div class="page-grid container-site">
+      <aside class="chapter-nav" aria-label="Page contents">
+        <p>Contents</p>
+        <nav>
+          {chapters.map(([href, label], index) => (
+            <a href={`#${href}`}><span>{String(index + 1).padStart(2, '0')}</span>{label}</a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="article-column">
+        <section id="problem" class="chapter statement-chapter">
+          <p class="chapter-label">The problem</p>
+          <h2>Every organisation already knows more than it understands.</h2>
+          <div class="prose">
+            <p>Modern marketing creates knowledge everywhere. Research uncovers customer behaviour. Product teams understand capability. Sales teams hear objections every day. Campaigns generate behavioural signals. Customer interviews reveal changing priorities. Executives accumulate years of market experience.</p>
+            <p>Individually, these are useful sources of evidence. Collectively, they could create a much richer picture of the market.</p>
+            <p>Yet that picture rarely exists in one place. Knowledge remains inside reports, dashboards, CRM systems, presentations, meeting notes and individual expertise.</p>
+            <p>The organisation possesses knowledge. It does not always possess shared understanding.</p>
+          </div>
+          <blockquote>Marketing rarely fails because organisations lack knowledge. It struggles because knowledge stops moving.</blockquote>
+        </section>
+
+        <section class="chapter">
+          <p class="chapter-label">The hidden cost of specialisation</p>
+          <h2>The more specialised marketing becomes, the more important its connections become.</h2>
+          <div class="prose">
+            <p>Specialisation is one of modern marketing's greatest strengths. Research, product marketing, performance, customer marketing, content, communications and operations all require genuine expertise.</p>
+            <p>But effectiveness inside individual functions does not automatically create understanding across the organisation.</p>
+            <p>Research may inform one campaign before disappearing into an archive. Customer interviews may become isolated case studies. Campaign learning may improve the next advert without influencing positioning. Sales objections may never reach the team developing thought leadership.</p>
+            <p>None of this happens because people are doing poor work. It happens because organisations have become better at producing knowledge than connecting it.</p>
+          </div>
+        </section>
+
+        <section id="principles" class="chapter chapter-wide">
+          <p class="chapter-label">The principles</p>
+          <h2>Five principles for marketing that learns.</h2>
+          <div class="principle-grid">
+            {principles.map(([number, title, description]) => (
+              <article class="principle-card">
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="capability" class="chapter">
+          <p class="chapter-label">The connective capability</p>
+          <h2>Editorial Intelligence connects specialist knowledge before marketing communicates it.</h2>
+          <div class="prose">
+            <p>Every marketing discipline answers an important question. Research asks what is changing. Product marketing asks why the solution matters. Performance marketing asks what is working. Customer marketing asks what changed for customers. Sales asks what buyers need. Content asks how the organisation should communicate.</p>
+            <p>Those disciplines should remain specialist. The gap is that few organisations have a capability dedicated to connecting their answers.</p>
+            <p>Editorial Intelligence sits between organisational evidence and marketing execution. It captures signals, connects sources, interprets patterns, frames arguments, activates ideas and returns learning to the evidence base.</p>
+          </div>
+
+          <div class="connected-model" aria-label="Connected marketing organisation model">
+            <div class="connected-layer">
+              <p>Organisational evidence</p>
+              <div>{['Research', 'Customer insight', 'Product knowledge', 'Sales conversations', 'Campaign response', 'Executive expertise'].map((item) => <span>{item}</span>)}</div>
+            </div>
+            <div class="connected-core">
+              <span>Editorial Intelligence</span>
+              <small>Connective capability</small>
+            </div>
+            <div class="connected-layer">
+              <p>Marketing application</p>
+              <div>{['Campaign strategy', 'Positioning', 'Thought leadership', 'Customer marketing', 'Sales enablement', 'AI visibility'].map((item) => <span>{item}</span>)}</div>
+            </div>
+          </div>
+
+          <div class="boundary">
+            <div>
+              <p class="chapter-label">Specialist marketing owns</p>
+              <p>Brand, media, channels, CRM, operations, creative delivery and specialist functional practice.</p>
+            </div>
+            <div>
+              <p class="chapter-label">Editorial Intelligence connects</p>
+              <p>Evidence, interpretation, narrative, learning and organisational memory across those functions.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="evidence" class="chapter chapter-wide">
+          <p class="chapter-label">Evidence in practice</p>
+          <h2>The discipline emerged through real work, not in isolation.</h2>
+          <div class="evidence-grid">
+            {evidenceCases.map((item) => (
+              <a href={item.href} class="evidence-card">
+                <span class="evidence-label">{item.label}</span>
+                <h3>{item.title}</h3>
+                <dl>
+                  <div><dt>Challenge</dt><dd>{item.challenge}</dd></div>
+                  <div><dt>Connection</dt><dd>{item.connection}</dd></div>
+                  <div><dt>Outcome</dt><dd>{item.outcome}</dd></div>
+                </dl>
+                <p class="evidence-principle">{item.principle}</p>
+                <span class="evidence-link">Explore the evidence →</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section id="learning" class="chapter">
+          <p class="chapter-label">The marketing learning system</p>
+          <h2>Marketing should increase organisational understanding, not simply produce campaigns.</h2>
+          <div class="learning-system" aria-label="Marketing learning system">
+            {[
+              ['01', 'Evidence', 'Research, customers, sales, products and market signals'],
+              ['02', 'Understanding', 'Patterns interpreted and assumptions challenged'],
+              ['03', 'Narrative', 'A position, argument or hypothesis worth activating'],
+              ['04', 'Execution', 'Campaigns, content, communications and commercial material'],
+              ['05', 'Learning', 'Behaviour, objections, questions and outcomes interpreted'],
+              ['06', 'Organisational knowledge', 'What was learned is retained and reused'],
+            ].map(([number, title, description]) => (
+              <div class="learning-step">
+                <span>{number}</span><strong>{title}</strong><p>{description}</p>
+              </div>
+            ))}
+            <div class="return-line">Better evidence returns to the next cycle ↑</div>
+          </div>
+          <div class="prose">
+            <p>Every campaign should leave the organisation knowing something it did not know before. That understanding should then improve the next decision.</p>
+            <p>Marketing begins to compound when its knowledge compounds.</p>
+          </div>
+        </section>
+
+        <section id="why-now" class="chapter ai-chapter">
+          <p class="chapter-label">Why now</p>
+          <h2>AI makes creating content cheaper. Editorial Intelligence makes deciding what matters more valuable.</h2>
+          <div class="prose">
+            <p>Creating another article, image or campaign variation is no longer the difficult part. The constraint is moving towards judgement.</p>
+            <p>Which customer tension deserves attention? Which evidence is strongest? Which result matters beyond the dashboard? Which idea should become the organisation's position?</p>
+            <p>AI can increase output without increasing understanding. The organisations that learn fastest will increasingly outperform those that simply publish fastest.</p>
+          </div>
+        </section>
+
+        <section id="diagnose" class="chapter diagnose-chapter">
+          <p class="chapter-label">Where does knowledge stop moving?</p>
+          <h2>Use the page as a diagnostic, not just an argument.</h2>
+          <div class="diagnostic-list">
+            {[
+              'Research continues to influence marketing after its initial launch.',
+              'Customer conversations shape positioning and product decisions.',
+              'Campaign learning reaches teams beyond the channel that produced it.',
+              'Sales feedback improves future messaging and thought leadership.',
+              'Valuable knowledge is easy to find, understand and reuse.',
+            ].map((item) => <div><span aria-hidden="true"></span><p>{item}</p></div>)}
+          </div>
+          <p class="diagnostic-question">How many of these statements are consistently true in your organisation?</p>
+          <div class="next-step-grid">
+            <a href="/assessment" class="next-step-card next-step-card--primary">
+              <span>Diagnose</span>
+              <h3>Take the Editorial Intelligence Assessment</h3>
+              <p>Identify where evidence, narrative and learning are becoming disconnected.</p>
+              <strong>Start the assessment →</strong>
+            </a>
+            <a href="/compare-notes" class="next-step-card">
+              <span>Discuss</span>
+              <h3>Compare notes</h3>
+              <p>Explore how knowledge moves through your organisation and where it loses momentum.</p>
+              <strong>Spend 30 minutes comparing approaches →</strong>
+            </a>
+          </div>
+          <div class="audit-link">
+            <p>The Narrative Audit is the first paid application of this thinking.</p>
+            <a href="/work/narrative-audit">Explore the Narrative Audit →</a>
+          </div>
+          <CompareNotesCallout
+            body="Editorial Intelligence is being developed through research, practice and conversation. I’m interested in how marketing teams connect evidence and where useful learning disappears."
+            linkLabel="Let’s compare notes"
+          />
+        </section>
+
+        <footer class="version-note">
+          <span>Editorial Intelligence 2.0</span>
+          <p>A living discipline refined through evidence, practice and conversation.</p>
+        </footer>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .marketing-page { padding: 5rem 0 7rem; }
+  .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(21rem, 0.95fr); gap: clamp(3rem, 7vw, 7rem); align-items: center; padding-bottom: 6rem; }
+  .hero-copy { max-width: 44rem; }
+  .hero-meta { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 2rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--color-ink-tertiary); }
+  .hero h1 { font-size: clamp(3rem, 7vw, 6rem); line-height: .98; letter-spacing: -.045em; color: var(--color-ink); margin: 0 0 2.2rem; }
+  .hero-thesis { font-size: clamp(1.35rem, 2.5vw, 2rem); line-height: 1.35; color: var(--color-ink); max-width: 34rem; margin-bottom: 1.5rem; }
+  .hero-summary { font-size: 1.05rem; line-height: 1.8; color: var(--color-ink-secondary); max-width: 38rem; }
+  .hero-model { border: 1px solid var(--color-rule); background: var(--color-surface-secondary); padding: clamp(1.4rem, 3vw, 2.3rem); }
+  .model-label, .chapter-label { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .09em; font-size: .67rem; color: var(--color-ink-tertiary); }
+  .model-label { margin-bottom: 1.4rem; }
+  .signal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .signal-grid span, .connected-layer span { border: 1px solid var(--color-rule); padding: .55rem .65rem; font-size: .77rem; color: var(--color-ink-secondary); background: var(--color-surface); }
+  .flow-line { height: 2.6rem; display: grid; place-items: center; }
+  .flow-line span { display: block; width: 1px; height: 100%; background: var(--color-accent); position: relative; }
+  .flow-line span::after { content: ''; position: absolute; bottom: -1px; left: -3px; width: 7px; height: 7px; border-right: 1px solid var(--color-accent); border-bottom: 1px solid var(--color-accent); transform: rotate(45deg); }
+  .model-core { text-align: center; border: 1px solid var(--color-accent); padding: 1rem; color: var(--color-ink); }
+  .model-core strong, .model-outcomes strong { display: block; font-size: .95rem; }
+  .model-core small { display: block; margin-top: .4rem; font-family: var(--font-mono); font-size: .62rem; color: var(--color-ink-tertiary); }
+  .model-outcomes { text-align: center; }
+  .model-outcomes p { margin-top: .45rem; font-size: .72rem; color: var(--color-ink-tertiary); }
+  .model-result { text-align: center; font-family: var(--font-mono); font-size: .75rem; color: var(--color-accent); text-transform: uppercase; letter-spacing: .08em; }
+  .page-grid { display: grid; grid-template-columns: 12rem minmax(0, 48rem); gap: clamp(3rem, 7vw, 7rem); align-items: start; }
+  .chapter-nav { position: sticky; top: 7rem; padding-top: .4rem; }
+  .chapter-nav > p { font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .09em; color: var(--color-ink-tertiary); margin-bottom: 1rem; }
+  .chapter-nav nav { display: flex; flex-direction: column; border-left: 1px solid var(--color-rule); }
+  .chapter-nav a { display: flex; gap: .7rem; padding: .55rem .8rem; text-decoration: none; font-size: .76rem; color: var(--color-ink-secondary); }
+  .chapter-nav a:hover { color: var(--color-accent); }
+  .chapter-nav a span { font-family: var(--font-mono); font-size: .62rem; color: var(--color-ink-tertiary); }
+  .article-column { min-width: 0; }
+  .chapter { scroll-margin-top: 7rem; padding: 5rem 0; border-top: 1px solid var(--color-rule); }
+  .article-column > .chapter:first-child { border-top: 0; padding-top: 0; }
+  .chapter h2 { font-size: clamp(2rem, 4.7vw, 3.65rem); line-height: 1.08; letter-spacing: -.035em; color: var(--color-ink); margin: 1rem 0 2rem; }
+  .prose { display: flex; flex-direction: column; gap: 1.25rem; max-width: 42rem; }
+  .prose p { font-size: 1.02rem; line-height: 1.85; color: var(--color-ink-secondary); }
+  blockquote { margin: 3rem 0 0; padding: 2rem 0 0; border-top: 1px solid var(--color-accent); font-size: clamp(1.45rem, 3vw, 2.2rem); line-height: 1.35; color: var(--color-ink); }
+  .principle-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--color-rule); border: 1px solid var(--color-rule); }
+  .principle-card { background: var(--color-surface); padding: 1.6rem; min-height: 13rem; }
+  .principle-card span { font-family: var(--font-mono); font-size: .65rem; color: var(--color-accent); }
+  .principle-card h3 { font-size: 1.2rem; line-height: 1.3; color: var(--color-ink); margin: 2.3rem 0 .8rem; }
+  .principle-card p { font-size: .88rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .principle-card:last-child { grid-column: 1 / -1; min-height: auto; }
+  .connected-model { margin: 3rem 0; border: 1px solid var(--color-rule); }
+  .connected-layer { padding: 1.4rem; }
+  .connected-layer > p { font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: var(--color-ink-tertiary); margin-bottom: .8rem; }
+  .connected-layer > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+  .connected-core { padding: 1.2rem; text-align: center; background: var(--color-ink); color: var(--color-surface); }
+  .connected-core span { display: block; font-size: 1rem; font-weight: 600; }
+  .connected-core small { display: block; margin-top: .25rem; font-family: var(--font-mono); font-size: .62rem; opacity: .7; }
+  .boundary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--color-rule); border: 1px solid var(--color-rule); }
+  .boundary > div { background: var(--color-surface-secondary); padding: 1.4rem; }
+  .boundary p:last-child { margin-top: .8rem; font-size: .9rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .evidence-card { display: flex; flex-direction: column; padding: 1.5rem; border: 1px solid var(--color-rule); background: var(--color-surface-secondary); text-decoration: none; transition: transform .18s ease, border-color .18s ease; }
+  .evidence-card:hover { transform: translateY(-2px); border-color: var(--color-accent); }
+  .evidence-label { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: .62rem; color: var(--color-ink-tertiary); }
+  .evidence-card h3 { font-size: 1.35rem; color: var(--color-ink); margin: 1rem 0 1.4rem; }
+  .evidence-card dl { display: flex; flex-direction: column; gap: 1rem; }
+  .evidence-card dt { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .07em; font-size: .58rem; color: var(--color-ink-tertiary); margin-bottom: .25rem; }
+  .evidence-card dd { font-size: .83rem; line-height: 1.6; color: var(--color-ink-secondary); }
+  .evidence-principle { margin: 1.4rem 0 .8rem; padding-top: 1rem; border-top: 1px solid var(--color-rule); color: var(--color-ink); font-size: .87rem; font-weight: 600; }
+  .evidence-link { margin-top: auto; font-size: .78rem; color: var(--color-accent); }
+  .learning-system { margin: 3rem 0; border: 1px solid var(--color-rule); background: var(--color-surface-secondary); padding: 1rem; }
+  .learning-step { display: grid; grid-template-columns: 2rem 9rem 1fr; gap: 1rem; align-items: start; padding: 1rem; border-bottom: 1px solid var(--color-rule); }
+  .learning-step span { font-family: var(--font-mono); font-size: .62rem; color: var(--color-accent); }
+  .learning-step strong { color: var(--color-ink); font-size: .9rem; }
+  .learning-step p { font-size: .8rem; line-height: 1.55; color: var(--color-ink-secondary); }
+  .return-line { padding: 1rem; text-align: right; font-family: var(--font-mono); font-size: .66rem; color: var(--color-accent); }
+  .ai-chapter h2 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); }
+  .diagnostic-list { display: flex; flex-direction: column; border-top: 1px solid var(--color-rule); }
+  .diagnostic-list > div { display: grid; grid-template-columns: 1rem 1fr; gap: 1rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--color-rule); }
+  .diagnostic-list span { width: .85rem; height: .85rem; border: 1px solid var(--color-accent); }
+  .diagnostic-list p { font-size: .93rem; color: var(--color-ink-secondary); }
+  .diagnostic-question { font-size: 1.2rem; color: var(--color-ink); margin: 2rem 0 3rem; }
+  .next-step-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .next-step-card { display: flex; flex-direction: column; min-height: 18rem; padding: 1.5rem; border: 1px solid var(--color-rule); text-decoration: none; background: var(--color-surface-secondary); }
+  .next-step-card--primary { border-color: var(--color-accent); }
+  .next-step-card > span { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: .62rem; color: var(--color-accent); }
+  .next-step-card h3 { margin: 2rem 0 .8rem; font-size: 1.3rem; line-height: 1.3; color: var(--color-ink); }
+  .next-step-card p { font-size: .87rem; line-height: 1.65; color: var(--color-ink-secondary); }
+  .next-step-card strong { margin-top: auto; padding-top: 1.5rem; color: var(--color-ink); font-size: .8rem; }
+  .next-step-card:hover strong { color: var(--color-accent); }
+  .audit-link { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1rem 0 2rem; font-size: .82rem; color: var(--color-ink-secondary); }
+  .audit-link a { color: var(--color-accent); text-decoration: none; white-space: nowrap; }
+  .version-note { border-top: 1px solid var(--color-rule); padding-top: 1.5rem; display: flex; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: .64rem; color: var(--color-ink-tertiary); }
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-model { max-width: 40rem; }
+    .page-grid { grid-template-columns: 1fr; }
+    .chapter-nav { display: none; }
+  }
+  @media (max-width: 680px) {
+    .marketing-page { padding-top: 3rem; }
+    .hero { padding-bottom: 4rem; }
+    .hero h1 { font-size: 3.2rem; }
+    .chapter { padding: 3.8rem 0; }
+    .principle-grid, .evidence-grid, .boundary, .next-step-grid { grid-template-columns: 1fr; }
+    .principle-card:last-child { grid-column: auto; }
+    .connected-layer > div { grid-template-columns: repeat(2, 1fr); }
+    .learning-step { grid-template-columns: 1.7rem 1fr; }
+    .learning-step p { grid-column: 2; }
+    .audit-link, .version-note { align-items: flex-start; flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-model, .chapter { animation: reveal .65s ease both; }
+    .chapter:nth-child(2) { animation-delay: .05s; }
+    .chapter:nth-child(3) { animation-delay: .1s; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+</style>

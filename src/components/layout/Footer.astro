@@ -5,30 +5,74 @@ const year = new Date().getFullYear();
 
 <footer class="border-t border-[var(--color-rule,#2c2920)] mt-24">
   <div class="container-site py-12">
-    <div class="flex flex-col md:flex-row justify-between gap-8">
+    <div class="flex flex-col lg:flex-row justify-between gap-10">
       <div class="flex flex-col gap-2">
         <span class="t-label">{SITE.name}</span>
         <p class="t-small" style="font-family: var(--font-mono); letter-spacing: 0.06em; color: var(--color-accent); opacity: 0.8;">Knowledge that compounds.</p>
         <p class="t-small max-w-sm" style="margin-top: 0.5rem;">{SITE.description}</p>
       </div>
-      <nav aria-label="Footer navigation">
-        <ul class="flex flex-wrap gap-x-6 gap-y-2 list-none m-0 p-0">
-          {SITE.nav.map((item) => (
-            <li>
-              <a href={item.href} class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)] transition-colors">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+
+      <div class="footer-link-groups">
+        <nav aria-label="Start here">
+          <p class="footer-group-title">Start here</p>
+          <ul class="footer-link-list">
+            <li><a href="/applications/marketing">Editorial Intelligence for marketing</a></li>
+            <li><a href="/assessment">Assessment</a></li>
+            <li><a href="/compare-notes">Compare notes</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Footer navigation">
+          <p class="footer-group-title">Explore</p>
+          <ul class="footer-link-list">
+            {SITE.nav.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </div>
+
     <div class="mt-12 pt-6 border-t border-[var(--color-rule,#2c2920)] flex flex-col md:flex-row justify-between gap-2">
       <p class="t-small">{SITE.author}</p>
       <div class="flex items-center gap-6">
-        <a href="/start" class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)] transition-colors">Start here</a>
+        <a href="/start" class="t-small text-[var(--color-ink-tertiary)] no-underline hover:text-[var(--color-ink)] transition-colors">Site orientation</a>
         <p class="t-small">&copy; {year}. This framework evolves as new evidence is added.</p>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-link-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+    gap: 3rem;
+  }
+  .footer-group-title {
+    margin-bottom: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-tertiary);
+  }
+  .footer-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .footer-link-list a {
+    color: var(--color-ink-secondary);
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .footer-link-list a:hover { color: var(--color-ink); }
+  @media (max-width: 640px) {
+    .footer-link-groups { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
