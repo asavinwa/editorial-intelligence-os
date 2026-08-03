@@ -10,7 +10,7 @@ const sorted = frameworks.sort((a, b) => b.data.date.getTime() - a.data.date.get
 const curatedSlugs = new Set([
   'evidence-engine', 'narrative-architecture', 'ai-visibility-buyability',
   'editorial-intelligence-framework', 'daily-os', 'workflow-library',
-  'customer-signal-framework',
+  'customer-signal-framework', 'portable-intelligence',
 ]);
 const operational = sorted.filter(fw => curatedSlugs.has(fw.slug));
 const applied = sorted.filter(fw => !curatedSlugs.has(fw.slug));
@@ -82,6 +82,7 @@ const applied = sorted.filter(fw => !curatedSlugs.has(fw.slug));
       <p class="fw-tier-intro mb-8">Apply the model — tools for day-to-day practice and specific problems.</p>
       <div class="flagship-grid">
         {[
+          { title: 'Portable Intelligence', desc: 'How to keep knowledge durable, legible and reusable across AI models, software platforms and organisations.', href: '/frameworks/portable-intelligence' },
           { title: 'AI Visibility & Buyability', desc: 'How reputation influences AI discovery and buyer confidence, from signals through to commercial outcomes.', href: '/frameworks/ai-visibility-buyability' },
           { title: 'Customer Signal Framework', desc: 'How to identify, capture and organise customer signals so they strengthen the evidence base over time.', href: '/frameworks/customer-signal-framework' },
           { title: 'Daily OS', desc: 'The day-to-day practice — how Editorial Intelligence becomes a repeatable operating rhythm.', href: '/frameworks/daily-os' },
