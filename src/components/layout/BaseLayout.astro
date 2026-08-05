@@ -227,11 +227,12 @@ const structuredData = {
         const start = byHref.get('/start');
         const guide = byHref.get('/guide');
         const assessment = byHref.get('/assessment');
+        const narrativeAudit = byHref.get('/work/narrative-audit');
         const startupAudit = byHref.get('/work/startup-narrative-audit');
         const aiVisibility = byHref.get('/work/ai-visibility-audit');
         const researchLed = byHref.get('/work/research-led-thought-leadership');
 
-        if (start && guide && assessment && startupAudit && aiVisibility && researchLed) {
+        if (start && guide && assessment && narrativeAudit && startupAudit && aiVisibility && researchLed) {
           const marketing = guide.cloneNode(true) as HTMLAnchorElement;
           marketing.href = '/applications/marketing';
           const badge = marketing.querySelector('.guide-callout-badge');
@@ -263,6 +264,7 @@ const structuredData = {
                 <p class="guide-callout-sub">Focused help for specific visibility and narrative problems.</p>
               `;
               parent.insertBefore(servicesHeader, credibility);
+              parent.insertBefore(narrativeAudit, credibility);
               parent.insertBefore(startupAudit, credibility);
               parent.insertBefore(aiVisibility, credibility);
               parent.insertBefore(researchLed, credibility);
