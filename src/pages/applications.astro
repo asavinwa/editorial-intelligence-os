@@ -252,6 +252,46 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
 
       <hr class="divider mb-16" />
 
+      <!-- Editorial judgement applied to outputs -->
+      <section id="editorial-outputs" class="mb-16">
+        <p class="t-label mb-6">From judgement to useful form</p>
+        <h2 class="application-output-heading">Writing is an output. Editorial judgement is the service.</h2>
+        <div class="prose-section mb-8">
+          <p>Editorial Intelligence does not begin with a predetermined deliverable. It establishes what is worth saying, which evidence matters, what can credibly be claimed and what the audience needs to understand or decide.</p>
+          <p>The final form follows that judgement. The same discipline can shape a video, report, pitch deck or interactive diagnostic without reducing the work to a menu of production services.</p>
+        </div>
+
+        <div class="output-grid">
+          <article class="output-card">
+            <p class="output-card-label">Video</p>
+            <h3>Give the production something worth saying.</h3>
+            <p>Develop the evidence, central idea, interview approach, script, narrative brief and edit priorities before filming or AI generation begins.</p>
+          </article>
+          <article class="output-card">
+            <p class="output-card-label">Reports</p>
+            <h3>Turn research into an argument, not an archive.</h3>
+            <p>Synthesise findings, establish the evidence hierarchy and choose the right expression: written report, designed PDF, web publication or interactive experience.</p>
+          </article>
+          <article class="output-card">
+            <p class="output-card-label">Pitch decks</p>
+            <h3>Build the case before designing the slides.</h3>
+            <p>Define the audience and decision, select the strongest proof and create the narrative sequence and slide-level argument.</p>
+          </article>
+          <article class="output-card">
+            <p class="output-card-label">Interactive diagnostics</p>
+            <h3>Turn evidence into a useful exchange.</h3>
+            <p>Translate research into meaningful questions, response logic and outcomes that help the participant while generating further insight.</p>
+          </article>
+        </div>
+
+        <div class="specialist-output-note">
+          <p><strong>Other specialist applications</strong></p>
+          <p>The same evidence-led judgement can support newsletters, award entries and bids when the work depends on finding the strongest material and shaping it for a specific audience or decision.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
       <!-- AI systems callout -->
       <section class="mb-16">
         <div class="ai-systems-callout">
@@ -483,6 +523,78 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
   .app-link:hover {
     border-color: var(--color-accent);
   }
+
+  .application-output-heading {
+    max-width: 24ch;
+    margin: 0 0 1.5rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+  }
+
+  .output-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    background: var(--color-rule);
+  }
+
+  @media (min-width: 640px) {
+    .output-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .output-card {
+    padding: 1.4rem;
+    background: var(--color-surface-secondary);
+  }
+
+  .output-card-label {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .output-card h3 {
+    margin: 0 0 0.65rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  .output-card > p:last-child {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+  }
+
+  .specialist-output-note {
+    margin-top: 1rem;
+    padding: 1.1rem 1.25rem;
+    border-left: 2px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+    background: var(--color-surface-secondary);
+  }
+
+  .specialist-output-note p {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+  }
+
+  .specialist-output-note p + p { margin-top: 0.25rem; }
+  .specialist-output-note strong { color: var(--color-ink); font-weight: 500; }
 
   .app-loop-explainer p {
     font-size: 0.9rem;
