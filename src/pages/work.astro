@@ -31,9 +31,27 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           <p>Start by understanding what you know and what is missing. Develop existing evidence or generate what is needed, then build the narrative, activation system or specialist application the opportunity requires.</p>
         </div>
 
+        <div class="work-routes mb-12">
+          <a href="#understand" class="work-route">
+            <span class="work-route-number">01</span>
+            <h3>Understand what you already know</h3>
+            <p>Review existing research, customer insight, expertise and content to find the argument, evidence gaps and opportunities already present.</p>
+          </a>
+          <a href="#generate" class="work-route">
+            <span class="work-route-number">02</span>
+            <h3>Generate the evidence you need</h3>
+            <p>Investigate an important question through focused qualitative research, interviews and structured practitioner conversations.</p>
+          </a>
+          <a href="#develop" class="work-route">
+            <span class="work-route-number">03</span>
+            <h3>Develop and activate the argument</h3>
+            <p>Turn evidence into a distinctive position, narrative system and the formats needed to make it useful.</p>
+          </a>
+        </div>
+
         <!-- Flagship: Narrative audit -->
-        <div id="narrative-audit" class="service-flagship mb-12">
-          <p class="service-eyebrow">Start here</p>
+        <div id="understand" class="service-flagship mb-12">
+          <p class="service-eyebrow">Route 1 · Understand what you already know</p>
           <h3 class="service-heading">Narrative audit</h3>
           <p class="service-prop">Find out what your existing evidence actually adds up to.</p>
           <div class="prose-section mb-6">
@@ -73,8 +91,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           <a href="/work/startup-narrative-audit" class="service-inline-link">Explore the Startup Narrative Audit →</a>
         </div>
 
-        <div class="service-specialist mb-12">
-          <p class="service-section-label mb-6">When the evidence does not exist yet</p>
+        <div id="generate" class="service-specialist mb-12">
+          <p class="service-section-label mb-6">Route 2 · Generate the evidence you need</p>
           <h3 class="service-heading-sm">Research-led thought leadership</h3>
           <p class="service-prop-sm">Generate original evidence and turn it into a distinctive argument, report and content programme.</p>
           <div class="prose-section-sm mb-4">
@@ -88,8 +106,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         </div>
 
         <!-- Build layer -->
-        <div class="mb-12">
-          <p class="service-section-label mb-8">Build from the evidence</p>
+        <div id="develop" class="mb-12">
+          <p class="service-section-label mb-8">Route 3 · Develop and activate the argument</p>
           <div class="service-dev-grid">
 
             <!-- Research activation -->
@@ -257,6 +275,52 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 <style>
   .work-inner {
     max-width: 42rem;
+  }
+
+  .work-routes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    background: var(--color-rule);
+  }
+
+  .work-route {
+    display: block;
+    padding: 1.35rem;
+    background: var(--color-surface-secondary);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .work-route:hover {
+    background: color-mix(in srgb, var(--color-accent) 7%, var(--color-surface-secondary));
+  }
+
+  .work-route-number {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-accent);
+  }
+
+  .work-route h3 {
+    margin: 0 0 0.55rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  .work-route p {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
   }
 
   .work-research-route { margin-top: 1.25rem; font-size: 0.8125rem; line-height: 1.65; color: var(--color-ink-tertiary); }

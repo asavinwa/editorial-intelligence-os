@@ -1,7 +1,16 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
-import EILoop from '../components/content/EILoop.astro';
 import CompareNotesCallout from '../components/CompareNotesCallout.astro';
+
+const operatingCycle = [
+  ['Generate', 'Create new evidence where important questions cannot yet be answered.'],
+  ['Capture', 'Preserve useful research, insight, expertise and market signals.'],
+  ['Connect', 'Bring evidence together so recurring themes become visible.'],
+  ['Synthesise', 'Use editorial judgement to decide what the evidence means.'],
+  ['Shape', 'Turn the strongest interpretation into a narrative and direction.'],
+  ['Activate', 'Choose the formats and experiences that make the argument useful.'],
+  ['Learn', 'Use response and performance as evidence for the next cycle.'],
+];
 ---
 
 <BaseLayout
@@ -27,7 +36,7 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
       <section class="mb-16">
         <div class="prose-section">
           <p>A framework is only valuable if it helps people make better decisions.</p>
-          <p>The applications below show how Editorial Intelligence can be used to capture signal, synthesise patterns, activate content and create evidence that feeds future work. Each one follows the same underlying pattern — signal, synthesis, activation, evidence, learning, reuse — but produces different outputs depending on the context.</p>
+          <p>The applications below show how Editorial Intelligence can be used to generate and develop evidence, shape an argument, activate it and learn from the response. Each one follows the same operating cycle — generate, capture, connect, synthesise, shape, activate, learn — but produces different outputs depending on the context.</p>
         </div>
       </section>
 
@@ -316,12 +325,22 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
       <div class="max-w-2xl mb-8">
         <h2 class="t-label mb-8">How the applications work</h2>
         <div class="prose-section">
-          <p>Each application follows the same underlying pattern. The context changes — research, webinars and events, customer stories, AI workflows — but the logic is consistent.</p>
+          <p>Each application follows the same operating cycle. The context changes — research, webinars and events, customer stories, AI workflows — but the logic is consistent.</p>
         </div>
       </div>
-      <EILoop />
+      <div class="operating-cycle" aria-label="The Editorial Intelligence operating cycle">
+        {operatingCycle.map(([stage, description], index) => (
+          <div class="operating-stage">
+            <span class="operating-stage-number">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <strong>{stage}</strong>
+              <p>{description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
       <div class="app-loop-explainer mt-8 max-w-2xl mx-auto">
-        <p>Editorial Intelligence works as a loop. Signals are captured from research, customers, webinars and events, and market change. They are synthesised into patterns and narratives, activated through content and campaigns, tested through evidence, and reused as intelligence that shapes future work.</p>
+        <p>Editorial Intelligence works as a continuous cycle. Organisations can enter where the constraint is strongest: generating missing evidence, connecting what already exists, shaping an argument or learning from how it performs.</p>
       </div>
     </section>
 
@@ -603,6 +622,50 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
     text-align: center;
     max-width: 52ch;
     margin: 0 auto;
+  }
+
+  .operating-cycle {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    background: var(--color-rule);
+  }
+
+  @media (min-width: 640px) {
+    .operating-cycle { grid-template-columns: 1fr 1fr; }
+  }
+
+  .operating-stage {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.75rem;
+    padding: 1.15rem;
+    background: var(--color-surface-secondary);
+  }
+
+  .operating-stage-number {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-accent);
+  }
+
+  .operating-stage strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-ink);
+  }
+
+  .operating-stage p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
   }
 
   /* Explore links */
