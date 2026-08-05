@@ -9,7 +9,7 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
   <section class="hero-section">
     <div class="container-site hero-grid">
       <!-- Left: text -->
-      <div class="hero-text">
+      <div class="hero-intro">
         <p class="t-label mb-6">Editorial Intelligence for the AI era</p>
         <h1 class="t-display text-[var(--color-ink)] mb-4 leading-[1.08]">
           Understand what you know.<br />Discover what you need to learn.
@@ -30,6 +30,9 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           Most organisations don't have a content problem. They have an evidence problem.
         </p>
 
+      </div>
+
+      <div class="journey-column">
         <p class="journey-heading">Start your journey</p>
 
         <!-- Start Here callout -->
@@ -134,7 +137,9 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           </div>
 
         </div>
-        <aside class="services-panel" aria-labelledby="services-title">
+      </div>
+
+      <aside class="services-panel" aria-labelledby="services-title">
           <p class="journey-heading" id="services-title">Specialist services</p>
           <div class="services-list">
             <a href="/work/narrative-audit" class="service-option">
@@ -166,8 +171,7 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
               </span>
             </a>
           </div>
-        </aside>
-      </div>
+      </aside>
     </div>
   </section>
 
@@ -329,19 +333,33 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "journey"
+      "services";
     gap: 3rem;
-    align-items: center;
+    align-items: start;
   }
 
   @media (min-width: 900px) {
     .hero-grid {
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-areas:
+        "intro diagram"
+        "journey services";
+      column-gap: 4rem;
+      row-gap: 2rem;
       align-items: start;
     }
   }
 
-  .hero-text {
+  .hero-intro {
+    grid-area: intro;
+    max-width: 56ch;
+  }
+
+  .journey-column {
+    grid-area: journey;
     max-width: 56ch;
   }
 
@@ -428,6 +446,7 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
   }
 
   .services-panel {
+    grid-area: services;
     margin-top: 0;
   }
 
@@ -545,6 +564,7 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
 
   /* ── Flow diagram ── */
   .hero-diagram {
+    grid-area: diagram;
     display: none;
   }
 
