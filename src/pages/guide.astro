@@ -2,6 +2,7 @@
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import LabSignup from '../components/LabSignup.astro';
 import CompareNotesCallout from '../components/CompareNotesCallout.astro';
+import FlagshipJourney from '../components/FlagshipJourney.astro';
 
 const sections = [
   { id: 'introduction', label: 'Introduction' },
@@ -19,6 +20,7 @@ const sections = [
 <BaseLayout
   title="A Practical Guide to Editorial Intelligence"
   description="How B2B teams generate and develop evidence into stronger narratives, decisions and reusable knowledge."
+  suppressFlagshipJourney
 >
   <div class="guide-layout container-site py-16">
 
@@ -166,6 +168,8 @@ const sections = [
         </div>
         <p>The parts reinforce one another. Activation creates new signals. Measurement shows what people used, questioned or ignored. Continuous learning then updates the evidence, narrative and strategy.</p>
       </section>
+
+      <FlagshipJourney embedded />
 
       <hr class="guide-divider" />
 
