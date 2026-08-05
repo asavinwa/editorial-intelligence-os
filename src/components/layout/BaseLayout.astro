@@ -44,6 +44,7 @@ const websiteId = `${SITE.url}/#website`;
 const nameOverrides: Record<string, string> = {
   'editorial-intelligence-os': 'Editorial Intelligence OS',
   'ai-visibility-audit': 'AI Visibility Audit',
+  'research-led-thought-leadership': 'Research-led thought leadership',
 };
 
 const segments = Astro.url.pathname.split('/').filter(Boolean);
@@ -228,8 +229,9 @@ const structuredData = {
         const assessment = byHref.get('/assessment');
         const startupAudit = byHref.get('/work/startup-narrative-audit');
         const aiVisibility = byHref.get('/work/ai-visibility-audit');
+        const researchLed = byHref.get('/work/research-led-thought-leadership');
 
-        if (start && guide && assessment && startupAudit && aiVisibility) {
+        if (start && guide && assessment && startupAudit && aiVisibility && researchLed) {
           const marketing = guide.cloneNode(true) as HTMLAnchorElement;
           marketing.href = '/applications/marketing';
           const badge = marketing.querySelector('.guide-callout-badge');
@@ -263,6 +265,7 @@ const structuredData = {
               parent.insertBefore(servicesHeader, credibility);
               parent.insertBefore(startupAudit, credibility);
               parent.insertBefore(aiVisibility, credibility);
+              parent.insertBefore(researchLed, credibility);
             }
           }
         }
