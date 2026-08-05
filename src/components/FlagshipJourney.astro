@@ -1,4 +1,9 @@
 ---
+interface Props {
+  embedded?: boolean;
+}
+
+const { embedded = false } = Astro.props;
 const rawPathname = Astro.url.pathname;
 const pathname = rawPathname !== '/' ? rawPathname.replace(/\/+$/, '') : '/';
 
@@ -63,11 +68,11 @@ const isApplications = pathname === '/applications';
 
 {journey && pathname !== '/applications/marketing' && (
   <aside
-    class:list={['flagship-journey', isApplications && 'flagship-journey--application']}
+    class:list={['flagship-journey', isApplications && 'flagship-journey--application', embedded && 'flagship-journey--embedded']}
     data-flagship-placement={isApplications ? 'applications' : undefined}
     aria-label="Recommended Editorial Intelligence journey"
   >
-    <div class:list={['flagship-journey-inner', !isApplications && 'container-site']}>
+    <div class:list={['flagship-journey-inner', !isApplications && !embedded && 'container-site']}>
       <div class="flagship-journey-copy">
         <p class="t-label">{journey.eyebrow}</p>
         <h2>{journey.title}</h2>
@@ -107,6 +112,15 @@ const isApplications = pathname === '/applications';
     padding-bottom: 1.5rem;
   }
   .flagship-journey-copy { max-width: 46rem; }
+  .flagship-journey--embedded {
+    margin-top: 2rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .flagship-journey--embedded .flagship-journey-inner {
+    padding: 1.5rem;
+  }
   .flagship-journey-copy h2 {
     margin-top: 0.35rem;
     font-size: clamp(1.25rem, 2.2vw, 1.8rem);
