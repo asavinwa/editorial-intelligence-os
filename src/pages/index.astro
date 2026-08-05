@@ -30,21 +30,7 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           Most organisations don't have a content problem. They have an evidence problem.
         </p>
 
-        <!-- Evidence entry points: mobile -->
-        <aside class="starting-panel starting-panel--mobile" aria-labelledby="starting-title-mobile">
-          <p class="starting-eyebrow">Two ways in</p>
-          <h2 id="starting-title-mobile" class="starting-title">Where are you starting?</h2>
-          <a href="/work/narrative-audit" class="starting-option">
-            <span class="starting-option-title">We already have evidence</span>
-            <span class="starting-option-body">Organise and develop existing research, expertise and customer insight.</span>
-            <span class="starting-option-link">Develop the evidence →</span>
-          </a>
-          <a href="/work/research-led-thought-leadership" class="starting-option">
-            <span class="starting-option-title">We need to generate evidence</span>
-            <span class="starting-option-body">Use interviews, workshops and qualitative research to discover what matters.</span>
-            <span class="starting-option-link">Generate the evidence →</span>
-          </a>
-        </aside>
+        <p class="journey-heading">Start your journey</p>
 
         <!-- Start Here callout -->
         <a href="/start" class="guide-callout group">
@@ -70,42 +56,6 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           <div class="guide-callout-body">
             <p class="guide-callout-title">A practical guide to Editorial Intelligence</p>
             <p class="guide-callout-sub">Learn how B2B teams turn scattered evidence into narratives, decisions and reusable knowledge →</p>
-          </div>
-        </a>
-
-        <!-- Narrative Audit callout -->
-        <a href="/work/narrative-audit" class="guide-callout group">
-          <span class="guide-callout-badge">Audit</span>
-          <div class="guide-callout-body">
-            <p class="guide-callout-title">Narrative Audit</p>
-            <p class="guide-callout-sub">Find the strongest argument already inside your research, insight and expertise →</p>
-          </div>
-        </a>
-
-        <!-- Startup Narrative Audit callout -->
-        <a href="/work/startup-narrative-audit" class="guide-callout group">
-          <span class="guide-callout-badge">Service</span>
-          <div class="guide-callout-body">
-            <p class="guide-callout-title">For B2B startups and early scaleups</p>
-            <p class="guide-callout-sub">Build a defensible market story from founder conviction, customer learning and product evidence →</p>
-          </div>
-        </a>
-
-        <!-- AI Visibility Audit callout -->
-        <a href="/work/ai-visibility-audit" class="guide-callout group">
-          <span class="guide-callout-badge">Audit</span>
-          <div class="guide-callout-body">
-            <p class="guide-callout-title">AI Visibility Audit</p>
-            <p class="guide-callout-sub">Understand how AI systems see your organisation and what is limiting your authority →</p>
-          </div>
-        </a>
-
-        <!-- Research-led thought leadership callout -->
-        <a href="/work/research-led-thought-leadership" class="guide-callout group">
-          <span class="guide-callout-badge">Research</span>
-          <div class="guide-callout-body">
-            <p class="guide-callout-title">Research-led thought leadership</p>
-            <p class="guide-callout-sub">Generate original evidence and turn it into a distinctive argument, report and content programme →</p>
           </div>
         </a>
 
@@ -184,19 +134,38 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           </div>
 
         </div>
-        <aside class="starting-panel starting-panel--desktop" aria-labelledby="starting-title-desktop">
-          <p class="starting-eyebrow">Two ways in</p>
-          <h2 id="starting-title-desktop" class="starting-title">Where are you starting?</h2>
-          <a href="/work/narrative-audit" class="starting-option">
-            <span class="starting-option-title">We already have evidence</span>
-            <span class="starting-option-body">Organise and develop existing research, expertise and customer insight.</span>
-            <span class="starting-option-link">Develop the evidence →</span>
-          </a>
-          <a href="/work/research-led-thought-leadership" class="starting-option">
-            <span class="starting-option-title">We need to generate evidence</span>
-            <span class="starting-option-body">Use interviews, workshops and qualitative research to discover what matters.</span>
-            <span class="starting-option-link">Generate the evidence →</span>
-          </a>
+        <aside class="services-panel" aria-labelledby="services-title">
+          <p class="journey-heading" id="services-title">Specialist services</p>
+          <div class="services-list">
+            <a href="/work/narrative-audit" class="service-option">
+              <span class="service-badge">Audit</span>
+              <span>
+                <span class="service-title">Narrative Audit</span>
+                <span class="service-body">Find the strongest argument already inside your research, insight and expertise.</span>
+              </span>
+            </a>
+            <a href="/work/startup-narrative-audit" class="service-option">
+              <span class="service-badge">Service</span>
+              <span>
+                <span class="service-title">For B2B startups and early scaleups</span>
+                <span class="service-body">Build a defensible market story from founder conviction, customer learning and product evidence.</span>
+              </span>
+            </a>
+            <a href="/work/ai-visibility-audit" class="service-option">
+              <span class="service-badge">Audit</span>
+              <span>
+                <span class="service-title">AI Visibility Audit</span>
+                <span class="service-body">Understand how AI systems see your organisation and what is limiting your authority.</span>
+              </span>
+            </a>
+            <a href="/work/research-led-thought-leadership" class="service-option">
+              <span class="service-badge">Research</span>
+              <span>
+                <span class="service-title">Research-led thought leadership</span>
+                <span class="service-body">Generate original evidence and turn it into a distinctive argument, report and content programme.</span>
+              </span>
+            </a>
+          </div>
         </aside>
       </div>
     </div>
@@ -448,71 +417,63 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
   }
 
 
-  /* ── Evidence entry points ── */
-  .starting-panel {
-    padding: 1.4rem 1.5rem;
-    border: 1px solid var(--color-rule);
-    border-top: 2px solid var(--color-accent);
-    border-radius: 6px;
-    background: var(--color-surface-secondary);
+  /* ── Journey and specialist services ── */
+  .journey-heading {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
   }
 
-  .starting-panel--desktop { display: none; }
-  .starting-panel--mobile { margin-bottom: 1.75rem; }
+  .services-panel {
+    margin-top: 0;
+  }
 
-  .starting-eyebrow {
+  .services-list {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .service-option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    text-decoration: none;
+  }
+
+  .service-badge {
     font-family: var(--font-mono);
     font-size: 0.5625rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 0.45rem;
+    padding-top: 0.15rem;
   }
 
-  .starting-title {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    line-height: 1.3;
-    color: var(--color-ink);
-    margin-bottom: 1rem;
+  .service-title,
+  .service-body {
+    display: block;
   }
 
-  .starting-option {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    padding: 0.9rem 0;
-    text-decoration: none;
-    border-top: 1px solid var(--color-rule);
-  }
-
-  .starting-option:last-child { padding-bottom: 0; }
-
-  .starting-option-title {
+  .service-title {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-ink);
+    line-height: 1.35;
+    margin-bottom: 0.3rem;
   }
 
-  .starting-option-body {
+  .service-body {
     font-size: 0.775rem;
     line-height: 1.55;
     color: var(--color-ink-tertiary);
   }
 
-  .starting-option-link {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.02em;
+  .service-option:hover .service-title {
     color: var(--color-accent);
-    margin-top: 0.2rem;
-  }
-
-  .starting-option:hover .starting-option-link { text-decoration: underline; }
-
-  @media (min-width: 900px) {
-    .starting-panel--mobile { display: none; }
-    .starting-panel--desktop { display: block; }
   }
 
   /* ── Guide callout ── */
