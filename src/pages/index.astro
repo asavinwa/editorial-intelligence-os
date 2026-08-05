@@ -30,6 +30,22 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           Most organisations don't have a content problem. They have an evidence problem.
         </p>
 
+        <!-- Evidence entry points: mobile -->
+        <aside class="starting-panel starting-panel--mobile" aria-labelledby="starting-title-mobile">
+          <p class="starting-eyebrow">Two ways in</p>
+          <h2 id="starting-title-mobile" class="starting-title">Where are you starting?</h2>
+          <a href="/work/narrative-audit" class="starting-option">
+            <span class="starting-option-title">We already have evidence</span>
+            <span class="starting-option-body">Organise and develop existing research, expertise and customer insight.</span>
+            <span class="starting-option-link">Develop the evidence →</span>
+          </a>
+          <a href="/work/research-led-thought-leadership" class="starting-option">
+            <span class="starting-option-title">We need to generate evidence</span>
+            <span class="starting-option-body">Use interviews, workshops and qualitative research to discover what matters.</span>
+            <span class="starting-option-link">Generate the evidence →</span>
+          </a>
+        </aside>
+
         <!-- Start Here callout -->
         <a href="/start" class="guide-callout group">
           <span class="guide-callout-badge">Start</span>
@@ -168,6 +184,20 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
           </div>
 
         </div>
+        <aside class="starting-panel starting-panel--desktop" aria-labelledby="starting-title-desktop">
+          <p class="starting-eyebrow">Two ways in</p>
+          <h2 id="starting-title-desktop" class="starting-title">Where are you starting?</h2>
+          <a href="/work/narrative-audit" class="starting-option">
+            <span class="starting-option-title">We already have evidence</span>
+            <span class="starting-option-body">Organise and develop existing research, expertise and customer insight.</span>
+            <span class="starting-option-link">Develop the evidence →</span>
+          </a>
+          <a href="/work/research-led-thought-leadership" class="starting-option">
+            <span class="starting-option-title">We need to generate evidence</span>
+            <span class="starting-option-body">Use interviews, workshops and qualitative research to discover what matters.</span>
+            <span class="starting-option-link">Generate the evidence →</span>
+          </a>
+        </aside>
       </div>
     </div>
   </section>
@@ -417,6 +447,74 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
     border-color: var(--color-ink);
   }
 
+
+  /* ── Evidence entry points ── */
+  .starting-panel {
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-top: 2px solid var(--color-accent);
+    border-radius: 6px;
+    background: var(--color-surface-secondary);
+  }
+
+  .starting-panel--desktop { display: none; }
+  .starting-panel--mobile { margin-bottom: 1.75rem; }
+
+  .starting-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.45rem;
+  }
+
+  .starting-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+
+  .starting-option {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.9rem 0;
+    text-decoration: none;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .starting-option:last-child { padding-bottom: 0; }
+
+  .starting-option-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .starting-option-body {
+    font-size: 0.775rem;
+    line-height: 1.55;
+    color: var(--color-ink-tertiary);
+  }
+
+  .starting-option-link {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.02em;
+    color: var(--color-accent);
+    margin-top: 0.2rem;
+  }
+
+  .starting-option:hover .starting-option-link { text-decoration: underline; }
+
+  @media (min-width: 900px) {
+    .starting-panel--mobile { display: none; }
+    .starting-panel--desktop { display: block; }
+  }
+
   /* ── Guide callout ── */
   .guide-callout {
     display: flex;
@@ -493,6 +591,8 @@ import CompareNotesCallout from '../components/CompareNotesCallout.astro';
     .hero-diagram {
       display: flex;
       align-items: stretch;
+      flex-direction: column;
+      gap: 1.25rem;
       padding-top: 2.25rem;
     }
   }
