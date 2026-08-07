@@ -22,7 +22,7 @@ The last section matters as much as the others. A roadmap that only records what
 
 Larger pieces of work, specified before they are started.
 
-- [Public repository evolution](public-repository-evolution.md) — making the repository the canonical public home of the methodology, not just the site source *(proposed)*
+- [Public repository evolution](public-repository-evolution.md) — making the repository the canonical public home of the methodology *(phase 1 complete; phases 2–4 parked — see the decision at the top of the document)*
 
 ## Maintaining this
 

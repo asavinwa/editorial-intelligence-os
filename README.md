@@ -1,5 +1,9 @@
 # Editorial Intelligence OS
 
+[![build](https://github.com/asavinwa/editorial-intelligence-os/actions/workflows/build.yml/badge.svg)](https://github.com/asavinwa/editorial-intelligence-os/actions/workflows/build.yml)
+[![content: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-blue)](LICENSE)
+[![code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
+
 The repository behind [editorialintelligence.co](https://www.editorialintelligence.co) — the published site, the documentation that explains the system, and the research that feeds it.
 
 Editorial Intelligence is a method for turning what an organisation already knows into strategic assets that compound. This repository holds three things: the **method** (`docs/`), the **evidence and work in progress** (`research/`), and the **published surface** (`website/`).
@@ -69,3 +73,8 @@ Vercel builds from the repository root using [`vercel.json`](vercel.json), which
 - **Tags are a controlled vocabulary.** Add new tags to `TAGS` in `website/src/content/config.ts` before using them; the schema rejects anything else and the build fails.
 - **`status` gates publication.** `draft` content stays out of listings. Narratives, frameworks and writing use `draft`/`published`; experiments use `active`/`complete`/`archived`/`draft`.
 - **Relationships are explicit.** The `related*` frontmatter arrays reference other entries by slug and drive cross-linking. Keep them accurate in both directions.
+- **CI enforces the above.** [`.github/workflows/build.yml`](.github/workflows/build.yml) builds the site on every push and pull request, so a tag outside the vocabulary or malformed frontmatter fails before it reaches the site.
+
+## Licence
+
+Documentation, frameworks and content are [CC BY 4.0](LICENSE) — free to use and adapt with attribution. Site code is MIT. See [`LICENSE`](LICENSE).

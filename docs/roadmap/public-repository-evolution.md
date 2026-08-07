@@ -1,9 +1,64 @@
 # Public repository evolution
 
-**Status:** proposed
+**Status:** phase 1 complete · phases 2–4 parked pending decision
 **Date:** 2026-08-07
-**Horizon:** next
+**Horizon:** phase 1 done; remainder undecided
 **Depends on:** the August 2026 restructure ([changelog](../changelog/2026-08.md))
+
+---
+
+## Decision — is the rest of this worth doing?
+
+**Short answer: probably not as written. Phase 1 is done. Phases 2–4 are parked until there is a reason to take them off the shelf.**
+
+### What changed
+
+This document was written against an assumption that the repository should reward exploration — that a visitor would arrive, navigate the methodology, and read their way into the discipline. That assumption drove the size of it, and particularly phase 3.
+
+The assumption is wrong for this audience. The people this work is aimed at — practitioners and leaders in marketing, communications and product — do not browse repositories. They will never open `docs/implementation/`. Building depth for a reader who does not exist is the most expensive mistake available here.
+
+### The revised objective
+
+> The repository should demonstrate at a glance that Editorial Intelligence is a technical exercise — a real system, built and maintained — without requiring anyone to dig into it.
+
+That is a much smaller job, and a different one. It is satisfied by signals, not by documentation:
+
+| Signal | What it says | Status |
+| --- | --- | --- |
+| Passing build badge | This is engineered and continuously verified | Done |
+| Licence | This is intended for use, not just display | Done |
+| Description and topics | This is a methodology, not a site build | Needs dashboard change |
+| Coherent three-layer structure | Someone thought about this | Done in the restructure |
+| Recent, meaningful commits | This is alive | Ongoing |
+| Dated changelog and roadmap | This evolves and the evolution is recorded | Done |
+
+All but one of those is already in place. The remaining item is four settings changes.
+
+### What this means for each phase
+
+| Phase | Verdict |
+| --- | --- |
+| **1 — settings and hygiene** | **Done.** Licence, CI and the untracking are committed; four dashboard settings remain. |
+| **2 — README and navigation** | **Worth a single sitting, later.** The first screen is the only part most visitors will read. Do sections 1–5 of the outline and stop. The rest of the outline is for a reader who is not coming. |
+| **3 — new documentation areas** | **Parked.** `docs/standards/` should be dropped outright — it is documentation governing documentation, and the repository is not large enough to need it. `docs/implementation/` is the one part with independent value, but that value is to clients and practitioners, and it would serve them better as site content or a delivered artefact than as a directory here. |
+| **4 — website integration** | **Reduced to one item.** A footer link from the site to the repository. The `/changelog` page, the "how this was built" links and the experiment-log pairing all assume visitors will follow the link and explore, which is the assumption being retired. |
+
+### The trade being made
+
+Depth is being given up in exchange for not spending weeks on it. That is the right trade at current evidence: nobody is asking for the depth, and the effort has a better home.
+
+The thing genuinely worth doing instead is unchanged and sits in [now, next and later](current.md): four active experiments have produced no published findings. One honest experiment write-up — including what did not work — does more for the credibility of the discipline than the whole of phase 3, because it is evidence rather than structure.
+
+### What would un-park this
+
+Revisit if any of these become true:
+
+- Someone asks for the methodology in a form they can implement themselves
+- A client or employer wants to adopt the frameworks internally and needs implementation guidance
+- The repository starts attracting traffic or contributors on its own
+- The method is taught — a course or workshop makes implementation guides a deliverable rather than an aspiration
+
+Until one of those happens, the sections below are a specification held in reserve, not a plan. They are kept because the thinking is done and re-deriving it later would be wasteful — which is the whole argument of the [compounding principle](../principles/compounding.md) applied to this document itself.
 
 ---
 

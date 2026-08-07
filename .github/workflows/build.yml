@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install dependencies
+        working-directory: website
+        run: npm ci
+
+      # Astro's content collections enforce the schemas and controlled tag
+      # vocabulary in src/content/config.ts, so a bad tag or malformed
+      # frontmatter fails the build rather than shipping.
+      - name: Build
+        working-directory: website
+        run: npm run build

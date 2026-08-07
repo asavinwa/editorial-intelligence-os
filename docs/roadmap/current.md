@@ -23,6 +23,8 @@
 
 **Populate `research/public-notes/`.** The directory exists and is empty. Working notes published early are how signals enter the system before they are ready to be narratives.
 
+**Finish the repository settings.** Four dashboard changes complete phase 1 of [public repository evolution](public-repository-evolution.md) — description, homepage, topics, wiki. Phases 2–4 of that proposal are parked; the reasoning is at the top of the document.
+
 ## Later
 
 **Agent-readable exports.** The content collections are structured, schema-enforced and cross-referenced — most of the work required to make the knowledge base directly consumable by an agent is already done. What is missing is a defined export surface and a decision about what should be exposed.
