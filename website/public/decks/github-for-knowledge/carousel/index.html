@@ -214,7 +214,6 @@ body {
 }
 
 .c-h--big { font-size: 82px; }
-.c-h--small { font-size: 54px; }
 
 .c-p {
   font-size: 30px;
@@ -291,33 +290,6 @@ body {
   margin-top: 8px;
   max-width: 37ch;
 }
-
-/* --- Split (two halves of a contrast) ------------------------------------- */
-.c-split { display: flex; flex-direction: column; gap: 0; }
-
-.c-half { padding: 30px 0; border-top: 1px solid var(--rule); }
-.c-half:last-child { border-bottom: 1px solid var(--rule); }
-
-.c-half p { margin: 0; }
-
-.c-half .cond {
-  font-family: var(--font-mono);
-  font-size: 21px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 14px;
-}
-
-.c-half .res {
-  font-family: var(--font-serif);
-  font-size: 52px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.c-half--muted .res { color: var(--ink-3); }
 
 /* --- Diff ----------------------------------------------------------------- */
 .c-diff { border: 1px solid var(--rule); background: var(--panel); }
@@ -424,34 +396,6 @@ body {
   height: 46px;
 }
 
-/* --- Repo listing --------------------------------------------------------- */
-.c-repo { margin: 0; border-top: 1px solid var(--rule); }
-
-.c-repo div {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  gap: 24px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--rule);
-  align-items: baseline;
-}
-
-.c-repo dt { font-family: var(--font-mono); font-size: 25px; color: var(--ink); }
-.c-repo dd { margin: 0; font-size: 25px; line-height: 1.45; color: var(--ink-2); }
-
-/* --- Close card ----------------------------------------------------------- */
-/* Sized so the full URL holds one line beside the page number */
-.c-cta {
-  font-family: var(--font-mono);
-  font-size: 21px;
-  line-height: 1.7;
-  color: var(--ink-3);
-  margin: 0;
-  white-space: nowrap;
-}
-
-.c-cta b { display: block; color: var(--accent); font-weight: 500; font-size: 25px; }
-
 /* --------------------------------------------------------------------------
    Print — one artboard per page at true size, which is what LinkedIn wants
    -------------------------------------------------------------------------- */
@@ -485,7 +429,7 @@ body {
       <h1>Your company has a GitHub for code. It has nothing for what it knows.</h1>
     </div>
     <p class="spec">
-      <b>13 cards</b> &middot; 1080 &times; 1080<br />
+      <b>8 cards</b> &middot; 1080 &times; 1080<br />
       From the field note <b>GitHub for knowledge</b><br />
       Print this page for an upload-ready PDF
     </p>
@@ -515,7 +459,7 @@ body {
 
     <!-- 02 -->
     <div class="slot">
-      <p class="slot-label"><b>02</b> The pause</p>
+      <p class="slot-label"><b>02</b> The pause &mdash; makes it concrete</p>
       <div class="frame">
         <article class="card">
           <p class="c-eyebrow c-eyebrow--quiet">Two questions</p>
@@ -526,7 +470,7 @@ body {
           </div>
           <div class="c-foot">
             <span>editorialintelligence.co</span>
-            <span class="num"><b>02</b> / 13</span>
+            <span class="num"><b>02</b> / 08</span>
           </div>
         </article>
       </div>
@@ -534,75 +478,7 @@ body {
 
     <!-- 03 -->
     <div class="slot">
-      <p class="slot-label"><b>03</b> Reframe &mdash; it isn&rsquo;t a talent gap</p>
-      <div class="frame">
-        <article class="card">
-          <p class="c-eyebrow c-eyebrow--quiet">The reframe</p>
-          <div class="c-body">
-            <h2 class="c-h">Neither team is smarter than the other.</h2>
-            <p class="c-p c-p--wide">One of them solved organisational memory as an <strong>engineering problem</strong> twenty years ago.</p>
-            <p class="c-p c-p--wide">The other is still treating it as a <strong>filing problem</strong>.</p>
-          </div>
-          <div class="c-foot">
-            <span>editorialintelligence.co</span>
-            <span class="num"><b>03</b> / 13</span>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- 04 -->
-    <div class="slot">
-      <p class="slot-label"><b>04</b> The four guarantees</p>
-      <div class="frame">
-        <article class="card">
-          <p class="c-eyebrow">What version control actually gave software teams</p>
-          <div class="c-body">
-            <ul class="c-list">
-              <li>One source of truth<span>Not &ldquo;final_v3_FINAL_amended&rdquo;. Disagreement resolved by review.</span></li>
-              <li>History survives<span>What changed, when, and &mdash; because every change carries a message &mdash; why.</span></li>
-              <li>Change is reviewed<span>Improvement is a process, not an accident of whoever last opened the file.</span></li>
-              <li>Everything is connected<span>A system where you can trace what depends on what.</span></li>
-            </ul>
-          </div>
-          <div class="c-foot">
-            <span>None of these has anything to do with programming</span>
-            <span class="num"><b>04</b> / 13</span>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- 05 -->
-    <div class="slot">
-      <p class="slot-label"><b>05</b> Why software got there first</p>
-      <div class="frame">
-        <article class="card">
-          <p class="c-eyebrow c-eyebrow--quiet">The asymmetry</p>
-          <div class="c-body">
-            <div class="c-split">
-              <div class="c-half">
-                <p class="cond">When knowledge rots in a codebase</p>
-                <p class="res">The build breaks.</p>
-              </div>
-              <div class="c-half c-half--muted">
-                <p class="cond">When knowledge rots in a marketing team</p>
-                <p class="res">Nothing breaks.</p>
-              </div>
-            </div>
-            <p class="c-p c-p--wide">The team just quietly re-buys research it already owns, re-learns lessons it already paid for, and re-argues positions it already settled.</p>
-          </div>
-          <div class="c-foot">
-            <span>editorialintelligence.co</span>
-            <span class="num"><b>05</b> / 13</span>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- 06 -->
-    <div class="slot">
-      <p class="slot-label"><b>06</b> The inventory</p>
+      <p class="slot-label"><b>03</b> The evidence</p>
       <div class="frame">
         <article class="card">
           <p class="c-eyebrow">Where your knowledge actually lives</p>
@@ -621,15 +497,15 @@ body {
           </div>
           <div class="c-foot">
             <span>editorialintelligence.co</span>
-            <span class="num"><b>06</b> / 13</span>
+            <span class="num"><b>03</b> / 08</span>
           </div>
         </article>
       </div>
     </div>
 
-    <!-- 07 -->
+    <!-- 04 -->
     <div class="slot">
-      <p class="slot-label"><b>07</b> Pull quote &mdash; the diagnosis</p>
+      <p class="slot-label"><b>04</b> The diagnosis &mdash; the quotable card</p>
       <div class="frame">
         <article class="card card--dark">
           <p class="c-eyebrow">The condition most companies are in</p>
@@ -639,41 +515,40 @@ body {
           </div>
           <div class="c-foot">
             <span>editorialintelligence.co</span>
-            <span class="num"><b>07</b> / 13</span>
+            <span class="num"><b>04</b> / 08</span>
           </div>
         </article>
       </div>
     </div>
 
-    <!-- 08 -->
+    <!-- 05 -->
     <div class="slot">
-      <p class="slot-label"><b>08</b> The experiment</p>
+      <p class="slot-label"><b>05</b> What good looks like</p>
       <div class="frame">
         <article class="card">
-          <p class="c-eyebrow">So I ran the experiment on myself</p>
+          <p class="c-eyebrow">What version control actually gave software teams</p>
           <div class="c-body">
-            <p class="c-p c-p--wide">I moved my own methodology into a repository and started treating professional knowledge the way engineers treat code. Not metaphorically &mdash; literally.</p>
-            <dl class="c-repo">
-              <div><dt>frameworks/</dt><dd>Versioned, so a framework has a history rather than a latest copy</dd></div>
-              <div><dt>evidence/</dt><dd>Research beside the arguments it supports, so claims trace to sources</dd></div>
-              <div><dt>workflows/</dt><dd>Written down as workflows, not carried as habits</dd></div>
-              <div><dt>prompts/</dt><dd>A library, so a prompt that worked doesn&rsquo;t die in a chat window</dd></div>
-            </dl>
+            <ul class="c-list">
+              <li>One source of truth<span>Not &ldquo;final_v3_FINAL_amended&rdquo;. Disagreement resolved by review.</span></li>
+              <li>History survives<span>What changed, when, and &mdash; because every change carries a message &mdash; why.</span></li>
+              <li>Change is reviewed<span>Improvement is a process, not an accident of whoever last opened the file.</span></li>
+              <li>Everything is connected<span>A system where you can trace what depends on what.</span></li>
+            </ul>
           </div>
           <div class="c-foot">
-            <span>editorialintelligence.co</span>
-            <span class="num"><b>08</b> / 13</span>
+            <span>None of these has anything to do with programming</span>
+            <span class="num"><b>05</b> / 08</span>
           </div>
         </article>
       </div>
     </div>
 
-    <!-- 09 -->
+    <!-- 06 -->
     <div class="slot">
-      <p class="slot-label"><b>09</b> The two effects</p>
+      <p class="slot-label"><b>06</b> The proof</p>
       <div class="frame">
         <article class="card">
-          <p class="c-eyebrow">Two things happened, in this order</p>
+          <p class="c-eyebrow">When I moved my own methodology into a repository</p>
           <div class="c-body">
             <ol class="c-steps">
               <li><p>Structuring the knowledge improved the knowledge.<span>Writing a workflow down exposes the steps you were skipping. Versioning a framework shows you where you contradict last month.</span></p></li>
@@ -683,58 +558,15 @@ body {
           </div>
           <div class="c-foot">
             <span>editorialintelligence.co</span>
-            <span class="num"><b>09</b> / 13</span>
+            <span class="num"><b>06</b> / 08</span>
           </div>
         </article>
       </div>
     </div>
 
-    <!-- 10 -->
+    <!-- 07 -->
     <div class="slot">
-      <p class="slot-label"><b>10</b> The commercial stake</p>
-      <div class="frame">
-        <article class="card">
-          <p class="c-eyebrow">AI changed the multiplier</p>
-          <div class="c-body">
-            <p class="c-p c-p--wide">For decades documentation was a cost centre with a moral glow. It made you maybe ten per cent more effective, and ten per cent was never worth the discipline.</p>
-            <div class="c-split">
-              <div class="c-half">
-                <p class="cond">Two competitors buy the same models</p>
-                <p class="res">One hands them five years of connected research. One hands them a brand deck.</p>
-              </div>
-            </div>
-            <p class="c-kicker">The gap will not be ten per cent.</p>
-          </div>
-          <div class="c-foot">
-            <span>editorialintelligence.co</span>
-            <span class="num"><b>10</b> / 13</span>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- 11 -->
-    <div class="slot">
-      <p class="slot-label"><b>11</b> The objection</p>
-      <div class="frame">
-        <article class="card">
-          <p class="c-eyebrow c-eyebrow--quiet">To be clear about what this isn&rsquo;t</p>
-          <div class="c-body">
-            <h2 class="c-h">Don&rsquo;t put your marketing team on GitHub on Monday.</h2>
-            <p class="c-p c-p--wide">Git&rsquo;s learning curve is real. The specific tool matters far less than the guarantees it enforces &mdash; and plenty of friendlier tools now wrap the same discipline.</p>
-            <p class="c-p c-p--wide">What you <strong>cannot</strong> do is get those guarantees from a shared drive, a wiki nobody gardens, or the memory of whoever&rsquo;s been there longest.</p>
-          </div>
-          <div class="c-foot">
-            <span>editorialintelligence.co</span>
-            <span class="num"><b>11</b> / 13</span>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- 12 -->
-    <div class="slot">
-      <p class="slot-label"><b>12</b> The test &mdash; the card people screenshot</p>
+      <p class="slot-label"><b>07</b> The test &mdash; the card people screenshot</p>
       <div class="frame">
         <article class="card">
           <p class="c-eyebrow">The honest test &middot; one minute</p>
@@ -749,15 +581,15 @@ body {
           </div>
           <div class="c-foot">
             <span>editorialintelligence.co</span>
-            <span class="num"><b>12</b> / 13</span>
+            <span class="num"><b>07</b> / 08</span>
           </div>
         </article>
       </div>
     </div>
 
-    <!-- 13 -->
+    <!-- 08 -->
     <div class="slot">
-      <p class="slot-label"><b>13</b> Close &mdash; the payoff and the ask</p>
+      <p class="slot-label"><b>08</b> Close &mdash; the payoff, source line only</p>
       <div class="frame">
         <article class="card card--dark">
           <p class="c-eyebrow">If the answer is no</p>
@@ -766,8 +598,8 @@ body {
             <p class="c-p c-p--wide">Engineers stopped accepting that trade a generation ago. The tools have finally made the same refusal affordable for everyone else.</p>
           </div>
           <div class="c-foot">
-            <p class="c-cta"><b>Read the full field note</b>editorialintelligence.co/writing/github-for-knowledge</p>
-            <span class="num"><b>13</b> / 13</span>
+            <span>editorialintelligence.co/writing/github-for-knowledge</span>
+            <span class="num"><b>08</b> / 08</span>
           </div>
         </article>
       </div>
