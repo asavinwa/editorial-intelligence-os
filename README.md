@@ -1,7 +1,7 @@
 # Editorial Intelligence
 
 [![build](https://github.com/asavinwa/editorial-intelligence-os/actions/workflows/build.yml/badge.svg)](https://github.com/asavinwa/editorial-intelligence-os/actions/workflows/build.yml)
-[![content: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-blue)](LICENSE)
+[![frameworks: CC BY 4.0](https://img.shields.io/badge/frameworks-CC%20BY%204.0-blue)](LICENSE)
 [![code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
 
 Source for **[editorialintelligence.co](https://www.editorialintelligence.co)** — the published home of Editorial Intelligence.
@@ -51,4 +51,4 @@ Vercel builds from the repository root using [`vercel.json`](vercel.json), which
 
 ## Licence
 
-Content is [CC BY 4.0](LICENSE) — free to use and adapt with attribution. Site code is MIT. See [`LICENSE`](LICENSE).
+The Editorial Intelligence frameworks are [CC BY 4.0](LICENSE) — free to use and adapt, including commercially, with attribution. Narratives, field notes and commissioned research are published for reading. Site code is MIT. See [`LICENSE`](LICENSE).

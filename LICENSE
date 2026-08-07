@@ -1,12 +1,18 @@
 # Licence
 
-This repository contains two kinds of work under two different licences.
+This repository contains three kinds of work under three different terms.
 
-## Documentation, frameworks and content — CC BY 4.0
+| What | Terms |
+| --- | --- |
+| The Editorial Intelligence method — frameworks and principles | CC BY 4.0 |
+| Narratives, field notes, experiments and commissioned research | Published for reading. All rights reserved. |
+| Site code | MIT |
 
-Everything in `docs/`, `research/`, `website/src/content/`, and this repository's
-Markdown documentation is licensed under the Creative Commons Attribution 4.0
-International Licence (CC BY 4.0).
+## 1. The Editorial Intelligence method — CC BY 4.0
+
+The frameworks and principles that describe how Editorial Intelligence works are
+licensed under the Creative Commons Attribution 4.0 International Licence
+(CC BY 4.0).
 
 You are free to share and adapt this material for any purpose, including
 commercially, provided you give appropriate credit.
@@ -16,7 +22,53 @@ Attribution: Asavin Wattanajantra — https://www.editorialintelligence.co
 Full licence: https://creativecommons.org/licenses/by/4.0/
 Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
 
-## Site code — MIT
+This covers the following, in `website/src/content/frameworks/`:
+
+- Editorial Intelligence Framework
+- Narrative Architecture
+- Customer Signal Framework
+- The Evidence Engine
+- Portable Intelligence
+- The Daily OS
+- Workflow Library
+- Case Study Intelligence Framework
+- Editorial Intelligence and AI Search
+- AI visibility is the outcome
+- Product Marketing Framework
+- Editorial Intelligence for product teams
+
+## 2. Everything else — published for reading
+
+All other content is published to be read. All rights reserved. You may quote it
+with attribution under normal fair dealing; you may not republish, adapt or
+redistribute it.
+
+This applies to:
+
+- Narratives — `website/src/content/narratives/`
+- Field notes and articles — `website/src/content/writing/`
+- Experiments — `website/src/content/experiments/`
+- Any framework developed in the course of a client or employer engagement,
+  whether or not it is named below
+
+The frameworks currently in that last category, excluded from the CC BY grant in
+section 1:
+
+- The AI Maturity Curve
+- Editorial Intelligence and Agentic AI
+- MTD Operational Reset
+- MTD Pricing Framework
+- Content Activation Framework
+
+These draw on research, survey data, events and editorial work produced with
+clients and employers. The rights in that underlying material are not mine alone
+to license onward, so they are not offered for reuse.
+
+**Rule for new work:** a document belongs in section 2, not section 1, if it
+reports or is substantially built on research, data or editorial work produced
+in the course of a client or employer engagement. When in doubt, section 2.
+
+## 3. Site code — MIT
 
 All source code in `website/` — Astro components, pages, configuration, styles
 and scripts — is licensed under the MIT Licence.
@@ -43,7 +95,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Trade marks
+## 4. Trade marks
 
-The licences above cover the written method and the code. They do not grant
-rights to the Editorial Intelligence name, logo or visual identity.
+The terms above cover the written method and the code. They do not grant rights
+to the Editorial Intelligence name, logo or visual identity.
