@@ -105,34 +105,38 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         <div class="cycle-steps mt-10">
           {[
             {
-              term: 'Evidence generation',
+              term: 'Generate',
               def: 'The cycle can begin with evidence an organisation already possesses. When important questions remain unanswered, it can also generate missing evidence through interviews, conversations, workshops and qualitative research. The aim is not research for its own sake, but the understanding required to make better strategic and editorial decisions.',
             },
             {
-              term: 'Synthesis',
-              def: 'Signals become insights through synthesis — the recognition that multiple observations from different sources are pointing at the same underlying truth. Not every signal survives synthesis. Most don\'t. The editorial judgement required here is the capacity to sit with incomplete evidence long enough to recognise what it is actually revealing, and to resist the impulse to publish before the pattern is clear.',
+              term: 'Capture',
+              def: 'Signals are everywhere: in customer interviews, research findings, product feedback, sales conversations, webinar and event discussions, social responses, market observations. Most organisations generate them continuously. The challenge is not producing them — it is preserving the ones that matter before they disappear into recordings, inboxes and individual memory. That recognition is the first exercise of editorial judgement.',
             },
             {
-              term: 'Narratives',
-              def: 'Narratives are where organisational knowledge becomes strategic direction. They provide the organising structure that connects evidence across time, teams and channels — becoming more authoritative as new evidence is added, and more distinctive as they develop over time. Narratives are the centre of the Editorial Intelligence Cycle. Everything before them exists to discover them. Everything after them exists to strengthen them.',
+              term: 'Connect',
+              def: 'A single customer describing workflow friction is a signal. Fifty customers describing the same friction, in the same terms, across different firm sizes and geographies — that is a pattern worth investigating. Connection brings evidence together across teams, formats and projects so those patterns become visible. Most organisations lose value here: not because evidence is missing, but because it is never joined up.',
             },
             {
-              term: 'Activation',
+              term: 'Synthesise',
+              def: 'Connected observations become insight through synthesis — deciding what the evidence actually means. Not every pattern survives it. Most don\'t. The editorial judgement required here is the capacity to sit with incomplete evidence long enough to recognise what it is actually revealing, and to resist the impulse to publish before the pattern is clear.',
+            },
+            {
+              term: 'Shape',
+              def: 'Shaping is where organisational knowledge becomes strategic direction. The strongest interpretation is turned into a narrative — a position the organisation can build on, develop over time and defend with evidence. Narratives provide the organising structure that connects evidence across time, teams and channels, and they are the centre of the cycle. Everything before them exists to discover them. Everything after them exists to strengthen them.',
+            },
+            {
+              term: 'Activate',
               def: 'Narratives are activated through the formats and channels suited to the audience and purpose — articles, frameworks, diagnostics, case studies, AI workflows, playbooks, video, social content, event presentations, sales enablement, executive communications. Format and channel selection is a strategic decision, not an afterthought. The question at this stage is not "how do we produce content?" but "which form will make this narrative most useful to this audience, in this context?"',
             },
             {
-              term: 'Evidence',
-              def: 'Every piece of activated content generates new evidence. A published article surfaces new questions. A social post reveals what resonates. A webinar generates new practitioner insights. A diagnostic uncovers new patterns. A framework, tested in practice, either holds or requires refinement. That evidence feeds back into the cycle as new signals — refining the narrative, strengthening the position, making the next pass more valuable than the previous one.',
-            },
-            {
-              term: 'Learning and reuse',
-              def: 'The final stage closes the loop. Evidence is applied: the narrative is refined where it needs sharpening, high-performing elements are repurposed in new contexts, and the signal capture capability that feeds into the next cycle improves with each pass. The organisation does not simply produce better content over time. It becomes more intelligent — a system that compounds its editorial knowledge rather than starting fresh with each campaign.',
+              term: 'Learn',
+              def: 'Every piece of activated work generates new evidence. A published article surfaces new questions. A social post reveals what resonates. A webinar generates new practitioner insights. A framework, tested in practice, either holds or requires refinement. The final stage treats all of it as new evidence for the next pass: the narrative is refined, high-performing elements are repurposed and the cycle begins again — stronger. The organisation does not simply produce better content over time. It becomes more intelligent.',
             },
           ].map((step, i) => (
             <div class="cycle-step">
               <div class="cycle-step__marker">
                 <span class="t-label">{String(i + 1).padStart(2, '0')}</span>
-                {i < 5 && <div class="cycle-step__line" aria-hidden="true" />}
+                {i < 6 && <div class="cycle-step__line" aria-hidden="true" />}
               </div>
               <div class="cycle-step__content">
                 <h3 class="t-title mb-3">{step.term}</h3>
@@ -189,7 +193,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
         <div class="mt-10 prose-section">
           <p>Three examples. Three different starting points — research, customer evidence, emerging technology. Three different outputs. The same underlying process.</p>
-          <p class="font-medium text-[var(--color-ink)]">Signals recognised. Synthesised into insights. Narratives built. Activated across formats and channels. Evidence accumulated. Learning applied.</p>
+          <p class="font-medium text-[var(--color-ink)]">Evidence generated where it was missing. Signals captured and connected. Synthesised into insight. Shaped into narrative. Activated across formats and channels. Learning fed back into the next cycle.</p>
           <p>That is Editorial Intelligence in practice.</p>
         </div>
       </section>
@@ -239,7 +243,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       <section class="mb-16">
         <h2 class="t-label mb-8">The operating model</h2>
         <div class="prose-section mb-10">
-          <p>At a higher level of abstraction, the cycle that powers Editorial Intelligence can be described in five stages.</p>
+          <p>At a higher level of abstraction, the seven-stage cycle can be compressed into five organisational moments.</p>
           <p>This is not a new cycle. It is the same cycle described at the level of the whole organisation — showing where every team, channel and communication discipline connects to the same intelligence foundation.</p>
         </div>
 
