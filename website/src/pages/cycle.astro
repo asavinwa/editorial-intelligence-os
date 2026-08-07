@@ -4,46 +4,70 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 const stages = [
   {
     num: '01',
-    name: 'Signals',
-    question: 'What should we pay attention to?',
-    purpose: 'Recognise observations with strategic potential before they disappear into the noise.',
-    inputs: ['Customer interviews', 'Research findings', 'Webinar and event conversations', 'Sales observations', 'Product feedback', 'Market data'],
+    name: 'Generate',
+    question: 'What do we still need to learn?',
+    purpose: 'Create evidence when it does not yet exist. Interviews, practitioner conversations, workshops and qualitative research answer the important questions the organisation cannot yet answer credibly.',
+    inputs: ['Practitioner and executive interviews', 'Customer interviews', 'Stakeholder conversations', 'Workshops', 'Qualitative research', 'Structured evidence gathering'],
     related: [
-      { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
+      { label: 'Research-led thought leadership', href: '/work/research-led-thought-leadership', type: 'framework' },
       { label: 'Hidden Hours', href: '/narratives/hidden-hours', type: 'narrative' },
     ],
     color: '#88806e',
   },
   {
     num: '02',
-    name: 'Synthesis',
+    name: 'Capture',
+    question: 'What should we pay attention to?',
+    purpose: 'Preserve useful research, customer insight, event conversations, practitioner expertise and market signals before they disappear into the noise.',
+    inputs: ['Customer interviews', 'Research findings', 'Webinar and event conversations', 'Sales observations', 'Product feedback', 'Market data'],
+    related: [
+      { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
+    ],
+    color: '#88806e',
+  },
+  {
+    num: '03',
+    name: 'Connect',
+    question: 'What belongs together?',
+    purpose: 'Bring evidence together across teams, formats and projects so recurring themes become visible. Most organisations lose value here — not because evidence is missing, but because it is never joined up.',
+    outputs: ['A connected evidence base', 'Recurring themes across sources', 'Contradictions worth investigating', 'Knowledge gaps made visible'],
+    related: [
+      { label: 'Evidence Engine', href: '/frameworks/evidence-engine', type: 'framework' },
+    ],
+    color: '#6a9fd8',
+  },
+  {
+    num: '04',
+    name: 'Synthesise',
     question: 'What does it mean?',
-    purpose: 'Connect multiple signals into meaningful patterns that reveal something strategically significant. This is where raw observations become insights — recurring themes, structural tensions, underlying truths.',
-    outputs: ['Recurring themes', 'Structural tensions', 'Strategic opportunities', 'Industry risks', 'Audience truths'],
+    purpose: 'Use human judgement, supported by AI, to test patterns and decide what the evidence means. This is where connected observations become insight — structural tensions, underlying truths, strategic significance.',
+    outputs: ['Insights', 'Structural tensions', 'Strategic opportunities', 'Industry risks', 'Audience truths'],
     related: [
       { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
     ],
     color: '#6a9fd8',
   },
   {
-    num: '03',
-    name: 'Narratives',
+    num: '05',
+    name: 'Shape',
     question: 'What position should we build?',
-    purpose: 'Organise insights into strategic stories an organisation can develop and strengthen over time.',
+    purpose: 'Turn the strongest interpretation into a clear narrative, position and editorial direction — strategic stories an organisation can develop and strengthen over time.',
     examples: ['Hidden Hours', 'Trusted AI', 'Customer Stories'],
     exampleLinks: [
       { label: 'Hidden Hours', href: '/narratives/hidden-hours' },
       { label: 'Customer Stories', href: '/narratives/customer-stories' },
     ],
-    related: [],
+    related: [
+      { label: 'Narrative Architecture', href: '/frameworks/narrative-architecture', type: 'framework' },
+    ],
     color: '#c8a96e',
     centre: true,
   },
   {
-    num: '04',
-    name: 'Activation',
+    num: '06',
+    name: 'Activate',
     question: 'How and where should we express it?',
-    purpose: 'Turn narratives into reusable forms, then deploy them in the formats and channels suited to the audience and purpose. Format and channel selection is a strategic decision — not content atomisation.',
+    purpose: 'Express the narrative through the formats, voices and channels most useful to each audience. Format and channel selection is a strategic decision — not content atomisation.',
     outputs: ['Articles and reports', 'Video and audio', 'Social content', 'Newsletter and email', 'Frameworks and diagnostics', 'Sales enablement', 'Event and webinar content', 'Executive communications'],
     related: [
       { label: 'Editorial Activation', href: '/frameworks/editorial-activation', type: 'framework' },
@@ -51,42 +75,33 @@ const stages = [
     color: '#c8a96e',
   },
   {
-    num: '05',
-    name: 'Evidence',
-    question: 'What did this generate?',
-    purpose: 'Capture what each activated piece reveals — engagement patterns, audience questions, platform signals, stakeholder feedback — then feed that evidence back as new signals for the next cycle.',
-    outputs: ['Audience questions and replies', 'Platform engagement signals', 'Stakeholder feedback', 'New patterns and tensions', 'Challenged or confirmed assumptions'],
-    related: [
-      { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
-    ],
-    color: '#88806e',
-  },
-  {
-    num: '06',
-    name: 'Learning and reuse',
-    question: 'How do we get smarter?',
-    purpose: 'Apply what the evidence reveals: refine the narrative, improve future activation decisions, repurpose high-performing elements, and build on what worked. The organisation becomes more intelligent with every completed cycle.',
-    outputs: ['Refined narrative positions', 'Improved format and channel judgement', 'Repurposed high-performing elements', 'Stronger signal capture for the next cycle'],
+    num: '07',
+    name: 'Learn',
+    question: 'What did this teach us?',
+    purpose: 'Treat performance, questions and audience response as new evidence. Capture what each activated piece reveals, refine the narrative, improve future decisions and feed everything back into the next cycle. The organisation becomes more intelligent with every completed pass.',
+    outputs: ['Audience questions and replies', 'Platform engagement signals', 'Stakeholder feedback', 'Refined narrative positions', 'Improved format and channel judgement', 'Stronger evidence for the next cycle'],
     related: [
       { label: 'Editorial Intelligence Framework', href: '/frameworks/editorial-intelligence-framework', type: 'framework' },
+      { label: 'Customer Signal Framework', href: '/frameworks/customer-signal-framework', type: 'framework' },
     ],
     color: '#88806e',
   },
 ];
 
 const hiddenHoursSteps = [
-  { stage: 'Signals', text: 'Research into operational pressure on accountants — hidden work, compliance burden, workflow friction' },
-  { stage: 'Synthesis', text: 'Admin and workflow friction are structural pressures, not individual inefficiencies' },
-  { stage: 'Narratives', text: 'The Hidden Hours narrative — the profession absorbing structural change in silence' },
-  { stage: 'Activation', text: 'Articles, diagnostic tool, social content, event presentations, editorial framework' },
-  { stage: 'Evidence', text: 'New signals from customer stories, practitioner conversations, platform responses and stakeholder use' },
-  { stage: 'Learning and reuse', text: 'Narrative refined. High-performing elements repurposed. Cycle continues — each pass stronger than the last', loop: true },
+  { stage: 'Generate', text: 'Research commissioned into operational pressure on accountants — a 1,000-respondent survey of where practitioner time really goes' },
+  { stage: 'Capture', text: 'Findings preserved alongside practitioner conversations, event discussions and customer signals — hidden work, compliance burden, workflow friction' },
+  { stage: 'Connect', text: 'Survey data joined with customer stories, market signals and adjacent research rather than filed as a single report' },
+  { stage: 'Synthesise', text: 'Admin and workflow friction identified as structural pressures, not individual inefficiencies' },
+  { stage: 'Shape', text: 'The Hidden Hours narrative — the profession absorbing structural change in silence' },
+  { stage: 'Activate', text: 'Articles, diagnostic tool, social content, event presentations, editorial framework' },
+  { stage: 'Learn', text: 'Responses, questions and stakeholder use feed back as new evidence. Narrative refined — each pass stronger than the last', loop: true },
 ];
 ---
 
 <BaseLayout
   title="The Editorial Intelligence Cycle"
-  description="Not a workflow that ends with publication. A system that learns. How signals become synthesis, narratives, activation, evidence and learning — continuously."
+  description="Not a workflow that ends with publication. A system that learns. How organisations generate, capture, connect, synthesise, shape, activate and learn from evidence — continuously."
 >
 
   <!-- Hero -->
@@ -101,7 +116,7 @@ const hiddenHoursSteps = [
       </div>
 
       <!-- Visual cycle diagram -->
-      <div class="cycle-diagram" aria-label="The Editorial Intelligence Cycle: Signals, Synthesis, Narratives, Activation, Evidence, Learning and reuse, back to Signals">
+      <div class="cycle-diagram" aria-label="The Editorial Intelligence Cycle: Generate, Capture, Connect, Synthesise, Shape, Activate, Learn, back to the start">
         {stages.map((stage, i) => (
           <div class="diagram-stage" data-centre={stage.centre}>
             <div class="stage-node" style={`--c: ${stage.color}`}>
@@ -119,7 +134,7 @@ const hiddenHoursSteps = [
         ))}
         <div class="diagram-loop" aria-hidden="true">
           <div class="loop-line"></div>
-          <span class="loop-label">back to signals</span>
+          <span class="loop-label">the cycle continues</span>
         </div>
       </div>
 
@@ -144,7 +159,7 @@ const hiddenHoursSteps = [
 
   <hr class="divider container-site" />
 
-  <!-- Six stages -->
+  <!-- Seven stages -->
   <section class="container-site py-16">
     <p class="t-label mb-10">Explore each stage</p>
     <div class="stages-grid">
