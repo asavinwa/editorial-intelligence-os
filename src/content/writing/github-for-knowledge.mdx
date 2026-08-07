@@ -1,0 +1,97 @@
+---
+title: "Why every company needs a GitHub for knowledge — not just code"
+excerpt: "Software teams solved organisational memory twenty years ago: one source of truth, full history, changes reviewed and connected. Everyone else still runs their most valuable knowledge through attachments and leaving drinks. AI has just made that gap expensive."
+date: 2026-08-07
+status: published
+tags:
+  - editorial-intelligence
+  - knowledge-systems
+  - editorial-os
+  - ai
+  - editorial-operations
+  - ai-workflows
+type: article
+readTime: 8
+relatedFrameworks:
+  - editorial-intelligence-framework
+  - daily-os
+  - evidence-engine
+relatedArticles:
+  - the-site-is-the-proof
+  - ai-made-editorial-intelligence-viable
+  - why-content-work-needs-to-compound
+---
+
+Ask a software team where their code lives and you get a one-word answer. Ask a marketing team where their knowledge lives and you get a pause, then a list: some of it's in the research folder, some in decks, some in a doc from the launch, quite a lot in Sarah's head, and Sarah left in March.
+
+Neither team is smarter than the other. One of them just solved organisational memory as an engineering problem twenty years ago, and the other is still treating it as a filing problem.
+
+That difference used to be survivable. AI has made it expensive — because for the first time, the return on well-structured knowledge isn't limited by how many humans have time to read it.
+
+---
+
+## What version control actually solved
+
+GitHub gets described as a place to store code, which undersells it in exactly the way that matters here. Storage was never the hard part. Any shared drive stores things.
+
+What version control actually gave software teams was a set of guarantees about knowledge:
+
+There is **one source of truth**. Not "final_v3_FINAL_amended", but a single canonical version everyone works from, with disagreement handled through review rather than parallel copies.
+
+**History survives.** You can see what changed, when, and — because every change carries a message — why. A decision made in 2019 is still inspectable in 2026, even though everyone involved has moved on.
+
+**Changes are reviewed before they land.** Improvement is a process, not an accident of whoever last had the file open.
+
+**Everything is connected.** Code doesn't live as ten thousand unrelated files; it lives as a system, where you can trace what depends on what.
+
+None of these guarantees has anything to do with programming. They're properties any body of knowledge would benefit from. Software teams got them first only because their knowledge happened to be executable, which made the cost of losing it immediate and visible. When knowledge rots in a codebase, the build breaks. When knowledge rots in a marketing team, nothing breaks — the team just quietly re-purchases research it already owns, re-learns lessons it already paid for, and re-argues positions it already settled.
+
+---
+
+## The knowledge everyone else loses
+
+Look at what a typical B2B organisation actually knows, and where that knowledge physically sits.
+
+The customer research lives in a PDF attached to an email thread. The interview transcripts that fed it were never kept. The narrative argument behind last year's flagship campaign exists as a deck, minus the reasoning, which was verbal. The editorial judgement about what the company will and won't say — tone, claims, positions — lives in the heads of two senior people. The prompts that individuals have painstakingly refined for AI-assisted work sit in personal chat histories, invisible to the colleague rebuilding the same prompt from scratch one desk away.
+
+Every one of these is an asset the organisation paid for. Almost none of them is in a state where the organisation could find it, trust it, build on it, or hand it to an AI system. That's the actual condition most companies are in: rich in knowledge, bankrupt in memory.
+
+I've written before about [why content work needs to compound](/writing/why-content-work-needs-to-compound) — the argument that good editorial work should leave behind more than published assets. This is the infrastructure question underneath that argument. Compounding isn't a mindset. It requires somewhere for the compounding to physically happen.
+
+---
+
+## Running the experiment on myself
+
+For the past months I've been testing the obvious response: I moved my own methodology into a repository and started treating my professional knowledge the way engineers treat code.
+
+Not metaphorically — literally. Frameworks live as versioned documents. Research and evidence live alongside the arguments they support, so a claim can be traced to its source. Editorial workflows are written down as workflows, not habits. Prompts live in a library, where a prompt that worked gets kept, improved and reused instead of dying in a chat window. The commit history has become something I didn't anticipate: a development log of the thinking itself, showing how a framework evolved and what changed my mind.
+
+Two things happened that I'd tell any organisation to expect.
+
+First, the act of structuring the knowledge improved it. Writing a workflow down exposes the steps you were skipping. Versioning a framework forces you to notice when you're contradicting last month's version. The repository isn't a record of the methodology; maintaining it turned out to be [the methodology running](/writing/the-site-is-the-proof).
+
+Second — and this is the part with commercial consequences — AI became dramatically more useful. Not because the models improved, but because I could finally hand them something worth working with. An AI agent pointed at a structured, versioned, interconnected body of knowledge can find the relevant evidence, respect the established positions, reuse the proven workflows and draft inside the house argument. The same agent pointed at a shared drive full of orphaned PDFs can only generate plausible text. The difference isn't the AI. It's what the AI has to stand on.
+
+---
+
+## Documentation just became a competitive advantage
+
+That second effect is why this argument has a deadline on it.
+
+For decades, documentation was a cost centre with a moral glow — everyone agreed it was virtuous and nobody funded it, because its benefits arrived slowly and only through human readers. A beautifully maintained knowledge base made you perhaps ten per cent more effective, and ten per cent was never worth the discipline it demanded.
+
+AI changes the multiplier. Structured knowledge is now the substrate that determines what all of these expensive new tools can actually do for you. Two competitors buy the same models; one can hand those models five years of connected research, settled narrative positions and proven workflows, and the other can hand them a brand deck. They will not get the same output, and the gap will not be ten per cent.
+
+There's an external version of the same effect. AI systems increasingly form their view of what your company is credible about from the evidence you've made available — and they reward the same things version control enforces internally: consistency, connection, and claims that trace to sources. The organisations whose knowledge is structured enough to be trusted by their own AI tools tend to be the same ones whose public arguments are coherent enough to be trusted by everyone else's.
+
+---
+
+## The discipline, not the platform
+
+To be clear about what I'm not arguing: most companies should not push their marketing team onto GitHub on Monday. Git's learning curve is real, and the platform was built for people who think in branches. The specific tool matters far less than the guarantees it enforces.
+
+What I am arguing is that every organisation now needs *some* system that gives its knowledge what version control gives code: one canonical source, visible history, reviewed change, and connection instead of fragmentation. You can get those properties from a repository, and increasingly from tools that wrap the same discipline in friendlier surfaces. What you cannot do is get them from a shared drive, a wiki nobody gardens, or the memory of whoever has been there longest.
+
+The honest test takes one minute. Pick the most expensive piece of knowledge your organisation produced last year — the research programme, the strategy work, the customer evidence. Now ask: could a new joiner find it, understand why it says what it says, see what's been built on it since, and hand it to an AI system in a usable form?
+
+If the answer is no, the knowledge isn't an asset yet. It's an anecdote with a budget line. Engineers stopped accepting that trade a generation ago. For everyone else, the tools have finally made the same refusal affordable — and the companies that notice first will spend the next few years building on top of what they know, while their competitors keep starting again.
