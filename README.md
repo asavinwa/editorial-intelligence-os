@@ -1,60 +1,32 @@
-# Editorial Intelligence OS
+# Editorial Intelligence
 
 [![build](https://github.com/asavinwa/editorial-intelligence-os/actions/workflows/build.yml/badge.svg)](https://github.com/asavinwa/editorial-intelligence-os/actions/workflows/build.yml)
 [![content: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-blue)](LICENSE)
 [![code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
 
-The repository behind [editorialintelligence.co](https://www.editorialintelligence.co) — the published site, the documentation that explains the system, and the research that feeds it.
+Source for **[editorialintelligence.co](https://www.editorialintelligence.co)** — the published home of Editorial Intelligence.
 
-Editorial Intelligence is a method for turning what an organisation already knows into strategic assets that compound. This repository holds three things: the **method** (`docs/`), the **evidence and work in progress** (`research/`), and the **published surface** (`website/`).
+Editorial Intelligence is a method for turning what an organisation already knows into strategic assets that compound. Most organisations do not lack insight; they lack a system for remembering it. Research is commissioned, evidence gathered, observations made — and then the learning disappears, and the next project starts from scratch.
+
+The site sets out the method, the frameworks behind it and the experiments testing it in practice.
+
+**→ [Read it on the site](https://www.editorialintelligence.co)**
 
 ## Structure
 
-```
-editorial-intelligence-os/
-├── website/          Astro site — the published surface
-├── docs/             The method: philosophy, principles, frameworks, roadmap, changelog
-├── research/         Public notes and experiments
-└── README.md
-```
+An [Astro 4](https://astro.build) site. Everything lives under `website/`.
 
-### `website/`
-
-The Astro 4 site that renders everything public-facing. It is a standard Astro project:
-
-| Path | Role |
+| Path | Contains |
 | --- | --- |
-| `website/src/pages/` | Routes — the application layer |
-| `website/src/components/` | Astro components, including content-specific ones under `components/content/` |
-| `website/src/content/` | Content collections (`narratives`, `frameworks`, `writing`, `experiments`) — the canonical MDX |
+| `website/src/pages/` | Routes |
+| `website/src/components/` | Components, with content-specific ones under `components/content/` |
+| `website/src/content/` | The content collections — narratives, frameworks, writing, experiments |
 | `website/src/content/config.ts` | Collection schemas and the controlled tag vocabulary |
-| `website/public/` | Static assets served as-is |
+| `website/public/` | Static assets |
 
-Astro requires routes to live at `src/pages`, so the app and component layers sit under `src/` rather than at the root of `website/`.
+Content is authored as MDX in typed collections rather than hard-coded into pages, so the schemas — not editorial discipline — are what keep it consistent.
 
-**Content lives in `website/src/content/`, not in `docs/`.** The MDX files there are the canonical, rendered source of truth for frameworks, narratives, writing and experiments. `docs/` explains and indexes the system; it does not duplicate the content.
-
-### `docs/`
-
-Documentation of the method itself — the reasoning, not the output.
-
-| Path | Role |
-| --- | --- |
-| [`start-here.md`](docs/start-here.md) | Entry point: what this is and how to navigate it |
-| [`philosophy.md`](docs/philosophy.md) | Why Editorial Intelligence exists and what it argues |
-| [`principles/`](docs/principles/) | The working principles that govern decisions |
-| [`frameworks/`](docs/frameworks/) | Index of the frameworks and how they relate |
-| [`roadmap/`](docs/roadmap/) | What is being built next and why |
-| [`changelog/`](docs/changelog/) | What changed, when, and what it means |
-
-### `research/`
-
-| Path | Role |
-| --- | --- |
-| [`public-notes/`](research/public-notes/) | Open working notes — thinking in progress, published early |
-| [`experiments/`](research/experiments/) | Build logs and findings for the experiments the site lists |
-
-## Running the site
+## Working locally
 
 ```bash
 cd website
@@ -64,17 +36,19 @@ npm run build    # outputs to website/dist
 npm run preview
 ```
 
+Requires Node 22.
+
 ## Deployment
 
-Vercel builds from the repository root using [`vercel.json`](vercel.json), which points the install, build and output paths at `website/`. If you change the deploy target, update that file rather than the Vercel dashboard so the configuration stays in the repository.
+Vercel builds from the repository root using [`vercel.json`](vercel.json), which points install, build and output at `website/`. Change that file rather than the Vercel dashboard, so the deploy configuration stays in the repository.
 
 ## Conventions
 
-- **Tags are a controlled vocabulary.** Add new tags to `TAGS` in `website/src/content/config.ts` before using them; the schema rejects anything else and the build fails.
+- **Tags are a controlled vocabulary.** Add new tags to `TAGS` in `website/src/content/config.ts` before using them; anything else fails the build.
 - **`status` gates publication.** `draft` content stays out of listings. Narratives, frameworks and writing use `draft`/`published`; experiments use `active`/`complete`/`archived`/`draft`.
 - **Relationships are explicit.** The `related*` frontmatter arrays reference other entries by slug and drive cross-linking. Keep them accurate in both directions.
-- **CI enforces the above.** [`.github/workflows/build.yml`](.github/workflows/build.yml) builds the site on every push and pull request, so a tag outside the vocabulary or malformed frontmatter fails before it reaches the site.
+- **CI enforces all three.** [`.github/workflows/build.yml`](.github/workflows/build.yml) builds on every push and pull request, so a bad tag or malformed frontmatter fails before it reaches the site.
 
 ## Licence
 
-Documentation, frameworks and content are [CC BY 4.0](LICENSE) — free to use and adapt with attribution. Site code is MIT. See [`LICENSE`](LICENSE).
+Content is [CC BY 4.0](LICENSE) — free to use and adapt with attribution. Site code is MIT. See [`LICENSE`](LICENSE).
