@@ -1,0 +1,1138 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+
+// Formspree submission endpoint. Replace REPLACE_WITH_FORM_ID with the real
+// form ID from https://formspree.io before promoting the questionnaire.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORM_ID';
+
+const roleOptions = [
+  'Content or editorial',
+  'Research or insight',
+  'Thought leadership',
+  'Product marketing',
+  'Communications or public relations',
+  'Customer research or customer experience',
+  'Knowledge management',
+  'Strategy',
+  'Senior or executive leadership',
+  'Agency or consultancy',
+  'Independent practitioner',
+];
+
+const workingContextOptions = [
+  'In-house',
+  'Agency or consultancy',
+  'Independent',
+  'Not currently working within an organisation',
+];
+
+const orgSizeOptions = [
+  '1–9 people',
+  '10–49 people',
+  '50–249 people',
+  '250–999 people',
+  '1,000–4,999 people',
+  '5,000 or more people',
+  'Not sure',
+  'Prefer not to say',
+];
+
+const evidenceOptions = [
+  'Customer interviews or conversations',
+  'Surveys',
+  'Market research',
+  'Audience or user research',
+  'Product or usage data',
+  'Content, campaign or performance data',
+  'Sales conversations',
+  'Customer service or support conversations',
+  'Internal subject-matter expertise',
+  'Operational or financial data',
+  'Academic or external research',
+  'Competitor or market intelligence',
+  'Workshop or event discussions',
+];
+
+const influenceClarityOptions = [
+  'The influence was clear and directly observable',
+  'The idea contributed alongside other factors',
+  'The influence was indirect or difficult to establish',
+  'The idea did not ultimately influence a decision',
+  'I do not know',
+];
+
+const involvedOptions = [
+  'Content or editorial',
+  'Research or insight',
+  'Thought leadership',
+  'Product marketing',
+  'Communications or public relations',
+  'Customer research or customer experience',
+  'Knowledge management',
+  'Strategy',
+  'Product',
+  'Sales',
+  'Customer service or support',
+  'Data or analytics',
+  'Design or user experience',
+  'Senior or executive leadership',
+  'External agency, consultant or partner',
+  'One person handled most or all stages',
+];
+
+const activityOptions = [
+  'Defining the question or problem',
+  'Gathering evidence',
+  'Checking the quality or reliability of the evidence',
+  'Organising or synthesising the evidence',
+  'Identifying the main insight',
+  'Developing an argument or recommendation',
+  'Creating a narrative',
+  'Producing content, materials or a prototype',
+  'Presenting the idea to decision-makers',
+  'Distributing or activating the idea',
+  'Measuring its effect',
+  'Capturing the learning for future use',
+];
+
+const helpedOptions = [
+  'Quality or credibility of the evidence',
+  'Relevance to a current organisational priority',
+  'Timing',
+  'Senior sponsorship',
+  'A clear insight',
+  'A strong argument or recommendation',
+  'Narrative or storytelling',
+  'Understanding of the intended audience',
+  'Effective presentation',
+  'Effective distribution or activation',
+  'Existing trust in the person or team',
+  'Collaboration across teams',
+  'A working prototype or practical demonstration',
+  'Measurable results',
+  'The idea did not gain influence',
+  'I do not know',
+];
+
+const lostOptions = [
+  'Research is stored but difficult to find',
+  'Customer conversations are not captured',
+  'Evidence remains within one team',
+  'Teams duplicate research or start again',
+  'Findings are reduced to a single output',
+  'Useful detail is removed during approval or simplification',
+  'Evidence is not connected across projects or sources',
+  'Nobody owns the development of the idea',
+  'Work stops after publication or presentation',
+  'Results and learning are not fed into future work',
+  'Staff changes cause knowledge to disappear',
+  'Decision-makers do not trust or value the evidence',
+  'Time or budget prevents further development',
+  'Valuable knowledge is generally reused well',
+  'I do not know',
+];
+
+const preventOptions = [
+  'Weak, incomplete or unreliable evidence',
+  'The evidence does not answer a relevant question',
+  'Lack of time',
+  'Lack of budget or capacity',
+  'Unclear ownership',
+  'Organisational silos',
+  'Competing priorities',
+  'Political or cultural resistance',
+  'Lack of senior sponsorship',
+  'The idea or recommendation is unclear',
+  'The narrative or communication is ineffective',
+  'The right audience is not reached',
+  'The evidence arrives too late',
+  'No route from insight to action',
+  'Nothing commonly prevents it',
+  'I do not know',
+];
+
+const afterProjectOptions = [
+  'It is actively reused and developed',
+  'It is sometimes reused when someone remembers it',
+  'It is stored but rarely revisited',
+  'It remains mainly within the original team',
+  'It is difficult to find or effectively disappears',
+  'It varies too much to generalise',
+  'I do not know',
+];
+
+const aiChangeOptions = [
+  'Finding or retrieving evidence',
+  'Transcribing or capturing conversations',
+  'Organising or summarising evidence',
+  'Analysing data or identifying patterns',
+  'Generating questions or hypotheses',
+  'Developing arguments or recommendations',
+  'Creating narratives',
+  'Producing content or materials',
+  'Building prototypes or interactive tools',
+  'Personalising or distributing ideas',
+  'Measuring or interpreting results',
+  'AI is not currently changing this work',
+  'I do not know',
+];
+
+const aiBoundaryOptions = [
+  'Yes, substantially',
+  'Yes, to some extent',
+  'Not yet, but I expect it to',
+  'No',
+  'I do not use AI in this work',
+  'I do not know',
+];
+
+const aiActivityOptions = [...activityOptions, 'Building a digital tool or experience'];
+
+const aiEffectOptions = [
+  'Faster progress',
+  'Greater independence',
+  'Better connection across stages',
+  'More experimentation',
+  'Broader responsibility',
+  'Reduced waiting or handoffs',
+  'Shallower specialist input',
+  'Greater risk of error',
+  'Unclear ownership or accountability',
+  'More work for one person',
+];
+
+const responseUseOptions = [
+  {
+    value: 'analysis-only',
+    label: 'My response may be analysed as part of the research, but not quoted or described in published outputs.',
+  },
+  {
+    value: 'anonymous-use',
+    label: 'My response may be used anonymously in research findings and publications.',
+  },
+  {
+    value: 'approach-for-attribution',
+    label: 'You may approach me separately for approval to use an attributed quotation or example.',
+  },
+];
+---
+
+<BaseLayout
+  title="Practitioner questionnaire — evidence to influence"
+  description="A pilot research questionnaire investigating how evidence becomes an influential idea inside an organisation and where that process breaks down."
+  noindex={true}
+  suppressFlagshipJourney={true}
+>
+  <header class="q-hero">
+    <div class="container-site">
+      <p class="t-label mb-6">Editorial Intelligence Research Project · Pilot version 1</p>
+      <h1 class="t-display mb-6">How does evidence become an influential idea?</h1>
+      <div class="q-intro">
+        <p>
+          I'm researching how organisations turn research, customer insight, internal expertise and other forms of evidence into ideas that influence decisions.
+        </p>
+        <p>
+          This questionnaire asks about your experience of that process: what works, where useful knowledge gets lost and how AI may be changing the work.
+        </p>
+        <p>
+          It should take approximately 10–15 minutes. You do not need to prepare anything. Where possible, please use a real recent example rather than describing the ideal process.
+        </p>
+        <p>
+          Your response will contribute to the Editorial Intelligence Research Project. You will choose at the end whether your contribution may be used anonymously, whether I may contact you about it and whether you are open to a follow-up conversation. Nothing will be attributed to you or your organisation without separate approval.
+        </p>
+      </div>
+      <p class="q-pilot-note">
+        This is a pilot. If a question feels unclear, repetitive or difficult, that is useful information in itself — there is space to say so at the end.
+      </p>
+    </div>
+  </header>
+
+  <div class="container-site">
+    <form id="research-form" class="q-form" data-endpoint={FORMSPREE_ENDPOINT} novalidate>
+      <!-- Section: About your work -->
+      <section class="q-section">
+        <p class="t-label q-section-label">About your work</p>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">01</span> Which option best describes your current role?</legend>
+          <div class="q-options">
+            {roleOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="q01_role" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="radio" name="q01_role" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q01_role_other" class="q-text q-other-detail" placeholder="If other, describe your role" aria-label="Other role" />
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">02</span> What kind of organisation do you work in?</legend>
+          <p class="q-sub-label">Working context</p>
+          <div class="q-options">
+            {workingContextOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="q02_working_context" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="radio" name="q02_working_context" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q02_working_context_other" class="q-text q-other-detail" placeholder="If other, describe your working context" aria-label="Other working context" />
+          <label class="q-field">
+            <span class="q-sub-label">Sector</span>
+            <input type="text" name="q02_sector" class="q-text" placeholder="e.g. financial services, healthcare, education" />
+          </label>
+          <p class="q-sub-label">Approximate organisation size</p>
+          <div class="q-options">
+            {orgSizeOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="q02_org_size" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+          </div>
+          <label class="q-field">
+            <span class="q-sub-label">Organisation name <em>(optional)</em></span>
+            <input type="text" name="q02_org_name" class="q-text" />
+          </label>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">03</span> Which forms of evidence do you regularly work with?</legend>
+          <p class="q-hint">Select all that apply.</p>
+          <div class="q-options">
+            {evidenceOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q03_evidence_forms" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option">
+              <input type="checkbox" name="q03_evidence_forms" value="I do not regularly work with evidence in this way" />
+              <span>I do not regularly work with evidence in this way</span>
+            </label>
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q03_evidence_forms" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q03_evidence_forms_other" class="q-text q-other-detail" placeholder="If other, describe the evidence" aria-label="Other evidence" />
+        </fieldset>
+      </section>
+
+      <!-- Section: A recent example -->
+      <section class="q-section">
+        <p class="t-label q-section-label">A recent example</p>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">04</span> Think of a recent occasion when evidence helped shape an idea, recommendation or piece of work that influenced a decision. What happened?</legend>
+          <p class="q-hint">Describe the situation, the evidence and what changed. Please avoid confidential details.</p>
+          <textarea name="q04_anchor_example" class="q-textarea" rows="6"></textarea>
+          <label class="q-option q-no-example">
+            <input type="checkbox" name="q04_no_example" value="I cannot think of a suitable example" id="no-example-toggle" />
+            <span>I cannot think of a suitable example</span>
+          </label>
+          <p class="q-conditional-note" id="no-example-note" hidden>
+            No problem — for questions 5–9, answer about how this process tends to work in your organisation more generally.
+          </p>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">05</span> Where did the evidence in that example come from?</legend>
+          <p class="q-hint">Select all that apply.</p>
+          <div class="q-options">
+            {evidenceOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q05_evidence_source" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option">
+              <input type="checkbox" name="q05_evidence_source" value="It already existed but had not previously been used" />
+              <span>It already existed but had not previously been used</span>
+            </label>
+            <label class="q-option">
+              <input type="checkbox" name="q05_evidence_source" value="It was gathered specifically for this work" />
+              <span>It was gathered specifically for this work</span>
+            </label>
+            <label class="q-option">
+              <input type="checkbox" name="q05_evidence_source" value="I am not sure" />
+              <span>I am not sure</span>
+            </label>
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q05_evidence_source" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q05_evidence_source_other" class="q-text q-other-detail" placeholder="If other, describe the source" aria-label="Other evidence source" />
+          <label class="q-field">
+            <span class="q-sub-label">What made this evidence useful or credible? <em>(optional)</em></span>
+            <input type="text" name="q05_credibility" class="q-text" />
+          </label>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">06</span> What decision, action or change did the resulting idea influence?</legend>
+          <p class="q-hint">This might include a strategic decision, product change, campaign direction, investment, operational action, change in understanding or decision not to act.</p>
+          <textarea name="q06_influence" class="q-textarea" rows="4"></textarea>
+          <p class="q-sub-label">How clear was that influence?</p>
+          <div class="q-options">
+            {influenceClarityOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="q06_influence_clarity" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">07</span> Who was involved between gathering the evidence and communicating the idea?</legend>
+          <p class="q-hint">Select all that apply.</p>
+          <div class="q-options">
+            {involvedOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q07_involved" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q07_involved" value="Other" />
+              <span>Other</span>
+            </label>
+            <label class="q-option">
+              <input type="checkbox" name="q07_involved" value="I do not know" />
+              <span>I do not know</span>
+            </label>
+          </div>
+          <input type="text" name="q07_involved_other" class="q-text q-other-detail" placeholder="If other, who was involved?" aria-label="Other people involved" />
+          <label class="q-field">
+            <span class="q-sub-label">Who, if anyone, connected the different stages or teams? <em>(optional)</em></span>
+            <input type="text" name="q07_connector" class="q-text" />
+          </label>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">08</span> Which activities were involved?</legend>
+          <p class="q-hint">Select all that apply.</p>
+          <div class="q-options">
+            {activityOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q08_activities" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q08_activities" value="Other" />
+              <span>Other</span>
+            </label>
+            <label class="q-option">
+              <input type="checkbox" name="q08_activities" value="I do not know" />
+              <span>I do not know</span>
+            </label>
+          </div>
+          <input type="text" name="q08_activities_other" class="q-text q-other-detail" placeholder="If other, which activities?" aria-label="Other activities" />
+        </fieldset>
+
+        <fieldset class="q-question" data-max-select="3">
+          <legend><span class="q-num">09</span> What most helped the idea gain influence?</legend>
+          <p class="q-hint">Select up to three.</p>
+          <div class="q-options">
+            {helpedOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q09_helped" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q09_helped" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q09_helped_other" class="q-text q-other-detail" placeholder="If other, what helped?" aria-label="Other helping factor" />
+        </fieldset>
+      </section>
+
+      <!-- Section: Where knowledge is lost -->
+      <section class="q-section">
+        <p class="t-label q-section-label">Where knowledge is lost</p>
+
+        <fieldset class="q-question" data-max-select="3">
+          <legend><span class="q-num">10</span> Where is valuable knowledge most likely to be lost or underused in your organisation?</legend>
+          <p class="q-hint">Select up to three.</p>
+          <div class="q-options">
+            {lostOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q10_knowledge_lost" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q10_knowledge_lost" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q10_knowledge_lost_other" class="q-text q-other-detail" placeholder="If other, where is it lost?" aria-label="Other knowledge loss" />
+          <label class="q-field">
+            <span class="q-sub-label">If useful, explain where this tends to happen. <em>(optional)</em></span>
+            <textarea name="q10_detail" class="q-textarea" rows="3"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="q-question" data-max-select="3">
+          <legend><span class="q-num">11</span> What most commonly prevents evidence from influencing decisions?</legend>
+          <p class="q-hint">Select up to three.</p>
+          <div class="q-options">
+            {preventOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q11_prevents" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q11_prevents" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q11_prevents_other" class="q-text q-other-detail" placeholder="If other, what prevents it?" aria-label="Other preventing factor" />
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">12</span> Can you share an example of useful evidence being ignored, forgotten or used only once? <em class="q-optional-tag">(optional)</em></legend>
+          <p class="q-hint">What was the evidence, what happened to it and what value might have been lost? Please avoid confidential details.</p>
+          <textarea name="q12_negative_example" class="q-textarea" rows="4"></textarea>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">13</span> What usually happens to useful evidence after the immediate project or decision has ended?</legend>
+          <div class="q-options">
+            {afterProjectOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="q13_after_project" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="radio" name="q13_after_project" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q13_after_project_other" class="q-text q-other-detail" placeholder="If other, what happens?" aria-label="Other outcome" />
+          <label class="q-field">
+            <span class="q-sub-label">What, if anything, helps your organisation reuse knowledge? <em>(optional)</em></span>
+            <input type="text" name="q13_reuse_helpers" class="q-text" />
+          </label>
+        </fieldset>
+      </section>
+
+      <!-- Section: AI and the work -->
+      <section class="q-section">
+        <p class="t-label q-section-label">AI and the work</p>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">14</span> How, if at all, is AI changing the way you work with evidence and ideas?</legend>
+          <p class="q-hint">Select all that apply.</p>
+          <div class="q-options">
+            {aiChangeOptions.map((option) => (
+              <label class="q-option">
+                <input type="checkbox" name="q14_ai_change" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+            <label class="q-option q-option-other">
+              <input type="checkbox" name="q14_ai_change" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <input type="text" name="q14_ai_change_other" class="q-text q-other-detail" placeholder="If other, how is AI changing it?" aria-label="Other AI change" />
+          <label class="q-field">
+            <span class="q-sub-label">What has improved, and what has become weaker or riskier? <em>(optional)</em></span>
+            <textarea name="q14_detail" class="q-textarea" rows="3"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">15</span> Has AI enabled you to take on activities that would previously have involved another role or team?</legend>
+          <div class="q-options">
+            {aiBoundaryOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="q15_ai_boundary" value={option} />
+                <span>{option}</span>
+              </label>
+            ))}
+          </div>
+          <div id="ai-boundary-followup" class="q-followup" hidden>
+            <p class="q-sub-label">Which activities?</p>
+            <div class="q-options">
+              {aiActivityOptions.map((option) => (
+                <label class="q-option">
+                  <input type="checkbox" name="q15_ai_activities" value={option} />
+                  <span>{option}</span>
+                </label>
+              ))}
+            </div>
+            <p class="q-sub-label">What has been the main effect?</p>
+            <div class="q-options">
+              {aiEffectOptions.map((option) => (
+                <label class="q-option">
+                  <input type="checkbox" name="q15_ai_effect" value={option} />
+                  <span>{option}</span>
+                </label>
+              ))}
+              <label class="q-option q-option-other">
+                <input type="checkbox" name="q15_ai_effect" value="Other" />
+                <span>Other</span>
+              </label>
+            </div>
+            <input type="text" name="q15_ai_effect_other" class="q-text q-other-detail" placeholder="If other, what has been the effect?" aria-label="Other AI effect" />
+            <label class="q-field">
+              <span class="q-sub-label">Where is specialist input or human judgement still necessary?</span>
+              <textarea name="q15_judgement" class="q-textarea" rows="3"></textarea>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend><span class="q-num">16</span> If you could change one thing about how your organisation turns evidence into influential ideas, what would it be?</legend>
+          <textarea name="q16_one_change" class="q-textarea" rows="4"></textarea>
+        </fieldset>
+      </section>
+
+      <!-- Section: Pilot feedback -->
+      <section class="q-section">
+        <p class="t-label q-section-label">About this questionnaire</p>
+        <fieldset class="q-question">
+          <legend>Did any question feel unclear, repetitive, leading or difficult? <em class="q-optional-tag">(optional)</em></legend>
+          <p class="q-hint">This is a pilot — your feedback shapes the next version.</p>
+          <textarea name="pilot_feedback" class="q-textarea" rows="3"></textarea>
+        </fieldset>
+      </section>
+
+      <!-- Section: Contact and permissions -->
+      <section class="q-section q-permissions">
+        <p class="t-label q-section-label">About you and your permissions</p>
+        <p class="q-permissions-intro">
+          Everything above is the research. This final section covers who you are, whether I may contact you and how your response may be used. Contact details are optional unless you would like follow-up.
+        </p>
+
+        <fieldset class="q-question">
+          <legend>About you</legend>
+          <label class="q-field">
+            <span class="q-sub-label">Name <em>(optional unless you would like follow-up)</em></span>
+            <input type="text" name="contact_name" class="q-text" autocomplete="name" />
+          </label>
+          <label class="q-field">
+            <span class="q-sub-label">Email address <em>(optional unless you would like follow-up)</em></span>
+            <input type="email" name="email" class="q-text" autocomplete="email" id="contact-email" />
+          </label>
+          <label class="q-field">
+            <span class="q-sub-label">Organisation <em>(optional)</em></span>
+            <input type="text" name="contact_organisation" class="q-text" autocomplete="organization" />
+          </label>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend>Contact permissions</legend>
+          <p class="q-hint">Each choice is independent and entirely optional.</p>
+          <div class="q-options q-options-stack">
+            <label class="q-option">
+              <input type="checkbox" name="permission_contact" value="yes" class="needs-email" />
+              <span>You may contact me to clarify or discuss this response.</span>
+            </label>
+            <label class="q-option">
+              <input type="checkbox" name="permission_conversation" value="yes" class="needs-email" />
+              <span>I am open to a 30-minute Compare Notes conversation.</span>
+            </label>
+            <label class="q-option">
+              <input type="checkbox" name="permission_publication_updates" value="yes" class="needs-email" />
+              <span>I would like to hear when findings from this research are published.</span>
+            </label>
+          </div>
+          <p class="q-conditional-note" id="email-needed-note" hidden>
+            Please add your email address above so I can follow up on the options you have chosen.
+          </p>
+          <p class="q-hint">
+            Hearing about research findings is a research-update permission only — it does not add you to a marketing newsletter.
+          </p>
+        </fieldset>
+
+        <fieldset class="q-question" id="response-use-question">
+          <legend>How may your response be used? <em class="q-required-tag">(required)</em></legend>
+          <div class="q-options q-options-stack">
+            {responseUseOptions.map((option) => (
+              <label class="q-option">
+                <input type="radio" name="permission_response_use" value={option.value} required />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+          <p class="q-hint">
+            Choosing the third option does not provide advance permission to attribute anything. I will contact you with the exact proposed wording and context before publication.
+          </p>
+          <p class="q-conditional-note" id="response-use-note" hidden>
+            Please choose one option for how your response may be used.
+          </p>
+        </fieldset>
+
+        <fieldset class="q-question">
+          <legend>How your information is handled</legend>
+          <div class="q-privacy">
+            <p><strong>Who is responsible:</strong> Asavin Wattanajantra, as the independent researcher behind the Editorial Intelligence Research Project.</p>
+            <p><strong>What is collected:</strong> your questionnaire answers and, only if you provide them, your name, email address and organisation.</p>
+            <p><strong>Why:</strong> to analyse how evidence becomes influential ideas inside organisations and to publish aggregated, anonymised findings on the terms you choose above.</p>
+            <p><strong>Where it is stored:</strong> submissions are processed by Formspree (the form service behind this page) and then held in a private research tracker. They are kept for the duration of the research programme and deleted when no longer needed.</p>
+            <p><strong>Who can access it:</strong> only the researcher. Contact details are never published, shared or added to a marketing list.</p>
+            <p><strong>Withdrawal:</strong> email <a href="mailto:asavin@editorialintelligence.co">asavin@editorialintelligence.co</a> at any time to withdraw or request deletion of your response. Once findings have been aggregated or anonymised, your individual response can still be deleted, but it may no longer be possible to remove its influence from already-published aggregate findings.</p>
+          </div>
+        </fieldset>
+      </section>
+
+      <div class="q-submit-row">
+        <button type="submit" class="q-submit" id="submit-btn">
+          Submit your response
+          <span aria-hidden="true">→</span>
+        </button>
+        <p class="q-conditional-note" id="submit-error" hidden></p>
+      </div>
+    </form>
+
+    <div class="q-confirmation" id="confirmation" hidden>
+      <p class="t-label mb-5">Response received</p>
+      <h2>Thank you for contributing to the Editorial Intelligence Research Project.</h2>
+      <p>
+        Your response will help build a clearer picture of how evidence becomes an influential idea inside organisations — and where useful knowledge is lost along the way.
+      </p>
+      <p>
+        If you asked to be contacted or indicated that you are open to a Compare Notes conversation, I may follow up using the email address you provided.
+      </p>
+      <a href="/compare-notes" class="q-back-link">← Back to Compare Notes</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('research-form') as HTMLFormElement;
+  const confirmation = document.getElementById('confirmation') as HTMLElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const submitError = document.getElementById('submit-error') as HTMLElement;
+  const endpoint = form.dataset.endpoint ?? '';
+
+  // "Select up to three" questions
+  form.querySelectorAll<HTMLElement>('[data-max-select]').forEach((fieldset) => {
+    const max = Number(fieldset.dataset.maxSelect);
+    const boxes = Array.from(fieldset.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'));
+    fieldset.addEventListener('change', () => {
+      const checked = boxes.filter((box) => box.checked).length;
+      boxes.forEach((box) => {
+        box.disabled = !box.checked && checked >= max;
+      });
+    });
+  });
+
+  // Q4: no-example route
+  const noExampleToggle = document.getElementById('no-example-toggle') as HTMLInputElement;
+  const noExampleNote = document.getElementById('no-example-note') as HTMLElement;
+  noExampleToggle?.addEventListener('change', () => {
+    noExampleNote.hidden = !noExampleToggle.checked;
+  });
+
+  // Q15: conditional follow-up
+  const followup = document.getElementById('ai-boundary-followup') as HTMLElement;
+  form.querySelectorAll<HTMLInputElement>('input[name="q15_ai_boundary"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      followup.hidden = !(radio.value === 'Yes, substantially' || radio.value === 'Yes, to some extent');
+    });
+  });
+
+  // Contact permissions need an email address
+  const emailInput = document.getElementById('contact-email') as HTMLInputElement;
+  const emailNote = document.getElementById('email-needed-note') as HTMLElement;
+  const needsEmailBoxes = Array.from(form.querySelectorAll<HTMLInputElement>('.needs-email'));
+  const emailRequired = () => needsEmailBoxes.some((box) => box.checked);
+  const refreshEmailNote = () => {
+    emailNote.hidden = !(emailRequired() && !emailInput.value.trim());
+  };
+  needsEmailBoxes.forEach((box) => box.addEventListener('change', refreshEmailNote));
+  emailInput.addEventListener('input', refreshEmailNote);
+
+  const showError = (message: string) => {
+    submitError.textContent = message;
+    submitError.hidden = false;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    submitError.hidden = true;
+
+    const responseUse = form.querySelector<HTMLInputElement>('input[name="permission_response_use"]:checked');
+    const responseUseNote = document.getElementById('response-use-note') as HTMLElement;
+    responseUseNote.hidden = Boolean(responseUse);
+    if (!responseUse) {
+      document.getElementById('response-use-question')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    if (emailRequired() && !emailInput.value.trim()) {
+      refreshEmailNote();
+      emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      emailInput.focus({ preventScroll: true });
+      return;
+    }
+
+    if (endpoint.includes('REPLACE_WITH_FORM_ID')) {
+      showError('The pilot form is not accepting submissions yet. Please email asavin@editorialintelligence.co and I will send you the questions directly.');
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.append('_subject', 'Editorial Intelligence research questionnaire response');
+    formData.append('questionnaire_version', 'pilot-v1');
+    formData.append('contribution_method', 'web-questionnaire');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw new Error(`Submission failed (${response.status})`);
+      form.hidden = true;
+      confirmation.hidden = false;
+      confirmation.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      showError('Something went wrong sending your response. Please try again, or email asavin@editorialintelligence.co.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Submit your response <span aria-hidden="true">→</span>';
+    }
+  });
+</script>
+
+<style>
+  .q-hero {
+    padding-block: clamp(4rem, 9vw, 7rem) clamp(3rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .q-hero h1 {
+    max-width: 22ch;
+  }
+
+  .q-intro {
+    max-width: 62ch;
+  }
+
+  .q-intro p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  .q-intro p + p {
+    margin-top: 1.1rem;
+  }
+
+  .q-pilot-note {
+    max-width: 62ch;
+    margin-top: 1.75rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-tertiary);
+  }
+
+  .q-form {
+    max-width: 46rem;
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 8vw, 6rem);
+  }
+
+  .q-section + .q-section {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding-top: clamp(2.5rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .q-section-label {
+    margin-bottom: 2rem;
+  }
+
+  .q-question {
+    margin: 0 0 2.75rem;
+    padding: 0;
+    border: none;
+  }
+
+  .q-question:last-child {
+    margin-bottom: 0;
+  }
+
+  .q-question legend {
+    margin-bottom: 0.85rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+
+  .q-num {
+    margin-right: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+  }
+
+  .q-optional-tag,
+  .q-required-tag {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.6875rem;
+    color: var(--color-ink-tertiary);
+  }
+
+  .q-required-tag {
+    color: var(--color-accent);
+  }
+
+  .q-hint {
+    margin-bottom: 0.85rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+  }
+
+  .q-sub-label {
+    display: block;
+    margin: 1.15rem 0 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .q-sub-label em {
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .q-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .q-option {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-ink-secondary);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .q-option:hover {
+    border-color: var(--color-ink-tertiary);
+  }
+
+  .q-option:has(input:checked) {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+    color: var(--color-ink);
+  }
+
+  .q-option:has(input:disabled) {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .q-option input {
+    flex-shrink: 0;
+    accent-color: var(--color-accent);
+  }
+
+  .q-text,
+  .q-textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    background: var(--color-surface-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .q-text:focus,
+  .q-textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  .q-textarea {
+    resize: vertical;
+    min-height: 5.5rem;
+  }
+
+  .q-other-detail {
+    margin-top: 0.5rem;
+  }
+
+  .q-field {
+    display: block;
+    margin-top: 1.15rem;
+  }
+
+  .q-field .q-sub-label {
+    margin-top: 0;
+  }
+
+  .q-no-example {
+    margin-top: 0.75rem;
+  }
+
+  .q-conditional-note {
+    margin-top: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border-left: 2px solid var(--color-signal);
+    background: var(--color-surface-secondary);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+  }
+
+  .q-followup {
+    margin-top: 1.25rem;
+    padding: 1.15rem;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+  }
+
+  .q-followup .q-option {
+    background: var(--color-surface);
+  }
+
+  .q-permissions-intro {
+    max-width: 58ch;
+    margin: -1rem 0 2rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+  }
+
+  .q-options-stack .q-option {
+    align-items: flex-start;
+  }
+
+  .q-options-stack .q-option input {
+    margin-top: 0.3rem;
+  }
+
+  .q-privacy p {
+    margin-bottom: 0.7rem;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--color-ink-tertiary);
+  }
+
+  .q-privacy strong {
+    color: var(--color-ink-secondary);
+    font-weight: 500;
+  }
+
+  .q-privacy a {
+    color: var(--color-accent);
+  }
+
+  .q-submit-row {
+    margin-top: 3rem;
+  }
+
+  .q-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 1.35rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .q-submit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+
+  .q-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .q-confirmation {
+    max-width: 46rem;
+    padding-block: clamp(3rem, 7vw, 5rem) clamp(4rem, 9vw, 7rem);
+  }
+
+  .q-confirmation h2 {
+    margin-bottom: 1.25rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .q-confirmation p {
+    max-width: 58ch;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  .q-back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .q-back-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 640px) {
+    .q-options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .q-options-stack {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
