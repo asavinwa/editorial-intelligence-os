@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A GitHub for knowledge — Editorial Intelligence</title>
+  <meta name="description" content="A presentation of the field note: why every company needs a GitHub for knowledge, not just code. Twenty slides on version control, organisational memory and why AI changed the return on structured knowledge." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.editorialintelligence.co/decks/github-for-knowledge/" />
+  <meta property="og:title" content="A GitHub for knowledge — Editorial Intelligence" />
+  <meta property="og:description" content="Twenty slides on version control, organisational memory and why AI changed the return on structured knowledge." />
+  <meta property="og:url" content="https://www.editorialintelligence.co/decks/github-for-knowledge/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://www.editorialintelligence.co/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="A GitHub for knowledge — Editorial Intelligence" />
+  <meta name="twitter:description" content="Twenty slides on version control, organisational memory and why AI changed the return on structured knowledge." />
+  <meta name="twitter:image" content="https://www.editorialintelligence.co/og-image.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+<style>
+/* ==========================================================================
+   Tokens — inherited from website/src/styles/global.css so the deck reads as
+   part of the same system. Light is the base; dark is redefined at token
+   level only, three times over, so it resolves for prefers-color-scheme,
+   for an explicit data-theme stamp, and for the un-stamped default.
+   ========================================================================== */
+:root {
+  --ink: #1a1a18;
+  --ink-2: #4a4a46;
+  --ink-3: #8a8a84;
+  --surface: #fafaf8;
+  --surface-2: #f2f2ee;
+  --surface-3: #e8e8e2;
+  --rule: #e2e2da;
+  --accent: #2d5a3d;
+  --accent-soft: #e8f0eb;
+  --signal: #8b5e3c;
+  --signal-soft: #f4ece5;
+  --shadow: 0 1px 2px rgba(26, 26, 24, 0.05);
+
+  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --rail-w: 15rem;
+  --pad-x: clamp(1.5rem, 5vw, 5rem);
+  --pad-y: clamp(2rem, 5vh, 4rem);
+  --measure: 34ch;
+  --measure-wide: 62ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #f2ede4;
+    --ink-2: #c4bdb0;
+    --ink-3: #88806e;
+    --surface: #18160f;
+    --surface-2: #201e16;
+    --surface-3: #2c2920;
+    --rule: #2c2920;
+    --accent: #c8a96e;
+    --accent-soft: #28220f;
+    --signal: #c07a5a;
+    --signal-soft: #2a1d16;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ink: #f2ede4;
+  --ink-2: #c4bdb0;
+  --ink-3: #88806e;
+  --surface: #18160f;
+  --surface-2: #201e16;
+  --surface-3: #2c2920;
+  --rule: #2c2920;
+  --accent: #c8a96e;
+  --accent-soft: #28220f;
+  --signal: #c07a5a;
+  --signal-soft: #2a1d16;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Shell
+   ========================================================================== */
+.deck {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  background: var(--surface);
+}
+
+/* --------------------------------------------------------------------------
+   Rail — the argument drawn as a commit graph. One node per slide, grouped
+   into the six movements of the piece. Order carries meaning here, which is
+   why the movements are numbered and the slides are not.
+   -------------------------------------------------------------------------- */
+.rail {
+  position: relative;
+  border-right: 1px solid var(--rule);
+  background: var(--surface-2);
+  padding: var(--pad-y) 0 var(--pad-y) 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.rail-head {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+.rail-head strong {
+  display: block;
+  color: var(--ink-2);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.graph {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.graph-move {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  padding: 0.875rem 0 0.375rem 1.75rem;
+  position: relative;
+  line-height: 1.4;
+}
+
+.graph-move::before {
+  content: attr(data-n);
+  position: absolute;
+  left: 0;
+  color: var(--ink-3);
+  opacity: 0.55;
+}
+
+.graph-move.is-active { color: var(--ink); }
+
+.node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.1875rem 0 0.1875rem 1.75rem;
+  border: 0;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  transition: color 0.18s ease;
+}
+
+/* The connecting line, drawn behind the nodes */
+.node::before {
+  content: "";
+  position: absolute;
+  left: 0.3125rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.node::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  border-radius: 50%;
+  border: 1px solid var(--ink-3);
+  background: var(--surface-2);
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.node:hover { color: var(--ink); }
+.node:hover::after { border-color: var(--accent); }
+
+.node.is-seen::after { border-color: var(--ink-2); }
+
+.node.is-current {
+  color: var(--ink);
+}
+
+.node.is-current::after {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.25);
+}
+
+.node-sha { opacity: 0.7; }
+.node.is-current .node-sha { opacity: 1; color: var(--accent); }
+
+.rail-foot {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  padding-right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+.rail-foot kbd {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 0.0625rem 0.3125rem;
+  background: var(--surface);
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------------------
+   Stage
+   -------------------------------------------------------------------------- */
+.stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: var(--pad-y) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* `safe` keeps the top of an over-tall slide reachable instead of
+     clipping it above the scroll origin */
+  justify-content: safe center;
+  gap: 1.75rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem);
+  transition: opacity 0.42s ease, transform 0.42s ease, visibility 0s linear 0.42s;
+}
+
+.slide.is-current {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.42s ease, transform 0.42s ease, visibility 0s;
+}
+
+/* ==========================================================================
+   Slide furniture
+   ========================================================================== */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.eyebrow--accent { color: var(--accent); }
+
+.statement {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.85rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+  max-width: 20ch;
+  color: var(--ink);
+}
+
+.statement--long { max-width: 26ch; font-size: clamp(1.6rem, 3.4vw, 2.7rem); }
+
+.support {
+  font-size: clamp(0.95rem, 1.15vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: var(--measure-wide);
+  margin: 0;
+}
+
+.support strong { color: var(--ink); font-weight: 500; }
+
+.kicker {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  margin: 0;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+
+.footnote {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.footnote a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* --- Title slide ---------------------------------------------------------- */
+.slide--title { gap: 2rem; }
+
+.title-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5.2vw, 4.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin: 0;
+  max-width: 17ch;
+  text-wrap: balance;
+}
+
+.title-rule {
+  width: 3.5rem;
+  height: 2px;
+  background: var(--accent);
+  border: 0;
+  margin: 0;
+}
+
+.title-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* --- Section marker ------------------------------------------------------- */
+.slide--section { justify-content: center; gap: 1.25rem; }
+
+.section-n {
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1;
+  color: var(--rule);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.slide--section .statement { max-width: 16ch; }
+
+/* --- Two-panel comparison ------------------------------------------------- */
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  max-width: 58rem;
+}
+
+.panel {
+  background: var(--surface);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.panel-q {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.panel-a {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.panel--muted { background: var(--surface-2); }
+.panel--muted .panel-a { color: var(--ink-2); }
+
+/* --- Guarantee list ------------------------------------------------------- */
+/* Four guarantees, so a fixed 2x2 rather than auto-fit — auto-fit lands on
+   three columns at desktop width and orphans the fourth */
+.guarantees {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 3rem;
+  max-width: 56rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 46rem) {
+  .guarantees { grid-template-columns: minmax(0, 1fr); gap: 1.125rem; }
+}
+
+.guarantee {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.guarantee dt {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.guarantee dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 38ch;
+}
+
+/* --- The diff ------------------------------------------------------------
+   The one deliberate borrowing of form. Umber and forest rather than the
+   literal red and green, so it reads as this palette using a diff, not a
+   screenshot of a pull request.
+   ------------------------------------------------------------------------- */
+.diff {
+  border: 1px solid var(--rule);
+  background: var(--surface-2);
+  max-width: 62rem;
+  overflow-x: auto;
+}
+
+.diff-head {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface-3);
+  white-space: nowrap;
+}
+
+.diff-body { margin: 0; padding: 0; list-style: none; }
+
+.diff-line {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.05vw, 0.875rem);
+  line-height: 1.65;
+  padding: 0.4375rem 1rem 0.4375rem 0;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.diff-line:last-child { border-bottom: 0; }
+
+.diff-line--del {
+  background: var(--signal-soft);
+  box-shadow: inset 3px 0 0 var(--signal);
+}
+
+.diff-line--del .diff-mark { color: var(--signal); }
+.diff-line--del .diff-text { color: var(--ink-2); }
+
+.diff-mark {
+  text-align: center;
+  font-weight: 500;
+  user-select: none;
+}
+
+.diff-text { min-width: 0; }
+.diff-text b { font-weight: 500; color: var(--ink); }
+.diff-text span { color: var(--ink-3); }
+
+/* --- Quote ---------------------------------------------------------------- */
+.slide--quote { justify-content: center; }
+
+.pull {
+  margin: 0;
+  border-left: 2px solid var(--accent);
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+  max-width: 24ch;
+}
+
+.pull p {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* --- Moves list (what went into the repo) --------------------------------- */
+.moves {
+  margin: 0;
+  padding: 0;
+  max-width: 58rem;
+  border-top: 1px solid var(--rule);
+}
+
+.move {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr);
+  gap: 0.25rem 2rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.move dt {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.move dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* --- The test ------------------------------------------------------------- */
+.checks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 46rem;
+}
+
+.check {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.875rem;
+  align-items: baseline;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.1vw, 1.65rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.check::before {
+  content: "?";
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-align: center;
+  line-height: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ==========================================================================
+   Controls
+   ========================================================================== */
+.controls {
+  position: absolute;
+  right: var(--pad-x);
+  bottom: calc(var(--pad-y) - 0.75rem);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 5;
+}
+
+.counter {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.counter b { color: var(--ink); font-weight: 500; }
+
+.btn {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.btn:disabled { opacity: 0.35; cursor: default; }
+
+/* Mobile progress bar, shown only when the rail is gone */
+.progress {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--rule);
+  z-index: 5;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.42s ease;
+}
+
+/* ==========================================================================
+   Overview
+   ========================================================================== */
+.overview {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: var(--surface);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  overflow-y: auto;
+  display: none;
+}
+
+.overview.is-open { display: block; }
+
+.overview-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.overview-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+/* Hairlines come from the cards themselves rather than a gap-coloured
+   container, so a part-filled last row doesn't leave a block of rule colour */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  background: var(--surface);
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.thumb {
+  background: var(--surface);
+  border: 0;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  cursor: pointer;
+  padding: 1rem;
+  min-height: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
+  font: inherit;
+  color: inherit;
+}
+
+.thumb:hover { background: var(--surface-2); }
+.thumb.is-current { background: var(--accent-soft); }
+
+.thumb-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.thumb.is-current .thumb-meta { color: var(--accent); }
+
+.thumb-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.thumb-move {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+/* ==========================================================================
+   Responsive — below the rail breakpoint the deck becomes a single column
+   with a progress bar instead of the commit graph.
+   ========================================================================== */
+@media (max-width: 60rem) {
+  .deck { grid-template-columns: minmax(0, 1fr); }
+  .rail { display: none; }
+  .progress { display: block; }
+  .slide { padding-top: calc(var(--pad-y) + 1rem); padding-bottom: calc(var(--pad-y) + 2.5rem); }
+  .statement { max-width: 18ch; }
+  .diff-line { white-space: normal; }
+  .move { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+}
+
+@media (max-width: 30rem) {
+  .controls { right: 1.25rem; }
+  .check { grid-template-columns: 1.25rem minmax(0, 1fr); gap: 0.625rem; }
+}
+
+/* Short viewports — let the slide scroll rather than clip */
+@media (max-height: 34rem) {
+  .slide { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Print — every slide becomes a landscape page, so the deck exports to PDF
+   ========================================================================== */
+@media print {
+  @page { size: landscape; margin: 1.5cm; }
+  body { overflow: visible; background: #fff; }
+  .deck { position: static; display: block; }
+  .rail, .controls, .progress, .overview { display: none !important; }
+  .stage { overflow: visible; }
+  .slide {
+    position: static;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    break-after: page;
+    page-break-after: always;
+    min-height: 15cm;
+    padding: 0 0 1cm;
+  }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+}
+</style>
+
+<div class="deck">
+  <!-- ====================================================================
+       Rail
+       ==================================================================== -->
+  <nav class="rail" aria-label="Slides">
+    <div class="rail-head">
+      <strong>Field note</strong>
+      editorialintelligence.co
+    </div>
+    <ol class="graph" id="graph"></ol>
+    <p class="rail-foot">
+      <kbd>&larr;</kbd> <kbd>&rarr;</kbd> move<br />
+      <kbd>G</kbd> overview<br />
+      <kbd>P</kbd> print / PDF
+    </p>
+  </nav>
+
+  <!-- ====================================================================
+       Stage
+       ==================================================================== -->
+  <main class="stage" id="stage">
+    <div class="progress" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+    <!-- 1 -->
+    <section class="slide slide--title" data-move="0" data-title="A GitHub for knowledge">
+      <p class="eyebrow">Field note &middot; Editorial Intelligence</p>
+      <h1 class="title-display">Why every company needs a GitHub for knowledge &mdash; not just code</h1>
+      <hr class="title-rule" />
+      <p class="support">Software teams solved organisational memory twenty years ago. Everyone else still runs their most valuable knowledge through attachments and leaving drinks.</p>
+      <ul class="title-meta">
+        <li>Asavin Wattanajantra</li>
+        <li>7 August 2026</li>
+        <li>20 slides</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide" data-move="0" data-title="Two questions">
+      <p class="eyebrow">The opening</p>
+      <div class="panels">
+        <div class="panel">
+          <p class="panel-q">Ask a software team where their code lives</p>
+          <p class="panel-a">A one-word answer.</p>
+        </div>
+        <div class="panel panel--muted">
+          <p class="panel-q">Ask a marketing team where their knowledge lives</p>
+          <p class="panel-a">A pause. Then a list.</p>
+        </div>
+      </div>
+      <p class="support">Some of it&rsquo;s in the research folder, some in decks, some in a doc from the launch, quite a lot in Sarah&rsquo;s head. <strong>Sarah left in March.</strong></p>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide" data-move="0" data-title="Neither team is smarter">
+      <h2 class="statement">Neither team is smarter than the other.</h2>
+      <p class="support">One of them solved organisational memory as an engineering problem twenty years ago. The other is still treating it as a filing problem.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide" data-move="0" data-title="Why the gap is expensive now">
+      <h2 class="statement statement--long">That difference used to be survivable.</h2>
+      <p class="support">AI has made it expensive &mdash; because for the first time, the return on well-structured knowledge isn&rsquo;t limited by how many humans have time to read it.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide slide--section" data-move="1" data-title="What version control actually solved">
+      <p class="section-n">01</p>
+      <h2 class="statement">What version control actually solved</h2>
+      <p class="support">Storage was never the hard part. Any shared drive stores things.</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide" data-move="1" data-title="Four guarantees about knowledge">
+      <p class="eyebrow eyebrow--accent">What software teams actually got</p>
+      <dl class="guarantees">
+        <div class="guarantee">
+          <dt>One source of truth</dt>
+          <dd>Not &ldquo;final_v3_FINAL_amended&rdquo;. A single canonical version, with disagreement handled through review rather than parallel copies.</dd>
+        </div>
+        <div class="guarantee">
+          <dt>History survives</dt>
+          <dd>What changed, when, and &mdash; because every change carries a message &mdash; why. A decision made in 2019 is still inspectable in 2026.</dd>
+        </div>
+        <div class="guarantee">
+          <dt>Change is reviewed</dt>
+          <dd>Improvement is a process, not an accident of whoever last had the file open.</dd>
+        </div>
+        <div class="guarantee">
+          <dt>Everything is connected</dt>
+          <dd>Not ten thousand unrelated files, but a system, where you can trace what depends on what.</dd>
+        </div>
+      </dl>
+      <p class="footnote">None of these guarantees has anything to do with programming.</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide" data-move="1" data-title="Why software got there first">
+      <p class="eyebrow">The asymmetry</p>
+      <div class="panels">
+        <div class="panel">
+          <p class="panel-q">When knowledge rots in a codebase</p>
+          <p class="panel-a">The build breaks.</p>
+        </div>
+        <div class="panel panel--muted">
+          <p class="panel-q">When knowledge rots in a marketing team</p>
+          <p class="panel-a">Nothing breaks.</p>
+        </div>
+      </div>
+      <p class="support">The team just quietly re-purchases research it already owns, re-learns lessons it already paid for, and re-argues positions it already settled.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide slide--section" data-move="2" data-title="The knowledge everyone else loses">
+      <p class="section-n">02</p>
+      <h2 class="statement">The knowledge everyone else loses</h2>
+      <p class="support">Look at what a typical B2B organisation actually knows &mdash; and where that knowledge physically sits.</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide" data-move="2" data-title="Where the assets actually sit">
+      <p class="eyebrow">Assets the organisation paid for</p>
+      <div class="diff">
+        <p class="diff-head">~ where it currently lives</p>
+        <ul class="diff-body">
+          <li class="diff-line diff-line--del"><span class="diff-mark" aria-hidden="true">&minus;</span><span class="diff-text"><b>customer research</b> <span>&rarr; a PDF attached to an email thread</span></span></li>
+          <li class="diff-line diff-line--del"><span class="diff-mark" aria-hidden="true">&minus;</span><span class="diff-text"><b>interview transcripts</b> <span>&rarr; never kept</span></span></li>
+          <li class="diff-line diff-line--del"><span class="diff-mark" aria-hidden="true">&minus;</span><span class="diff-text"><b>the campaign argument</b> <span>&rarr; a deck, minus the reasoning, which was verbal</span></span></li>
+          <li class="diff-line diff-line--del"><span class="diff-mark" aria-hidden="true">&minus;</span><span class="diff-text"><b>tone, claims, positions</b> <span>&rarr; the heads of two senior people</span></span></li>
+          <li class="diff-line diff-line--del"><span class="diff-mark" aria-hidden="true">&minus;</span><span class="diff-text"><b>refined AI prompts</b> <span>&rarr; personal chat histories</span></span></li>
+        </ul>
+      </div>
+      <p class="support">Almost none of it is in a state where the organisation could find it, trust it, build on it, or hand it to an AI system.</p>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide slide--quote" data-move="2" data-title="Rich in knowledge, bankrupt in memory">
+      <blockquote class="pull"><p>Rich in knowledge, bankrupt in memory.</p></blockquote>
+      <p class="support">Compounding isn&rsquo;t a mindset. It requires somewhere for the compounding to physically happen.</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide slide--section" data-move="3" data-title="Running the experiment on myself">
+      <p class="section-n">03</p>
+      <h2 class="statement">Running the experiment on myself</h2>
+      <p class="support">I moved my own methodology into a repository and started treating professional knowledge the way engineers treat code. Not metaphorically &mdash; literally.</p>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide" data-move="3" data-title="What moved into the repository">
+      <p class="eyebrow eyebrow--accent">What that looks like in practice</p>
+      <dl class="moves">
+        <div class="move"><dt>frameworks/</dt><dd>Versioned documents, so a framework has a history rather than a latest copy.</dd></div>
+        <div class="move"><dt>evidence/</dt><dd>Research lives alongside the arguments it supports, so a claim can be traced to its source.</dd></div>
+        <div class="move"><dt>workflows/</dt><dd>Editorial workflows written down as workflows, not carried as habits.</dd></div>
+        <div class="move"><dt>prompts/</dt><dd>A library, where a prompt that worked gets kept, improved and reused instead of dying in a chat window.</dd></div>
+        <div class="move"><dt>commit history</dt><dd>The part I didn&rsquo;t anticipate: a development log of the thinking itself, showing how a framework evolved and what changed my mind.</dd></div>
+      </dl>
+      <p class="footnote">The published layer is open: <a href="https://github.com/asavinwa/editorial-intelligence-os">github.com/asavinwa/editorial-intelligence-os</a></p>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide" data-move="3" data-title="Effect one: structuring it improved it">
+      <p class="eyebrow">Effect one</p>
+      <h2 class="statement statement--long">Structuring the knowledge improved the knowledge.</h2>
+      <p class="support">Writing a workflow down exposes the steps you were skipping. Versioning a framework forces you to notice when you&rsquo;re contradicting last month&rsquo;s version.</p>
+      <p class="kicker">The repository isn&rsquo;t a record of the methodology. Maintaining it turned out to be the methodology running.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide" data-move="3" data-title="Effect two: AI got dramatically more useful">
+      <p class="eyebrow">Effect two</p>
+      <h2 class="statement statement--long">AI became dramatically more useful. The models never changed.</h2>
+      <p class="support">An agent pointed at a structured, versioned, interconnected body of knowledge can find the relevant evidence, respect the established positions, reuse the proven workflows and draft inside the house argument. The same agent pointed at a shared drive full of orphaned PDFs can only generate plausible text.</p>
+      <p class="kicker">The difference isn&rsquo;t the AI. It&rsquo;s what the AI has to stand on.</p>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide slide--section" data-move="4" data-title="Documentation just became a competitive advantage">
+      <p class="section-n">04</p>
+      <h2 class="statement">Documentation just became a competitive advantage</h2>
+      <p class="support">Which is why this argument has a deadline on it.</p>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide" data-move="4" data-title="AI changes the multiplier">
+      <p class="eyebrow">The multiplier</p>
+      <div class="panels">
+        <div class="panel panel--muted">
+          <p class="panel-q">Before &mdash; a cost centre with a moral glow</p>
+          <p class="panel-a">Ten per cent better, for readers who never had time.</p>
+        </div>
+        <div class="panel">
+          <p class="panel-q">Now &mdash; two competitors buy the same models</p>
+          <p class="panel-a">One hands them five years of connected research. One hands them a brand deck.</p>
+        </div>
+      </div>
+      <p class="kicker">They will not get the same output, and the gap will not be ten per cent.</p>
+    </section>
+
+    <!-- 17 -->
+    <section class="slide" data-move="4" data-title="The external version of the same effect">
+      <h2 class="statement statement--long">Your own AI tools and your market are grading the same thing.</h2>
+      <p class="support">AI systems increasingly form their view of what your company is credible about from the evidence you&rsquo;ve made available &mdash; and they reward exactly what version control enforces internally: consistency, connection, and claims that trace to sources.</p>
+    </section>
+
+    <!-- 18 -->
+    <section class="slide" data-move="4" data-title="The discipline, not the platform">
+      <p class="eyebrow">To be clear about what this isn&rsquo;t</p>
+      <h2 class="statement statement--long">Don&rsquo;t put the marketing team on GitHub on Monday.</h2>
+      <p class="support">Git&rsquo;s learning curve is real, and the platform was built for people who think in branches. The specific tool matters far less than the guarantees it enforces. What you <strong>cannot</strong> do is get those guarantees from a shared drive, a wiki nobody gardens, or the memory of whoever has been there longest.</p>
+    </section>
+
+    <!-- 19 -->
+    <section class="slide" data-move="5" data-title="The one-minute test">
+      <p class="eyebrow eyebrow--accent">The honest test &middot; one minute</p>
+      <p class="support">Pick the most expensive piece of knowledge your organisation produced last year &mdash; the research programme, the strategy work, the customer evidence. Could a new joiner:</p>
+      <ul class="checks">
+        <li class="check">Find it?</li>
+        <li class="check">Understand why it says what it says?</li>
+        <li class="check">See what&rsquo;s been built on it since?</li>
+        <li class="check">Hand it to an AI system in a usable form?</li>
+      </ul>
+    </section>
+
+    <!-- 20 -->
+    <section class="slide" data-move="5" data-title="An anecdote with a budget line">
+      <h2 class="statement statement--long">If the answer is no, the knowledge isn&rsquo;t an asset yet. It&rsquo;s an anecdote with a budget line.</h2>
+      <p class="support">Engineers stopped accepting that trade a generation ago. For everyone else, the tools have finally made the same refusal affordable &mdash; and the companies that notice first will spend the next few years building on top of what they know, while their competitors keep starting again.</p>
+      <p class="footnote">Full field note: <a href="https://www.editorialintelligence.co/writing/github-for-knowledge/">editorialintelligence.co/writing/github-for-knowledge</a></p>
+    </section>
+
+    <div class="controls">
+      <span class="counter"><b id="counterNow">01</b> / <span id="counterAll">20</span></span>
+      <button class="btn" id="prevBtn" type="button" aria-label="Previous slide">&larr;</button>
+      <button class="btn" id="nextBtn" type="button" aria-label="Next slide">&rarr;</button>
+      <button class="btn" id="gridBtn" type="button" aria-label="Slide overview">&#9633;</button>
+    </div>
+  </main>
+</div>
+
+<!-- ======================================================================
+     Overview
+     ====================================================================== -->
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-label="Slide overview" hidden>
+  <div class="overview-head">
+    <h2 class="overview-title">Why every company needs a GitHub for knowledge</h2>
+    <button class="btn" id="closeOverview" type="button" aria-label="Close overview">&times;</button>
+  </div>
+  <div class="overview-grid" id="overviewGrid"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var MOVES = [
+    'Opening',
+    'What version control solved',
+    'What everyone else loses',
+    'The experiment',
+    'The advantage',
+    'The test'
+  ];
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var graph = document.getElementById('graph');
+  var overview = document.getElementById('overview');
+  var overviewGrid = document.getElementById('overviewGrid');
+  var progressFill = document.getElementById('progressFill');
+  var counterNow = document.getElementById('counterNow');
+  var counterAll = document.getElementById('counterAll');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var index = 0;
+  var nodes = [];
+  var moveLabels = [];
+  var thumbs = [];
+
+  counterAll.textContent = pad(slides.length);
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  /* A stable pseudo-sha per slide, so the rail reads like a log rather than
+     a list of numbers. Derived from the slide title, not random, so it
+     survives reloads. */
+  function sha(text) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < text.length; i++) {
+      h ^= text.charCodeAt(i);
+      h = (h * 0x01000193) >>> 0;
+    }
+    return h.toString(16).slice(0, 7).padStart(7, '0');
+  }
+
+  /* ---- Build the rail -------------------------------------------------- */
+  var lastMove = -1;
+  slides.forEach(function (slide, i) {
+    var move = parseInt(slide.getAttribute('data-move'), 10) || 0;
+    var title = slide.getAttribute('data-title') || 'Slide ' + (i + 1);
+
+    if (move !== lastMove) {
+      var head = document.createElement('li');
+      head.className = 'graph-move';
+      head.setAttribute('data-n', pad(move));
+      head.textContent = MOVES[move] || '';
+      graph.appendChild(head);
+      moveLabels[move] = head;
+      lastMove = move;
+    }
+
+    var li = document.createElement('li');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'node';
+    btn.innerHTML = '<span class="node-sha">' + sha(title) + '</span>';
+    btn.title = title;
+    btn.addEventListener('click', function () { go(i); });
+    li.appendChild(btn);
+    graph.appendChild(li);
+    nodes.push(btn);
+  });
+
+  /* ---- Build the overview ---------------------------------------------- */
+  slides.forEach(function (slide, i) {
+    var move = parseInt(slide.getAttribute('data-move'), 10) || 0;
+    var title = slide.getAttribute('data-title') || 'Slide ' + (i + 1);
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'thumb';
+    btn.innerHTML =
+      '<span class="thumb-meta"><span>' + pad(i + 1) + '</span><span>' + sha(title) + '</span></span>' +
+      '<span class="thumb-title"></span>' +
+      '<span class="thumb-move">' + (MOVES[move] || '') + '</span>';
+    btn.querySelector('.thumb-title').textContent = title;
+    btn.addEventListener('click', function () {
+      go(i);
+      closeOverview();
+    });
+    overviewGrid.appendChild(btn);
+    thumbs.push(btn);
+  });
+
+  /* ---- Navigation ------------------------------------------------------ */
+  function go(i, skipHash) {
+    index = Math.max(0, Math.min(slides.length - 1, i));
+
+    slides.forEach(function (s, n) {
+      var current = n === index;
+      s.classList.toggle('is-current', current);
+      s.setAttribute('aria-hidden', current ? 'false' : 'true');
+      if ('inert' in s) { s.inert = !current; }
+    });
+
+    nodes.forEach(function (n, j) {
+      n.classList.toggle('is-current', j === index);
+      n.classList.toggle('is-seen', j < index);
+      n.setAttribute('aria-current', j === index ? 'true' : 'false');
+    });
+
+    var move = parseInt(slides[index].getAttribute('data-move'), 10) || 0;
+    moveLabels.forEach(function (label, m) {
+      if (label) { label.classList.toggle('is-active', m === move); }
+    });
+
+    thumbs.forEach(function (t, j) { t.classList.toggle('is-current', j === index); });
+
+    counterNow.textContent = pad(index + 1);
+    progressFill.style.width = ((index + 1) / slides.length * 100) + '%';
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === slides.length - 1;
+
+    if (nodes[index] && nodes[index].scrollIntoView) {
+      nodes[index].scrollIntoView({ block: 'nearest' });
+    }
+
+    if (!skipHash) {
+      var hash = '#' + (index + 1);
+      if (window.location.hash !== hash) {
+        /* Sandboxed embeds can refuse history writes; the deck works without */
+        try { history.replaceState(null, '', hash); } catch (err) {}
+      }
+    }
+  }
+
+  function next() { if (index < slides.length - 1) { go(index + 1); } }
+  function prev() { if (index > 0) { go(index - 1); } }
+
+  function openOverview() {
+    overview.hidden = false;
+    overview.classList.add('is-open');
+  }
+
+  function closeOverview() {
+    overview.classList.remove('is-open');
+    overview.hidden = true;
+  }
+
+  function overviewOpen() { return overview.classList.contains('is-open'); }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  document.getElementById('gridBtn').addEventListener('click', function () {
+    overviewOpen() ? closeOverview() : openOverview();
+  });
+  document.getElementById('closeOverview').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) { return; }
+
+    if (e.key === 'Escape') {
+      if (overviewOpen()) { e.preventDefault(); closeOverview(); }
+      return;
+    }
+
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      if (overviewOpen()) { closeOverview(); }
+      next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (overviewOpen()) { closeOverview(); }
+      prev();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      go(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      go(slides.length - 1);
+    } else if (e.key === 'g' || e.key === 'G') {
+      e.preventDefault();
+      overviewOpen() ? closeOverview() : openOverview();
+    } else if (e.key === 'p' || e.key === 'P') {
+      e.preventDefault();
+      closeOverview();
+      window.print();
+    }
+  });
+
+  /* ---- Touch ----------------------------------------------------------- */
+  var touchX = null;
+  var touchY = null;
+  var stage = document.getElementById('stage');
+
+  stage.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { return; }
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+
+  stage.addEventListener('touchend', function (e) {
+    if (touchX === null) { return; }
+    var dx = e.changedTouches[0].clientX - touchX;
+    var dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      dx < 0 ? next() : prev();
+    }
+    touchX = null;
+    touchY = null;
+  }, { passive: true });
+
+  /* ---- Deep links ------------------------------------------------------ */
+  function fromHash() {
+    var n = parseInt((window.location.hash || '').replace('#', ''), 10);
+    return isNaN(n) ? 0 : n - 1;
+  }
+
+  window.addEventListener('hashchange', function () { go(fromHash(), true); });
+
+  go(fromHash(), true);
+}());
+</script>
+
+</body>
+</html>
