@@ -105,15 +105,23 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         </div>
         <div class="route-card" role="listitem">
           <span class="person-num">02</span>
-          <h3>A written contribution</h3>
-          <p>Prefer to reflect in your own time? I'll send the research questions by email and you can respond whenever suits. A structured web questionnaire is currently being piloted.</p>
+          <h3>The written questionnaire</h3>
+          <p>Around 10–15 minutes, in your own time. It asks you to reconstruct one real example of evidence shaping a decision, then covers where knowledge gets lost and how AI is changing the work.</p>
+          <a href="/compare-notes/questionnaire" class="route-link">
+            Open the questionnaire
+            <span aria-hidden="true">→</span>
+          </a>
+          <p class="route-pilot-tag">Pilot version 1</p>
         </div>
         <div class="route-card" role="listitem">
           <span class="person-num">03</span>
           <h3>An anonymous contribution</h3>
-          <p>You can respond to the written questions without your name or organisation being recorded in the research at all. Just say so when you get in touch.</p>
+          <p>You can respond to the written questions without your name or organisation being recorded in the research at all. The questionnaire's contact fields are all optional — leave them blank and the response stays anonymous.</p>
         </div>
       </div>
+      <p class="people-note">
+        The questionnaire is being piloted, so its wording may still change. Responses collected during the pilot remain part of the research, and any substantial revision is recorded so findings can be traced to the version that produced them.
+      </p>
     </section>
 
     <section class="terms-section">
@@ -151,7 +159,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       </div>
       <div class="closing-invite">
         <h2>Would you spend 30 minutes comparing notes?</h2>
-        <p>Tell me a little about the work you do and the problem you keep encountering. We'll take it from there.</p>
+        <p>Tell me a little about the work you do and the problem you keep encountering. We'll take it from there. If a conversation is harder to schedule, the questionnaire covers the same ground in your own time.</p>
         <div class="closing-actions">
           <a
             href="mailto:asavin@editorialintelligence.co?subject=Let's%20compare%20notes&body=Hi%20Asavin%2C%0A%0AI'd%20be%20happy%20to%20compare%20notes.%20A%20little%20about%20my%20work%3A%0A%0A"
@@ -160,10 +168,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
             Start a conversation
             <span aria-hidden="true">→</span>
           </a>
-          <a href="https://www.linkedin.com/in/ashwat/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
-            Or message me on LinkedIn
+          <a href="/compare-notes/questionnaire" class="compare-btn compare-btn-secondary">
+            Answer the questionnaire
+            <span aria-hidden="true">→</span>
           </a>
         </div>
+        <a href="https://www.linkedin.com/in/ashwat/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+          Or message me on LinkedIn
+        </a>
       </div>
     </section>
   </main>
@@ -362,6 +374,30 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     color: var(--color-ink-secondary);
   }
 
+  .route-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .route-link:hover {
+    text-decoration: underline;
+  }
+
+  .route-pilot-tag {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
   .terms-section {
     padding-block: clamp(4rem, 8vw, 7rem);
     background: var(--color-surface-secondary);
@@ -458,7 +494,15 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     opacity: 0.9;
   }
 
+  .compare-btn-secondary {
+    border-color: var(--color-rule);
+    background: transparent;
+    color: var(--color-ink);
+  }
+
   .linkedin-link {
+    display: inline-block;
+    margin-top: 1rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--color-accent);
