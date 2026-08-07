@@ -92,6 +92,58 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       </div>
     </section>
 
+    <section class="container-site compare-section">
+      <div class="compare-section-heading">
+        <p class="t-label">Ways to take part</p>
+        <h2>Contribute in whichever way suits you</h2>
+      </div>
+      <div class="routes-grid" role="list">
+        <div class="route-card" role="listitem">
+          <span class="person-num">01</span>
+          <h3>A 30-minute conversation</h3>
+          <p>A video call comparing how evidence becomes influence in your organisation. Not an interview with a script — a genuine exchange between practitioners.</p>
+        </div>
+        <div class="route-card" role="listitem">
+          <span class="person-num">02</span>
+          <h3>A written contribution</h3>
+          <p>Prefer to reflect in your own time? I'll send the research questions by email and you can respond whenever suits. A structured web questionnaire is currently being piloted.</p>
+        </div>
+        <div class="route-card" role="listitem">
+          <span class="person-num">03</span>
+          <h3>An anonymous contribution</h3>
+          <p>You can respond to the written questions without your name or organisation being recorded in the research at all. Just say so when you get in touch.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="terms-section">
+      <div class="container-site">
+        <div class="compare-section-heading terms-heading">
+          <p class="t-label">How this works</p>
+          <h2>What happens to what you share</h2>
+        </div>
+        <div class="terms-grid">
+          <div class="terms-item">
+            <h3>How your contribution is used</h3>
+            <p>Contributions become part of the research evidence base behind Editorial Intelligence. They are synthesised — alongside other conversations and responses — into published findings, methodology improvements and, eventually, a first research report. Your contribution is analysed on the terms you choose: analysis only, anonymous use in findings, or available for attribution.</p>
+          </div>
+          <div class="terms-item">
+            <h3>Attribution is optional — and off by default</h3>
+            <p>Nothing is attributed to you or your organisation unless you separately approve the exact wording and context first. Your contact details stay in a private research tracker; they are never published and never added to a marketing list.</p>
+          </div>
+          <div class="terms-item">
+            <h3>What you receive</h3>
+            <p>This is an exchange, not an extraction. Participants receive the early synthesis of findings, anything from the methodology that's relevant to the problem they described, and — if they want it — a note when the research is published.</p>
+          </div>
+          <div class="terms-item">
+            <h3>What happens after you get in touch</h3>
+            <p>I reply personally — there's no automated sequence behind this page. We find a time or I send the questions, your contribution is logged as anonymised research evidence, and I follow up with something useful rather than a pitch. You can ask for your contribution to be withdrawn at any point before findings are aggregated.</p>
+          </div>
+        </div>
+        <p class="people-note">These are research conversations, not sales calls. If commercial work ever grows out of one, it will be because you raised it.</p>
+      </div>
+    </section>
+
     <section class="container-site closing-section">
       <div class="closing-copy">
         <p>If my thinking is useful, brilliant.</p>
@@ -282,6 +334,72 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     color: var(--color-accent);
   }
 
+  .routes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--color-rule);
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .route-card {
+    padding: 1.5rem 1.35rem;
+    border-right: 1px solid var(--color-rule);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .route-card h3 {
+    margin: 0.75rem 0 0.6rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  .route-card p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+  }
+
+  .terms-section {
+    padding-block: clamp(4rem, 8vw, 7rem);
+    background: var(--color-surface-secondary);
+    border-block: 1px solid var(--color-rule);
+  }
+
+  .terms-heading {
+    margin-bottom: 2.5rem;
+  }
+
+  .terms-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--color-rule);
+    border: 1px solid var(--color-rule);
+  }
+
+  .terms-item {
+    padding: 1.5rem 1.35rem;
+    background: var(--color-surface);
+  }
+
+  .terms-item h3 {
+    margin-bottom: 0.6rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  .terms-item p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+  }
+
   .closing-section {
     padding-block: clamp(4rem, 9vw, 8rem);
   }
@@ -371,6 +489,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     .questions-section {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       gap: clamp(3rem, 8vw, 7rem);
+    }
+
+    .routes-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .terms-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
