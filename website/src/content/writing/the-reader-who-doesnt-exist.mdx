@@ -1,0 +1,123 @@
+---
+title: "The reader who doesn't exist"
+excerpt: "I spent a day building a documentation layer nobody was ever going to read, then deleted it. The mistake is one I'd have caught instantly in a client's work: depth built for an audience that was never coming."
+date: 2026-08-07
+status: draft
+tags:
+  - editorial-intelligence
+  - knowledge-systems
+  - editorial-systems
+  - content-strategy
+  - thought-leadership
+type: reflection
+readTime: 7
+relatedFrameworks:
+  - editorial-intelligence-framework
+  - portable-intelligence
+relatedArticles:
+  - github-for-knowledge
+  - documentation-competitive-advantage
+  - the-site-is-the-proof
+---
+
+I have spent the last few weeks arguing that organisations should write more down.
+
+That documentation is no longer a chore nobody funds, because the reader changed — it is agents and systems now, not just busy colleagues. That every company needs something like a GitHub for knowledge. That the failure mode of most organisations is not a shortage of insight but the absence of any mechanism for remembering it.
+
+I still think all of that is right.
+
+Last week I applied it to my own work and got it wrong.
+
+---
+
+## What I built
+
+The repository behind this site holds the Astro project that renders it, and the content collections that fill it — the narratives, the frameworks, the field notes, the experiments.
+
+I decided it should hold more than that. So I built a documentation layer alongside the site: the philosophy behind the method, a set of working principles, an index of the frameworks grouped by purpose, a roadmap, a changelog, a place for research notes.
+
+Then I wrote a proposal for what it should become. Navigation standards. Implementation guides. A four-phase migration plan. A structure that a visitor could arrive at cold and read their way into the discipline.
+
+It was coherent. Every piece connected to every other piece. It took most of a day.
+
+Then I deleted almost all of it.
+
+---
+
+## The first mistake was the obvious one
+
+The methodology already had a home. A separate, private repository that has been the canonical source for years — principles, frameworks, evidence, the research pipeline, all of it maintained and versioned.
+
+What I had built was a second, public, partial copy of that.
+
+This is the specific failure I would flag inside thirty seconds in someone else's organisation. Two versions of the same knowledge, in different places, both looking authoritative. Nobody can tell which one is current. They start drifting the day they are created, and the drift is invisible until someone acts on the wrong one.
+
+The rule is not complicated. Knowledge has one home. Everything else links to it, or restates it deliberately for a particular audience, and says which it is doing.
+
+I broke it in the same sitting in which I wrote it down.
+
+That is worth saying plainly, because the interesting thing about this kind of error is not that people do not know the rule. It is that knowing the rule provides almost no protection when you are inside the work and it feels like you are building something good.
+
+---
+
+## The second mistake was more useful
+
+The duplication was careless. The thing underneath it was more instructive.
+
+I was building for a reader who does not exist.
+
+The proposal assumed someone would arrive at a repository, find the documentation well organised, and follow it into the methodology. Read the philosophy, move to the principles, browse the frameworks, open an implementation guide, come out understanding how the whole thing works.
+
+That person is not coming.
+
+The people this work is for run marketing, communications and product functions. They have a knowledge problem and not enough time. They do not browse repositories. They will never open a directory called `implementation`. They arrive from a talk, or an article somebody forwarded, and they give it ninety seconds.
+
+I had designed a reading experience for an audience that does not read that way, using a surface they do not visit.
+
+---
+
+## Depth has to be earned by demand
+
+Here is the version worth keeping:
+
+**Match the depth of a publishing surface to whether its audience will actually explore it.**
+
+Building depth for a reader who does not exist is the most expensive mistake available in content work, and it is dangerous precisely because it does not feel like a mistake. It feels like diligence. It produces something coherent and well-structured, and the coherence is what stops you asking whether anyone will encounter it.
+
+Once you have the shape of it, you see it everywhere.
+
+The resource library with four hundred assets and no path through them. The microsite with six levels of navigation, built because the material genuinely was that layered. The report appendix written with real care for a reader who stopped at the executive summary. The internal wiki that everybody agrees is essential and nobody opens. The onboarding documentation that assumes a new starter will read forty pages in sequence.
+
+None of these are produced by laziness. They are produced by taking the material seriously and not taking the reader's actual behaviour seriously at the same time.
+
+The question is not *is this thorough?* It is *who arrives here, how, and how long do they stay?* If the honest answer is "almost nobody, briefly, on their way somewhere else," then the surface needs signals, not depth. It needs to communicate that the work behind it is real and current, and then get out of the way.
+
+---
+
+## Which is the boundary on the argument I have been making
+
+This does not contradict the case for writing things down. It draws a line around it.
+
+Write it down because the knowledge compounds, because it can be reviewed and corrected, because it survives the person who holds it, because an agent can act on it. Those reasons hold whether or not anyone browses.
+
+But writing it down and building a reading experience around it are different jobs, and only the first one is always worth doing. The methodology needs to be documented properly, in one place, maintained. It does not need a public reading experience until somebody asks for one.
+
+The tell is who the depth is for. Depth built so knowledge is retrievable is infrastructure. Depth built so a hypothetical visitor has a good time is decoration, and decoration for someone who never shows up is just cost.
+
+---
+
+## What the repository is now
+
+It is the [source for this site](https://github.com/asavinwa/editorial-intelligence-os), and nothing more ambitious than that.
+
+The site itself, the content collections with their schemas and controlled vocabulary, a licence so the frameworks can actually be used, and a build that runs on every change so a malformed entry fails before it reaches you.
+
+It is public, and has been from the start. What changed is that it now says what it is. If you go and look, you should be able to tell in about twenty seconds that this is a real system that is actively maintained — and then leave, because everything worth reading is here on the site rather than there.
+
+That is the whole job of that surface. It took me a day of building the wrong thing to work out that it was already nearly doing it.
+
+---
+
+The methodology is stronger for the deletion. Not because the documentation was bad, but because I now have a rule I did not have last week, and it came from getting it wrong on my own work rather than observing it in someone else's.
+
+That is the loop functioning as intended. It is just less comfortable when the signal is your own misjudgement.
