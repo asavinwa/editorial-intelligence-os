@@ -18,6 +18,12 @@ The last section matters as much as the others. A roadmap that only records what
 - [Now, next and later](current.md) — the live position
 - [Open questions](open-questions.md) — decisions that shape the roadmap but are not yet made
 
+## Proposals
+
+Larger pieces of work, specified before they are started.
+
+- [Public repository evolution](public-repository-evolution.md) — making the repository the canonical public home of the methodology, not just the site source *(proposed)*
+
 ## Maintaining this
 
 Review when something moves horizon, not on a schedule. When an item ships, move it to the [changelog](../changelog/) with a note on what it changed — the roadmap records intent, the changelog records what actually happened, and the gap between them is the most useful signal either one produces.
