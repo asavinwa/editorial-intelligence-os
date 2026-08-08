@@ -1,0 +1,134 @@
+---
+title: "What I accidentally built on my holiday"
+excerpt: "This was meant to be proper time off, and mostly it has been. But Editorial Intelligence kept moving anyway — because the distance between having an idea and having a working version of it has collapsed, and the boring bits in between are no longer mine to endure."
+date: 2026-08-08
+status: published
+tags:
+  - editorial-intelligence
+  - ai
+  - research
+  - knowledge-systems
+  - ai-workflows
+  - practical-ai
+type: reflection
+readTime: 6
+relatedFrameworks:
+  - editorial-intelligence-framework
+  - daily-os
+relatedArticles:
+  - github-for-knowledge
+  - ai-made-editorial-intelligence-viable
+  - the-site-is-the-proof
+  - thailand-reset
+---
+
+I'm on holiday in Thailand. This morning I woke up, picked up my phone and started messing around with Editorial Intelligence.
+
+That has become a surprisingly normal thing for me to do on a break. Not because I've decided holidays are a good opportunity to squeeze in more work — I've been with family, travelling around, eating well, training and generally enjoying having proper time away. It's because Editorial Intelligence is fun to build. And I think AI is a large part of why.
+
+---
+
+## A fairly strange morning
+
+I started on my phone, bouncing between ChatGPT, Claude Code and Codex. Some of it was thinking. Some of it was development. Quite a lot of it was simply working out what the next problem was.
+
+Eventually I moved outside with a coffee and opened the laptop. At one point I had ChatGPT open on the laptop while running Claude Code on my phone, photographing one screen and passing the picture to the other to work through what I was looking at. Not a conventional development environment. It worked.
+
+And somewhere in the middle of all that I found myself configuring MailerLite, authenticating an email domain through Porkbun, thinking about newsletter infrastructure, updating the website and working out how a new research component should connect to email capture and publishing — while sitting in a garden drinking coffee.
+
+A few years ago there is no chance I would have spent a morning of a holiday doing any of that. Not because the ideas would have been less interesting. Because everything surrounding the ideas would have been incredibly boring.
+
+---
+
+## One problem led to another
+
+I hadn't woken up planning to configure an email domain. I had been thinking about research.
+
+Editorial Intelligence is moving into a more serious practitioner research phase. There's a questionnaire built, a structure for capturing what I learn, and the beginnings of a plan for recruiting people to take part.
+
+But following that idea properly immediately produced another question. If somebody contributes to the research and wants to hear what comes of it, how do I keep in touch with them properly?
+
+That means permission-based email capture. Which means somewhere to store those details. Which took me back to a decision I'd been circling for a while: whether I actually needed Substack.
+
+I didn't have an established subscriber base there, and running a website, a Substack and LinkedIn as three separate publishing systems was starting to feel like unnecessary complexity. So I simplified it. The website stays the source of truth. LinkedIn becomes the main newsletter and distribution channel. And I keep my own permission-based list separately, for people who want research updates or simply want to stay in touch.
+
+That decision meant setting up MailerLite. Which meant authenticating my domain. Which meant opening Porkbun and dealing with DNS records.
+
+Which is how thinking about practitioner research ended with me editing DNS in a garden in Thailand.
+
+---
+
+## AI lets curiosity survive implementation
+
+That chain of events is the most interesting thing about the whole morning.
+
+Before the current generation of AI tools, almost every stage of it contained enough friction to stop me. I might have searched for the best email platform. Then for how to connect it to a static site. Then for what domain authentication actually means. Then for where the right DNS settings live. Then discovered the instructions were written for a version of the platform that no longer looks like that. Then opened another six tabs. Then wondered whether I needed a developer. Then decided I could probably deal with it another day.
+
+The idea itself would have survived. The implementation would have killed the momentum.
+
+Search is still useful, obviously. But search largely hands you information and leaves the integration work to you: find the right result, work out whether it's still current, understand it, map it onto your exact setup, then execute it.
+
+With AI, the interaction becomes contextual instead. Here is what I'm looking at. Here is the problem. What do I do next?
+
+That sounds like a small change. It isn't. **AI lets curiosity survive implementation.**
+
+---
+
+## The interesting work is still mine
+
+None of which means AI makes everything easy.
+
+Writing still takes time. Deciding what Editorial Intelligence actually means takes time. Designing research that's genuinely useful takes thought. Working out whether an idea is good or merely sounds clever requires judgement. Choosing what not to build is as difficult as it ever was.
+
+Those are the parts I want to spend time on.
+
+What AI is increasingly good at removing is everything surrounding them — the debugging, the unfamiliar technical setup, the documentation, the repetitive implementation, and the particular moment where you realise the thing you want to do requires knowledge from a discipline that isn't yours and quietly decide it isn't worth the hassle.
+
+That distinction matters. I'm not remotely excited by configuring DNS records. I am excited by whether Editorial Intelligence can become a useful research and knowledge system. AI helps me get through one to reach the other.
+
+---
+
+## Building across several models
+
+There's another slightly unusual part of how I've been working.
+
+Editorial Intelligence doesn't really live in ChatGPT, or Claude, or Codex. It lives in GitHub.
+
+That has become important, because I move between models depending on what I'm doing and which device happens to be in front of me. Yesterday I deliberately left myself a detailed handover in the Editorial Intelligence Core repository so that a different model could pick up exactly where the previous one stopped.
+
+The repository is the persistent memory. The models are tools working around it.
+
+Which means I can think something through in ChatGPT, build part of it with Claude Code, use Codex for another job, and the project still holds together. That feels far more significant to me than trying to decide which model is "best" — and it's the practical version of an argument I've made at more length about [why knowledge needs somewhere to accumulate](/writing/github-for-knowledge).
+
+---
+
+## What Editorial Intelligence became on holiday
+
+When I arrived in Thailand, Editorial Intelligence already existed. There was a website, a growing body of thinking, and the start of turning that thinking into frameworks and practical tools.
+
+During this break, the system has become more complete. The website makes the thinking public. GitHub is the deeper knowledge base behind it. The research component is designed to test the ideas against the experience of actual practitioners, rather than letting me carry on inventing frameworks in isolation. And the publishing side is becoming clearer too.
+
+The loop I'm aiming at looks something like this:
+
+1. Research creates something genuinely new to say.
+2. That thinking gets developed on the website.
+3. The website feeds LinkedIn and the Editorial Intelligence newsletter.
+4. Publishing creates conversations and feedback.
+5. Those conversations create better research.
+6. And the research improves Editorial Intelligence again.
+
+That's much closer to what I want the whole thing to become: a learning system rather than a fixed methodology.
+
+---
+
+## This is not a post about working on holiday
+
+I should probably make that clear.
+
+I don't think people should spend their holidays optimising their productivity, and I certainly don't want AI to turn every spare hour into another opportunity to work.
+
+The interesting thing for me is almost the opposite. Some of this no longer feels much like work. It feels like making something. The parts that would previously have made the experience frustrating or tedious are increasingly handled with help from AI, and that leaves more of the thinking, experimenting, writing and deciding — the bits I actually enjoy.
+
+So no, my holiday hasn't made me want to work more. But it has made me rethink what building an idea can look like when the distance between thinking and making becomes much shorter.
+
+And yes, for a few hours this week, a green wooden table under the palms was the office.
