@@ -43,3 +43,4 @@ Run the build before pushing. It is the only check there is.
 - Shared page furniture lives in `website/src/components/`. `CompareNotesCallout.astro` in particular renders on seven pages, so a change there is a change everywhere.
 - Navigation is defined once in `website/src/config/site.ts`.
 - Pages that are pilots or otherwise not ready for search carry `noindex` via the `BaseLayout` prop.
+- Photographs go in `website/public/Images/photos/`, uploaded through GitHub's own upload form. A photo attached to a Claude Code or Codex session on the web is never uploaded — the assistant gets a rendering to look at, not the file — so asking it to "add this photo" from a chat attachment cannot work. See that folder's `README.md` for the route that does, and for naming, sizing and orientation.
