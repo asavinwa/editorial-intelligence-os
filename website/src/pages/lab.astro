@@ -1,28 +1,22 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
-import LabSignup from '../components/LabSignup.astro';
+import KeepInTouch from '../components/KeepInTouch.astro';
 ---
 
 <BaseLayout
-  title="Editorial Intelligence Lab"
-  description="The Editorial Intelligence Lab is a Substack publication where the discipline is developed in public — field notes, essays, AI narrative research and applications as they emerge."
+  title="Keep in touch"
+  description="Occasional updates from Editorial Intelligence — new research, findings as they emerge and invitations to take part."
 >
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      window.va?.('track', 'lab_page_view');
-    });
-  </script>
-
   <div class="lab-inner container-site">
 
     <header class="lab-header">
-      <p class="t-label mb-4">Editorial Intelligence Lab</p>
-      <h1 class="lab-h1">Join the first 100 readers</h1>
-      <p class="lab-lede">The Lab is where Editorial Intelligence is developed in public. Each issue connects field notes, AI narrative research and cross-sector applications into thinking you can use — before it becomes a framework.</p>
+      <p class="t-label mb-4">Editorial Intelligence</p>
+      <h1 class="lab-h1">Keep in touch with Editorial Intelligence</h1>
+      <p class="lab-lede">Occasional updates on new research, findings and ways to take part. Editorial Intelligence is being developed in public and tested through practitioner research; this list is how to follow that work without watching a feed.</p>
     </header>
 
     <div class="lab-signup-primary">
-      <LabSignup variant="full" headline="" />
+      <KeepInTouch variant="full" headline="" body="" />
     </div>
 
     <hr class="divider" />
@@ -30,34 +24,33 @@ import LabSignup from '../components/LabSignup.astro';
     <section class="lab-section">
       <h2 class="lab-h2">What you will receive</h2>
       <ul class="lab-list">
-        <li>Field notes from active engagements — what the evidence is showing, what changed, what held</li>
-        <li>AI visibility research and how it is shifting what Editorial Intelligence work actually involves</li>
-        <li>Applications of the frameworks across sectors — accounting, professional services, B2B technology, media</li>
-        <li>Early access to new tools, assessments and framework iterations before they appear on the main site</li>
-        <li>Writing that reflects the discipline in practice, not just describes it</li>
+        <li>New practitioner research, and invitations to take part in it</li>
+        <li>Findings as they emerge — labelled honestly when the sample is still small</li>
+        <li>Field notes from active engagements: what the evidence showed, what changed, what held</li>
+        <li>Early access to new tools, assessments and framework iterations</li>
       </ul>
+      <p class="lab-note">Occasional means occasional. Updates go out when the work produces something worth sending, not on a schedule.</p>
     </section>
 
     <hr class="divider" />
 
     <section class="lab-section">
-      <h2 class="lab-h2">The Lab's place in the system</h2>
+      <h2 class="lab-h2">Where the regular writing lives</h2>
       <div class="lab-prose">
-        <p>Editorial Intelligence OS is being built in public. The frameworks are live and in use. The assessment is operational. The Lab is where the material that eventually becomes frameworks first appears — rough, in progress, genuinely useful.</p>
-        <p>The Lab is not a newsletter in the traditional sense. It does not attempt to be complete or authoritative on publication. It captures the work as it develops and shares what is most useful to practitioners who are doing similar things, or thinking through similar questions.</p>
-        <p>If you are in content, editorial, marketing or communications — or in a knowledge or strategy function trying to make evidence more usable — this is the publication most likely to be directly relevant to what you are working on.</p>
+        <p>The recurring newsletter is published on LinkedIn under the Editorial Intelligence name. If you want the regular reading rhythm, that is the place to find it.</p>
+        <p>This list is different, and deliberately quieter. It is a direct line for research participation and for the things that do not fit a publishing schedule.</p>
       </div>
       <a href="/writing" class="lab-archive-link">Browse the full writing archive →</a>
     </section>
 
     <hr class="divider" />
 
-    <section class="lab-section lab-section--cta">
-      <LabSignup
-        variant="full"
-        headline="Start receiving the Lab"
-        body="New issues when the work produces something worth sharing — not on a fixed schedule."
-      />
+    <section class="lab-section">
+      <h2 class="lab-h2">Taking part in the research</h2>
+      <div class="lab-prose">
+        <p>Joining this list is not the same as taking part in the research, and neither one signs you up for the other. The practitioner research has its own invitation, its own consent and its own permissions, which you choose question by question.</p>
+      </div>
+      <a href="/compare-notes" class="lab-archive-link">Read the research invitation →</a>
     </section>
 
   </div>
@@ -136,6 +129,13 @@ import LabSignup from '../components/LabSignup.astro';
     font-size: 0.75rem;
   }
 
+  .lab-note {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-ink-tertiary);
+  }
+
   .lab-prose {
     display: flex;
     flex-direction: column;
@@ -159,9 +159,5 @@ import LabSignup from '../components/LabSignup.astro';
 
   .lab-archive-link:hover {
     text-decoration: underline;
-  }
-
-  .lab-section--cta {
-    padding-top: 0.5rem;
   }
 </style>

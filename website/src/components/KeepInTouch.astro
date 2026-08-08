@@ -1,0 +1,290 @@
+---
+/**
+ * Email capture for the Editorial Intelligence website list.
+ *
+ * This is the owned-audience list: occasional updates, research findings and
+ * invitations to take part. It is deliberately not a second newsletter — the
+ * LinkedIn newsletter is the recurring publication.
+ *
+ * ── Connecting MailerLite ───────────────────────────────────────────────────
+ * Nothing here is wired to MailerLite yet, and no identifiers have been
+ * guessed. Until the two values below are filled in, the component renders in
+ * an unconnected state: the form is visible but disabled, and it explains that
+ * signup is not open yet rather than silently discarding an address.
+ *
+ * To connect it, set both values in `src/config/mailerlite.ts`:
+ *
+ *   1. ACCOUNT_ID — the numeric account ID in MailerLite's embedded form code,
+ *      shown as `ml_account` / the number in `webforms/.../takel` snippets.
+ *   2. FORM_ID    — the ID of the specific embedded form to submit to.
+ *
+ * Configure the double opt-in, the confirmation email, the consent record and
+ * the unsubscribe footer in MailerLite itself. The site does not store
+ * addresses and holds no API key — the form posts straight to MailerLite.
+ */
+import { MAILERLITE, isMailerLiteConfigured, mailerLiteAction } from '../config/mailerlite';
+
+export interface Props {
+  variant?: 'compact' | 'full';
+  eyebrow?: string;
+  headline?: string;
+  body?: string;
+}
+
+const {
+  variant = 'compact',
+  eyebrow,
+  headline = 'Keep in touch with Editorial Intelligence',
+  body = 'Occasional updates on new research, findings and ways to take part.',
+} = Astro.props;
+
+const connected = isMailerLiteConfigured();
+const action = mailerLiteAction();
+
+// Unique per instance — the component renders more than once on some pages.
+const uid = `kit-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class={`keep-in-touch keep-in-touch--${variant}`} data-connected={String(connected)}>
+  {eyebrow && <p class="kit-eyebrow">{eyebrow}</p>}
+  {headline && <p class="kit-headline">{headline}</p>}
+  {body && <p class="kit-body">{body}</p>}
+
+  <form
+    class="kit-form"
+    method="post"
+    action={action}
+    target="_blank"
+    rel="noopener"
+    data-connected={String(connected)}
+  >
+    <label class="kit-field">
+      <span class="kit-label">Email address</span>
+      <input
+        type="email"
+        name={MAILERLITE.emailField}
+        id={`${uid}-email`}
+        class="kit-input"
+        placeholder="you@organisation.com"
+        autocomplete="email"
+        required
+        disabled={!connected}
+      />
+    </label>
+
+    <label class="kit-consent" for={`${uid}-consent`}>
+      <input
+        type="checkbox"
+        id={`${uid}-consent`}
+        name={MAILERLITE.consentField}
+        value="1"
+        required
+        disabled={!connected}
+      />
+      <span>
+        I agree to receive occasional Editorial Intelligence updates by email. I can unsubscribe at
+        any time.
+      </span>
+    </label>
+
+    <div class="kit-action">
+      <button type="submit" class="kit-button" disabled={!connected}>
+        Keep me updated <span aria-hidden="true">→</span>
+      </button>
+      <span class="kit-note">
+        {connected
+          ? 'No spam. Unsubscribe in one click.'
+          : 'Signup opens shortly.'}
+      </span>
+    </div>
+
+    <p class="kit-privacy">
+      Your address is used only to send these updates. Read the <a href="/privacy">privacy policy</a>.
+    </p>
+  </form>
+</div>
+
+<style>
+  .keep-in-touch {
+    margin: 2rem 0;
+  }
+
+  .keep-in-touch--compact {
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .kit-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .kit-headline {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--color-ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .keep-in-touch--full .kit-headline {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .kit-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    max-width: 52ch;
+  }
+
+  .kit-form {
+    margin-top: 1.15rem;
+    max-width: 34rem;
+  }
+
+  .kit-field {
+    display: block;
+  }
+
+  .kit-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .kit-input {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    background: var(--color-surface);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .kit-input:focus {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  .kit-input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .kit-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    cursor: pointer;
+  }
+
+  .kit-consent input {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    accent-color: var(--color-accent);
+  }
+
+  .kit-consent:has(input:disabled) {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .kit-action {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    margin-top: 1.15rem;
+  }
+
+  .kit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .kit-button:hover:not(:disabled) {
+    opacity: 0.86;
+  }
+
+  .kit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .kit-note {
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .kit-privacy {
+    margin-top: 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+  }
+
+  .kit-privacy a {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 767px) {
+    .keep-in-touch {
+      margin: 1.5rem 0;
+    }
+
+    .keep-in-touch--compact {
+      padding: 1.25rem;
+    }
+
+    .kit-headline {
+      font-size: 1.125rem;
+    }
+
+    .keep-in-touch--full .kit-headline {
+      font-size: 1.5rem;
+    }
+
+    .kit-action {
+      align-items: flex-start;
+    }
+
+    .kit-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

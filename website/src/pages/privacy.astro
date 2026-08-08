@@ -1,0 +1,486 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { SITE } from '../config/site';
+
+/**
+ * This policy describes what the site actually does, established by reading the
+ * codebase rather than by adapting a template. If the implementation changes,
+ * change this page in the same commit.
+ *
+ * Two things described here are prepared but not yet connected, and are
+ * described as such rather than as live: the research questionnaire's Formspree
+ * endpoint (`src/pages/compare-notes/questionnaire.astro`) and the MailerLite
+ * form (`src/config/mailerlite.ts`).
+ */
+const lastUpdated = '8 August 2026';
+---
+
+<BaseLayout
+  title="Privacy policy"
+  description="How Editorial Intelligence collects, uses and protects personal information — email updates, research participation, analytics and your data protection rights."
+  suppressFlagshipJourney={true}
+>
+  <header class="p-hero">
+    <div class="container-site">
+      <p class="t-label mb-6">Privacy</p>
+      <h1 class="t-display mb-6">Privacy policy</h1>
+      <p class="p-lede">
+        This explains what personal information Editorial Intelligence collects, why, who else
+        handles it and what you can ask me to do about it. It is written to be read rather than
+        skimmed past.
+      </p>
+      <p class="p-updated">Last updated {lastUpdated}</p>
+    </div>
+  </header>
+
+  <div class="container-site">
+    <article class="p-body">
+
+      <section class="p-section">
+        <h2>Who operates Editorial Intelligence</h2>
+        <p>
+          Editorial Intelligence is operated by {SITE.author}, an independent practitioner based in
+          the United Kingdom. There is no company, team or parent organisation behind it — one
+          person is responsible for this website, the research programme and everything described
+          on this page.
+        </p>
+        <p>
+          For data protection purposes, that makes me the data controller for the personal
+          information described here. You can reach me at
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>What this site collects</h2>
+        <p>
+          Most of this website collects nothing at all. It is a static site: you can read every
+          framework, narrative, method and field note without giving me any information and without
+          anything being stored on your device.
+        </p>
+        <p>Personal information reaches me in only three ways, and each one is something you choose to do:</p>
+        <ul class="p-list">
+          <li>You subscribe to email updates.</li>
+          <li>You complete the practitioner research questionnaire.</li>
+          <li>You email me directly, or ask for a Compare Notes conversation.</li>
+        </ul>
+        <p>
+          Alongside those, the site uses privacy-focused analytics that count visits without
+          identifying visitors. That is described further down.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Email updates</h2>
+        <p>
+          If you subscribe to Editorial Intelligence updates, I collect your email address. Nothing
+          else is required — there is no name field, no organisation field and no way to make the
+          form ask for more.
+        </p>
+        <p>
+          I use it to send occasional updates about new research, findings as they emerge and
+          opportunities to take part. Occasional means what it says: updates go out when the work
+          produces something worth sending, not on a schedule.
+        </p>
+        <p>
+          <strong>The lawful basis is your consent.</strong> You give it by ticking the consent box
+          on the form, which is never pre-ticked. I keep a record of that consent so I can show it
+          was given.
+        </p>
+        <p>
+          The subscription list is held by MailerLite, described under third-party services below.
+          You can unsubscribe from any email, at any time, using the link in its footer. That
+          removes you immediately and needs no explanation or reply from you.
+        </p>
+        <p>
+          I do not sell, rent or share the list with anyone, and I do not use it for advertising or
+          pass it to advertising networks.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Research participation</h2>
+        <p>
+          The Editorial Intelligence Research Project investigates how organisations turn evidence
+          into ideas that influence decisions. You can take part by completing the practitioner
+          questionnaire or by having a Compare Notes conversation.
+        </p>
+        <p>
+          The questionnaire collects your answers about how your organisation works. Your name,
+          email address and organisation are optional, and only needed if you want me to be able to
+          follow up. The questionnaire page carries its own detailed privacy notice covering how
+          that specific research data is handled, and the permissions you choose there govern what
+          happens to your response.
+        </p>
+        <p>
+          <strong>The lawful basis is your consent</strong>, given through the explicit permission
+          choices in the questionnaire. You choose whether your response may be quoted anonymously,
+          whether I may contact you and whether you are open to a follow-up conversation. Nothing is
+          ever attributed to you or your organisation without asking you separately, with the exact
+          proposed wording.
+        </p>
+        <p>
+          I should also be straightforward about something the questionnaire states plainly:
+          Editorial Intelligence is how I make a living, so this research develops a commercial
+          practice as well as a body of knowledge. Responses are read with an eye to where the
+          method might be useful to an organisation. No approach about working together follows from
+          that unless you raise it first.
+        </p>
+      </section>
+
+      <section class="p-section p-section--emphasis">
+        <h2>Research consent and email consent are separate</h2>
+        <p>
+          These are two different decisions and I keep them that way.
+        </p>
+        <p>
+          Taking part in research does not subscribe you to email updates. Completing the
+          questionnaire, asking to hear when findings are published, or having a Compare Notes
+          conversation will never add you to the mailing list. Research contact details are held
+          separately from the subscriber list and the two are not combined.
+        </p>
+        <p>
+          The reverse holds too. Subscribing to updates does not enrol you in the research or give
+          me permission to use anything you have said as research data.
+        </p>
+        <p>
+          If you want both, you have to choose both — deliberately, in two places.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Why I process this information</h2>
+        <ul class="p-list">
+          <li><strong>To send email updates</strong> you have asked for.</li>
+          <li><strong>To carry out and publish the research</strong>, on the terms you chose when you took part.</li>
+          <li><strong>To reply to you</strong> when you get in touch, and to arrange conversations you have agreed to.</li>
+          <li><strong>To understand how the site is used</strong> in aggregate, so I can tell which work is worth continuing.</li>
+        </ul>
+        <p>
+          I do not build profiles of individuals, make automated decisions about anyone, or use
+          personal information for advertising or targeting.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Cookies and analytics</h2>
+        <p>
+          <strong>This site does not set any cookies.</strong> There is no cookie banner because
+          there is nothing to consent to.
+        </p>
+        <p>
+          The site uses Vercel Web Analytics, which counts page views and referrers without cookies
+          and without collecting information that identifies you personally. It gives me visit
+          counts, not visitors.
+        </p>
+        <p>
+          Two small pieces of information are stored in your browser's local storage, on your own
+          device. Neither is sent anywhere, and neither is a cookie:
+        </p>
+        <ul class="p-list">
+          <li>
+            <strong>Your assessment answers.</strong> The capability assessment runs entirely in
+            your browser. Your answers are saved locally so you can leave and come back, and are
+            never transmitted to me or anyone else. Clearing your browser data deletes them. I
+            never see your result unless you choose to tell me.
+          </li>
+          <li>
+            <strong>An analytics opt-out flag</strong> that I use to keep my own visits out of the
+            statistics.
+          </li>
+        </ul>
+      </section>
+
+      <section class="p-section">
+        <h2>Third-party services</h2>
+        <p>
+          Running a website means relying on other companies. These are the ones that can encounter
+          your information, and what each one does:
+        </p>
+
+        <div class="p-processors">
+          <div class="p-processor">
+            <p class="p-processor-name">Vercel</p>
+            <p>
+              Hosts the website and provides the analytics described above. Because Vercel serves
+              every page, its servers process your IP address as part of delivering the site to you,
+              as any web host must.
+            </p>
+          </div>
+
+          <div class="p-processor">
+            <p class="p-processor-name">MailerLite</p>
+            <p>
+              Stores the email subscriber list, sends the updates, records consent and handles
+              unsubscribes. If you subscribe, your email address is held there.
+            </p>
+          </div>
+
+          <div class="p-processor">
+            <p class="p-processor-name">Formspree</p>
+            <p>
+              Receives research questionnaire submissions and passes them to me. The website is
+              static and stores nothing itself, so a form service is what makes the questionnaire
+              possible.
+            </p>
+          </div>
+
+          <div class="p-processor">
+            <p class="p-processor-name">Google Fonts</p>
+            <p>
+              Serves the typefaces the site uses. Fonts are requested from Google's servers when a
+              page loads, which means Google receives your IP address at that moment. This happens
+              on every page, whether or not you interact with anything.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          Some of these providers operate outside the UK, including in the United States. Where
+          information is transferred internationally, it is done under the safeguards those
+          providers put in place for UK and European data protection law.
+        </p>
+        <p>
+          Each of these companies has its own privacy policy governing what it does with the
+          information it handles.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>How long information is kept</h2>
+        <ul class="p-list">
+          <li>
+            <strong>Email subscriptions</strong> are kept until you unsubscribe or ask me to delete
+            your address. There is no reason for me to hold an address once you no longer want the
+            updates.
+          </li>
+          <li>
+            <strong>Research responses</strong> are kept for the duration of the research programme
+            and deleted when they are no longer needed for it.
+          </li>
+          <li>
+            <strong>Emails you send me</strong> are kept as long as the conversation is useful, and
+            deleted when it is not.
+          </li>
+        </ul>
+        <p>
+          One limitation is worth being honest about. Once research responses have been aggregated
+          or anonymised into published findings, your individual response can still be deleted, but
+          it may no longer be possible to remove its influence from findings already published.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Unsubscribing</h2>
+        <p>
+          Every email includes an unsubscribe link in its footer. One click, no reason needed, no
+          reply from me required. It takes effect immediately.
+        </p>
+        <p>
+          If a link ever fails, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and I will
+          remove you by hand.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Your data protection rights</h2>
+        <p>
+          Under UK data protection law you have the right to:
+        </p>
+        <ul class="p-list">
+          <li><strong>Access</strong> the personal information I hold about you, and get a copy.</li>
+          <li><strong>Correct</strong> anything inaccurate or incomplete.</li>
+          <li><strong>Delete</strong> it — sometimes called the right to be forgotten.</li>
+          <li><strong>Restrict</strong> or <strong>object to</strong> how I use it.</li>
+          <li><strong>Withdraw consent</strong> at any time, without affecting anything done before you withdrew it.</li>
+          <li><strong>Portability</strong> — receive your information in a transferable format.</li>
+        </ul>
+        <p>
+          To exercise any of these, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Say what
+          you want and I will do it. I will respond within one month, and there is no charge.
+        </p>
+        <p>
+          Given the scale of this operation, most requests are quick. If you ask me to delete your
+          information, I will delete it rather than look for reasons to keep it.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Complaints</h2>
+        <p>
+          If you think I have handled your information badly, please tell me first — most problems
+          are faster to fix directly.
+        </p>
+        <p>
+          You also have the right to complain to the Information Commissioner's Office, the UK's
+          data protection regulator, at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a>.
+          You do not have to raise it with me before going to them.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Changes to this policy</h2>
+        <p>
+          If what the site does changes, this page changes with it, and the date at the top updates.
+          The website's source code is public, so what this page claims can be checked against what
+          the site actually does.
+        </p>
+      </section>
+
+      <section class="p-section">
+        <h2>Contact</h2>
+        <p>
+          For anything about privacy, your information or this policy, email
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. It reaches me directly.
+        </p>
+      </section>
+
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .p-hero {
+    padding-block: clamp(4rem, 9vw, 7rem) clamp(2.5rem, 5vw, 4rem);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .p-hero h1 {
+    max-width: 18ch;
+  }
+
+  .p-lede {
+    max-width: 58ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-ink-secondary);
+  }
+
+  .p-updated {
+    margin-top: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .p-body {
+    max-width: 42rem;
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 8vw, 6rem);
+  }
+
+  .p-section + .p-section {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .p-section h2 {
+    margin-bottom: 1.1rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .p-section p {
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    color: var(--color-ink-secondary);
+  }
+
+  .p-section p + p {
+    margin-top: 1rem;
+  }
+
+  .p-section strong {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .p-section a {
+    color: var(--color-accent);
+  }
+
+  .p-list {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .p-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--color-ink-secondary);
+  }
+
+  .p-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .p-list + p {
+    margin-top: 1.25rem;
+  }
+
+  .p-section--emphasis {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .p-section--emphasis + .p-section {
+    border-top: none;
+  }
+
+  .p-processors {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .p-processor {
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    background: var(--color-surface-secondary);
+  }
+
+  .p-processor-name {
+    margin-bottom: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .p-processor p:not(.p-processor-name) {
+    font-size: 0.875rem;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 640px) {
+    .p-section--emphasis {
+      padding: 1.25rem;
+    }
+
+    .p-processor {
+      padding: 1rem;
+    }
+  }
+</style>
