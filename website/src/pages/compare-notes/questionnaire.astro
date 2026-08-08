@@ -1,9 +1,32 @@
 ---
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 
-// Formspree submission endpoint. Replace REPLACE_WITH_FORM_ID with the real
-// form ID from https://formspree.io before promoting the questionnaire.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORM_ID';
+/**
+ * Formspree submission endpoint for the practitioner questionnaire.
+ *
+ * Formspree receives the response, stores it in its dashboard, emails it on
+ * receipt and exports it as CSV. The website itself stores nothing and holds no
+ * access keys — the form ID is a public write-only identifier, which is why it
+ * sits in the source rather than in an environment variable.
+ *
+ * Formspree's own tracking/embed script is deliberately not loaded. The page
+ * posts to the endpoint directly, so the site continues to set no cookies and
+ * `/privacy` can go on saying so. Adding that script means changing `/privacy`
+ * in the same commit.
+ *
+ * The submission is assembled by hand in the script below rather than posted as
+ * a raw `FormData`, so that what lands in the Formspree dashboard is a readable
+ * research response rather than several dozen mostly-empty fields.
+ */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdenaeqy';
+
+/** Identifies the instrument and version a response was answered under. */
+const RESEARCH_CONTEXT = {
+  programme: 'Editorial Intelligence Research Project',
+  instrument: 'Practitioner questionnaire: evidence to influence',
+  version: 'Pilot version 1',
+  method: 'Web questionnaire',
+} as const;
 
 const roleOptions = [
   'Content or editorial',
@@ -201,17 +224,22 @@ const aiEffectOptions = [
   'More work for one person',
 ];
 
+/**
+ * The submitted `value` is the permission in plain words rather than a slug, so
+ * a response read in the Formspree dashboard states what was consented to
+ * without needing this file open beside it.
+ */
 const responseUseOptions = [
   {
-    value: 'analysis-only',
+    value: 'Analyse only — do not quote or describe in published outputs',
     label: 'My response may be analysed as part of the research, but not quoted or described in published outputs.',
   },
   {
-    value: 'anonymous-use',
+    value: 'May be used anonymously in findings and publications',
     label: 'My response may be used anonymously in research findings and publications.',
   },
   {
-    value: 'approach-for-attribution',
+    value: 'May be approached separately for approval to attribute',
     label: 'You may approach me separately for approval to use an attributed quotation or example.',
   },
 ];
@@ -251,7 +279,22 @@ const responseUseOptions = [
   </header>
 
   <div class="container-site">
-    <form id="research-form" class="q-form" data-endpoint={FORMSPREE_ENDPOINT} novalidate>
+    <noscript>
+      <p class="q-note q-note-error">
+        This questionnaire needs JavaScript to send your response, because the page assembles and checks your permissions before anything is submitted. If you would rather not enable it, email <a href="mailto:asavin@editorialintelligence.co">asavin@editorialintelligence.co</a> and I will send you the questions directly.
+      </p>
+    </noscript>
+
+    <form
+      id="research-form"
+      class="q-form"
+      data-endpoint={FORMSPREE_ENDPOINT}
+      data-programme={RESEARCH_CONTEXT.programme}
+      data-instrument={RESEARCH_CONTEXT.instrument}
+      data-version={RESEARCH_CONTEXT.version}
+      data-method={RESEARCH_CONTEXT.method}
+      novalidate
+    >
       <!-- Section: About your work -->
       <section class="q-section">
         <p class="t-label q-section-label">About your work</p>
@@ -339,8 +382,15 @@ const responseUseOptions = [
           <legend><span class="q-num">04</span> Think of a recent occasion when evidence helped shape an idea, recommendation or piece of work that influenced a decision. What happened?</legend>
           <p class="q-hint">Describe the situation, the evidence and what changed. Please avoid confidential details.</p>
           <textarea name="q04_anchor_example" class="q-textarea" rows="6"></textarea>
+          {/*
+            Paired hidden default: the submission records "No" when the box is
+            ticked and "Yes" when it is not, so a response says outright whether
+            it rests on a real example instead of leaving it to be inferred from
+            a missing field. The script keeps the last value for these names.
+          */}
+          <input type="hidden" name="q04_example_provided" value="Yes" />
           <label class="q-option q-no-example">
-            <input type="checkbox" name="q04_no_example" value="I cannot think of a suitable example" id="no-example-toggle" />
+            <input type="checkbox" name="q04_example_provided" value="No" id="no-example-toggle" />
             <span>I cannot think of a suitable example</span>
           </label>
           <p class="q-conditional-note" id="no-example-note" hidden>
@@ -378,19 +428,19 @@ const responseUseOptions = [
           <input type="text" name="q05_evidence_source_other" class="q-text q-other-detail" placeholder="If other, describe the source" aria-label="Other evidence source" />
           <label class="q-field">
             <span class="q-sub-label">What made this evidence useful or credible? <em>(optional)</em></span>
-            <input type="text" name="q05_credibility" class="q-text" />
+            <input type="text" name="q05_evidence_credibility" class="q-text" />
           </label>
         </fieldset>
 
         <fieldset class="q-question">
           <legend><span class="q-num">06</span> What decision, action or change did the resulting idea influence?</legend>
           <p class="q-hint">This might include a strategic decision, product change, campaign direction, investment, operational action, change in understanding or decision not to act.</p>
-          <textarea name="q06_influence" class="q-textarea" rows="4"></textarea>
+          <textarea name="q06_decision_influenced" class="q-textarea" rows="4"></textarea>
           <p class="q-sub-label">How clear was that influence?</p>
           <div class="q-options">
             {influenceClarityOptions.map((option) => (
               <label class="q-option">
-                <input type="radio" name="q06_influence_clarity" value={option} />
+                <input type="radio" name="q06_influence_strength" value={option} />
                 <span>{option}</span>
               </label>
             ))}
@@ -419,7 +469,7 @@ const responseUseOptions = [
           <input type="text" name="q07_involved_other" class="q-text q-other-detail" placeholder="If other, who was involved?" aria-label="Other people involved" />
           <label class="q-field">
             <span class="q-sub-label">Who, if anyone, connected the different stages or teams? <em>(optional)</em></span>
-            <input type="text" name="q07_connector" class="q-text" />
+            <input type="text" name="q07_stage_connector" class="q-text" />
           </label>
         </fieldset>
 
@@ -486,7 +536,7 @@ const responseUseOptions = [
           <input type="text" name="q10_knowledge_lost_other" class="q-text q-other-detail" placeholder="If other, where is it lost?" aria-label="Other knowledge loss" />
           <label class="q-field">
             <span class="q-sub-label">If useful, explain where this tends to happen. <em>(optional)</em></span>
-            <textarea name="q10_detail" class="q-textarea" rows="3"></textarea>
+            <textarea name="q10_knowledge_lost_detail" class="q-textarea" rows="3"></textarea>
           </label>
         </fieldset>
 
@@ -531,7 +581,7 @@ const responseUseOptions = [
           <input type="text" name="q13_after_project_other" class="q-text q-other-detail" placeholder="If other, what happens?" aria-label="Other outcome" />
           <label class="q-field">
             <span class="q-sub-label">What, if anything, helps your organisation reuse knowledge? <em>(optional)</em></span>
-            <input type="text" name="q13_reuse_helpers" class="q-text" />
+            <input type="text" name="q13_knowledge_reuse_helpers" class="q-text" />
           </label>
         </fieldset>
       </section>
@@ -558,7 +608,7 @@ const responseUseOptions = [
           <input type="text" name="q14_ai_change_other" class="q-text q-other-detail" placeholder="If other, how is AI changing it?" aria-label="Other AI change" />
           <label class="q-field">
             <span class="q-sub-label">What has improved, and what has become weaker or riskier? <em>(optional)</em></span>
-            <textarea name="q14_detail" class="q-textarea" rows="3"></textarea>
+            <textarea name="q14_ai_improved_or_riskier" class="q-textarea" rows="3"></textarea>
           </label>
         </fieldset>
 
@@ -598,14 +648,14 @@ const responseUseOptions = [
             <input type="text" name="q15_ai_effect_other" class="q-text q-other-detail" placeholder="If other, what has been the effect?" aria-label="Other AI effect" />
             <label class="q-field">
               <span class="q-sub-label">Where is specialist input or human judgement still necessary?</span>
-              <textarea name="q15_judgement" class="q-textarea" rows="3"></textarea>
+              <textarea name="q15_human_judgement_still_needed" class="q-textarea" rows="3"></textarea>
             </label>
           </div>
         </fieldset>
 
         <fieldset class="q-question">
           <legend><span class="q-num">16</span> If you could change one thing about how your organisation turns evidence into influential ideas, what would it be?</legend>
-          <textarea name="q16_one_change" class="q-textarea" rows="4"></textarea>
+          <textarea name="q16_one_thing_to_change" class="q-textarea" rows="4"></textarea>
         </fieldset>
       </section>
 
@@ -645,17 +695,26 @@ const responseUseOptions = [
         <fieldset class="q-question">
           <legend>Contact permissions</legend>
           <p class="q-hint">Each choice is independent and entirely optional.</p>
+          {/*
+            Each permission carries a hidden "No" ahead of its box, so a
+            withheld permission arrives as an explicit "No" rather than as a
+            field that simply is not there. Consent that was declined and
+            consent that was never recorded should not look identical.
+          */}
           <div class="q-options q-options-stack">
             <label class="q-option">
-              <input type="checkbox" name="permission_contact" value="yes" class="needs-email" />
+              <input type="hidden" name="permission_contact_about_response" value="No" />
+              <input type="checkbox" name="permission_contact_about_response" value="Yes" class="needs-email" />
               <span>You may contact me to clarify or discuss this response.</span>
             </label>
             <label class="q-option">
-              <input type="checkbox" name="permission_conversation" value="yes" class="needs-email" />
+              <input type="hidden" name="permission_compare_notes_conversation" value="No" />
+              <input type="checkbox" name="permission_compare_notes_conversation" value="Yes" class="needs-email" />
               <span>I am open to a 30-minute Compare Notes conversation.</span>
             </label>
             <label class="q-option">
-              <input type="checkbox" name="permission_publication_updates" value="yes" class="needs-email" />
+              <input type="hidden" name="permission_research_findings_updates" value="No" />
+              <input type="checkbox" name="permission_research_findings_updates" value="Yes" class="needs-email" />
               <span>I would like to hear when findings from this research are published.</span>
             </label>
           </div>
@@ -699,16 +758,23 @@ const responseUseOptions = [
         </fieldset>
       </section>
 
+      {/*
+        Formspree's own honeypot field. Real participants never see it; bots
+        that fill it have their submission discarded server-side. It is a plain
+        input, not the Formspree tracking script.
+      */}
+      <input type="text" name="_gotcha" class="q-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
       <div class="q-submit-row">
         <button type="submit" class="q-submit" id="submit-btn">
           Submit your response
           <span aria-hidden="true">→</span>
         </button>
-        <p class="q-conditional-note" id="submit-error" hidden></p>
+        <p class="q-note q-note-error" id="submit-error" role="alert" hidden></p>
       </div>
     </form>
 
-    <div class="q-confirmation" id="confirmation" hidden>
+    <div class="q-confirmation" id="confirmation" tabindex="-1" hidden>
       <p class="t-label mb-5">Response received</p>
       <h2>Thank you for contributing to the Editorial Intelligence Research Project.</h2>
       <p>
@@ -716,6 +782,9 @@ const responseUseOptions = [
       </p>
       <p>
         If you asked to be contacted or indicated that you are open to a Compare Notes conversation, I may follow up using the email address you provided.
+      </p>
+      <p class="q-confirmation-note">
+        Nothing else happens automatically. You have not been added to any email list, and you will not receive anything you did not ask for above.
       </p>
       <a href="/compare-notes" class="q-back-link">← Back to Compare Notes</a>
     </div>
@@ -767,9 +836,141 @@ const responseUseOptions = [
   needsEmailBoxes.forEach((box) => box.addEventListener('change', refreshEmailNote));
   emailInput.addEventListener('input', refreshEmailNote);
 
+  /* ── Assembling the submission ───────────────────────────────────────────
+     Posting the raw form would send Formspree several dozen fields, most of
+     them empty, with every multi-select split across repeated keys and every
+     "Other" detail sitting apart from the answer it belongs to. The response
+     is meant to be read and coded by hand, so it is assembled deliberately
+     instead: one field per question, named for what it asks, empty answers
+     dropped and research context first. */
+
+  const OTHER_SUFFIX = '_other';
+
+  /**
+   * Names carrying a hidden default ahead of their checkbox, where the later
+   * value supersedes the earlier one rather than joining it.
+   */
+  const LAST_VALUE_WINS = new Set([
+    'q04_example_provided',
+    'permission_contact_about_response',
+    'permission_compare_notes_conversation',
+    'permission_research_findings_updates',
+  ]);
+
+  /**
+   * Fields inside a hidden container — the Q15 follow-up after the participant
+   * changes their answer, for instance. They belong to a question that is no
+   * longer being asked, so submitting them would record an answer the
+   * participant has withdrawn.
+   */
+  const withdrawnFieldNames = (): Set<string> => {
+    const names = new Set<string>();
+    form.querySelectorAll<HTMLElement>('[hidden]').forEach((container) => {
+      container.querySelectorAll<HTMLInputElement>('input, textarea, select').forEach((field) => {
+        if (field.name) names.add(field.name);
+      });
+    });
+    return names;
+  };
+
+  const collectAnswers = (): Map<string, string> => {
+    const withdrawn = withdrawnFieldNames();
+    const grouped = new Map<string, string[]>();
+
+    for (const [name, value] of new FormData(form).entries()) {
+      if (typeof value !== 'string' || withdrawn.has(name)) continue;
+      const answer = value.trim();
+      if (!answer) continue;
+
+      if (LAST_VALUE_WINS.has(name)) {
+        grouped.set(name, [answer]);
+        continue;
+      }
+      const answers = grouped.get(name);
+      if (answers) answers.push(answer);
+      else grouped.set(name, [answer]);
+    }
+
+    // Fold each "Other" box into the answer it qualifies, so the detail arrives
+    // beside its selection instead of in a field of its own.
+    for (const name of Array.from(grouped.keys())) {
+      if (!name.endsWith(OTHER_SUFFIX)) continue;
+      const detail = `Other: ${grouped.get(name)!.join('; ')}`;
+      const question = name.slice(0, -OTHER_SUFFIX.length);
+      grouped.delete(name);
+
+      const answers = grouped.get(question);
+      if (!answers) {
+        grouped.set(question, [detail]);
+        continue;
+      }
+      const placeholder = answers.indexOf('Other');
+      if (placeholder === -1) answers.push(detail);
+      else answers[placeholder] = detail;
+    }
+
+    return new Map(Array.from(grouped, ([name, answers]) => [name, answers.join('; ')]));
+  };
+
+  const openedAt = Date.now();
+
+  const buildSubmission = (): FormData => {
+    const submission = new FormData();
+    const instrument = form.dataset.instrument ?? 'Practitioner questionnaire';
+    const version = form.dataset.version ?? '';
+
+    // Context first: a response should say what it is before it says anything
+    // else, in the notification email as well as in the dashboard.
+    submission.append('_subject', `${instrument} — ${version} response`);
+    submission.append('research_programme', form.dataset.programme ?? '');
+    submission.append('research_instrument', instrument);
+    submission.append('questionnaire_version', version);
+    submission.append('contribution_method', form.dataset.method ?? '');
+    submission.append('questionnaire_url', window.location.href);
+    submission.append('submitted_at', new Date().toISOString());
+    // Time with the page open, not time spent answering — a tab left sitting
+    // will overstate it. Recorded because the pilot has to reassess the stated
+    // 10–15 minutes, and it is the only signal available without tracking.
+    submission.append('time_on_page_minutes', String(Math.max(1, Math.round((Date.now() - openedAt) / 60000))));
+
+    for (const [name, answer] of collectAnswers()) submission.append(name, answer);
+    return submission;
+  };
+
+  /* ── Submitting ──────────────────────────────────────────────────────── */
+
   const showError = (message: string) => {
     submitError.textContent = message;
     submitError.hidden = false;
+  };
+
+  const EMAIL_FALLBACK = 'email asavin@editorialintelligence.co and I will take it from there';
+
+  /** Turns a Formspree rejection into something a participant can act on. */
+  const failureMessage = async (response: Response): Promise<string> => {
+    if (response.status === 429) {
+      return `Too many responses have been sent from this connection in a short time. Please wait a few minutes and try again, or ${EMAIL_FALLBACK}.`;
+    }
+
+    let detail = '';
+    try {
+      const body = await response.json();
+      if (Array.isArray(body?.errors)) {
+        detail = body.errors
+          .map((error: { field?: string; message?: string }) => [error.field, error.message].filter(Boolean).join(' '))
+          .filter(Boolean)
+          .join('; ');
+      } else if (typeof body?.error === 'string') {
+        detail = body.error;
+      }
+    } catch {
+      // Not JSON — the general message below covers it.
+    }
+
+    if (detail) {
+      return `Your response was not accepted: ${detail}. Please correct that and try again, or ${EMAIL_FALLBACK}.`;
+    }
+    return `Something went wrong sending your response (error ${response.status}). Please try again, or ${EMAIL_FALLBACK}.`;
   };
 
   form.addEventListener('submit', async (event) => {
@@ -791,31 +992,30 @@ const responseUseOptions = [
       return;
     }
 
-    if (endpoint.includes('REPLACE_WITH_FORM_ID')) {
-      showError('The pilot form is not accepting submissions yet. Please email asavin@editorialintelligence.co and I will send you the questions directly.');
-      return;
-    }
-
-    const formData = new FormData(form);
-    formData.append('_subject', 'Editorial Intelligence research questionnaire response');
-    formData.append('questionnaire_version', 'pilot-v1');
-    formData.append('contribution_method', 'web-questionnaire');
-
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        body: formData,
+        body: buildSubmission(),
         headers: { Accept: 'application/json' },
       });
-      if (!response.ok) throw new Error(`Submission failed (${response.status})`);
+
+      if (!response.ok) {
+        showError(await failureMessage(response));
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit your response <span aria-hidden="true">→</span>';
+        return;
+      }
+
       form.hidden = true;
       confirmation.hidden = false;
       confirmation.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      confirmation.focus({ preventScroll: true });
     } catch {
-      showError('Something went wrong sending your response. Please try again, or email asavin@editorialintelligence.co.');
+      // Network failure, or the request never reached Formspree at all.
+      showError(`Your response could not be sent — the connection to the form service failed. Please check your connection and try again, or ${EMAIL_FALLBACK}.`);
       submitBtn.disabled = false;
       submitBtn.innerHTML = 'Submit your response <span aria-hidden="true">→</span>';
     }
@@ -1013,7 +1213,8 @@ const responseUseOptions = [
     margin-top: 0.75rem;
   }
 
-  .q-conditional-note {
+  .q-conditional-note,
+  .q-note {
     margin-top: 0.75rem;
     padding: 0.75rem 0.9rem;
     border-left: 2px solid var(--color-signal);
@@ -1021,6 +1222,35 @@ const responseUseOptions = [
     font-size: 0.8125rem;
     line-height: 1.6;
     color: var(--color-ink-secondary);
+  }
+
+  /* Failure states carry the full signal border rather than the left rule the
+     in-form prompts use, so a submission that did not go through cannot be
+     mistaken for one of the page's ordinary nudges. */
+  .q-note-error {
+    border: 1px solid var(--color-signal);
+    border-left-width: 2px;
+    color: var(--color-ink);
+  }
+
+  .q-note-error a {
+    color: var(--color-accent);
+  }
+
+  noscript .q-note {
+    display: block;
+    max-width: 46rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* Honeypot. Kept out of sight and out of the tab order without `display:
+     none`, which the simpler bots know to skip. */
+  .q-gotcha {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
   }
 
   .q-followup {
@@ -1109,12 +1339,26 @@ const responseUseOptions = [
     color: var(--color-ink);
   }
 
+  .q-confirmation:focus {
+    outline: none;
+  }
+
   .q-confirmation p {
     max-width: 58ch;
     margin-bottom: 1rem;
     font-size: 1rem;
     line-height: 1.8;
     color: var(--color-ink-secondary);
+  }
+
+  .q-confirmation-note {
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface-secondary);
+    font-size: 0.875rem !important;
+    line-height: 1.7 !important;
+    color: var(--color-ink-tertiary) !important;
   }
 
   .q-back-link {

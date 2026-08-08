@@ -7,10 +7,11 @@ import { SITE } from '../config/site';
  * codebase rather than by adapting a template. If the implementation changes,
  * change this page in the same commit.
  *
- * Two things described here are prepared but not yet connected, and are
- * described as such rather than as live: the research questionnaire's Formspree
- * endpoint (`src/pages/compare-notes/questionnaire.astro`) and the MailerLite
- * form (`src/config/mailerlite.ts`).
+ * Both processors described here are now connected: the research
+ * questionnaire's Formspree endpoint
+ * (`src/pages/compare-notes/questionnaire.astro`) and the MailerLite form
+ * (`src/config/mailerlite.ts`). Neither loads a third-party script, so the
+ * no-cookie position stated below still holds for both.
  */
 const lastUpdated = '8 August 2026';
 ---
@@ -236,6 +237,13 @@ const lastUpdated = '8 August 2026';
               Receives research questionnaire submissions and passes them to me. The website is
               static and stores nothing itself, so a form service is what makes the questionnaire
               possible.
+            </p>
+            <p>
+              Formspree offers a tracking script in the same way MailerLite does, and it is
+              likewise <strong>not installed here</strong>. The questionnaire posts your answers
+              to Formspree only at the moment you press submit. Responses reach Formspree and no
+              further: they are never passed to MailerLite, and completing the questionnaire does
+              not add you to the email list.
             </p>
           </div>
 
