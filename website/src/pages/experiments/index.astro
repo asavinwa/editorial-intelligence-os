@@ -18,11 +18,21 @@ const statusColors: Record<string, string> = {
   archived: 'var(--color-ink-tertiary)',
   draft: 'var(--color-ink-secondary)',
 };
+
+const typeLabels: Record<string, string> = {
+  diagnostic: 'Diagnostic',
+  workbook: 'Workbook',
+  tool: 'Tool',
+  agent: 'Agent',
+  workflow: 'Workflow',
+  os: 'Operating system',
+  'prompt-library': 'Prompt library',
+};
 ---
 
 <BaseLayout
   title="Experiments"
-  description="Interactive prototypes, AI workflows and practical applications that explore how Editorial Intelligence can be applied in real organisations."
+  description="Diagnostics, tools, workflows and guided experiences built from research and organisational knowledge — Editorial Intelligence applied rather than described."
   pageType="collection"
 >
   <div class="container-site py-16">
@@ -30,10 +40,10 @@ const statusColors: Record<string, string> = {
       <p class="t-label mb-4">Experiments</p>
       <h1 class="t-heading mb-4">Editorial Intelligence in practice</h1>
       <p class="t-body mb-6">
-        Experiments are where Editorial Intelligence becomes practical. This section tracks prototypes, tools, workflows and editorial systems that test how customer insight, research, market signals and AI-supported methods can become useful public assets.
+        Everything here began as knowledge — research, customer interviews, organisational expertise, market signals. None of it ended as an article. These are the things that got built instead: diagnostics, tools, workflows and guided experiences that people use rather than read.
       </p>
       <p class="t-body">
-        Some experiments are interactive tools. Some are workflows. Some are guided editorial experiences. The point is not to present each one as a finished product, but to show how ideas develop through use.
+        They were not planned as a product line. Each came out of editorial work that could have stopped at content and didn't. The point is not to present any of them as finished, but to show what the same evidence produces when the output is something to use.
       </p>
     </header>
 
@@ -59,7 +69,7 @@ const statusColors: Record<string, string> = {
         return (
           <a href={`/experiments/${exp.slug}`} class="exp-card group no-underline">
             <div class="exp-card-meta">
-              <span class="type-badge-exp">Experiment</span>
+              <span class="type-badge-exp">{typeLabels[exp.data.type] ?? 'Experiment'}</span>
               <span class="status-indicator" style={`--dot: ${statusColor}`}>
                 <span class="status-dot"></span>
                 <span class="status-text" style={`color: ${statusColor}`}>{statusLabel}</span>
@@ -88,8 +98,11 @@ const statusColors: Record<string, string> = {
 
     <div class="lab-note">
       <p class="t-label mb-3">About this section</p>
+      <p class="t-body mb-4">
+        Each entry documents a prototype built and refined in real conditions, or a published asset examined as a demonstration of Editorial Intelligence method. Some are active and evolving. Some are complete. All of them show the approach applied, not just described.
+      </p>
       <p class="t-body">
-        Each experiment documents a prototype built and refined in real conditions — or a published asset examined as a demonstration of Editorial Intelligence method. Some are active and evolving. Some are complete. All of them show the approach applied, not just described.
+        What they share is a starting point: knowledge the organisation already held, and a decision to build something from it rather than write about it. <a href="/writing/some-knowledge-should-be-built">Some of what you know should be built, not published</a> sets out the argument behind that choice, and what still needs testing.
       </p>
     </div>
   </div>
