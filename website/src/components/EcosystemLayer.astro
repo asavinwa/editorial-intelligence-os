@@ -1,0 +1,138 @@
+---
+/**
+ * The connective layer: which business functions Editorial Intelligence exchanges
+ * knowledge with. Each entry states what Editorial Intelligence contributes and what
+ * it receives in return, so the list reads as an exchange rather than a service menu.
+ * Entries are only linked where a page genuinely covers that connection.
+ */
+const connections: {
+  name: string;
+  gives: string;
+  returns: string;
+  href?: string;
+}[] = [
+  {
+    name: 'Research',
+    gives: 'The questions worth investigating and the argument the findings can support',
+    returns: 'Original evidence that changes what the organisation believes',
+  },
+  {
+    name: 'Content strategy',
+    gives: 'The evidence and position that decide what is worth producing',
+    returns: 'Patterns in what audiences read, return to and ignore',
+  },
+  {
+    name: 'Growth marketing',
+    gives: 'Propositions, narratives and evidence worth testing',
+    returns: 'Response data showing which arguments travel, resonate and convert',
+    href: '/applications/performance-marketing',
+  },
+  {
+    name: 'Sales',
+    gives: 'A coherent account of the problem the customer recognises',
+    returns: 'Objections, questions and the language buyers actually use',
+    href: '/activation',
+  },
+  {
+    name: 'PR',
+    gives: 'A connected evidence base rather than an isolated statistic',
+    returns: 'Journalist questions and the angles a market finds newsworthy',
+    href: '/activation',
+  },
+  {
+    name: 'Product',
+    gives: 'Customer and market evidence connected across sources',
+    returns: 'Capability signals and what adoption reveals about the problem',
+    href: '/frameworks/editorial-intelligence-product-management',
+  },
+  {
+    name: 'AI and search',
+    gives: 'Expertise made explicit, coherent and consistently reinforced',
+    returns: 'Evidence of how the organisation is understood and retrieved',
+    href: '/work/ai-visibility-audit',
+  },
+];
+---
+
+<section class="ecosystem" aria-labelledby="ecosystem-title">
+  <p class="t-label mb-3" id="ecosystem-title">Works with</p>
+  <p class="ecosystem-intro mb-8">
+    Editorial Intelligence connects organisational knowledge and editorial judgement to several
+    business functions. It does not replace any of them. Each connection runs in both directions:
+    the function receives stronger material, and its response becomes evidence for what the
+    organisation should say, investigate or develop next.
+  </p>
+
+  <ul class="ecosystem-grid">
+    {connections.map((item) => (
+      <li class="ecosystem-item">
+        {item.href ? (
+          <a href={item.href} class="ecosystem-name ecosystem-name--link">{item.name} →</a>
+        ) : (
+          <span class="ecosystem-name">{item.name}</span>
+        )}
+        <p class="ecosystem-exchange"><span>Receives</span>{item.gives}</p>
+        <p class="ecosystem-exchange"><span>Returns</span>{item.returns}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .ecosystem-intro {
+    max-width: 46rem;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--color-ink-secondary);
+  }
+
+  .ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background: var(--color-rule);
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .ecosystem-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.25rem;
+    background: var(--color-surface-secondary);
+  }
+
+  .ecosystem-name {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .ecosystem-name--link {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .ecosystem-name--link:hover { text-decoration: underline; }
+
+  .ecosystem-exchange {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+  }
+
+  .ecosystem-exchange span {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+</style>

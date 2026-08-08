@@ -4,7 +4,7 @@ import BaseLayout from '../../components/layout/BaseLayout.astro';
 
 <BaseLayout
   title="Editorial Intelligence for performance marketing"
-  description="Connect campaign response with customer, research and editorial evidence so performance marketing improves organisational understanding as well as short-term results."
+  description="Connect campaign response with customer, research and editorial evidence so performance and growth marketing improve organisational understanding as well as short-term results."
 >
   <article class="container-site py-20">
     <div class="pm-inner">
@@ -33,6 +33,35 @@ import BaseLayout from '../../components/layout/BaseLayout.astro';
         <div class="pm-principle mt-8">
           <p class="t-label mb-3">The shift</p>
           <p>From optimising isolated assets to testing and strengthening the narrative behind them.</p>
+        </div>
+      </section>
+
+      <hr class="divider mb-16" />
+
+      <section class="mb-16">
+        <h2 class="pm-h2 mb-6">From editorial intelligence to growth</h2>
+        <div class="prose-section mb-8">
+          <p>Good growth marketing needs something worth testing.</p>
+          <p>Editorial Intelligence works upstream of growth: finding the evidence, customer insight and expertise that can become a differentiated proposition, narrative or campaign.</p>
+          <p>Growth marketing then returns evidence of its own. Which arguments attract attention? Which evidence builds confidence? Which messages lead people to act?</p>
+        </div>
+
+        <div class="pm-loop" aria-label="Evidence, narrative, activation, response, learning">
+          <span>Evidence</span>
+          <span aria-hidden="true">→</span>
+          <span>Narrative</span>
+          <span aria-hidden="true">→</span>
+          <span>Activation</span>
+          <span aria-hidden="true">→</span>
+          <span>Response</span>
+          <span aria-hidden="true">→</span>
+          <span>Learning</span>
+        </div>
+        <p class="pm-loop-note mb-8">This is the <a href="/intelligence#operating-model">Editorial Intelligence operating model</a> applied to growth activity rather than a separate method. Signals become narrative, narrative is activated, and response returns as evidence for the next cycle.</p>
+
+        <div class="prose-section">
+          <p>Instead of simply producing more content and optimising its distribution, organisations can improve both what they communicate and what they learn from the response.</p>
+          <p>Editorial Intelligence is not a replacement for growth marketing. It gives growth teams stronger material to work with and turns their results into evidence for what the organisation should say, investigate or develop next.</p>
         </div>
       </section>
 
@@ -191,13 +220,13 @@ import BaseLayout from '../../components/layout/BaseLayout.astro';
       <section class="mb-16">
         <h2 class="pm-h2 mb-6">What Editorial Intelligence does not replace</h2>
         <div class="prose-section mb-8">
-          <p>Editorial Intelligence is not a substitute for performance marketing expertise. It does not set bids, build attribution models, configure conversion tracking, plan media spend or manage channel operations.</p>
+          <p>Editorial Intelligence is not a substitute for performance or growth marketing expertise. It does not set bids, plan media spend, build attribution models, configure conversion tracking or manage channel operations. Nor does it run conversion-rate optimisation, lifecycle automation, marketing technology implementation or growth analytics.</p>
           <p>It works alongside those disciplines. Its job is to improve the evidence and narrative entering the campaign, interpret the signals coming out and prevent useful learning from disappearing when the campaign ends.</p>
         </div>
         <div class="pm-boundary">
           <div>
-            <p class="t-label mb-3">Performance marketing owns</p>
-            <p>Media strategy, targeting, delivery, measurement and optimisation.</p>
+            <p class="t-label mb-3">Performance and growth marketing own</p>
+            <p>Media strategy, targeting, experiment delivery, conversion optimisation, measurement and marketing technology.</p>
           </div>
           <div>
             <p class="t-label mb-3">Editorial Intelligence connects</p>
@@ -303,6 +332,41 @@ import BaseLayout from '../../components/layout/BaseLayout.astro';
     line-height: 1.5;
     color: var(--color-ink);
   }
+
+  .pm-loop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.65rem;
+    padding: 1.25rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    background: var(--color-surface-secondary);
+  }
+
+  .pm-loop span {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+  }
+
+  .pm-loop span:nth-child(even) { color: var(--color-accent); }
+
+  .pm-loop-note {
+    margin-top: 0.85rem;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink-tertiary);
+  }
+
+  .pm-loop-note a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  }
+
+  .pm-loop-note a:hover { border-color: var(--color-accent); }
 
   .pm-flow {
     display: flex;
