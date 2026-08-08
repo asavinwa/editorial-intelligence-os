@@ -1,0 +1,381 @@
+---
+/**
+ * Email capture for the Editorial Intelligence website list.
+ *
+ * This is the owned-audience list: occasional updates, research findings and
+ * invitations to take part. It is deliberately not a second newsletter — the
+ * LinkedIn newsletter is the recurring publication.
+ *
+ * ── How this submits ────────────────────────────────────────────────────────
+ * The form posts straight to MailerLite's subscribe endpoint. MailerLite's
+ * universal tracking script is deliberately not installed anywhere on the site,
+ * because it sets cookies and the site sets none. See `config/mailerlite.ts`.
+ *
+ * The script below is ours, sets nothing and stores nothing. It exists only so
+ * a submission does not navigate the reader away to a page of raw JSON.
+ *
+ * One consequence worth knowing: the endpoint does not return CORS headers, so
+ * the request goes out `no-cors` and the response is opaque. We can tell that
+ * the request left the browser; we cannot read what MailerLite made of it. The
+ * confirmation is therefore worded around the double opt-in email — which is
+ * the thing the reader should actually be waiting for — rather than claiming a
+ * subscription we cannot observe. Configure double opt-in ON in MailerLite so
+ * that wording stays true.
+ *
+ * Without JavaScript the plain form still posts, opening MailerLite's response
+ * in a new tab. Less pretty, still subscribes.
+ */
+import { MAILERLITE, isMailerLiteConfigured, mailerLiteAction } from '../config/mailerlite';
+
+export interface Props {
+  variant?: 'compact' | 'full';
+  eyebrow?: string;
+  headline?: string;
+  body?: string;
+}
+
+const {
+  variant = 'compact',
+  eyebrow,
+  headline = 'Keep in touch with Editorial Intelligence',
+  body = 'Occasional updates on new research, findings and ways to take part.',
+} = Astro.props;
+
+const connected = isMailerLiteConfigured();
+const action = mailerLiteAction();
+
+// Unique per instance — the component renders more than once on some pages.
+const uid = `kit-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class={`keep-in-touch keep-in-touch--${variant}`} data-connected={String(connected)}>
+  {eyebrow && <p class="kit-eyebrow">{eyebrow}</p>}
+  {headline && <p class="kit-headline">{headline}</p>}
+  {body && <p class="kit-body">{body}</p>}
+
+  <form
+    class="kit-form"
+    method="post"
+    action={action}
+    target="_blank"
+    rel="noopener"
+    data-connected={String(connected)}
+  >
+    <label class="kit-field">
+      <span class="kit-label">Email address</span>
+      <input
+        type="email"
+        name={MAILERLITE.emailField}
+        id={`${uid}-email`}
+        class="kit-input"
+        placeholder="you@organisation.com"
+        autocomplete="email"
+        required
+        disabled={!connected}
+      />
+    </label>
+
+    <label class="kit-consent" for={`${uid}-consent`}>
+      <input
+        type="checkbox"
+        id={`${uid}-consent`}
+        name={MAILERLITE.consentField}
+        value="1"
+        required
+        disabled={!connected}
+      />
+      <span>
+        I agree to receive occasional Editorial Intelligence updates by email. I can unsubscribe at
+        any time.
+      </span>
+    </label>
+
+    <div class="kit-action">
+      <button type="submit" class="kit-button" disabled={!connected}>
+        Keep me updated <span aria-hidden="true">→</span>
+      </button>
+      <span class="kit-note">
+        {connected
+          ? 'No spam. Unsubscribe in one click.'
+          : 'Signup opens shortly.'}
+      </span>
+    </div>
+
+    <p class="kit-error" role="alert" hidden></p>
+
+    <p class="kit-privacy">
+      Your address is used only to send these updates. Read the <a href="/privacy">privacy policy</a>.
+    </p>
+  </form>
+
+  <div class="kit-done" role="status" hidden>
+    <p class="kit-done-headline">Almost there — check your inbox.</p>
+    <p class="kit-done-body">
+      A confirmation email is on its way. Your address is only added to the list once you click the
+      link in it, so if it does not arrive, nothing has been signed up.
+    </p>
+  </div>
+</div>
+
+<!--
+  Top level on purpose. Astro only compiles and bundles `<script>` at the top
+  level of a template; inside a conditional expression it is emitted verbatim,
+  TypeScript and all, and the browser rejects it. The selector below is the
+  guard instead — it matches nothing until the form is connected.
+-->
+<script>
+  // Ours, not MailerLite's. Sets no cookies and stores nothing.
+  document.querySelectorAll<HTMLFormElement>('form.kit-form[data-connected="true"]').forEach((form) => {
+    const button = form.querySelector<HTMLButtonElement>('.kit-button');
+    const error = form.querySelector<HTMLElement>('.kit-error');
+    const done = form.parentElement?.querySelector<HTMLElement>('.kit-done');
+    if (!button || !error || !done) return;
+
+    const original = button.innerHTML;
+
+    form.addEventListener('submit', async (event) => {
+      // Let the browser's own validation handle the empty and malformed cases.
+      if (!form.reportValidity()) return;
+
+      event.preventDefault();
+      error.hidden = true;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+
+      try {
+        // The endpoint sends no CORS headers, so the response is opaque: this
+        // confirms the request left the browser and nothing more.
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form),
+        });
+        form.hidden = true;
+        done.hidden = false;
+      } catch {
+        error.textContent =
+          'Something went wrong sending that. Please try again, or email asavin@editorialintelligence.co and I will add you by hand.';
+        error.hidden = false;
+        button.disabled = false;
+        button.innerHTML = original;
+      }
+    });
+  });
+</script>
+
+<style>
+  .keep-in-touch {
+    margin: 2rem 0;
+  }
+
+  .keep-in-touch--compact {
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface-secondary);
+  }
+
+  .kit-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .kit-headline {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--color-ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .keep-in-touch--full .kit-headline {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .kit-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    max-width: 52ch;
+  }
+
+  .kit-form {
+    margin-top: 1.15rem;
+    max-width: 34rem;
+  }
+
+  .kit-field {
+    display: block;
+  }
+
+  .kit-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .kit-input {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    background: var(--color-surface);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .kit-input:focus {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  .kit-input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .kit-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    cursor: pointer;
+  }
+
+  .kit-consent input {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    accent-color: var(--color-accent);
+  }
+
+  .kit-consent:has(input:disabled) {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .kit-action {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    margin-top: 1.15rem;
+  }
+
+  .kit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .kit-button:hover:not(:disabled) {
+    opacity: 0.86;
+  }
+
+  .kit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .kit-note {
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .kit-privacy {
+    margin-top: 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+  }
+
+  .kit-privacy a {
+    color: var(--color-accent);
+  }
+
+  .kit-error {
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.85rem;
+    border-left: 2px solid var(--color-signal);
+    background: var(--color-surface);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+  }
+
+  .kit-done {
+    margin-top: 1.15rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    background: var(--color-surface);
+    max-width: 34rem;
+  }
+
+  .kit-done-headline {
+    margin-bottom: 0.45rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--color-ink);
+  }
+
+  .kit-done-body {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+  }
+
+  @media (max-width: 767px) {
+    .keep-in-touch {
+      margin: 1.5rem 0;
+    }
+
+    .keep-in-touch--compact {
+      padding: 1.25rem;
+    }
+
+    .kit-headline {
+      font-size: 1.125rem;
+    }
+
+    .keep-in-touch--full .kit-headline {
+      font-size: 1.5rem;
+    }
+
+    .kit-action {
+      align-items: flex-start;
+    }
+
+    .kit-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

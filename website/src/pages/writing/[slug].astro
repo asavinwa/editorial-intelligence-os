@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import ConnectedThinking from '../../components/content/ConnectedThinking.astro';
-import LabSignup from '../../components/LabSignup.astro';
+import KeepInTouch from '../../components/KeepInTouch.astro';
 import { getCollection, render } from 'astro:content';
 import { getRelatedContent } from '../../lib/related';
 
@@ -68,7 +68,7 @@ const formattedDate = new Intl.DateTimeFormat('en-GB', {
           <a href="/editorial-intelligence-os" class="text-[var(--color-accent)] no-underline font-mono text-xs">Explore the EI OS →</a>
         </div>
 
-        <LabSignup headline="Follow the discipline as it develops" />
+        <KeepInTouch />
 
       </article>
 
