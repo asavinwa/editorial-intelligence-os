@@ -6,6 +6,10 @@
   :root {
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-serif: 'DM Serif Display', Georgia, serif;
+    /* Referenced by 48 files and defined in none of them until August 2026, so
+       every mono label silently rendered in Inter. Kept in sync with the
+       standalone diagnostic page, which declares its own copy. */
+    --font-mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
     --color-ink: #1a1a18;
     --color-ink-secondary: #4a4a46;
     --color-ink-tertiary: #8a8a84;

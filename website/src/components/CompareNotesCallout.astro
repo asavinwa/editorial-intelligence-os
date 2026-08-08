@@ -96,5 +96,11 @@ const {
   @media (max-width: 640px) {
     .compare-callout { grid-template-columns: 1fr; gap: 1.25rem; }
     .compare-callout-link { justify-self: start; }
+
+    /* The longest label in use — "Spend 30 minutes comparing notes" — needs
+       286px on one line in mono, against 229px available at 320px. As a
+       nowrap grid item it sized the whole column and pushed the callout off
+       screen. Let it take two lines instead; shrinking it would clip it. */
+    .compare-callout-link { white-space: normal; }
   }
 </style>
