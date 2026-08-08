@@ -16,13 +16,6 @@ const journeys: Record<string, {
   secondaryLabel?: string;
   secondaryHref?: string;
 }> = {
-  '/applications': {
-    eyebrow: 'Flagship application',
-    title: 'Editorial Intelligence for marketing',
-    body: 'How Editorial Intelligence connects research, customer evidence, campaign learning and internal expertise across a modern marketing organisation.',
-    primaryLabel: 'Explore the marketing application',
-    primaryHref: '/applications/marketing',
-  },
   '/guide': {
     eyebrow: 'Application',
     title: 'See the discipline applied to marketing',
@@ -30,23 +23,24 @@ const journeys: Record<string, {
     primaryLabel: 'Explore the marketing application',
     primaryHref: '/applications/marketing',
   },
-
-
-
-
+  '/work/narrative-audit': {
+    eyebrow: 'The thinking behind the audit',
+    title: 'Editorial Intelligence for marketing',
+    body: 'The audit is the first paid application of a wider discipline. See how Editorial Intelligence connects research, customer evidence, campaign learning and internal expertise across a marketing organisation.',
+    primaryLabel: 'Explore the marketing application',
+    primaryHref: '/applications/marketing',
+  },
 };
 
 const journey = journeys[pathname];
-const isApplications = pathname === '/applications';
 ---
 
 {journey && pathname !== '/applications/marketing' && (
   <aside
-    class:list={['flagship-journey', isApplications && 'flagship-journey--application', embedded && 'flagship-journey--embedded']}
-    data-flagship-placement={isApplications ? 'applications' : undefined}
+    class:list={['flagship-journey', embedded && 'flagship-journey--embedded']}
     aria-label="Recommended Editorial Intelligence journey"
   >
-    <div class:list={['flagship-journey-inner', !isApplications && !embedded && 'container-site']}>
+    <div class:list={['flagship-journey-inner', !embedded && 'container-site']}>
       <div class="flagship-journey-copy">
         <p class="t-label">{journey.eyebrow}</p>
         <h2>{journey.title}</h2>
@@ -60,16 +54,6 @@ const isApplications = pathname === '/applications';
       </div>
     </div>
   </aside>
-)}
-
-{isApplications && (
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
-      const flagship = document.querySelector('[data-flagship-placement="applications"]');
-      const applicationGrid = document.querySelector('.app-grid');
-      if (flagship && applicationGrid) applicationGrid.prepend(flagship);
-    });
-  </script>
 )}
 
 <style>
@@ -124,70 +108,8 @@ const isApplications = pathname === '/applications';
   .flagship-primary:hover,
   .flagship-secondary:hover { color: var(--color-ink); }
 
-  .flagship-journey--application {
-    order: -1;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
-    box-shadow: none;
-    overflow: hidden;
-  }
-  .flagship-journey--application .flagship-journey-inner {
-    padding: 1.5rem;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-  .flagship-journey--application .flagship-journey-copy h2 {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin: 0 0 0.4rem;
-  }
-  .flagship-journey--application .flagship-journey-copy > p:last-child {
-    margin: 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
-  }
-  .flagship-journey--application .t-label {
-    display: inline-block;
-    order: 2;
-    margin-top: 0.1rem;
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    letter-spacing: 0.06em;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    color: var(--color-accent);
-    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-  }
-  .flagship-journey--application .flagship-journey-copy {
-    display: flex;
-    flex-direction: column;
-  }
-  .flagship-journey--application .flagship-journey-copy h2 { order: 1; }
-  .flagship-journey--application .flagship-journey-copy > p:last-child { order: 3; margin-top: 0.4rem; }
-  .flagship-journey--application .flagship-journey-actions {
-    min-width: 0;
-    align-self: flex-end;
-  }
-  .flagship-journey--application .flagship-primary {
-    display: inline;
-    padding: 0 0 1px;
-    border: 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-    border-radius: 0;
-    background: transparent;
-    font-size: 0.8125rem;
-    font-weight: 400;
-  }
-
   @media (max-width: 760px) {
     .flagship-journey-inner { grid-template-columns: 1fr; gap: 1.25rem; }
     .flagship-journey-actions { min-width: 0; }
-    .flagship-journey--application .flagship-journey-inner { padding: 1.5rem; }
-    .flagship-journey--application .flagship-journey-actions { align-self: flex-start; }
   }
 </style>
