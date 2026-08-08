@@ -388,18 +388,21 @@ const responseUseOptions = [
           <p class="q-hint">Describe the situation, the evidence and what changed. Please avoid confidential details.</p>
           <textarea name="q04_anchor_example" class="q-textarea" rows="6"></textarea>
           {/*
-            Paired hidden default: the submission records "No" when the box is
-            ticked and "Yes" when it is not, so a response says outright whether
-            it rests on a real example instead of leaving it to be inferred from
-            a missing field. The script keeps the last value for these names.
+            The box is a control only and carries no name. Which route the
+            participant took is worked out at submission time from what they
+            actually did, because the three states are not what a ticked or
+            unticked box can express on its own: an example given, the opt-out
+            chosen, or the question left blank with neither.
           */}
-          <input type="hidden" name="q04_example_provided" value="Yes" />
           <label class="q-option q-no-example">
-            <input type="checkbox" name="q04_example_provided" value="No" id="no-example-toggle" />
+            <input type="checkbox" id="no-example-toggle" />
             <span>I cannot think of a suitable example</span>
           </label>
           <p class="q-conditional-note" id="no-example-note" hidden>
             No problem — for questions 5–9, answer about how this process tends to work in your organisation more generally.
+          </p>
+          <p class="q-note q-note-error" id="q04-blank-note" hidden>
+            Question 4 is the example that questions 5–9 build on. Please add one, or tick "I cannot think of a suitable example" so I know which you meant. If you would rather skip it, submitting again will go through.
           </p>
         </fieldset>
 
@@ -818,8 +821,30 @@ const responseUseOptions = [
   // Q4: no-example route
   const noExampleToggle = document.getElementById('no-example-toggle') as HTMLInputElement;
   const noExampleNote = document.getElementById('no-example-note') as HTMLElement;
+  const anchorExample = form.querySelector<HTMLTextAreaElement>('textarea[name="q04_anchor_example"]')!;
+  const anchorBlankNote = document.getElementById('q04-blank-note') as HTMLElement;
+
+  /**
+   * Which route the participant took through Q4. The specification offers two —
+   * an example, or the explicit opt-out — and treats Q4 as the anchor for
+   * questions 5–9. Blank with neither chosen is a third state it does not
+   * account for, and it must not be recorded as though an example were given:
+   * a response coded as example-based with no example in it is exactly what
+   * would corrupt the analysis.
+   */
+  const exampleRoute = (): string => {
+    if (noExampleToggle.checked) return 'No — could not think of one';
+    return anchorExample.value.trim() ? 'Yes' : 'No — left blank';
+  };
+
+  const anchorUnresolved = () => !anchorExample.value.trim() && !noExampleToggle.checked;
+
   noExampleToggle?.addEventListener('change', () => {
     noExampleNote.hidden = !noExampleToggle.checked;
+    if (!anchorUnresolved()) anchorBlankNote.hidden = true;
+  });
+  anchorExample.addEventListener('input', () => {
+    if (!anchorUnresolved()) anchorBlankNote.hidden = true;
   });
 
   // Q15: conditional follow-up
@@ -856,7 +881,6 @@ const responseUseOptions = [
    * value supersedes the earlier one rather than joining it.
    */
   const LAST_VALUE_WINS = new Set([
-    'q04_example_provided',
     'permission_contact_about_response',
     'permission_compare_notes_conversation',
     'permission_research_findings_updates',
@@ -942,6 +966,9 @@ const responseUseOptions = [
     submission.append('meta_time_on_page_minutes', String(Math.max(1, Math.round((Date.now() - openedAt) / 60000))));
 
     for (const [name, answer] of collectAnswers()) submission.append(name, answer);
+    // Derived rather than collected, so it can never claim an example the
+    // response does not contain. Sorts beside q04_anchor_example either way.
+    submission.append('q04_example_provided', exampleRoute());
     return submission;
   };
 
@@ -981,9 +1008,21 @@ const responseUseOptions = [
     return `Something went wrong sending your response (error ${response.status}). Please try again, or ${EMAIL_FALLBACK}.`;
   };
 
+  /** Whether the Q4 prompt has already been shown and answered by submitting again. */
+  let anchorPromptAcknowledged = false;
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     submitError.hidden = true;
+
+    // Asked once, then respected. Skipping Q4 is a legitimate choice; doing it
+    // without noticing is not, and only the participant can tell them apart.
+    if (anchorUnresolved() && !anchorPromptAcknowledged) {
+      anchorPromptAcknowledged = true;
+      anchorBlankNote.hidden = false;
+      anchorBlankNote.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     const responseUse = form.querySelector<HTMLInputElement>('input[name="permission_response_use"]:checked');
     const responseUseNote = document.getElementById('response-use-note') as HTMLElement;
