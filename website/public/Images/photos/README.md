@@ -9,9 +9,11 @@ needed to make the file exist.
 
 This is the route to use. It is the only one that works away from a laptop.
 
-1. On github.com, open this folder on the branch you are working on.
-2. **Add file → Upload files.**
-3. Pick the photo. Commit to a branch and open a pull request.
+1. Open the upload form, which points straight at this folder:
+
+   https://github.com/asavinwa/editorial-intelligence-os/upload/main/website/public/Images/photos
+
+2. Pick the photo. Commit to a branch and open a pull request.
 4. Tell Claude Code or Codex the filename and where it should appear. Wiring it
    into a page, writing the alt text and sizing it are the assistant's job.
 

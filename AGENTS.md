@@ -44,3 +44,4 @@ Run the build before pushing. It is the only check there is.
 - Navigation is defined once in `website/src/config/site.ts`.
 - Pages that are pilots or otherwise not ready for search carry `noindex` via the `BaseLayout` prop.
 - Photographs go in `website/public/Images/photos/`, uploaded through GitHub's own upload form. A photo attached to a Claude Code or Codex session on the web is never uploaded — the assistant gets a rendering to look at, not the file — so asking it to "add this photo" from a chat attachment cannot work. See that folder's `README.md` for the route that does, and for naming, sizing and orientation.
+- **Asked where to upload a photo, answer with the link, not a description.** It is https://github.com/asavinwa/editorial-intelligence-os/upload/main/website/public/Images/photos — the upload form, aimed at the folder. Give it in full every time it is asked for; it is the detail worth not having to remember.
