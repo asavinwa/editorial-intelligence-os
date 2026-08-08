@@ -17,6 +17,11 @@ import BaseLayout from '../../components/layout/BaseLayout.astro';
  * The submission is assembled by hand in the script below rather than posted as
  * a raw `FormData`, so that what lands in the Formspree dashboard is a readable
  * research response rather than several dozen mostly-empty fields.
+ *
+ * Formspree lists a response's fields alphabetically, not in the order they
+ * were sent. Field names therefore carry the grouping that append order cannot:
+ * `meta_` for research context, `q01`–`q16` for the numbered instrument,
+ * `contact_` and `permission_` for the closing section.
  */
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdenaeqy';
 
@@ -919,19 +924,22 @@ const responseUseOptions = [
     const instrument = form.dataset.instrument ?? 'Practitioner questionnaire';
     const version = form.dataset.version ?? '';
 
-    // Context first: a response should say what it is before it says anything
-    // else, in the notification email as well as in the dashboard.
+    // Formspree lists fields alphabetically rather than in the order they are
+    // sent, established by reading a real submission in the dashboard. Append
+    // order therefore buys nothing, and the `meta_` prefix is what keeps the
+    // research context in one block instead of scattered through the answers.
+    // `_subject` sorts to the top on its own and carries the identification.
     submission.append('_subject', `${instrument} — ${version} response`);
-    submission.append('research_programme', form.dataset.programme ?? '');
-    submission.append('research_instrument', instrument);
-    submission.append('questionnaire_version', version);
-    submission.append('contribution_method', form.dataset.method ?? '');
-    submission.append('questionnaire_url', window.location.href);
-    submission.append('submitted_at', new Date().toISOString());
+    submission.append('meta_research_programme', form.dataset.programme ?? '');
+    submission.append('meta_research_instrument', instrument);
+    submission.append('meta_questionnaire_version', version);
+    submission.append('meta_contribution_method', form.dataset.method ?? '');
+    submission.append('meta_questionnaire_url', window.location.href);
+    submission.append('meta_submitted_at', new Date().toISOString());
     // Time with the page open, not time spent answering — a tab left sitting
     // will overstate it. Recorded because the pilot has to reassess the stated
     // 10–15 minutes, and it is the only signal available without tracking.
-    submission.append('time_on_page_minutes', String(Math.max(1, Math.round((Date.now() - openedAt) / 60000))));
+    submission.append('meta_time_on_page_minutes', String(Math.max(1, Math.round((Date.now() - openedAt) / 60000))));
 
     for (const [name, answer] of collectAnswers()) submission.append(name, answer);
     return submission;
