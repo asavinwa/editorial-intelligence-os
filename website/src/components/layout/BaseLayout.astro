@@ -160,6 +160,18 @@ const structuredData = {
 
     <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {/*
+      Self-hosted fonts. One stylesheet in public/ so the standalone diagnostic
+      page can share it — it cannot import from src/. Do not reintroduce
+      fonts.googleapis.com: it sends every visitor's IP to Google, and /privacy
+      states that no such transfer happens.
+    */}
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="/fonts/-nFnOHM81r4j6k0gjAW3mujVU2B2G_Bx0g.woff2" />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="min-h-screen flex flex-col">
