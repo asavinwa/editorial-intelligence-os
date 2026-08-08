@@ -29,12 +29,12 @@ export const MAILERLITE = {
    * Numeric form ID, taken from the form's dashboard URL:
    *   dashboard.mailerlite.com/forms/195199618102855345/overview
    *
-   * VERIFY THIS ONCE before relying on it. Open the form's "HTML code" tab and
-   * check the `action` on the `<form>` element matches what `mailerLiteAction()`
-   * builds below. MailerLite's embedded forms post to the account/form pair, and
-   * the dashboard ID is normally the same number that appears in the action —
-   * but it is one glance to confirm, and a wrong ID fails silently by design
-   * (see the submit handler in KeepInTouch.astro).
+   * Confirmed working by an end-to-end signup on 8 August 2026, once the sender
+   * domain was authenticated in MailerLite.
+   *
+   * If this ever changes, note that a wrong ID fails silently: the opaque
+   * response means the page shows its confirmation either way. Re-test with a
+   * real submission rather than trusting the success state.
    */
   formId: '195199618102855345',
 
