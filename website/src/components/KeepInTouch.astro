@@ -6,21 +6,24 @@
  * invitations to take part. It is deliberately not a second newsletter — the
  * LinkedIn newsletter is the recurring publication.
  *
- * ── Connecting MailerLite ───────────────────────────────────────────────────
- * Nothing here is wired to MailerLite yet, and no identifiers have been
- * guessed. Until the two values below are filled in, the component renders in
- * an unconnected state: the form is visible but disabled, and it explains that
- * signup is not open yet rather than silently discarding an address.
+ * ── How this submits ────────────────────────────────────────────────────────
+ * The form posts straight to MailerLite's subscribe endpoint. MailerLite's
+ * universal tracking script is deliberately not installed anywhere on the site,
+ * because it sets cookies and the site sets none. See `config/mailerlite.ts`.
  *
- * To connect it, set both values in `src/config/mailerlite.ts`:
+ * The script below is ours, sets nothing and stores nothing. It exists only so
+ * a submission does not navigate the reader away to a page of raw JSON.
  *
- *   1. ACCOUNT_ID — the numeric account ID in MailerLite's embedded form code,
- *      shown as `ml_account` / the number in `webforms/.../takel` snippets.
- *   2. FORM_ID    — the ID of the specific embedded form to submit to.
+ * One consequence worth knowing: the endpoint does not return CORS headers, so
+ * the request goes out `no-cors` and the response is opaque. We can tell that
+ * the request left the browser; we cannot read what MailerLite made of it. The
+ * confirmation is therefore worded around the double opt-in email — which is
+ * the thing the reader should actually be waiting for — rather than claiming a
+ * subscription we cannot observe. Configure double opt-in ON in MailerLite so
+ * that wording stays true.
  *
- * Configure the double opt-in, the confirmation email, the consent record and
- * the unsubscribe footer in MailerLite itself. The site does not store
- * addresses and holds no API key — the form posts straight to MailerLite.
+ * Without JavaScript the plain form still posts, opening MailerLite's response
+ * in a new tab. Less pretty, still subscribes.
  */
 import { MAILERLITE, isMailerLiteConfigured, mailerLiteAction } from '../config/mailerlite';
 
@@ -98,11 +101,67 @@ const uid = `kit-${Math.random().toString(36).slice(2, 9)}`;
       </span>
     </div>
 
+    <p class="kit-error" role="alert" hidden></p>
+
     <p class="kit-privacy">
       Your address is used only to send these updates. Read the <a href="/privacy">privacy policy</a>.
     </p>
   </form>
+
+  <div class="kit-done" role="status" hidden>
+    <p class="kit-done-headline">Almost there — check your inbox.</p>
+    <p class="kit-done-body">
+      A confirmation email is on its way. Your address is only added to the list once you click the
+      link in it, so if it does not arrive, nothing has been signed up.
+    </p>
+  </div>
 </div>
+
+<!--
+  Top level on purpose. Astro only compiles and bundles `<script>` at the top
+  level of a template; inside a conditional expression it is emitted verbatim,
+  TypeScript and all, and the browser rejects it. The selector below is the
+  guard instead — it matches nothing until the form is connected.
+-->
+<script>
+  // Ours, not MailerLite's. Sets no cookies and stores nothing.
+  document.querySelectorAll<HTMLFormElement>('form.kit-form[data-connected="true"]').forEach((form) => {
+    const button = form.querySelector<HTMLButtonElement>('.kit-button');
+    const error = form.querySelector<HTMLElement>('.kit-error');
+    const done = form.parentElement?.querySelector<HTMLElement>('.kit-done');
+    if (!button || !error || !done) return;
+
+    const original = button.innerHTML;
+
+    form.addEventListener('submit', async (event) => {
+      // Let the browser's own validation handle the empty and malformed cases.
+      if (!form.reportValidity()) return;
+
+      event.preventDefault();
+      error.hidden = true;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+
+      try {
+        // The endpoint sends no CORS headers, so the response is opaque: this
+        // confirms the request left the browser and nothing more.
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form),
+        });
+        form.hidden = true;
+        done.hidden = false;
+      } catch {
+        error.textContent =
+          'Something went wrong sending that. Please try again, or email asavin@editorialintelligence.co and I will add you by hand.';
+        error.hidden = false;
+        button.disabled = false;
+        button.innerHTML = original;
+      }
+    });
+  });
+</script>
 
 <style>
   .keep-in-touch {
@@ -259,6 +318,38 @@ const uid = `kit-${Math.random().toString(36).slice(2, 9)}`;
 
   .kit-privacy a {
     color: var(--color-accent);
+  }
+
+  .kit-error {
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.85rem;
+    border-left: 2px solid var(--color-signal);
+    background: var(--color-surface);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+  }
+
+  .kit-done {
+    margin-top: 1.15rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    background: var(--color-surface);
+    max-width: 34rem;
+  }
+
+  .kit-done-headline {
+    margin-bottom: 0.45rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--color-ink);
+  }
+
+  .kit-done-body {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
   }
 
   @media (max-width: 767px) {

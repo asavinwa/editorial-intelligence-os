@@ -2,50 +2,56 @@
  * MailerLite connection details for the Editorial Intelligence website list.
  *
  * ─────────────────────────────────────────────────────────────────────────────
- * THIS IS THE ONLY FILE THAT NEEDS EDITING TO GO LIVE.
+ * DELIBERATELY NOT USING MAILERLITE'S UNIVERSAL SCRIPT.
  *
- * Both values below are empty on purpose. They have not been guessed, and no
- * MailerLite identifier appears anywhere else in the codebase. While either is
- * empty, `KeepInTouch.astro` renders a disabled form that says signup is not
- * open yet, rather than posting addresses into the void.
+ * MailerLite's embed instructions ask for a `<script>` in the site `<head>` on
+ * every page. That script sets tracking cookies. The site currently sets none,
+ * which is why `/privacy` can say so plainly and the site carries no cookie
+ * banner — the strongest privacy claim the site has.
  *
- * To connect the form:
+ * So the form posts directly to MailerLite's subscribe endpoint instead. No
+ * third-party script, no cookies, no banner, and the form keeps the site's own
+ * markup, styling and consent wording. MailerLite still does the work that
+ * matters: double opt-in, consent records and unsubscribes.
  *
- *   1. In MailerLite, create the subscriber group for the website list and an
- *      embedded form for it.
- *   2. Open the form's embed code. It contains a URL shaped like
- *        https://assets.mailerlite.com/jsonp/<ACCOUNT_ID>/forms/<FORM_ID>/subscribe
- *      Copy the two numbers out of it.
- *   3. Paste ACCOUNT_ID and FORM_ID below and redeploy.
- *
- * Configure in MailerLite rather than here:
- *   - double opt-in (recommended: on, so consent is confirmed and evidenced)
- *   - the confirmation and welcome emails
- *   - the unsubscribe link in every campaign footer
- *   - the group this form subscribes people to
- *
- * The site holds no MailerLite API key. The form posts directly from the
- * visitor's browser to MailerLite, so no secret is needed and none should be
- * added here — this file is committed to a public repository.
+ * If the universal script is ever added, `/privacy` must change in the same
+ * commit. The no-cookie claim is only true while this stays true.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 export const MAILERLITE = {
-  /** Numeric account ID from the MailerLite embed code. */
-  accountId: '',
-
-  /** ID of the embedded form addresses are submitted to. */
-  formId: '',
+  /**
+   * Numeric account ID, read from the MailerLite universal snippet:
+   *   ml('account', '2563378');
+   */
+  accountId: '2563378',
 
   /**
-   * Field names MailerLite expects from an embedded form. These are
-   * MailerLite's own defaults and only need changing if the form is built with
-   * custom field names.
+   * Numeric form ID, taken from the form's dashboard URL:
+   *   dashboard.mailerlite.com/forms/195199618102855345/overview
+   *
+   * VERIFY THIS ONCE before relying on it. Open the form's "HTML code" tab and
+   * check the `action` on the `<form>` element matches what `mailerLiteAction()`
+   * builds below. MailerLite's embedded forms post to the account/form pair, and
+   * the dashboard ID is normally the same number that appears in the action —
+   * but it is one glance to confirm, and a wrong ID fails silently by design
+   * (see the submit handler in KeepInTouch.astro).
+   */
+  formId: '195199618102855345',
+
+  /**
+   * Field names MailerLite expects from an embedded form. These are its
+   * defaults; change them only if the form was built with custom field names.
+   *
+   * `consentField` must match a custom field on the MailerLite form. If the
+   * form has no such field, MailerLite ignores the value and the tick is
+   * enforced by the browser only — still valid consent, but not evidenced on
+   * the MailerLite record. Adding the field is worth the two minutes.
    */
   emailField: 'fields[email]',
   consentField: 'fields[marketing_consent]',
 } as const;
 
-/** True once both identifiers have been filled in above. */
+/** True once both identifiers are present. */
 export function isMailerLiteConfigured(): boolean {
   return MAILERLITE.accountId.trim() !== '' && MAILERLITE.formId.trim() !== '';
 }
